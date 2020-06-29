@@ -1,4 +1,4 @@
-# logr <a href='https://dplyr.tidyverse.org'><img src='man/figures/logo.png' align="right" height="139" /></a>
+# logr <img src='man/images/logr.svg' align="right" height="139" />
 The **logr** package helps to create log files for R scripts.  The package 
 provides easy logging, without the complexity of other logging systems.  It is 
 designed for analysts who simply want a written log of the their program 
@@ -120,18 +120,18 @@ Log Elapsed Time: 0 00:00:01
 
 ## Parts of the log
 
-### Log Header
+#### Log Header
 The log header provides an introduction to your log. The header block 
 contains the path of the log file, the working directory, the name of the user,
 a date-time stamp, and other useful information concerning the 
 operating environment.  
 
-### Notes
+#### Notes
 Notes will be written to the log for every call to `log_print()`. The notes 
 will follow the printing of the object, and will include a date-time stamp
 and the elapsed time since the last call to `log_print()`.  
 
-### Log Footer
+#### Log Footer
 The log footer concludes the log with another date-time stamp for the log
 end time, and a total elapsed time for the entire script.  Note that the log
 footer may not be generated if the script errors while running in batch.
@@ -141,7 +141,7 @@ footer may not be generated if the script errors while running in batch.
 written at the point they are encountered.  Warnings will be written at the 
 end of the log.  
 
-## Message File
+## Message File \*.msg
 If errors or warnings are generated, they will also be written to a separate 
 file called a message file.  The message file has the same name as the log, 
 but with a *.msg* extension.  The purpose of the message file is so that 
@@ -149,7 +149,7 @@ errors and warnings that occur during execution of the script can be
 observed from the file system.  The presence or absense of the *.msg* file 
 will indicate whether or not the program ran clean.
 
-## Log subdirectory
+## Log subdirectory /log
 By default, `logr` prints the log to a subdirectory named *log*.  If that 
 subdirectory does not exist, the `log_open()` function will create it.  
 The default behavior can be overriden by setting `logdir` parameter on the
