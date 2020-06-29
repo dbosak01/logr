@@ -175,7 +175,7 @@ log_open <- function(file_name = "", logdir = TRUE, show_notes = TRUE) {
 #' @param msg Whether to print the object to the msg log.  This parameter is
 #' intended to be used internally.  Value values are TRUE and FALSE.  The 
 #' default value is FALSE.
-#' @return None
+#' @return The object, invisibly
 #' @seealso \code{\link{log_open}} to open the log, 
 #' and \code{\link{log_close}} to close the log.
 #' @export
@@ -266,7 +266,7 @@ log_print <- function(x, ...,
 #' Close the log
 #'
 #' @description 
-#' Print any warnings, print the log footer and close the log file. 
+#' The \code{log_close} function closes the log file. 
 #' 
 #' @details 
 #' The \code{log_close} function terminates logging.  As part of the termination
@@ -276,7 +276,7 @@ log_print <- function(x, ...,
 #' be printed at the bottom of the log.  
 #' 
 #' The function also prints the log footer.  The log footer contains a 
-#' date/timestamp of when the log was closed.  
+#' date-time stamp of when the log was closed.  
 #' @return None
 #' @seealso \code{\link{log_open}} to open the log, and \code{\link{log_print}} 
 #' for printing to the log.

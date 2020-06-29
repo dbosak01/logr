@@ -10,7 +10,7 @@ log_close()
 None
 }
 \description{
-Print any warnings, print the log footer and close the log file.
+The \code{log_close} function closes the log file.
 }
 \details{
 The \code{log_close} function terminates logging.  As part of the termination
@@ -20,7 +20,7 @@ at the end of the logging session. Therefore, any warning messages will only
 be printed at the bottom of the log.
 
 The function also prints the log footer.  The log footer contains a
-date/timestamp of when the log was closed.
+date-time stamp of when the log was closed.
 }
 \examples{
 # Open the log

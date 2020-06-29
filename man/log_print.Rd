@@ -23,7 +23,7 @@ intended to be used internally.  Value values are TRUE and FALSE.  The
 default value is FALSE.}
 }
 \value{
-None
+The object, invisibly
 }
 \description{
 The \code{log_print} function prints an object to the currently opened log.
