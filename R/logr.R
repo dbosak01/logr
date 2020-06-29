@@ -64,10 +64,19 @@ separator <-
 #' @param logfolder Send the log to a logfolder named "log".  If the logfolder
 #' does not exist, the function will create it.
 #' @return The path of the log.
-#' @seealso \code\link{log_print} for printing to the log (and console), 
-#' and \code\link{log_close} to close the log.
+#' @seealso \code{\link{log_print}} for printing to the log (and console), 
+#' and \code{\link{log_close}} to close the log.
 #' @export
 #' @examples
+#' # Open the log
+#' log_open("test.log", logfolder = TRUE)
+#' 
+#' # Print test messages
+#' log_print("Test message")
+#' log_print(mtcars)
+#' 
+#' # Close the log
+#' log_close()
 log_open <- function(file_name = "", logfolder = FALSE) {
   
 
@@ -160,6 +169,15 @@ log_open <- function(file_name = "", logfolder = FALSE) {
 #' @return None
 #' @export
 #' @examples
+#' # Open the log
+#' log_open("test.log", logfolder = TRUE)
+#' 
+#' # Print test messages
+#' log_print("Test message")
+#' log_print(mtcars)
+#' 
+#' # Close the log
+#' log_close()
 log_print <- function(x, ..., 
                       console = TRUE, 
                       blank_after = TRUE, 
@@ -231,8 +249,14 @@ log_print <- function(x, ...,
 #' @return None
 #' @export
 #' @examples
+#' # Open the log
 #' log_open("test.log", logfolder = TRUE)
-#' log_print("Test Message")
+#' 
+#' # Print test messages
+#' log_print("Test message")
+#' log_print(mtcars)
+#' 
+#' # Close the log
 #' log_close()
 log_close <- function() {
   
