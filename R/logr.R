@@ -237,6 +237,15 @@ log_print <- function(x, ...,
         tc <- Sys.time()
         
         if (Sys.getenv("log_show_notes") == "TRUE") {
+          
+          # Print data frame row and column counts
+          if (any(class(x) == "data.frame")) {
+            cat(paste("NOTE: Data frame has", nrow(x), "rows and", ncol(x), 
+                      "columns."), "\n")
+            cat("\n")
+          }
+          
+          # Print log timestamps
           cat(paste("NOTE: Log Print Time: ", tc), "\n")
           cat(paste("NOTE: Elapsed Time in seconds:", get_time_diff(tc)), "\n")
           cat("\n")
@@ -419,7 +428,7 @@ dhms <- function(t){
 
 
 
-
+# 
 # lf <- log_open("test.log")
 # 
 # log_print("Here is the first log message")
@@ -427,12 +436,14 @@ dhms <- function(t){
 # 
 # Sys.sleep(1)
 # log_print(mtcars)
+# 
+# 
 # generror
 # # warning("Test warning")
-# # 
-# # 
-# # 
-# # 
+# #
+# #
+# #
+# #
 # # log_print("Here is a second log message")
 # log_close()
 

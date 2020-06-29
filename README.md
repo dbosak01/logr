@@ -2,7 +2,7 @@
 The **logr** package helps create log files for R scripts.  The package 
 provides easy logging, without the complexity of other logging systems.  It is 
 designed for analysts who simply want a written log of the their program 
-execution.  The package is written as a wrapper to 
+execution.  The package is designed as a wrapper to 
 the base R `sink` function.
 
 ## How to use
@@ -26,6 +26,7 @@ log_open("test.log")
 log_print("Here is the first log message")
 
 # Other code as needed ...
+Sys.sleep(1)
 
 # Print a data frame
 log_print(mtcars)
@@ -107,6 +108,8 @@ Ferrari Dino        19.7   6 145.0 175 3.62 2.770 15.50  0  1    5    6
 Maserati Bora       15.0   8 301.0 335 3.54 3.570 14.60  0  1    5    8
 Volvo 142E          21.4   4 121.0 109 4.11 2.780 18.60  1  1    4    2
 
+NOTE: Data frame has 32 rows and 11 columns. 
+
 NOTE: Log Print Time:  2020-06-29 14:14:46 
 NOTE: Elapsed Time in seconds: 1.18965315818787 
 
@@ -133,7 +136,8 @@ operating environment.
 #### Notes
 Notes will be written to the log for every call to `log_print()`. The notes 
 will follow the printing of the object, and will include a date-time stamp
-and the elapsed time since the last call to `log_print()`.  
+and the elapsed time since the last call to `log_print()`. If the object
+is of class `data.frame` the number of rows and columns will also be noted. 
 
 #### Log Footer
 The log footer concludes the log with another date-time stamp for the log
