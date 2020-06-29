@@ -47,3 +47,7 @@ log_print(mtcars)
 # Close the log
 log_close()
 }
+\seealso{
+\code{\link{log_open}} to open the log,
+and \code{\link{log_close}} to close the log.
+}

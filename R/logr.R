@@ -340,8 +340,23 @@ print_log_header <- function(log_path) {
   log_print(paste("Log Path:", log_path), console = FALSE, blank_after = FALSE)
   log_print(paste("Working Directory:", getwd()), console = FALSE, 
             blank_after = FALSE)
-  log_print(paste("User Name:", Sys.getenv("USERNAME")), console = FALSE, 
+  
+  inf <- Sys.info()
+  log_print(paste("User Name:", inf["user"]), console = FALSE, 
             blank_after = FALSE)
+  
+  vr <- sub("R version ", "", R.Version()["version.string"])
+  log_print(paste("R Version:", vr), console = FALSE, 
+            blank_after = FALSE)
+  log_print(paste("Machine:", inf["nodename"], inf["machine"]), 
+            console = FALSE, 
+            blank_after = FALSE)
+
+  log_print(paste("Operating System:", inf["sysname"], inf["release"], 
+                  inf["version"]), 
+            console = FALSE, 
+            blank_after = FALSE)
+  
   log_print(paste("Log Start Time:", Sys.time()), console = FALSE, 
             blank_after = FALSE)
   log_print(paste(separator), console = FALSE)
@@ -404,19 +419,23 @@ dhms <- function(t){
 
 
 
-# lf <- log_open("test.log", show_notes = FALSE)
+
+# lf <- log_open("test.log")
 # 
 # log_print("Here is the first log message")
+# 
+# 
 # Sys.sleep(1)
 # log_print(mtcars)
-# # generror
+# generror
 # # warning("Test warning")
-# # warning("another warning")
-# 
-# 
-# 
-# log_print("Here is a second log message")
+# # 
+# # 
+# # 
+# # 
+# # log_print("Here is a second log message")
 # log_close()
+
 
 
 # clean up

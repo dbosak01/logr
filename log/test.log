@@ -2,10 +2,16 @@
 Log Path: ./log/test.log 
 Working Directory: C:/packages/logr 
 User Name: dbosak 
-Log Start Time: 2020-06-29 09:34:24 
+R Version: 4.0.0 (2020-04-24) 
+Machine: BOSAK-MAIN x86-64 
+Operating System: Windows 10 x64 build 18362 
+Log Start Time: 2020-06-29 14:14:45 
 ========================================================================= 
 
 Here is the first log message 
+
+NOTE: Log Print Time:  2020-06-29 14:14:45 
+NOTE: Elapsed Time in seconds: 0.253318071365356 
 
                      mpg cyl  disp  hp drat    wt  qsec vs am gear carb
 Mazda RX4           21.0   6 160.0 110 3.90 2.620 16.46  0  1    4    4
@@ -41,9 +47,19 @@ Ferrari Dino        19.7   6 145.0 175 3.62 2.770 15.50  0  1    5    6
 Maserati Bora       15.0   8 301.0 335 3.54 3.570 14.60  0  1    5    8
 Volvo 142E          21.4   4 121.0 109 4.11 2.780 18.60  1  1    4    2
 
-Here is a second log message 
+NOTE: Log Print Time:  2020-06-29 14:14:46 
+NOTE: Elapsed Time in seconds: 1.18965315818787 
+
+Error: object 'generror' not found
+ 
+
+NOTE: Log Print Time:  2020-06-29 14:14:46 
+NOTE: Elapsed Time in seconds: 0.0129709243774414 
+
+NOTE: Log Print Time: 2020-06-29 14:14:46 
+NOTE: Log Elapsed Time: 0.0698549747467041 
 
 ========================================================================= 
-Log End Time: 2020-06-29 09:34:25 
+Log End Time: 2020-06-29 14:14:46 
 Log Elapsed Time: 0 00:00:01 
 ========================================================================= 
