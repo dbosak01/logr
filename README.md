@@ -1,4 +1,4 @@
-# logr <img src='man/images/logr.svg' align="right" height="139" />
+# logr <img src='man/images/logr.svg' align="right" height="80" />
 The **logr** package helps create log files for R scripts.  The package 
 provides easy logging, without the complexity of other logging systems.  It is 
 designed for analysts who simply want a written log of the their program 
@@ -154,11 +154,11 @@ If errors or warnings are generated, they will also be written to a separate
 file called a message file.  The message file has the same name as the log, 
 but with a *.msg* extension.  The purpose of the message file is so that 
 errors and warnings that occur during execution of the script can be 
-observed from the file system.  The presence or absense of the *.msg* file 
+observed from the file system.  The presence or absence of the *.msg* file 
 will indicate whether or not the program ran clean.
 
 ### Log subdirectory /log
 By default, `logr` prints the log to a subdirectory named *log*.  If that 
-subdirectory does not exist, the `log_open()` function will create it.  
-The default behavior can be overriden by setting `logdir` parameter on the
+subdirectory does not exist, the `log_open()` function will create it.  The 
+default behavior can be overridden by setting the `logdir` parameter on the
 `log_open()` function to `FALSE`.  
