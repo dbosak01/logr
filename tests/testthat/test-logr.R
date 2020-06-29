@@ -80,8 +80,7 @@ test_that("the logr package can create a log with no errors or warnings.", {
   
 })
 
-# Not sure how to intentionally generate an error, trap it with the logger, 
-# and yet not crash the check.
+
 test_that("the logr package can create a log with errors and warnings.", {
 
 

@@ -330,6 +330,10 @@ error_handler <- function() {
 }
 
 # Currently Not Used
+# Was not able to get warning event to trigger properly.
+# Will revisit at some point.
+# In the meantime, warnings will be printed at 
+# the end of the log.
 #' @noRd
 warning_handler <- function() {
   
@@ -400,7 +404,7 @@ print_log_footer <- function() {
   log_print(paste(separator), console = FALSE, blank_after = FALSE)
 }
 
-
+#' @noRd
 get_time_diff <- function(x) {
   
   ts <- Sys.getenv("log_time")
