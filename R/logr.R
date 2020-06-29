@@ -293,9 +293,11 @@ log_print <- function(x, ...,
 #' log_close()
 log_close <- function() {
   
+  has_warnings <- FALSE
   if(exists("last.warning")) {
     lw <- get("last.warning")
-    if(length(lw) > 0) {
+    has_warnings <- length(lw) > 0
+    if(has_warnings) {
       log_print(warnings(), console = FALSE)
       log_print(warnings(), console = FALSE, msg = TRUE)
       assign("last.warning", NULL, envir = baseenv())
@@ -306,7 +308,7 @@ log_close <- function() {
   options(error = NULL)
   
   # Print out footer
-  print_log_footer()
+  print_log_footer(has_warnings)
   
   # Clean up environment variables
   Sys.unsetenv("log_path")
@@ -376,11 +378,11 @@ print_log_header <- function(log_path) {
 }
 
 #' @noRd
-print_log_footer <- function() {
+print_log_footer <- function(has_warnings = FALSE) {
   
   tc <- Sys.time()
   
-  if (Sys.getenv("log_show_notes") == "TRUE") {
+  if (Sys.getenv("log_show_notes") == "TRUE" & has_warnings) {
     # Force notes for last operation
     log_print(paste("NOTE: Log Print Time:", Sys.time()), 
               console = FALSE, blank_after = FALSE)
