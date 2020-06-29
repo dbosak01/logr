@@ -1,4 +1,4 @@
-# logr <img src='man/images/logr.svg' align="right" height="80" />
+# logr <img src='man/images/logr.svg' align="right" height="138" />
 The **logr** package helps create log files for R scripts.  The package 
 provides easy logging, without the complexity of other logging systems.  It is 
 designed for analysts who simply want a written log of the their program 
