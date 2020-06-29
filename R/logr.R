@@ -61,15 +61,17 @@ separator <-
 #' 
 #' @param file_name The name of the log file.  If no path is specified, the 
 #' working directory will be used.
-#' @param logfolder Send the log to a logfolder named "log".  If the logfolder
-#' does not exist, the function will create it.
+#' @param logdir Send the log to a log directory named "log".  If the log 
+#' directory does not exist, the function will create it.
+#' @param show_notes If true, will write note timestamp to the log.  Default
+#' is TRUE.
 #' @return The path of the log.
 #' @seealso \code{\link{log_print}} for printing to the log (and console), 
 #' and \code{\link{log_close}} to close the log.
 #' @export
 #' @examples
 #' # Open the log
-#' log_open("test.log", logfolder = TRUE)
+#' log_open("test.log")
 #' 
 #' # Print test messages
 #' log_print("Test message")
@@ -77,7 +79,7 @@ separator <-
 #' 
 #' # Close the log
 #' log_close()
-log_open <- function(file_name = "", logfolder = FALSE) {
+log_open <- function(file_name = "", logdir = TRUE, show_notes = TRUE) {
   
 
   lpath <- ""
@@ -94,7 +96,7 @@ log_open <- function(file_name = "", logfolder = FALSE) {
       lpath <- paste0(file_name, ".log")
     
     d <- dirname(lpath)
-    if (logfolder == TRUE & substr(d, length(d) - 3, length(d)) != "log") {
+    if (logdir == TRUE & substr(d, length(d) - 3, length(d)) != "log") {
       tryCatch({
         ldir <- file.path(d, "log")
         if (!dir.exists(ldir))
@@ -137,6 +139,14 @@ log_open <- function(file_name = "", logfolder = FALSE) {
   
   print_log_header(lpath)
   
+  # Record timestamp for later use by log_print
+  ts <- Sys.time()
+  Sys.setenv(log_time = ts)
+  Sys.setenv(log_start_time = ts)
+  
+  # Capture show_notes parameter
+  Sys.setenv(log_show_notes = show_notes)
+  
   return(lpath)
   
 }
@@ -170,7 +180,7 @@ log_open <- function(file_name = "", logfolder = FALSE) {
 #' @export
 #' @examples
 #' # Open the log
-#' log_open("test.log", logfolder = TRUE)
+#' log_open("test.log")
 #' 
 #' # Print test messages
 #' log_print("Test message")
@@ -221,6 +231,17 @@ log_print <- function(x, ...,
       },
     finally = {
       
+      # Print time stamps on normal log_print
+      if (blank_after == TRUE & console == TRUE) {
+        tc <- Sys.time()
+        
+        if (Sys.getenv("log_show_notes") == "TRUE") {
+          cat(paste("NOTE: Log Print Time: ", tc), "\n")
+          cat(paste("NOTE: Elapsed Time in seconds:", get_time_diff(tc)), "\n")
+          cat("\n")
+        }
+      }
+      
       # Release sink no matter what
       sink()
     }
@@ -250,7 +271,7 @@ log_print <- function(x, ...,
 #' @export
 #' @examples
 #' # Open the log
-#' log_open("test.log", logfolder = TRUE)
+#' log_open("test.log")
 #' 
 #' # Print test messages
 #' log_print("Test message")
@@ -269,14 +290,18 @@ log_close <- function() {
     }
   }
   
-
-  
+  # Detach error handler
   options(error = NULL)
   
+  # Print out footer
   print_log_footer()
   
+  # Clean up environment variables
   Sys.unsetenv("log_path")
   Sys.unsetenv("msg_path")
+  Sys.unsetenv("log_show_notes")
+  Sys.unsetenv("log_time")
+  Sys.unsetenv("log_start_time")
   
 }
 
@@ -312,7 +337,7 @@ print_log_header <- function(log_path) {
   log_print(paste("Log Path:", log_path), console = FALSE, blank_after = FALSE)
   log_print(paste("Working Directory:", getwd()), console = FALSE, 
             blank_after = FALSE)
-  log_print(paste("System User:", Sys.getenv("USERNAME")), console = FALSE, 
+  log_print(paste("User Name:", Sys.getenv("USERNAME")), console = FALSE, 
             blank_after = FALSE)
   log_print(paste("Log Start Time:", Sys.time()), console = FALSE, 
             blank_after = FALSE)
@@ -321,26 +346,77 @@ print_log_header <- function(log_path) {
 
 #' @noRd
 print_log_footer <- function() {
+  
+  tc <- Sys.time()
+  
+  if (Sys.getenv("log_show_notes") == "TRUE") {
+    # Force notes for last operation
+    log_print(paste("NOTE: Log Print Time:", Sys.time()), 
+              console = FALSE, blank_after = FALSE)
+    log_print(paste("NOTE: Log Elapsed Time:", get_time_diff(tc)), 
+              console = FALSE, blank_after = TRUE)
+  }
+  
+  # Get log_start_time
+  ts <- Sys.getenv("log_start_time")
+  tn <- as.POSIXct(as.double(ts), origin = "1970-01-01")
+  lt <-  tc - tn
+
   log_print(paste(separator), console = FALSE, blank_after = FALSE)
-  log_print(paste("Log End Time:", Sys.time()), console = FALSE, 
+  log_print(paste("Log End Time:", tc), console = FALSE, 
             blank_after = FALSE)
+
+  log_print(paste("Log Elapsed Time:", dhms(as.numeric(lt))), console = FALSE, 
+            blank_after = FALSE)
+
+
   log_print(paste(separator), console = FALSE, blank_after = FALSE)
 }
 
 
+get_time_diff <- function(x) {
+  
+  ts <- Sys.getenv("log_time")
+  tn <- as.POSIXct(as.double(ts), origin = "1970-01-01")
+  
+  ret <- x - tn
+  
+  Sys.setenv(log_time = x)
+  
+  return(ret)
+}
+
+#' @noRd
+dhms <- function(t){
+  paste(t %/% (60*60*24) 
+        ,paste(formatC(t %/% (60*60) %% 24, width = 2, format = "d", flag = "0")
+               ,formatC(t %/% 60 %% 60, width = 2, format = "d", flag = "0")
+               ,formatC(t %% 60, width = 2, format = "d", flag = "0")
+               ,sep = ":"
+        )
+  )
+}
 
 # Test Case ---------------------------------------------------------------
-# 
-# lf <- log_open("test.log", logfolder = TRUE)
+
+
+
+# lf <- log_open("test.log", show_notes = FALSE)
 # 
 # log_print("Here is the first log message")
+# Sys.sleep(1)
 # log_print(mtcars)
-# generror
-# warning("Test warning")
+# # generror
+# # warning("Test warning")
+# # warning("another warning")
+# 
+# 
+# 
 # log_print("Here is a second log message")
 # log_close()
-# 
-# # clean up
+
+
+# clean up
 # if (file.exists(lf)) {
 #   file.remove(lf)
 # }

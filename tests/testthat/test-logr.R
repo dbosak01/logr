@@ -3,7 +3,7 @@ context("logr tests")
 test_that("the log_open function handles invalid parameters.", {
   
 
-  nm <- log_open(logfolder = TRUE)
+  nm <- log_open()
   log_print("Here is the first log message")
   log_print("Here is a second log message")
   log_close()
@@ -27,7 +27,7 @@ test_that("the log_open function handles invalid parameters.", {
 test_that("the log_print function handles invalid parameters.", {
   
   
-  lp <- log_open(logfolder = TRUE)
+  lp <- log_open()
   log_print("Here is the first log message")
   log_print("Here is a second log message")
   log_close()
@@ -53,7 +53,7 @@ test_that("the log_print function handles invalid parameters.", {
 test_that("the logr package can create a log with no errors or warnings.", {
   
   
-  lf <- log_open("test.log", logfolder = TRUE)
+  lf <- log_open("test.log")
   log_print("Here is the first log message")
   log_print(mtcars)
   log_print("Here is a second log message")
@@ -85,7 +85,7 @@ test_that("the logr package can create a log with no errors or warnings.", {
 test_that("the logr package can create a log with errors and warnings.", {
 
 
-  lf <- log_open("test.log", logfolder = TRUE)
+  lf <- log_open("test.log")
   log_print("Here is the first log message")
   log_print(mtcars)
   warning("Test warning")

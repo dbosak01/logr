@@ -38,7 +38,7 @@ of a scripts' execution is required.
 }
 \examples{
 # Open the log
-log_open("test.log", logfolder = TRUE)
+log_open("test.log")
 
 # Print test messages
 log_print("Test message")

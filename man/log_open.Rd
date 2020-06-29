@@ -4,14 +4,17 @@
 \alias{log_open}
 \title{Initialize the log}
 \usage{
-log_open(file_name = "", logfolder = FALSE)
+log_open(file_name = "", logdir = TRUE, show_notes = TRUE)
 }
 \arguments{
 \item{file_name}{The name of the log file.  If no path is specified, the
 working directory will be used.}
 
-\item{logfolder}{Send the log to a logfolder named "log".  If the logfolder
-does not exist, the function will create it.}
+\item{logdir}{Send the log to a log directory named "log".  If the log
+directory does not exist, the function will create it.}
+
+\item{show_notes}{If true, will write note timestamp to the log.  Default
+is TRUE.}
 }
 \value{
 The path of the log.
@@ -63,7 +66,7 @@ and call \code{log_close} at the bottom of the script.
 }
 \examples{
 # Open the log
-log_open("test.log", logfolder = TRUE)
+log_open("test.log")
 
 # Print test messages
 log_print("Test message")
