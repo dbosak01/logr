@@ -1,5 +1,5 @@
 Package: logr
-Title: Contains functions for creating printed logs
+Title: Creates Log Files
 Version: 0.0.0.9001
 Authors@R: 
     person(given = "David",
