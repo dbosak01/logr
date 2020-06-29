@@ -1,0 +1,17 @@
+Package: logr
+Title: Contains functions for creating printed logs.
+Version: 0.0.0.9000
+Authors@R: 
+    person(given = "David",
+           family = "Bosak",
+           role = c("aut", "cre"),
+           email = "dbosak01@gmail.com")
+Description: This package contains functions to help create log files.  The 
+    package aims to overcome the limitations of the base R sink command.  The
+    log function will print to both the console and the file log, without 
+    interfering in other write operations.
+License: CC0
+Encoding: UTF-8
+LazyData: true
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.1.0
