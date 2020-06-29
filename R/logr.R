@@ -2,10 +2,7 @@
 # Globals -----------------------------------------------------------------
 
 
-# Path to the log file
-log_path <- ""
-msg_path <- ""
-dump_path <- ""
+# Log Separator
 separator <- 
   "========================================================================="
 
@@ -78,8 +75,9 @@ log_open <- function(file_name = "", logfolder = FALSE) {
   
   # Get log file name
   if (file_name == "")
-    lpath = "script.log"
-  else if (file_name != "") {
+    file_name = "script.log"
+  
+  if (file_name != "") {
     
     if (grepl(".log", file_name, fixed=TRUE) == TRUE)
       lpath <- file_name
@@ -101,8 +99,9 @@ log_open <- function(file_name = "", logfolder = FALSE) {
     }
   }
   
-  #dump_path <<- sub(".log", ".dump", lpath, fixed = TRUE)
-  msg_path <<- sub(".log", ".msg", lpath, fixed = TRUE)
+  mpath <- sub(".log", ".msg", lpath, fixed = TRUE)
+  Sys.setenv(msg_path = mpath)
+
     
   # Kill any existing log file
   if (file.exists(lpath)) {
@@ -110,8 +109,8 @@ log_open <- function(file_name = "", logfolder = FALSE) {
   }
   
   # Kill any existing msg file  
-  if (file.exists(msg_path)) {
-    file.remove(msg_path)
+  if (file.exists(mpath)) {
+    file.remove(mpath)
   }
   
   # if (file.exists(dump_path)) {
@@ -119,7 +118,7 @@ log_open <- function(file_name = "", logfolder = FALSE) {
   # }
 
   # Set global variable
-  log_path <<- lpath
+  Sys.setenv(log_path = lpath)
   
   # Attach error event handler
   options(error = error_handler)
@@ -127,16 +126,25 @@ log_open <- function(file_name = "", logfolder = FALSE) {
   # Doesn't seem to work
   #options(warn = 1, warning = warning_handler)
   
-  print_log_header()
+  print_log_header(lpath)
   
   return(lpath)
   
 }
 
-
-
-
-#' Title
+#' @title
+#' Print an object to the log
+#' 
+#' @description 
+#' The \code{log_print} function prints an object to the currently opened log.
+#' 
+#' @details 
+#' The log is initialized with \code{log_open}.  Once the log is open, objects
+#' like variables and data frames can be printed to the log to monitor execution
+#' of your script.  If working interactively, the function will print both to
+#' the log and to the console.  The \code{log_print} function is useful when
+#' writing and debugging batch scripts, and in situations where some record
+#' of a scripts' execution is required.
 #'
 #' @param x The object to print.  
 #' @param ... Any parameters to pass to the print function.
@@ -162,9 +170,9 @@ log_print <- function(x, ...,
     print(x, ...)
   
   # Print to msg_path, if requested
-  file_path <- log_path
+  file_path <- Sys.getenv("log_path")
   if (msg == TRUE)
-    file_path <- msg_path
+    file_path <- Sys.getenv("msg_path")
   
   # Print to log or msg file
   tryCatch( {
@@ -224,21 +232,30 @@ log_print <- function(x, ...,
 #' @export
 #' @examples
 #' log_open("test.log", logfolder = TRUE)
-#' 
+#' log_print("Test Message")
 #' log_close()
 log_close <- function() {
   
-  if(length(last.warning) > 0) {
-    log_print(warnings(), console = FALSE)
-    log_print(warnings(), console = FALSE, msg = TRUE)
-    assign("last.warning", NULL, envir = baseenv())
+  if(exists("last.warning")) {
+    lw <- get("last.warning")
+    if(length(lw) > 0) {
+      log_print(warnings(), console = FALSE)
+      log_print(warnings(), console = FALSE, msg = TRUE)
+      assign("last.warning", NULL, envir = baseenv())
+    }
   }
+  
+
   
   options(error = NULL)
   
   print_log_footer()
   
+  Sys.unsetenv("log_path")
+  Sys.unsetenv("msg_path")
+  
 }
+
 
 # Event Handlers ----------------------------------------------------------
 
@@ -256,7 +273,8 @@ error_handler <- function() {
 warning_handler <- function() {
   
   #print("Warning Handler")
-  log_message(warnings())
+  log_print(warnings())
+  log_print(warnings(), console = FALSE, msg = TRUE)
   
 }
 
@@ -264,7 +282,7 @@ warning_handler <- function() {
 # Utilities ---------------------------------------------------------------
 
 #' @noRd
-print_log_header <- function() {
+print_log_header <- function(log_path) {
   
   log_print(paste(separator), console = FALSE, blank_after = FALSE)
   log_print(paste("Log Path:", log_path), console = FALSE, blank_after = FALSE)
@@ -288,10 +306,9 @@ print_log_footer <- function() {
 
 
 # Test Case ---------------------------------------------------------------
-
+# 
 # lf <- log_open("test.log", logfolder = TRUE)
-# log_path
-# print(lf)
+# 
 # log_print("Here is the first log message")
 # log_print(mtcars)
 # generror
@@ -306,4 +323,3 @@ print_log_footer <- function() {
 # if (file.exists(msg_path)) {
 #   file.remove(msg_path)
 # }
-
