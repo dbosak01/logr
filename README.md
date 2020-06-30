@@ -1,4 +1,7 @@
 # logr <img src='man/images/logr.svg' align="right" height="138" />
+<!-- badges: start -->
+[![Travis build status](https://travis-ci.com/dbosak01/logr.svg?branch=master)](https://travis-ci.com/dbosak01/logr)
+<!-- badges: end -->
 The **logr** package helps create log files for R scripts.  The package 
 provides easy logging, without the complexity of other logging systems.  It is 
 designed for analysts who simply want a written log of the their program 
@@ -169,7 +172,5 @@ subdirectory does not exist, the `log_open()` function will create it.  The
 default behavior can be overridden by setting the `logdir` parameter on the
 `log_open()` function to `FALSE`.  
 
-<!-- badges: start -->
-[![Travis build status](https://travis-ci.com/dbosak01/logr.svg?branch=master)](https://travis-ci.com/dbosak01/logr)
-<!-- badges: end -->
+
 
