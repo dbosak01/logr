@@ -168,3 +168,8 @@ By default, `logr` prints the log to a subdirectory named *log*.  If that
 subdirectory does not exist, the `log_open()` function will create it.  The 
 default behavior can be overridden by setting the `logdir` parameter on the
 `log_open()` function to `FALSE`.  
+
+<!-- badges: start -->
+[![Travis build status](https://travis-ci.com/dbosak01/logr.svg?branch=master)](https://travis-ci.com/dbosak01/logr)
+<!-- badges: end -->
+

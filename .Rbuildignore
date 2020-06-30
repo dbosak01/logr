@@ -2,3 +2,4 @@
 ^\.Rproj\.user$
 ^log$
 ^cran\-comments\.md$
+^\.travis\.yml$
