@@ -12,24 +12,25 @@ separator <-
 
 
 #' @title
-#' Initialize the log
+#' Open the log
 #' 
 #' @description 
 #' A function to initialize the log file.
 #' 
 #' @details
-#' This function initializes and opens the log file.  This function must be 
-#' called first, before any logging can occur.  The function determines the 
-#' log path, attaches event handlers, clears existing log files, 
-#' and initiates a new log.
+#' The \code{log_open} function initializes and opens the log file.  
+#' This function must be called first, before any logging can occur.  
+#' The function determines the log path, attaches event handlers, 
+#' clears existing log files, and initiates a new log.
 #'
 #' The \code{file_name} parameter may be a full path, a relative path, or 
 #' a file name.  An relative path or file name will be assumed to be relative
-#' to the current working directory.  
+#' to the current working directory.  If the \code{file_name} does 
+#' not have a '.log' extension, the \code{log_open} function will add it.
 #' 
-#' If requested in the \code{subfolder} parameter, the \code{log_open}
-#' function will write to a 'log' subfolder of the path specified in the 
-#' \code{file_name}.  If the 'log' subfolder does not exist, 
+#' If requested in the \code{logdir} parameter, the \code{log_open}
+#' function will write to a 'log' subdirectory of the path specified in the 
+#' \code{file_name}.  If the 'log' subdirectory does not exist, 
 #' the function will create it.
 #' 
 #' The log file will be initialized with a header that shows the log file name,
@@ -48,11 +49,11 @@ separator <-
 #' the file system that an error or warning has been generated.  This indicator
 #' msg file is useful when running programs in batch.
 #' 
-#' To use logr, call \code{log_open}, and then make calls to \code{log_print} 
-#' as needed to print variables or data frames to the log.  The \code{log_print}
-#' function can be used in place of a standard \code{print} function.  Anything
-#' printed with \code{log_print} will be printed to the log, and to the console
-#' if working interactively.  
+#' To use \strong{logr}, call \code{log_open}, and then make calls to 
+#' \code{log_print} as needed to print variables or data frames to the log.  
+#' The \code{log_print} function can be used in place of a standard 
+#' \code{print} function.  Anything printed with \code{log_print} will 
+#' be printed to the log, and to the console if working interactively.  
 #' 
 #' This package provides the functionality of \code{sink}, but in much more 
 #' user-friendly way.  Recommended usage is to call \code{log_open} at the top 
@@ -62,9 +63,10 @@ separator <-
 #' @param file_name The name of the log file.  If no path is specified, the 
 #' working directory will be used.
 #' @param logdir Send the log to a log directory named "log".  If the log 
-#' directory does not exist, the function will create it.
-#' @param show_notes If true, will write note timestamp to the log.  Default
-#' is TRUE.
+#' directory does not exist, the function will create it.  Valid values are 
+#' TRUE and FALSE. The default is TRUE.
+#' @param show_notes If true, will write notes to the log.  Valid values are 
+#' TRUE and FALSE. Default is TRUE.
 #' @return The path of the log.
 #' @seealso \code{\link{log_print}} for printing to the log (and console), 
 #' and \code{\link{log_close}} to close the log.
@@ -81,20 +83,23 @@ separator <-
 #' log_close()
 log_open <- function(file_name = "", logdir = TRUE, show_notes = TRUE) {
   
-
   lpath <- ""
   
-  # Get log file name
+  # If no filename is specified, make up something.
+  # If R had a good way of getting the name of the currently
+  # executing script, I would do that instead.  But it doesn't.
   if (file_name == "")
     file_name = "script.log"
   
   if (file_name != "") {
     
+    # If there is no log extension, give it one
     if (grepl(".log", file_name, fixed=TRUE) == TRUE)
       lpath <- file_name
     else
       lpath <- paste0(file_name, ".log")
     
+    # Create log directory if needed
     d <- dirname(lpath)
     if (logdir == TRUE & substr(d, length(d) - 3, length(d)) != "log") {
       tryCatch({
@@ -110,6 +115,7 @@ log_open <- function(file_name = "", logdir = TRUE, show_notes = TRUE) {
     }
   }
   
+  # Create path for message file
   mpath <- sub(".log", ".msg", lpath, fixed = TRUE)
   Sys.setenv(msg_path = mpath)
 
@@ -124,6 +130,8 @@ log_open <- function(file_name = "", logdir = TRUE, show_notes = TRUE) {
     file.remove(mpath)
   }
   
+  # At one point considered creating a dump file
+  # automatically.  Still under consideration.
   # if (file.exists(dump_path)) {
   #   file.remove(dump_path)
   # }
@@ -134,9 +142,10 @@ log_open <- function(file_name = "", logdir = TRUE, show_notes = TRUE) {
   # Attach error event handler
   options(error = error_handler)
   
-  # Doesn't seem to work
+  # Doesn't seem to work. At least on Windows. Bummer.
   #options(warn = 1, warning = warning_handler)
   
+  # Create the log header
   print_log_header(lpath)
   
   # Record timestamp for later use by log_print
@@ -164,6 +173,13 @@ log_open <- function(file_name = "", logdir = TRUE, show_notes = TRUE) {
 #' the log and to the console.  The \code{log_print} function is useful when
 #' writing and debugging batch scripts, and in situations where some record
 #' of a scripts' execution is required.
+#' 
+#' If requested in the \code{log_open} function, \code{log_print}  
+#' will print a note after each call.  The note will contain a date-time stamp
+#' and elapsed time since the last call to \code{log_print}.  When printing
+#' a data frame, the \code{log_print} function will also print the number
+#' and rows and column in the data frame.  These counts may also be useful 
+#' in debugging.   
 #'
 #' @param x The object to print.  
 #' @param ... Any parameters to pass to the print function.
@@ -236,7 +252,8 @@ log_print <- function(x, ...,
       if (blank_after == TRUE & console == TRUE) {
         tc <- Sys.time()
         
-        if (Sys.getenv("log_show_notes") == "TRUE") {
+        if (Sys.getenv("log_show_notes") == "TRUE" |
+            Sys.getenv("log_show_notes") == "T") {
           
           # Print data frame row and column counts
           if (any(class(x) == "data.frame")) {
@@ -322,7 +339,8 @@ log_close <- function() {
 
 # Event Handlers ----------------------------------------------------------
 
-
+#' Event handler for errros.  This works.
+#' Is attached using options function in log_open.
 #' @noRd
 error_handler <- function() {
   
@@ -335,7 +353,7 @@ error_handler <- function() {
 # Was not able to get warning event to trigger properly.
 # Will revisit at some point.
 # In the meantime, warnings will be printed at 
-# the end of the log.
+# the end of the log, above the footer.
 #' @noRd
 warning_handler <- function() {
   
@@ -348,6 +366,7 @@ warning_handler <- function() {
 
 # Utilities ---------------------------------------------------------------
 
+#' Function to print the log header
 #' @noRd
 print_log_header <- function(log_path) {
   
@@ -377,24 +396,28 @@ print_log_header <- function(log_path) {
   log_print(paste(separator), console = FALSE)
 }
 
+#' Function to print the log footer
 #' @noRd
 print_log_footer <- function(has_warnings = FALSE) {
   
   tc <- Sys.time()
   
-  if (Sys.getenv("log_show_notes") == "TRUE" & has_warnings) {
-    # Force notes for last operation
+  if ((Sys.getenv("log_show_notes") == "TRUE" |
+       Sys.getenv("log_show_notes") == "T") & has_warnings) {
+    
+    # Force notes after warning print, before the footer
     log_print(paste("NOTE: Log Print Time:", Sys.time()), 
               console = FALSE, blank_after = FALSE)
     log_print(paste("NOTE: Log Elapsed Time:", get_time_diff(tc)), 
               console = FALSE, blank_after = TRUE)
   }
   
-  # Get log_start_time
+  # Calculate total elapsed execution time
   ts <- Sys.getenv("log_start_time")
   tn <- as.POSIXct(as.double(ts), origin = "1970-01-01")
   lt <-  tc - tn
 
+  # Print the log footer
   log_print(paste(separator), console = FALSE, blank_after = FALSE)
   log_print(paste("Log End Time:", tc), console = FALSE, 
             blank_after = FALSE)
@@ -402,23 +425,31 @@ print_log_footer <- function(has_warnings = FALSE) {
   log_print(paste("Log Elapsed Time:", dhms(as.numeric(lt))), console = FALSE, 
             blank_after = FALSE)
 
-
   log_print(paste(separator), console = FALSE, blank_after = FALSE)
 }
 
+#' Get time difference between last log_print call and current call
 #' @noRd
 get_time_diff <- function(x) {
   
+  # Pull timestamp out of environment variable
   ts <- Sys.getenv("log_time")
+  
+  # Convert string to time
   tn <- as.POSIXct(as.double(ts), origin = "1970-01-01")
   
+  # Get difference
   ret <- x - tn
   
+  # Set new timestamp
   Sys.setenv(log_time = x)
   
   return(ret)
 }
 
+#' Little function to format time in seconds into 
+#' days, hours, minutes, and seconds.  Stolen from StackOverflow.
+#' Did not want to create a dependency on external package to do it.
 #' @noRd
 dhms <- function(t){
   paste(t %/% (60*60*24) 

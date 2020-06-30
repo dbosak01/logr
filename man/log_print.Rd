@@ -35,6 +35,13 @@ of your script.  If working interactively, the function will print both to
 the log and to the console.  The \code{log_print} function is useful when
 writing and debugging batch scripts, and in situations where some record
 of a scripts' execution is required.
+
+If requested in the \code{log_open} function, \code{log_print}
+will print a note after each call.  The note will contain a date-time stamp
+and elapsed time since the last call to \code{log_print}.  When printing
+a data frame, the \code{log_print} function will also print the number
+and rows and column in the data frame.  These counts may also be useful
+in debugging.
 }
 \examples{
 # Open the log

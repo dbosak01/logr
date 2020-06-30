@@ -2,7 +2,7 @@
 % Please edit documentation in R/logr.R
 \name{log_open}
 \alias{log_open}
-\title{Initialize the log}
+\title{Open the log}
 \usage{
 log_open(file_name = "", logdir = TRUE, show_notes = TRUE)
 }
@@ -11,10 +11,11 @@ log_open(file_name = "", logdir = TRUE, show_notes = TRUE)
 working directory will be used.}
 
 \item{logdir}{Send the log to a log directory named "log".  If the log
-directory does not exist, the function will create it.}
+directory does not exist, the function will create it.  Valid values are
+TRUE and FALSE. The default is TRUE.}
 
-\item{show_notes}{If true, will write note timestamp to the log.  Default
-is TRUE.}
+\item{show_notes}{If true, will write notes to the log.  Valid values are
+TRUE and FALSE. Default is TRUE.}
 }
 \value{
 The path of the log.
@@ -23,18 +24,19 @@ The path of the log.
 A function to initialize the log file.
 }
 \details{
-This function initializes and opens the log file.  This function must be
-called first, before any logging can occur.  The function determines the
-log path, attaches event handlers, clears existing log files,
-and initiates a new log.
+The \code{log_open} function initializes and opens the log file.
+This function must be called first, before any logging can occur.
+The function determines the log path, attaches event handlers,
+clears existing log files, and initiates a new log.
 
 The \code{file_name} parameter may be a full path, a relative path, or
 a file name.  An relative path or file name will be assumed to be relative
-to the current working directory.
+to the current working directory.  If the \code{file_name} does
+not have a '.log' extension, the \code{log_open} function will add it.
 
-If requested in the \code{subfolder} parameter, the \code{log_open}
-function will write to a 'log' subfolder of the path specified in the
-\code{file_name}.  If the 'log' subfolder does not exist,
+If requested in the \code{logdir} parameter, the \code{log_open}
+function will write to a 'log' subdirectory of the path specified in the
+\code{file_name}.  If the 'log' subdirectory does not exist,
 the function will create it.
 
 The log file will be initialized with a header that shows the log file name,
@@ -53,11 +55,11 @@ The purpose of the msg file is to give the user a visual indicator from
 the file system that an error or warning has been generated.  This indicator
 msg file is useful when running programs in batch.
 
-To use logr, call \code{log_open}, and then make calls to \code{log_print}
-as needed to print variables or data frames to the log.  The \code{log_print}
-function can be used in place of a standard \code{print} function.  Anything
-printed with \code{log_print} will be printed to the log, and to the console
-if working interactively.
+To use \strong{logr}, call \code{log_open}, and then make calls to
+\code{log_print} as needed to print variables or data frames to the log.
+The \code{log_print} function can be used in place of a standard
+\code{print} function.  Anything printed with \code{log_print} will
+be printed to the log, and to the console if working interactively.
 
 This package provides the functionality of \code{sink}, but in much more
 user-friendly way.  Recommended usage is to call \code{log_open} at the top

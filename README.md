@@ -19,6 +19,8 @@ program body, and call `log_close()` once at the end of the program.
 
 A sample program is as follows:
 ```
+library(logr)
+
 # Open the log
 log_open("test.log")
 
@@ -42,7 +44,7 @@ log_close()
 ```
 
 ## What to print to the log
-You can print to the log anything that you can print to the console: vectors,
+You can print to the log anything that you can print to the console; vectors,
 lists, and data frames are all valid objects for logging.  Under the hood, 
 **logr** calls the `print()` function on that object, and writes the results 
 to the log. The `log_print()` function, by default, will also print the 
