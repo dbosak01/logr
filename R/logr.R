@@ -46,7 +46,7 @@ separator <-
 #' will have a '.msg' extension and will exist in the specified log directory.
 #' If the log is clean, the msg file will not be created.  
 #' The purpose of the msg file is to give the user a visual indicator from 
-#' the file system that an error or warning has been generated.  This indicator
+#' the file system that an error or warning occurred.  This indicator
 #' msg file is useful when running programs in batch.
 #' 
 #' To use \strong{logr}, call \code{log_open}, and then make calls to 
