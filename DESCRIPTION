@@ -10,7 +10,7 @@ Description: This package contains functions to help create log files.  The
     package aims to overcome the difficutly of the base R sink command.  The
     log_print function will print to both the console and the file log, without 
     interfering in other write operations.
-License: CCO
+License: CC0
 Encoding: UTF-8
 LazyData: true
 Suggests: testthat

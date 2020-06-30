@@ -68,6 +68,7 @@ and call \code{log_close} at the bottom of the script.
 }
 \examples{
 # Open the log
+\dontrun{
 log_open("test.log")
 
 # Print test messages
@@ -75,7 +76,8 @@ log_print("Test message")
 log_print(mtcars)
 
 # Close the log
-log_close()
+log_close
+}
 }
 \seealso{
 \code{\link{log_print}} for printing to the log (and console),

@@ -75,6 +75,7 @@ separator <-
 #' @export
 #' @examples
 #' # Open the log
+#' \dontrun{
 #' log_open("test.log")
 #' 
 #' # Print test messages
@@ -82,7 +83,8 @@ separator <-
 #' log_print(mtcars)
 #' 
 #' # Close the log
-#' log_close()
+#' log_close
+#' }
 log_open <- function(file_name = "", logdir = TRUE, show_notes = TRUE) {
   
   lpath <- ""
@@ -199,6 +201,7 @@ log_open <- function(file_name = "", logdir = TRUE, show_notes = TRUE) {
 #' @export
 #' @examples
 #' # Open the log
+#' \dontrun{
 #' log_open("test.log")
 #' 
 #' # Print test messages
@@ -207,6 +210,7 @@ log_open <- function(file_name = "", logdir = TRUE, show_notes = TRUE) {
 #' 
 #' # Close the log
 #' log_close()
+#' }
 log_print <- function(x, ..., 
                       console = TRUE, 
                       blank_after = TRUE, 
@@ -301,6 +305,7 @@ log_print <- function(x, ...,
 #' @export
 #' @examples
 #' # Open the log
+#' \dontrun{
 #' log_open("test.log")
 #' 
 #' # Print test messages
@@ -309,6 +314,7 @@ log_print <- function(x, ...,
 #' 
 #' # Close the log
 #' log_close()
+#' }
 log_close <- function() {
   
   has_warnings <- FALSE
@@ -465,24 +471,24 @@ dhms <- function(t){
 
 
 
-
-lf <- log_open("test.log", show_notes = FALSE)
-
-log_print("Here is the first log message")
-
-
-Sys.sleep(1)
-log_print(mtcars)
-
-
-generror
-# warning("Test warning")
-#
-#
-#
-#
-# log_print("Here is a second log message")
-log_close()
+# 
+# lf <- log_open("test.log", show_notes = FALSE)
+# 
+# log_print("Here is the first log message")
+# 
+# 
+# Sys.sleep(1)
+# log_print(mtcars)
+# 
+# 
+# generror
+# # warning("Test warning")
+# #
+# #
+# #
+# #
+# # log_print("Here is a second log message")
+# log_close()
 
 
 

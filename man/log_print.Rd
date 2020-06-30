@@ -45,6 +45,7 @@ in debugging.
 }
 \examples{
 # Open the log
+\dontrun{
 log_open("test.log")
 
 # Print test messages
@@ -53,6 +54,7 @@ log_print(mtcars)
 
 # Close the log
 log_close()
+}
 }
 \seealso{
 \code{\link{log_open}} to open the log,
