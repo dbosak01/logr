@@ -1,6 +1,8 @@
 
 # Globals -----------------------------------------------------------------
 
+# Set up environment
+e <- new.env(parent = emptyenv())
 
 # Log Separator
 separator <- 
@@ -117,7 +119,7 @@ log_open <- function(file_name = "", logdir = TRUE, show_notes = TRUE) {
   
   # Create path for message file
   mpath <- sub(".log", ".msg", lpath, fixed = TRUE)
-  Sys.setenv(msg_path = mpath)
+  e$msg_path <- mpath
 
     
   # Kill any existing log file
@@ -137,7 +139,7 @@ log_open <- function(file_name = "", logdir = TRUE, show_notes = TRUE) {
   # }
 
   # Set global variable
-  Sys.setenv(log_path = lpath)
+  e$log_path <- lpath
   
   # Attach error event handler
   options(error = error_handler)
@@ -150,11 +152,11 @@ log_open <- function(file_name = "", logdir = TRUE, show_notes = TRUE) {
   
   # Record timestamp for later use by log_print
   ts <- Sys.time()
-  Sys.setenv(log_time = ts)
-  Sys.setenv(log_start_time = ts)
+  e$log_time = ts
+  e$log_start_time = ts
   
   # Capture show_notes parameter
-  Sys.setenv(log_show_notes = show_notes)
+  e$log_show_notes = show_notes
   
   return(lpath)
   
@@ -215,9 +217,9 @@ log_print <- function(x, ...,
     print(x, ...)
   
   # Print to msg_path, if requested
-  file_path <- Sys.getenv("log_path")
+  file_path <- e$log_path
   if (msg == TRUE)
-    file_path <- Sys.getenv("msg_path")
+    file_path <- e$msg_path
   
   # Print to log or msg file
   tryCatch( {
@@ -252,8 +254,7 @@ log_print <- function(x, ...,
       if (blank_after == TRUE & console == TRUE) {
         tc <- Sys.time()
         
-        if (Sys.getenv("log_show_notes") == "TRUE" |
-            Sys.getenv("log_show_notes") == "T") {
+        if (e$log_show_notes == TRUE) {
           
           # Print data frame row and column counts
           if (any(class(x) == "data.frame")) {
@@ -328,18 +329,18 @@ log_close <- function() {
   print_log_footer(has_warnings)
   
   # Clean up environment variables
-  Sys.unsetenv("log_path")
-  Sys.unsetenv("msg_path")
-  Sys.unsetenv("log_show_notes")
-  Sys.unsetenv("log_time")
-  Sys.unsetenv("log_start_time")
+  e$log_path <- NULL
+  e$msg_path <- NULL
+  e$log_show_notes <- NULL
+  e$log_time <- NULL
+  e$log_start_time <- NULL
   
 }
 
 
 # Event Handlers ----------------------------------------------------------
 
-#' Event handler for errros.  This works.
+#' Event handler for errors.  This works.
 #' Is attached using options function in log_open.
 #' @noRd
 error_handler <- function() {
@@ -402,8 +403,7 @@ print_log_footer <- function(has_warnings = FALSE) {
   
   tc <- Sys.time()
   
-  if ((Sys.getenv("log_show_notes") == "TRUE" |
-       Sys.getenv("log_show_notes") == "T") & has_warnings) {
+  if (e$log_show_notes == "TRUE" & has_warnings) {
     
     # Force notes after warning print, before the footer
     log_print(paste("NOTE: Log Print Time:", Sys.time()), 
@@ -413,9 +413,9 @@ print_log_footer <- function(has_warnings = FALSE) {
   }
   
   # Calculate total elapsed execution time
-  ts <- Sys.getenv("log_start_time")
-  tn <- as.POSIXct(as.double(ts), origin = "1970-01-01")
-  lt <-  tc - tn
+  ts <- e$log_start_time
+  #tn <- as.POSIXct(as.double(ts), origin = "1970-01-01")
+  lt <-  tc - ts
 
   # Print the log footer
   log_print(paste(separator), console = FALSE, blank_after = FALSE)
@@ -433,16 +433,16 @@ print_log_footer <- function(has_warnings = FALSE) {
 get_time_diff <- function(x) {
   
   # Pull timestamp out of environment variable
-  ts <- Sys.getenv("log_time")
+  ts <- e$log_time
   
   # Convert string to time
-  tn <- as.POSIXct(as.double(ts), origin = "1970-01-01")
+  #tn <- as.POSIXct(as.double(ts), origin = "1970-01-01")
   
   # Get difference
-  ret <- x - tn
+  ret <- x - ts
   
   # Set new timestamp
-  Sys.setenv(log_time = x)
+  e$log_time = x
   
   return(ret)
 }
@@ -465,24 +465,24 @@ dhms <- function(t){
 
 
 
-# 
-# lf <- log_open("test.log")
-# 
-# log_print("Here is the first log message")
-# 
-# 
-# Sys.sleep(1)
-# log_print(mtcars)
-# 
-# 
-# generror
-# # warning("Test warning")
-# #
-# #
-# #
-# #
-# # log_print("Here is a second log message")
-# log_close()
+
+lf <- log_open("test.log", show_notes = FALSE)
+
+log_print("Here is the first log message")
+
+
+Sys.sleep(1)
+log_print(mtcars)
+
+
+generror
+# warning("Test warning")
+#
+#
+#
+#
+# log_print("Here is a second log message")
+log_close()
 
 
 
