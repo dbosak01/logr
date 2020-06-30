@@ -2,7 +2,7 @@
 % Please edit documentation in R/logr.R
 \name{log_open}
 \alias{log_open}
-\title{Open the log}
+\title{Open a log}
 \usage{
 log_open(file_name = "", logdir = TRUE, show_notes = TRUE)
 }

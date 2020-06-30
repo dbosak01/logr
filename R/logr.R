@@ -44,7 +44,7 @@ separator <-
 # Public Functions --------------------------------------------------------
 
 #' @title
-#' Open the log
+#' Open a log
 #' 
 #' @description 
 #' A function to initialize the log file.
