@@ -1,7 +1,22 @@
-# logr <img src='man/images/logr.svg' align="right" height="138" />
-<!-- badges: start -->
-[![Travis build status](https://travis-ci.com/dbosak01/logr.svg?branch=master)](https://travis-ci.com/dbosak01/logr)
-<!-- badges: end -->
+---
+title: "Create Logs for R Scripts"
+author: "David Bosak"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Create Logs for R Scripts}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+# logr <img src='../man/images/logr.svg' align="right" height="138" />
+
 The **logr** package helps create log files for R scripts.  The package 
 provides easy logging, without the complexity of other logging systems.  It is 
 designed for analysts who simply want a written log of the their program 
@@ -104,7 +119,7 @@ NOTE: Elapsed Time in seconds: 0.0508558750152588
 ========================================================================= 
 Log End Time: 2020-06-30 07:15:53 
 Log Elapsed Time: 0 00:00:00 
-=========================================================================  
+========================================================================= 
 ```
 
 ## Parts of the log
@@ -148,6 +163,3 @@ By default, `logr` prints the log to a subdirectory named *log*.  If that
 subdirectory does not exist, the `log_open()` function will create it.  The 
 default behavior can be overridden by setting the `logdir` parameter on the
 `log_open()` function to `FALSE`.  
-
-
-

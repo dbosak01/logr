@@ -1,18 +1,19 @@
 Package: logr
 Title: Creates Log Files
-Version: 1.0.1
+Version: 1.0.2
 Authors@R: 
     person(given = "David",
            family = "Bosak",
            role = c("aut", "cre"),
            email = "dbosak01@gmail.com")
 Description: Contains functions to help create log files.  The 
-    package aims to overcome the difficutly of the base R sink command.  The
-    log_print function will print to both the console and the file log, without 
-    interfering in other write operations.
+    package aims to overcome the difficulty of the base R sink() command.  The
+    log_print() function will print to both the console and the file log, 
+    without interfering in other write operations.
 License: CC0
 Encoding: UTF-8
 LazyData: true
-Suggests: testthat
+Suggests: knitr, qpdf, rmarkdown, testthat
+VignetteBuilder: knitr
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1

@@ -9,7 +9,7 @@
 #' It is 
 #' designed for analysts who simply want a written log of the their program 
 #' execution.  The package is designed as a wrapper to 
-#' the base R \code{sink} function.
+#' the base R \code{sink()} function.
 #' 
 #' @section How to use:
 #' There are only three \strong{logr} functions:
@@ -103,18 +103,27 @@ separator <-
 #' @seealso \code{\link{log_print}} for printing to the log (and console), 
 #' and \code{\link{log_close}} to close the log.
 #' @export
-#' @examples
-#' # Open the log
-#' \dontrun{
-#' log_open("test.log")
+#' @examples 
+#' # Create temp file location
+#' tmp <- file.path(tempdir(), "test.log")
 #' 
-#' # Print test messages
-#' log_print("Test message")
-#' log_print(mtcars)
+#' # Open log
+#' lf <- log_open(tmp)
 #' 
-#' # Close the log
-#' log_close
-#' }
+#' # Send message to log
+#' log_print("High Mileage Cars Subset")
+#' 
+#' # Perform operations
+#' hmc <- subset(mtcars, mtcars$mpg > 20)
+#' 
+#' # Print data to log
+#' log_print(hmc)
+#' 
+#' # Close log
+#' log_close()
+#' 
+#' # View results
+#' writeLines(readLines(lf))
 log_open <- function(file_name = "", logdir = TRUE, show_notes = TRUE) {
   
   lpath <- ""
@@ -229,18 +238,27 @@ log_open <- function(file_name = "", logdir = TRUE, show_notes = TRUE) {
 #' @seealso \code{\link{log_open}} to open the log, 
 #' and \code{\link{log_close}} to close the log.
 #' @export
-#' @examples
-#' # Open the log
-#' \dontrun{
-#' log_open("test.log")
+#' @examples 
+#' # Create temp file location
+#' tmp <- file.path(tempdir(), "test.log")
 #' 
-#' # Print test messages
-#' log_print("Test message")
-#' log_print(mtcars)
+#' # Open log
+#' lf <- log_open(tmp)
 #' 
-#' # Close the log
+#' # Send message to log
+#' log_print("High Mileage Cars Subset")
+#' 
+#' # Perform operations
+#' hmc <- subset(mtcars, mtcars$mpg > 20)
+#' 
+#' # Print data to log
+#' log_print(hmc)
+#' 
+#' # Close log
 #' log_close()
-#' }
+#' 
+#' # View results
+#' writeLines(readLines(lf))
 log_print <- function(x, ..., 
                       console = TRUE, 
                       blank_after = TRUE, 
@@ -333,18 +351,27 @@ log_print <- function(x, ...,
 #' @seealso \code{\link{log_open}} to open the log, and \code{\link{log_print}} 
 #' for printing to the log.
 #' @export
-#' @examples
-#' # Open the log
-#' \dontrun{
-#' log_open("test.log")
+#' @examples 
+#' # Create temp file location
+#' tmp <- file.path(tempdir(), "test.log")
 #' 
-#' # Print test messages
-#' log_print("Test message")
-#' log_print(mtcars)
+#' # Open log
+#' lf <- log_open(tmp)
 #' 
-#' # Close the log
+#' # Send message to log
+#' log_print("High Mileage Cars Subset")
+#' 
+#' # Perform operations
+#' hmc <- subset(mtcars, mtcars$mpg > 20)
+#' 
+#' # Print data to log
+#' log_print(hmc)
+#' 
+#' # Close log
 #' log_close()
-#' }
+#' 
+#' # View results
+#' writeLines(readLines(lf))
 log_close <- function() {
   
   has_warnings <- FALSE
@@ -498,34 +525,31 @@ dhms <- function(t){
 }
 
 # Test Case ---------------------------------------------------------------
-
-
-
 # 
-# lf <- log_open("test.log", show_notes = FALSE)
+# library(logr)
 # 
-# log_print("Here is the first log message")
+# tmp <- file.path(tempdir(), "test.log")
+# 
+# lf <- log_open(tmp)
+# 
+# log_print("High Mileage Cars Subset")
+# 
+# hmc <- subset(mtcars, mtcars$mpg > 20)
+# 
+# log_print(hmc)
 # 
 # 
-# Sys.sleep(1)
-# log_print(mtcars)
-# 
-# 
-# generror
+# #generror
 # # warning("Test warning")
-# #
-# #
-# #
-# #
 # # log_print("Here is a second log message")
 # log_close()
+# 
+# writeLines(readLines(lf))
 
 
 
-# clean up
-# if (file.exists(lf)) {
-#   file.remove(lf)
-# }
-# if (file.exists(msg_path)) {
-#   file.remove(msg_path)
-# }
+
+
+
+
+

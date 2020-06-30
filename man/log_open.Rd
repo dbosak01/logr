@@ -67,17 +67,26 @@ of the script, call \code{log_print} as needed to log interim state,
 and call \code{log_close} at the bottom of the script.
 }
 \examples{
-# Open the log
-\dontrun{
-log_open("test.log")
+# Create temp file location
+tmp <- file.path(tempdir(), "test.log")
 
-# Print test messages
-log_print("Test message")
-log_print(mtcars)
+# Open log
+lf <- log_open(tmp)
 
-# Close the log
-log_close
-}
+# Send message to log
+log_print("High Mileage Cars Subset")
+
+# Perform operations
+hmc <- subset(mtcars, mtcars$mpg > 20)
+
+# Print data to log
+log_print(hmc)
+
+# Close log
+log_close()
+
+# View results
+writeLines(readLines(lf))
 }
 \seealso{
 \code{\link{log_print}} for printing to the log (and console),

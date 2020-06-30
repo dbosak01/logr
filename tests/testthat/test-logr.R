@@ -2,49 +2,46 @@ context("logr tests")
 
 test_that("the log_open function handles invalid parameters.", {
   
-
-  nm <- log_open()
+  tmp <- tempdir()
+  
+  nm <- log_open(file.path(tmp, "test.log"))
   log_print("Here is the first log message")
   log_print("Here is a second log message")
   log_close()
   
-  lf <- "./log/script.log"
+  lf <- file.path(gsub("\\", "/", tmp, fixed = TRUE), "log/test.log")
   
   ret <- file.exists(lf)
   
   expect_equal(nm, lf)
   expect_equal(TRUE, ret)
   
-  if (ret)
-    file.remove(lf)
-  
-  if (dir.exists("log")) {
-    unlink("log", force = TRUE, recursive = TRUE)
-  }
   
 })
 
 test_that("the log_print function handles invalid parameters.", {
   
+  tmp <- tempdir()
   
-  lp <- log_open()
+  lp <- log_open(file.path(tmp, "test.log"))
+  
   log_print("Here is the first log message")
   log_print("Here is a second log message")
   log_close()
   
-  lf <- "./log/script.log"
+  lf <- file.path(gsub("\\", "/", tmp, fixed = TRUE), "log/test.log")
   
   ret <- file.exists(lf)
   
   expect_equal(basename(lp), basename(lf))
   expect_equal(TRUE, ret)
-  
-  if (ret)
-    file.remove(lf)
-  
-  if (dir.exists("log")) {
-    unlink("log", force = TRUE, recursive = TRUE)
-  }
+  # 
+  # if (ret)
+  #   file.remove(lf)
+  # 
+  # if (dir.exists(file.path(tmp, "log"))) {
+  #   unlink("log", force = TRUE, recursive = TRUE)
+  # }
   
 })
 
@@ -52,8 +49,9 @@ test_that("the log_print function handles invalid parameters.", {
 
 test_that("the logr package can create a log with no errors or warnings.", {
   
+  tmp <- tempdir()
   
-  lf <- log_open("test.log")
+  lf <- log_open(file.path(tmp, "test.log"))
   log_print("Here is the first log message")
   log_print(mtcars)
   log_print("Here is a second log message")
@@ -67,16 +65,6 @@ test_that("the logr package can create a log with no errors or warnings.", {
   expect_equal(ret, TRUE)
   expect_equal(ret2, FALSE)
   
-  # clean up
-  if (ret) {
-    file.remove(lf)
-  }
-  if (ret2) {
-    file.remove(mp)
-  }
-  if (dir.exists("log")) {
-    unlink("log", force = TRUE, recursive = TRUE)
-  }
   
 })
 

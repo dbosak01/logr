@@ -14,7 +14,7 @@ provides easy logging, without the complexity of other logging systems.
 It is
 designed for analysts who simply want a written log of the their program
 execution.  The package is designed as a wrapper to
-the base R \code{sink} function.
+the base R \code{sink()} function.
 }
 \section{How to use}{
 
