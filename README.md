@@ -1,6 +1,7 @@
 # logr <img src='man/images/logr.svg' align="right" height="138" />
 <!-- badges: start -->
-[![logr version](https://www.r-pkg.org/badges/version/logr?color=green)](https://cran.r-project.org/package=logr)
+
+[![logr version](https://www.r-pkg.org/badges/version/logr?)](https://cran.r-project.org/package=logr)
 [![logr downloads](https://cranlogs.r-pkg.org/badges/grand-total/logr)](https://cran.r-project.org/package=logr)
 [![Travis build status](https://travis-ci.com/dbosak01/logr.svg?branch=master)](https://travis-ci.com/dbosak01/logr)
 
