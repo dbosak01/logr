@@ -1,6 +1,8 @@
 # logr <img src='man/images/logr.svg' align="right" height="138" />
 <!-- badges: start -->
+[![logr downloads](https://cranlogs.r-pkg.org/badges/logr)](https://cran.r-project.org/package=logr)
 [![Travis build status](https://travis-ci.com/dbosak01/logr.svg?branch=master)](https://travis-ci.com/dbosak01/logr)
+
 <!-- badges: end -->
 The **logr** package helps create log files for R scripts.  The package 
 provides easy logging, without the complexity of other logging systems.  It is 
