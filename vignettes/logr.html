@@ -12,7 +12,7 @@
 
 <meta name="author" content="David Bosak" />
 
-<meta name="date" content="2020-06-30" />
+<meta name="date" content="2020-07-04" />
 
 <title>Create Logs for R Scripts</title>
 
@@ -244,7 +244,7 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 
 <h1 class="title toc-ignore">Create Logs for R Scripts</h1>
 <h4 class="author">David Bosak</h4>
-<h4 class="date">2020-06-30</h4>
+<h4 class="date">2020-07-04</h4>
 
 
 
@@ -253,8 +253,12 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 <p>The <strong>logr</strong> package helps create log files for R scripts. The package provides easy logging, without the complexity of other logging systems. It is designed for analysts who simply want a written log of the their program execution. The package is designed as a wrapper to the base R <code>sink()</code> function.</p>
 <div id="how-to-use" class="section level2">
 <h2>How to use</h2>
-<p>There are only three <strong>logr</strong> functions:<br />
-* <code>log_open()</code> * <code>log_print()</code> * <code>log_close()</code></p>
+<p>There are only three <strong>logr</strong> functions:</p>
+<ul>
+<li><code>log_open()</code></li>
+<li><code>log_print()</code></li>
+<li><code>log_close()</code></li>
+</ul>
 <p>The <code>log_open()</code> function initiates the log. The <code>log_print()</code> function prints an object to the log. The <code>log_close()</code> function closes the log. In normal situations, a user would place the call to <code>log_open()</code> at the top of the program, call <code>log_print()</code> as needed in the program body, and call <code>log_close()</code> once at the end of the program.</p>
 <p>A sample program is as follows:</p>
 <pre><code>library(logr)
@@ -287,7 +291,12 @@ writeLines(readLines(lf))
 </div>
 <div id="what-the-log-looks-like" class="section level2">
 <h2>What the log looks like</h2>
-<p>The log created by <strong>logr</strong> is simpler than most logging packages. This log is designed to be human-readable and increases the traceability of your activities. There are three main enhancements to a <strong>logr</strong> log: * A log header * Notes * A log footer</p>
+<p>The log created by <strong>logr</strong> is simpler than most logging packages. This log is designed to be human-readable and increases the traceability of your activities. There are three main enhancements to a <strong>logr</strong> log:</p>
+<ul>
+<li>A log header</li>
+<li>Notes</li>
+<li>A log footer</li>
+</ul>
 <p>Here is an example log, created by the sample program above:</p>
 <pre><code>========================================================================= 
 Log Path: C:/Users/dbosa/AppData/Local/Temp/RtmpQtOzhy/log/test.log 

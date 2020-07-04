@@ -25,9 +25,10 @@ the base R `sink()` function.
 
 ## How to use
 There are only three **logr** functions:  
-  * `log_open()`
-  * `log_print()`
-  * `log_close()`  
+
+* `log_open()`
+* `log_print()`
+* `log_close()`  
 
 The `log_open()` function initiates the log.  The 
 `log_print()` function prints an object to the log.  The `log_close()` function
@@ -74,6 +75,7 @@ object to the console. That means you can replace calls to `print()` with
 The log created by **logr** is simpler than most logging packages.  This 
 log is designed to be human-readable and increases the traceability of your
 activities.  There are three main enhancements to a **logr** log:
+
   * A log header
   * Notes
   * A log footer

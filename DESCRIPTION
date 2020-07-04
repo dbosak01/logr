@@ -1,6 +1,6 @@
 Package: logr
 Title: Creates Log Files
-Version: 1.0.3
+Version: 1.0.4
 Authors@R: 
     person(given = "David",
            family = "Bosak",

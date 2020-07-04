@@ -279,13 +279,24 @@ log_print <- function(x, ...,
       # Use sink() function so print() will work as desired
       sink(file_path, append = TRUE)
       if (class(x) == "character") {
+        if (length(x) == 1 && nchar(x) < 100) {
         
-        # Print the string
-        cat(x, "\n")
+          # Print the string
+          cat(x, "\n")
+          
+          # Add blank after if requested
+          if (blank_after == TRUE)
+            cat("\n")
+        } else {
+          
+          # Print the object
+          print(x, ...)
+          
+          if (blank_after == TRUE)
+            cat("\n")
+          
+        }
         
-        # Add blank after if requested
-        if (blank_after == TRUE)
-          cat("\n")
         
       } else {
         
@@ -535,17 +546,33 @@ dhms <- function(t){
 # log_print("High Mileage Cars Subset")
 # 
 # hmc <- subset(mtcars, mtcars$mpg > 20)
-# 
 # log_print(hmc)
 # 
+# log_print("Here is a character vector")
+# v1 <- c("1", "2", "3")
+# log_print(v1)
 # 
-# #generror
+# log_print("Here is a numeric vector")
+# v2 <- c(1, 2, 3)
+# log_print(v2)
+# 
+# log_print("Here is a factor")
+# f1 <- factor(c("A", "B", "B", "A"), levels = c("A", "B"))
+# log_print(f1)
+# 
+# log_print("Here is a list")
+# l1 <- list("A", 1, Sys.Date())
+# log_print(l1)
+# 
+# 
+#  generror
 # # warning("Test warning")
-# # log_print("Here is a second log message")
+# 
+# 
 # log_close()
 # 
 # writeLines(readLines(lf))
-
+# 
 
 
 

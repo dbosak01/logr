@@ -68,6 +68,39 @@ test_that("the logr package can create a log with no errors or warnings.", {
   
 })
 
+
+test_that("the logr package can log vectors, factors, and lists with no errors or warnings.", {
+  
+  tmp <- tempdir()
+  
+  lf <- log_open(file.path(tmp, "test.log"))
+  
+  log_print("Here is a vector")
+  v1 <- c("1", "2", "3")
+  log_print(v1)
+  
+  log_print("Here is a factor")
+  f1 <- factor(c("A", "B", "B", "A"), levels = c("A", "B"))
+  log_print(f1)
+  
+  log_print("Here is a list")
+  l1 <- list("A", 1, Sys.Date())
+  log_print(l1)
+  
+  mp <- e$msg_path
+  log_close()
+  
+  ret <- file.exists(lf)
+  ret2 <- file.exists(mp)
+  
+  expect_equal(ret, TRUE)
+  expect_equal(ret2, FALSE)
+  
+  
+})
+
+
+
 # Not sure how to generate an error and not cause the test to fail.
 # Commented out for now.
 # test_that("the logr package can create a log with errors and warnings.", {
