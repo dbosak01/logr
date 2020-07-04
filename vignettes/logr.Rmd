@@ -17,7 +17,10 @@ knitr::opts_chunk$set(
 ```
 # logr <img src='../man/images/logr.svg' align="right" height="138" />
 
-\lifecycle{maturing}
+![logr version](https://www.r-pkg.org/badges/version/logr)
+![logr lifecycle](https://img.shields.io/badge/lifecycle-stable-blue.svg)
+![logr downloads](https://cranlogs.r-pkg.org/badges/grand-total/logr)
+
 
 The **logr** package helps create log files for R scripts.  The package 
 provides easy logging, without the complexity of other logging systems.  It is 
