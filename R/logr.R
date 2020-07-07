@@ -278,7 +278,7 @@ log_print <- function(x, ...,
     
       # Use sink() function so print() will work as desired
       sink(file_path, append = TRUE)
-      if (class(x) == "character") {
+      if (all(class(x) == "character")) {
         if (length(x) == 1 && nchar(x) < 100) {
         
           # Print the string
