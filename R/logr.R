@@ -35,6 +35,7 @@ NULL
 
 # Set up environment
 e <- new.env(parent = emptyenv())
+e$log_status <- "closed"
 
 # Log Separator
 separator <- 
@@ -181,9 +182,22 @@ log_open <- function(file_name = "", logdir = TRUE, show_notes = TRUE) {
 
   # Set global variable
   e$log_path <- lpath
+  e$log_status = "open"
   
   # Attach error event handler
   options(error = error_handler)
+  
+  # Clear any warnings
+  has_warnings <- FALSE
+  if(exists("last.warning")) {
+    lw <- get("last.warning")
+    has_warnings <- length(lw) > 0
+    if(has_warnings) {
+      log_print(warnings(), console = FALSE)
+      log_print(warnings(), console = FALSE, msg = TRUE)
+      assign("last.warning", NULL, envir = baseenv())
+    }
+  }
   
   # Doesn't seem to work. At least on Windows. Bummer.
   #options(warn = 1, warning = warning_handler)
@@ -195,6 +209,7 @@ log_open <- function(file_name = "", logdir = TRUE, show_notes = TRUE) {
   ts <- Sys.time()
   e$log_time = ts
   e$log_start_time = ts
+
   
   # Capture show_notes parameter
   e$log_show_notes = show_notes
@@ -264,29 +279,43 @@ log_print <- function(x, ...,
                       blank_after = TRUE, 
                       msg = FALSE) {
   
-  # Print to console, if requested
-  if (console == TRUE)
-    print(x, ...)
   
-  # Print to msg_path, if requested
-  file_path <- e$log_path
-  if (msg == TRUE)
-    file_path <- e$msg_path
+  if (e$log_status == "open") {
   
-  # Print to log or msg file
-  tryCatch( {
+    # Print to console, if requested
+    if (console == TRUE)
+      print(x, ...)
     
-      # Use sink() function so print() will work as desired
-      sink(file_path, append = TRUE)
-      if (all(class(x) == "character")) {
-        if (length(x) == 1 && nchar(x) < 100) {
-        
-          # Print the string
-          cat(x, "\n")
+    # Print to msg_path, if requested
+    file_path <- e$log_path
+    if (msg == TRUE)
+      file_path <- e$msg_path
+    
+    # Print to log or msg file
+    tryCatch( {
+      
+        # Use sink() function so print() will work as desired
+        sink(file_path, append = TRUE)
+        if (all(class(x) == "character")) {
+          if (length(x) == 1 && nchar(x) < 100) {
           
-          # Add blank after if requested
-          if (blank_after == TRUE)
-            cat("\n")
+            # Print the string
+            cat(x, "\n")
+            
+            # Add blank after if requested
+            if (blank_after == TRUE)
+              cat("\n")
+          } else {
+            
+            # Print the object
+            print(x, ...)
+            
+            if (blank_after == TRUE)
+              cat("\n")
+            
+          }
+          
+          
         } else {
           
           # Print the object
@@ -294,49 +323,41 @@ log_print <- function(x, ...,
           
           if (blank_after == TRUE)
             cat("\n")
-          
         }
-        
-        
-      } else {
-        
-        # Print the object
-        print(x, ...)
-        
-        if (blank_after == TRUE)
-          cat("\n")
-      }
-    },
-    error = function(cond) {
-      
-        print("Error: Object cannot be printed to log\n")
       },
-    finally = {
-      
-      # Print time stamps on normal log_print
-      if (blank_after == TRUE & console == TRUE) {
-        tc <- Sys.time()
+      error = function(cond) {
         
-        if (e$log_show_notes == TRUE) {
+          print("Error: Object cannot be printed to log\n")
+        },
+      finally = {
+        
+        # Print time stamps on normal log_print
+        if (blank_after == TRUE & console == TRUE) {
+          tc <- Sys.time()
           
-          # Print data frame row and column counts
-          if (any(class(x) == "data.frame")) {
-            cat(paste("NOTE: Data frame has", nrow(x), "rows and", ncol(x), 
-                      "columns."), "\n")
+          if (e$log_show_notes == TRUE) {
+            
+            # Print data frame row and column counts
+            if (any(class(x) == "data.frame")) {
+              cat(paste("NOTE: Data frame has", nrow(x), "rows and", ncol(x), 
+                        "columns."), "\n")
+              cat("\n")
+            }
+            
+            # Print log timestamps
+            cat(paste("NOTE: Log Print Time: ", tc), "\n")
+            cat(paste("NOTE: Elapsed Time in seconds:", get_time_diff(tc)), "\n")
             cat("\n")
           }
-          
-          # Print log timestamps
-          cat(paste("NOTE: Log Print Time: ", tc), "\n")
-          cat(paste("NOTE: Elapsed Time in seconds:", get_time_diff(tc)), "\n")
-          cat("\n")
         }
+        
+        # Release sink no matter what
+        sink()
       }
-      
-      # Release sink no matter what
-      sink()
-    }
-  )
+    )
+  } else {
+    message("Log is not open.")
+  }
   
   invisible(x)
 }
@@ -385,29 +406,35 @@ log_print <- function(x, ...,
 #' writeLines(readLines(lf))
 log_close <- function() {
   
-  has_warnings <- FALSE
-  if(exists("last.warning")) {
-    lw <- get("last.warning")
-    has_warnings <- length(lw) > 0
-    if(has_warnings) {
-      log_print(warnings(), console = FALSE)
-      log_print(warnings(), console = FALSE, msg = TRUE)
-      assign("last.warning", NULL, envir = baseenv())
+  if (e$log_status == "open") {
+    has_warnings <- FALSE
+    if(exists("last.warning")) {
+      lw <- get("last.warning")
+      has_warnings <- length(lw) > 0
+      if(has_warnings) {
+        log_print(warnings(), console = FALSE)
+        log_print(warnings(), console = FALSE, msg = TRUE)
+        assign("last.warning", NULL, envir = baseenv())
+      }
     }
+    
+    # Detach error handler
+    options(error = NULL)
+    
+    # Print out footer
+    print_log_footer(has_warnings)
+    
+    # Clean up environment variables
+    e$log_path <- NULL
+    e$msg_path <- NULL
+    e$log_show_notes <- NULL
+    e$log_time <- NULL
+    e$log_start_time <- NULL
+    e$log_status <- "closed"
+  } else {
+    message("Log is not open.")
+    
   }
-  
-  # Detach error handler
-  options(error = NULL)
-  
-  # Print out footer
-  print_log_footer(has_warnings)
-  
-  # Clean up environment variables
-  e$log_path <- NULL
-  e$msg_path <- NULL
-  e$log_show_notes <- NULL
-  e$log_time <- NULL
-  e$log_start_time <- NULL
   
 }
 
@@ -539,13 +566,14 @@ dhms <- function(t){
 # 
 # library(logr)
 # 
+# library(tibble)
 # tmp <- file.path(tempdir(), "test.log")
 # 
 # lf <- log_open(tmp)
 # 
 # log_print("High Mileage Cars Subset")
 # 
-# hmc <- subset(mtcars, mtcars$mpg > 20)
+# hmc <- tibble(subset(mtcars, mtcars$mpg > 20))
 # log_print(hmc)
 # 
 # log_print("Here is a character vector")
@@ -565,14 +593,14 @@ dhms <- function(t){
 # log_print(l1)
 # 
 # 
-#  generror
+# # generror
 # # warning("Test warning")
 # 
 # 
 # log_close()
 # 
 # writeLines(readLines(lf))
-# 
+
 
 
 
