@@ -155,17 +155,17 @@ default behavior can be overridden by setting the `logdir` parameter on the
 `log_open()` function to `FALSE`.  
 
 ### Integration with tidylog
-You can integrate `logr` with the popular `tidylog` package by assigning 
-the `tidylog` options setting to `log_print`, as follows:
+You can integrate **logr** with the popular **tidylog** package by assigning 
+the **tidylog** options setting to `log_print`, as follows:
 
 `options("tidylog.display" = list(log_print))`
 
-Note that you still must open and close the `logr` log, as per normal 
-operation.  The difference is that all `tidylog` messages will be written
-to the log automatically.  You do not need to call `log_print` for `tidylog` 
+Note that you still must open and close the **logr** log, as per normal 
+operation.  The difference is that all **tidylog** messages will be written
+to the log automatically.  You do not need to call `log_print` for **tidylog** 
 messages.
 
-To detach `logr` from `tidylog`, set the display option to `NULL`:
+To detach **logr** from **tidylog**, set the display option to `NULL`:
 
 `options("tidylog.display" = NULL)`
 
