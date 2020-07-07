@@ -356,7 +356,9 @@ log_print <- function(x, ...,
       }
     )
   } else {
+    print(x, ...)
     message("Log is not open.")
+
   }
   
   invisible(x)
@@ -433,7 +435,7 @@ log_close <- function() {
     e$log_status <- "closed"
   } else {
     message("Log is not open.")
-    
+
   }
   
 }
