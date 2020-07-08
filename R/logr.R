@@ -356,7 +356,7 @@ log_print <- function(x, ...,
       }
     )
   } else {
-    print(x, ...)
+    #print(x, ...)
     message("Log is not open.")
 
   }
