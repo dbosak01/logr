@@ -9,7 +9,7 @@
 <!-- badges: end -->
 The **logr** package helps create log files for R scripts.  The package 
 provides easy logging, without the complexity of other logging systems.  It is 
-designed for analysts who simply want a written log of the their program 
+designed for analysts who simply want a written log of their program 
 execution.  The package is implemented as a wrapper to 
 the base R `sink()` function.
 
