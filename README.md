@@ -160,10 +160,10 @@ the **tidylog** options setting to `log_print`, as follows:
 
 `options("tidylog.display" = list(log_print))`
 
-Note that you still must open and close the **logr** log, as per normal 
-operation.  The difference is that all **tidylog** messages will be written
-to the log automatically.  You do not need to call `log_print` for **tidylog** 
-messages.
+This setting will cause all **tidylog** messages to be writted to the **logr**
+log automatically.  You do not need to call `log_print` for **tidylog** 
+messages.  Note that you still must open and close the **logr** log, 
+as per normal operation.  
 
 To detach **logr** from **tidylog**, set the display option to `NULL`:
 

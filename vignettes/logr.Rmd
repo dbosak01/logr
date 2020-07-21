@@ -17,10 +17,14 @@ knitr::opts_chunk$set(
 ```
 # logr <img src='../man/images/logr.svg' align="right" height="138" />
 
+<!-- badges: start -->
+
 ![logr version](https://www.r-pkg.org/badges/version/logr)
-![logr lifecycle](https://img.shields.io/badge/lifecycle-stable-blue.svg)
 ![logr downloads](https://cranlogs.r-pkg.org/badges/grand-total/logr)
 ![Travis build status](https://travis-ci.com/dbosak01/logr.svg?branch=master)
+![logr lifecycle](https://img.shields.io/badge/lifecycle-stable-blue.svg)
+
+<!-- badges: end -->
 
 The **logr** package helps create log files for R scripts.  The package 
 provides easy logging, without the complexity of other logging systems.  It is 
@@ -177,10 +181,10 @@ the **tidylog** options setting to `log_print`, as follows:
 
 `options("tidylog.display" = list(log_print))`
 
-Note that you still must open and close the **logr** log, as per normal 
-operation.  The difference is that all **tidylog** messages will be written
-to the log automatically.  You do not need to call `log_print` for **tidylog** 
-messages.
+This setting will cause all **tidylog** messages to be writted to the **logr**
+log automatically.  You do not need to call `log_print` for **tidylog** 
+messages.  Note that you still must open and close the **logr** log, 
+as per normal operation.  
 
 To detach **logr** from **tidylog**, set the display option to `NULL`:
 
