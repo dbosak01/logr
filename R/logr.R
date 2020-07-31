@@ -25,6 +25,10 @@
 #' \code{log_open} at the top of the program, call \code{log_print()} 
 #' as needed in the 
 #' program body, and call \code{log_close()} once at the end of the program.  
+#' 
+#' Logging may be controlled globally using the options "logr.on" and 
+#' "logr.notes".  Both options accept TRUE or FALSE values, and control
+#' log printing or log notes, respectively. 
 #'
 #' See function documentation for additional details.
 #' @docType package
@@ -93,6 +97,17 @@ separator <-
 #' of the script, call \code{log_print} as needed to log interim state, 
 #' and call \code{log_close} at the bottom of the script. 
 #' 
+#' Logging may be controlled globally using the "logr.on" option.  This option
+#' accepts a TRUE or FALSE value. If the option is set to FALSE, \strong{logr}
+#' will print to the console, but not to the log. 
+#' Example: \code{options("logr.on" = TRUE)}
+#' 
+#' Notes may be controlled globally using the "logr.notes" option.  This option
+#' also accepts a TRUE or FALSE value, and determines whether or not to print
+#' notes in the log.  The global option will override the \code{show_notes}
+#' parameter on the \code{log_open} function. 
+#' Example: \code{options("logr.notes" = FALSE)}
+#' 
 #' @param file_name The name of the log file.  If no path is specified, the 
 #' working directory will be used.
 #' @param logdir Send the log to a log directory named "log".  If the log 
@@ -127,6 +142,18 @@ separator <-
 #' writeLines(readLines(lf))
 log_open <- function(file_name = "", logdir = TRUE, show_notes = TRUE) {
   
+  if (is.null(options()[["logr.on"]]) == FALSE) {
+    
+   opt <- options("logr.on")
+   
+   if (all(opt[[1]] == FALSE)) 
+     e$log_status = "off"
+   else 
+     e$log_status = "on"
+    
+  } else e$log_status = "on"
+  
+  
   lpath <- ""
   
   # If no filename is specified, make up something.
@@ -159,60 +186,78 @@ log_open <- function(file_name = "", logdir = TRUE, show_notes = TRUE) {
     }
   }
   
-  # Create path for message file
-  mpath <- sub(".log", ".msg", lpath, fixed = TRUE)
-  e$msg_path <- mpath
-
+  if (e$log_status == "off") {
     
-  # Kill any existing log file
-  if (file.exists(lpath)) {
-    file.remove(lpath)
-  }
+    message("Log is off.")
+    
+  } else {
   
-  # Kill any existing msg file  
-  if (file.exists(mpath)) {
-    file.remove(mpath)
-  }
+    # Create path for message file
+    mpath <- sub(".log", ".msg", lpath, fixed = TRUE)
+    e$msg_path <- mpath
   
-  # At one point considered creating a dump file
-  # automatically.  Still under consideration.
-  # if (file.exists(dump_path)) {
-  #   file.remove(dump_path)
-  # }
-
-  # Set global variable
-  e$log_path <- lpath
-  e$log_status = "open"
-  
-  # Attach error event handler
-  options(error = error_handler)
-  
-  # Clear any warnings
-  has_warnings <- FALSE
-  if(exists("last.warning")) {
-    lw <- get("last.warning")
-    has_warnings <- length(lw) > 0
-    if(has_warnings) {
-      log_print(warnings(), console = FALSE)
-      log_print(warnings(), console = FALSE, msg = TRUE)
-      assign("last.warning", NULL, envir = baseenv())
+      
+    # Kill any existing log file
+    if (file.exists(lpath)) {
+      file.remove(lpath)
     }
-  }
+    
+    # Kill any existing msg file  
+    if (file.exists(mpath)) {
+      file.remove(mpath)
+    }
+    
+    # At one point considered creating a dump file
+    # automatically.  Still under consideration.
+    # if (file.exists(dump_path)) {
+    #   file.remove(dump_path)
+    # }
   
-  # Doesn't seem to work. At least on Windows. Bummer.
-  #options(warn = 1, warning = warning_handler)
+    # Set global variable
+    e$log_path <- lpath
+    e$log_status = "open"
+    
+    # Attach error event handler
+    options(error = error_handler)
+    
+    # Clear any warnings
+    has_warnings <- FALSE
+    if(exists("last.warning")) {
+      lw <- get("last.warning")
+      has_warnings <- length(lw) > 0
+      if(has_warnings) {
+        log_print(warnings(), console = FALSE)
+        log_print(warnings(), console = FALSE, msg = TRUE)
+        assign("last.warning", NULL, envir = baseenv())
+      }
+    }
+    
+    # Doesn't seem to work. At least on Windows. Bummer.
+    #options(warn = 1, warning = warning_handler)
+    
+    # Create the log header
+    print_log_header(lpath)
+    
+    # Record timestamp for later use by log_print
+    ts <- Sys.time()
+    e$log_time = ts
+    e$log_start_time = ts
   
-  # Create the log header
-  print_log_header(lpath)
-  
-  # Record timestamp for later use by log_print
-  ts <- Sys.time()
-  e$log_time = ts
-  e$log_start_time = ts
+    
+    if (is.null(options()[["logr.notes"]]) == FALSE) {
+      
+      optn <- options("logr.notes")
+      
+      e$log_show_notes = optn[[1]] 
+      
+    } else {
+      
+      # Capture show_notes parameter
+      e$log_show_notes = show_notes
+    }
 
   
-  # Capture show_notes parameter
-  e$log_show_notes = show_notes
+  }
   
   return(lpath)
   
@@ -355,8 +400,10 @@ log_print <- function(x, ...,
         sink()
       }
     )
-  } else {
-    #print(x, ...)
+  } else if (e$log_status == "off") {
+    print(x, ...) 
+  }  else {
+    print(x, ...)
     message("Log is not open.")
 
   }
@@ -433,6 +480,10 @@ log_close <- function() {
     e$log_time <- NULL
     e$log_start_time <- NULL
     e$log_status <- "closed"
+  } else if (e$log_status == "off") {
+  
+    message("Log is off.")
+    
   } else {
     message("Log is not open.")
 
@@ -568,7 +619,13 @@ dhms <- function(t){
 # 
 # library(logr)
 # 
+
+# options("logr.on" = NULL)
+# options("logr.notes" = NULL)
+# 
 # library(tibble)
+# 
+# file.remove(lf)
 # tmp <- file.path(tempdir(), "test.log")
 # 
 # lf <- log_open(tmp)
@@ -594,11 +651,11 @@ dhms <- function(t){
 # l1 <- list("A", 1, Sys.Date())
 # log_print(l1)
 # 
-# 
-# # generror
-# # warning("Test warning")
-# 
-# 
+# # 
+# # # generror
+# # # warning("Test warning")
+# # 
+# # 
 # log_close()
 # 
 # writeLines(readLines(lf))

@@ -32,6 +32,10 @@ a user would place the call to
 as needed in the
 program body, and call \code{log_close()} once at the end of the program.
 
+Logging may be controlled globally using the options "logr.on" and
+"logr.notes".  Both options accept TRUE or FALSE values, and control
+log printing or log notes, respectively.
+
 See function documentation for additional details.
 }
 

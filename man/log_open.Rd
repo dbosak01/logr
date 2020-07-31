@@ -65,6 +65,17 @@ This package provides the functionality of \code{sink}, but in much more
 user-friendly way.  Recommended usage is to call \code{log_open} at the top
 of the script, call \code{log_print} as needed to log interim state,
 and call \code{log_close} at the bottom of the script.
+
+Logging may be controlled globally using the "logr.on" option.  This option
+accepts a TRUE or FALSE value. If the option is set to FALSE, \strong{logr}
+will print to the console, but not to the log.
+Example: \code{options("logr.on" = TRUE)}
+
+Notes may be controlled globally using the "logr.notes" option.  This option
+also accepts a TRUE or FALSE value, and determines whether or not to print
+notes in the log.  The global option will override the \code{show_notes}
+parameter on the \code{log_open} function.
+Example: \code{options("logr.notes" = FALSE)}
 }
 \examples{
 # Create temp file location

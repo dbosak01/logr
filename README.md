@@ -169,4 +169,24 @@ To detach **logr** from **tidylog**, set the display option to `NULL`:
 
 `options("tidylog.display" = NULL)`
 
+### Global Options
+There are situations when you want to control log printing globally.  For
+those cases, **logr** has two global options.  The option "logr.on" accepts
+a `TRUE` or `FALSE` value, and determines whether the **logr** log is on 
+or off.  The option "logr.notes" also accepts a `TRUE` or `FALSE` value,
+and determines whether to include notes in the log.  Both of these global 
+options will override any local settings.  The following example demonstrates
+how to use these options:
+```
+# Turn logger off 
+options("logr.on" = FALSE)
+
+# Turn logger on and show notes 
+options("logr.on" = TRUE, "logr.notes" = TRUE)
+
+# Turn off notes
+options("logr.notes" = FALSE)
+```
+
+
 

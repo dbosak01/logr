@@ -17,15 +17,6 @@ knitr::opts_chunk$set(
 ```
 # logr <img src='../man/images/logr.svg' align="right" height="138" />
 
-<!-- badges: start -->
-
-![logr version](https://www.r-pkg.org/badges/version/logr)
-![logr downloads](https://cranlogs.r-pkg.org/badges/grand-total/logr)
-![Travis build status](https://travis-ci.com/dbosak01/logr.svg?branch=master)
-![logr lifecycle](https://img.shields.io/badge/lifecycle-stable-blue.svg)
-
-<!-- badges: end -->
-
 The **logr** package helps create log files for R scripts.  The package 
 provides easy logging, without the complexity of other logging systems.  It is 
 designed for analysts who simply want a written log of their program 
@@ -189,3 +180,23 @@ as per normal operation.
 To detach **logr** from **tidylog**, set the display option to `NULL`:
 
 `options("tidylog.display" = NULL)`
+
+### Global Options
+There are situations when you want to control log printing globally.  For
+those cases, **logr** has two global options.  The option "logr.on" accepts
+a `TRUE` or `FALSE` value, and determines whether the **logr** log is on 
+or off.  The option "logr.notes" also accepts a `TRUE` or `FALSE` value,
+and determines whether to include notes in the log.  Both of these global 
+options will override any local settings.  The following example demonstrates
+how to use these options:
+```
+# Turn logger off 
+options("logr.on" = FALSE)
+
+# Turn logger on and show notes 
+options("logr.on" = TRUE, "logr.notes" = TRUE)
+
+# Turn off notes
+options("logr.notes" = FALSE)
+```
+
