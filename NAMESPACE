@@ -3,3 +3,4 @@
 export(log_close)
 export(log_open)
 export(log_print)
+export(put)

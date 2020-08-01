@@ -2,6 +2,7 @@
 % Please edit documentation in R/logr.R
 \name{log_print}
 \alias{log_print}
+\alias{put}
 \title{Print an object to the log}
 \usage{
 log_print(x, ..., console = TRUE, blank_after = TRUE, msg = FALSE)

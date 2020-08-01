@@ -295,6 +295,7 @@ log_open <- function(file_name = "", logdir = TRUE, show_notes = TRUE) {
 #' intended to be used internally.  Value values are TRUE and FALSE.  The 
 #' default value is FALSE.
 #' @return The object, invisibly
+#' @aliases put
 #' @seealso \code{\link{log_open}} to open the log, 
 #' and \code{\link{log_close}} to close the log.
 #' @export
@@ -411,7 +412,19 @@ log_print <- function(x, ...,
   invisible(x)
 }
 
-
+#' @aliases log_print
+#' @export
+put <- function(x, ..., 
+                console = TRUE, 
+                blank_after = TRUE, 
+                msg = FALSE) {
+  
+  # Pass everything to log_print()
+  ret <- log_print(x, ..., console = console, blank_after = blank_after,
+                   msg = msg)
+  
+  invisible(ret)
+}
 
 #' @title
 #' Close the log
