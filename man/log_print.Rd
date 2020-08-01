@@ -43,6 +43,14 @@ and elapsed time since the last call to \code{log_print}.  When printing
 a data frame, the \code{log_print} function will also print the number
 and rows and column in the data frame.  These counts may also be useful
 in debugging.
+
+Notes may be turned off either by setting the \code{show_notes} parameter
+on \code{log_open} to FALSE, or by setting the global option "logr.notes"
+to FALSE.
+
+The \code{put} function is a shorthand alias for \code{log_print}. You can
+use \code{put} anywhere you would use \code{log_print}.  The functionality
+is identical.
 }
 \examples{
 # Create temp file location
