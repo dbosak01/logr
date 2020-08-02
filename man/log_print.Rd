@@ -6,6 +6,8 @@
 \title{Print an object to the log}
 \usage{
 log_print(x, ..., console = TRUE, blank_after = TRUE, msg = FALSE)
+
+put(x, ..., console = TRUE, blank_after = TRUE, msg = FALSE)
 }
 \arguments{
 \item{x}{The object to print.}

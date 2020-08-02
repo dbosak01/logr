@@ -268,7 +268,8 @@ log_open <- function(file_name = "", logdir = TRUE, show_notes = TRUE) {
 #' 
 #' @description 
 #' The \code{log_print} function prints an object to the currently opened log.
-#' 
+#' @usage log_print(x, ..., console = TRUE, blank_after = TRUE, msg = FALSE)
+#' @usage put(x, ..., console = TRUE, blank_after = TRUE, msg = FALSE)
 #' @details 
 #' The log is initialized with \code{log_open}.  Once the log is open, objects
 #' like variables and data frames can be printed to the log to monitor execution
