@@ -192,8 +192,8 @@ options("logr.notes" = FALSE)
 There are two aliases for the `log_print()` function: `put()` and `sep()`.
 `put()` is a direct alias, and has no additional functionality.  It is simply
 easier to type than `log_print()`.  `sep()` has some additional functionality in
-that it will automatically print separators before and after the text.  This
-function is intended for documentation purposes, and can help organize your 
+that it will automatically print separators before and after the log output. 
+This function is intended for documentation purposes, and can help organize your 
 log into sections.  Here is an example:
 ```
 
