@@ -58,10 +58,9 @@ use \code{put} anywhere you would use \code{log_print}.  The functionality
 is identical.
 
 The \code{sep} function is also a shorthand alias for \code{log_print},
-except it will print a separator before and after the printed text
-or object.  You can use the \code{sep} function to help organize your
-log.  In addition, the \code{sep} function has a limited number of
-optional arguments.
+except it will print a separator before and after the printed text.  This
+function is intended for documentation purposes, and you can use it
+to help organize your log into sections.
 }
 \examples{
 # Create temp file location

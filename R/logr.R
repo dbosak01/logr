@@ -295,10 +295,9 @@ log_open <- function(file_name = "", logdir = TRUE, show_notes = TRUE) {
 #' is identical.
 #' 
 #' The \code{sep} function is also a shorthand alias for \code{log_print}, 
-#' except it will print a separator before and after the printed text
-#' or object.  You can use the \code{sep} function to help organize your 
-#' log.  In addition, the \code{sep} function has a limited number of 
-#' optional arguments.
+#' except it will print a separator before and after the printed text.  This 
+#' function is intended for documentation purposes, and you can use it
+#' to help organize your log into sections.
 #' 
 #' @param x The object to print.  
 #' @param ... Any parameters to pass to the print function.
@@ -449,7 +448,9 @@ sep <- function(x, console = TRUE) {
   
   # Pass everything to log_print()
   log_print(separator, blank_after = FALSE)
-  ret <- log_print(x, blank_after = FALSE)
+  
+  str <- paste(strwrap(x, nchar(separator)), collapse = "\n")
+  ret <- log_print(str, blank_after = FALSE)
   log_print(separator)
   
   invisible(ret)
@@ -672,7 +673,13 @@ dhms <- function(t){
 # 
 # lf <- log_open(tmp)
 # 
-# sep("High Mileage Cars Subset")
+# str <- "High Mileage Cars Subset and some more stuff and more and more and let's see how far we can go."
+# 
+# v2 <- strwrap(str, 76)
+# 
+# paste(v2, sep = "|", collapse = "+")
+# 
+# sep(str)
 # 
 # hmc <- tibble(subset(mtcars, mtcars$mpg > 20))
 # log_print(hmc)
@@ -692,12 +699,11 @@ dhms <- function(t){
 # log_print("Here is a list")
 # l1 <- list("A", 1, Sys.Date())
 # log_print(l1)
-# 
-# #
-# # # generror
-# # # warning("Test warning")
-# #
-# #
+#
+# # generror
+# # warning("Test warning")
+#
+#
 # log_close()
 # 
 # writeLines(readLines(lf))
