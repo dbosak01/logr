@@ -270,6 +270,7 @@ log_open <- function(file_name = "", logdir = TRUE, show_notes = TRUE) {
 #' The \code{log_print} function prints an object to the currently opened log.
 #' @usage log_print(x, ..., console = TRUE, blank_after = TRUE, msg = FALSE)
 #' @usage put(x, ..., console = TRUE, blank_after = TRUE, msg = FALSE)
+#' @usage sep(x, console = TRUE)
 #' @details 
 #' The log is initialized with \code{log_open}.  Once the log is open, objects
 #' like variables and data frames can be printed to the log to monitor execution
@@ -293,6 +294,12 @@ log_open <- function(file_name = "", logdir = TRUE, show_notes = TRUE) {
 #' use \code{put} anywhere you would use \code{log_print}.  The functionality
 #' is identical.
 #' 
+#' The \code{sep} function is also a shorthand alias for \code{log_print}, 
+#' except it will print a separator before and after the printed text
+#' or object.  You can use the \code{sep} function to help organize your 
+#' log.  In addition, the \code{sep} function has a limited number of 
+#' optional arguments.
+#' 
 #' @param x The object to print.  
 #' @param ... Any parameters to pass to the print function.
 #' @param console Whether or not to print to the console.  Valid values are
@@ -304,7 +311,8 @@ log_open <- function(file_name = "", logdir = TRUE, show_notes = TRUE) {
 #' intended to be used internally.  Value values are TRUE and FALSE.  The 
 #' default value is FALSE.
 #' @return The object, invisibly
-#' @aliases put
+#' @aliases put 
+#' @aliases sep
 #' @seealso \code{\link{log_open}} to open the log, 
 #' and \code{\link{log_close}} to close the log.
 #' @export
@@ -431,6 +439,18 @@ put <- function(x, ...,
   # Pass everything to log_print()
   ret <- log_print(x, ..., console = console, blank_after = blank_after,
                    msg = msg)
+  
+  invisible(ret)
+}
+
+#' @aliases log_print
+#' @export
+sep <- function(x, console = TRUE) {
+  
+  # Pass everything to log_print()
+  log_print(separator, blank_after = FALSE)
+  ret <- log_print(x, blank_after = FALSE)
+  log_print(separator)
   
   invisible(ret)
 }
@@ -641,7 +661,7 @@ dhms <- function(t){
 # 
 # library(logr)
 # 
-
+# 
 # options("logr.on" = NULL)
 # options("logr.notes" = NULL)
 # 
@@ -652,7 +672,7 @@ dhms <- function(t){
 # 
 # lf <- log_open(tmp)
 # 
-# log_print("High Mileage Cars Subset")
+# sep("High Mileage Cars Subset")
 # 
 # hmc <- tibble(subset(mtcars, mtcars$mpg > 20))
 # log_print(hmc)
@@ -661,7 +681,7 @@ dhms <- function(t){
 # v1 <- c("1", "2", "3")
 # log_print(v1)
 # 
-# log_print("Here is a numeric vector")
+# sep("Here is a numeric \nvector")
 # v2 <- c(1, 2, 3)
 # log_print(v2)
 # 
@@ -673,17 +693,17 @@ dhms <- function(t){
 # l1 <- list("A", 1, Sys.Date())
 # log_print(l1)
 # 
-# # 
+# #
 # # # generror
 # # # warning("Test warning")
-# # 
-# # 
+# #
+# #
 # log_close()
 # 
 # writeLines(readLines(lf))
-
-
-
+# 
+# 
+# 
 
 
 

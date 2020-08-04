@@ -3,11 +3,14 @@
 \name{log_print}
 \alias{log_print}
 \alias{put}
+\alias{sep}
 \title{Print an object to the log}
 \usage{
 log_print(x, ..., console = TRUE, blank_after = TRUE, msg = FALSE)
 
 put(x, ..., console = TRUE, blank_after = TRUE, msg = FALSE)
+
+sep(x, console = TRUE)
 }
 \arguments{
 \item{x}{The object to print.}
@@ -53,6 +56,12 @@ to FALSE.
 The \code{put} function is a shorthand alias for \code{log_print}. You can
 use \code{put} anywhere you would use \code{log_print}.  The functionality
 is identical.
+
+The \code{sep} function is also a shorthand alias for \code{log_print},
+except it will print a separator before and after the printed text
+or object.  You can use the \code{sep} function to help organize your
+log.  In addition, the \code{sep} function has a limited number of
+optional arguments.
 }
 \examples{
 # Create temp file location
