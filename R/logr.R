@@ -341,6 +341,7 @@ log_print <- function(x, ...,
                       blank_after = TRUE, 
                       msg = FALSE) {
   
+  update_status()
   
   if (e$log_status == "open") {
   
@@ -422,7 +423,6 @@ log_print <- function(x, ...,
   }  else {
     print(x, ...)
     message("Log is not open.")
-
   }
   
   invisible(x)
@@ -498,6 +498,8 @@ sep <- function(x, console = TRUE) {
 #' writeLines(readLines(lf))
 log_close <- function() {
   
+  update_status()
+  
   if (e$log_status == "open") {
     has_warnings <- FALSE
     if(exists("last.warning")) {
@@ -563,6 +565,20 @@ warning_handler <- function() {
 
 
 # Utilities ---------------------------------------------------------------
+
+#' @noRd
+update_status <- function() {
+  
+  if (!is.null(options("logr.on")[[1]])) {
+    
+    if(options("logr.on")[[1]] == FALSE)
+      e$log_status <- "off"
+    else if (options("logr.on")[[1]] == TRUE & e$log_status == "off")
+      e$log_status <- "on"
+    
+  }
+}
+
 
 #' Function to print the log header
 #' @noRd
@@ -663,8 +679,10 @@ dhms <- function(t){
 # library(logr)
 # 
 # 
-# options("logr.on" = NULL)
-# options("logr.notes" = NULL)
+# options("logr.on" = TRUE)
+# options("logr.notes" = FALSE)
+# 
+# e$log_status
 # 
 # library(tibble)
 # 
@@ -688,6 +706,7 @@ dhms <- function(t){
 # v1 <- c("1", "2", "3")
 # log_print(v1)
 # 
+# 
 # sep("Here is a numeric \nvector")
 # v2 <- c(1, 2, 3)
 # log_print(v2)
@@ -699,17 +718,17 @@ dhms <- function(t){
 # log_print("Here is a list")
 # l1 <- list("A", 1, Sys.Date())
 # log_print(l1)
-#
+# 
 # # generror
 # # warning("Test warning")
-#
-#
+# 
+# 
 # log_close()
 # 
 # writeLines(readLines(lf))
-# 
-# 
-# 
+
+
+
 
 
 

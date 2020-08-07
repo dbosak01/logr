@@ -12,7 +12,7 @@
 
 <meta name="author" content="David Bosak" />
 
-<meta name="date" content="2020-07-31" />
+<meta name="date" content="2020-08-07" />
 
 <title>Create Logs for R Scripts</title>
 
@@ -244,7 +244,7 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 
 <h1 class="title toc-ignore">Create Logs for R Scripts</h1>
 <h4 class="author">David Bosak</h4>
-<h4 class="date">2020-07-31</h4>
+<h4 class="date">2020-08-07</h4>
 
 
 
@@ -387,6 +387,29 @@ options(&quot;logr.on&quot; = TRUE, &quot;logr.notes&quot; = TRUE)
 
 # Turn off notes
 options(&quot;logr.notes&quot; = FALSE)</code></pre>
+</div>
+<div id="put-and-sep-functions" class="section level3">
+<h3><code>put()</code> and <code>sep()</code> functions</h3>
+<p>There are two aliases for the <code>log_print()</code> function: <code>put()</code> and <code>sep()</code>. <code>put()</code> is a direct alias, and has no additional functionality. It is simply easier to type than <code>log_print()</code>. <code>sep()</code> has some additional functionality in that it will automatically print separators before and after the log output. This function is intended for documentation purposes, and can help organize your log into sections. Here is an example:</p>
+<pre><code>
+sep(&quot;High Mileage Cars Subset&quot;)
+put(mtcars[1:10, ])
+
+# ========================================================================= 
+# High Mileage Cars Subset 
+# ========================================================================= 
+# 
+#                    mpg cyl  disp  hp drat    wt  qsec vs am gear carb
+# Mazda RX4         21.0   6 160.0 110 3.90 2.620 16.46  0  1    4    4
+# Mazda RX4 Wag     21.0   6 160.0 110 3.90 2.875 17.02  0  1    4    4
+# Datsun 710        22.8   4 108.0  93 3.85 2.320 18.61  1  1    4    1
+# Hornet 4 Drive    21.4   6 258.0 110 3.08 3.215 19.44  1  0    3    1
+# Hornet Sportabout 18.7   8 360.0 175 3.15 3.440 17.02  0  0    3    2
+# Valiant           18.1   6 225.0 105 2.76 3.460 20.22  1  0    3    1
+# Duster 360        14.3   8 360.0 245 3.21 3.570 15.84  0  0    3    4
+# Merc 240D         24.4   4 146.7  62 3.69 3.190 20.00  1  0    4    2
+# Merc 230          22.8   4 140.8  95 3.92 3.150 22.90  1  0    4    2
+# Merc 280          19.2   6 167.6 123 3.92 3.440 18.30  1  0    4    4</code></pre>
 </div>
 </div>
 </div>
