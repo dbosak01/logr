@@ -226,8 +226,6 @@ log_open <- function(file_name = "", logdir = TRUE, show_notes = TRUE) {
       lw <- get("last.warning")
       has_warnings <- length(lw) > 0
       if(has_warnings) {
-        log_print(warnings(), console = FALSE)
-        log_print(warnings(), console = FALSE, msg = TRUE)
         assign("last.warning", NULL, envir = baseenv())
       }
     }
