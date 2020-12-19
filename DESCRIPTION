@@ -15,6 +15,7 @@ Encoding: UTF-8
 LazyData: true
 URL: https://github.com/dbosak01/logr
 BugReports: https://github.com/dbosak01/logr/issues
+Depends: R (>= 4.0.0)
 Suggests: knitr, rmarkdown, testthat
 VignetteBuilder: knitr
 Roxygen: list(markdown = TRUE)
