@@ -10,37 +10,17 @@
 
 ### Introduction <img src='man/images/logr2.png' align="right" height="138" />
 
-Here is the logr intro.
+Here is the logr intro. More coming soon.
 
 ### Installation
 
-The easiest way to install the **sassy** system is to run the following 
+The easiest way to install the **logr** package is to run the following 
 command from your R console:
 
-    install.packages("sassy")
+    install.packages("logr")
 
 
 Then put the following line at the top of your script:
 
-    library(sassy)
+    library(logr)
 
-
-That's it!
-
-### Getting Help
-
-If you need help with the **sassy** family of packages, the best place 
-to turn to is the [r-sassy](http://www.r-sassy.org) web site.  
-This web site offers many examples, and full
-documentation on every function.  
-
-If you need additional help, please turn 
-to [stackoverflow.com](https://stackoverflow.com).  The stackoverflow 
-community will be very willing to answer your questions.  
-
-### Next Steps
-
-Next, you should read the [Get started](http://sassy.r-sassy.org/articles/sassy.html)
-page, and look at some examples.  From these pages, you will be able to 
-link into each of the packages included in the **sassy** system, and explore them
-in depth.
