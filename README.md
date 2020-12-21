@@ -10,7 +10,9 @@
 
 ### Introduction <img src='man/images/logr2.png' align="right" height="138" />
 
-Here is the logr intro. More coming soon.
+Currently in the middle of revising 
+the documentation.  Best source is 
+[here](https://logr.r-sassy.org/articles/logr.html).
 
 ### Installation
 
