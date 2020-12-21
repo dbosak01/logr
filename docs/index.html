@@ -60,7 +60,19 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
-      <a href="articles/logr-tidylog.html">logr-tidylog</a>
+      <a href="articles/logr-parts.html">Log Parts</a>
+    </li>
+    <li>
+      <a href="articles/logr-features.html">Additional Features</a>
+    </li>
+    <li>
+      <a href="articles/logr-globals.html">Global Options</a>
+    </li>
+    <li>
+      <a href="articles/logr-put.html">Aliases for log_print()</a>
+    </li>
+    <li>
+      <a href="articles/logr-tidylog.html">tidylog Integration</a>
     </li>
   </ul>
 </li>
@@ -87,188 +99,38 @@
 
       </header><div class="row">
   <div class="contents col-md-9">
-<div id="logr-" class="section level1">
+<div id="logr" class="section level1">
 <div class="page-header"><h1 class="hasAnchor">
-<a href="#logr-" class="anchor"></a>logr <img src="man/images/logr2.png" align="right" height="138">
-</h1></div>
+<a href="#logr" class="anchor"></a>logr</h1></div>
 <!-- badges: start -->
 
 <!-- badges: end -->
-<p>The <strong>logr</strong> package helps create log files for R scripts. The package provides easy logging, without the complexity of other logging systems. It is designed for analysts who simply want a written log of their program execution. The package is implemented as a wrapper to the base R <code><a href="https://rdrr.io/r/base/sink.html">sink()</a></code> function.</p>
-<div id="how-to-use" class="section level2">
-<h2 class="hasAnchor">
-<a href="#how-to-use" class="anchor"></a>How to use</h2>
-<p>There are only three <strong>logr</strong> functions:</p>
-<ul>
-<li><code><a href="reference/log_open.html">log_open()</a></code></li>
-<li><code><a href="reference/log_print.html">log_print()</a></code></li>
-<li><code><a href="reference/log_close.html">log_close()</a></code></li>
-</ul>
-<p>The <code><a href="reference/log_open.html">log_open()</a></code> function initiates the log. The <code><a href="reference/log_print.html">log_print()</a></code> function prints an object to the log. The <code><a href="reference/log_close.html">log_close()</a></code> function closes the log. In normal situations, a user would place the call to <code><a href="reference/log_open.html">log_open()</a></code> at the top of the program, call <code><a href="reference/log_print.html">log_print()</a></code> as needed in the program body, and call <code><a href="reference/log_close.html">log_close()</a></code> once at the end of the program.</p>
-<p>A sample program is as follows:</p>
-<pre><code><a href="https://github.com/dbosak01/logr">library(logr)
-
-# Create temp file location
-tmp &lt;- file.path(tempdir(), "test.log")
-
-# Open log
-lf &lt;- log_open(tmp)
-
-# Send message to log
-log_print("High Mileage Cars Subset")
-
-# Perform operations
-hmc &lt;- subset(mtcars, mtcars$mpg &gt; 20)
-
-# Print data to log
-log_print(hmc)
-
-# Close log
-log_close()
-
-# View results
-writeLines(readLines(lf))
-</a></code></pre>
-</div>
-<div id="what-to-print-to-the-log" class="section level2">
-<h2 class="hasAnchor">
-<a href="#what-to-print-to-the-log" class="anchor"></a>What to print to the log</h2>
-<p>You can print to the log anything that you can print to the console; vectors, lists, and data frames are all valid objects for logging. Under the hood, <strong>logr</strong> calls the <code><a href="https://rdrr.io/r/base/print.html">print()</a></code> function on that object, and writes the results to the log. The <code><a href="reference/log_print.html">log_print()</a></code> function, by default, will also print the object to the console. That means you can replace calls to <code><a href="https://rdrr.io/r/base/print.html">print()</a></code> with <code><a href="reference/log_print.html">log_print()</a></code>, and there will be no loss of convenience during development.</p>
-</div>
-<div id="what-the-log-looks-like" class="section level2">
-<h2 class="hasAnchor">
-<a href="#what-the-log-looks-like" class="anchor"></a>What the log looks like</h2>
-<p>The log created by <strong>logr</strong> is simpler than most logging packages. This log is designed to be human-readable and increases the traceability of your activities. There are three main enhancements to a <strong>logr</strong> log:</p>
-<ul>
-<li>A log header</li>
-<li>Notes</li>
-<li>A log footer</li>
-</ul>
-<p>Here is an example log, created by the sample program above:</p>
-<pre><code>========================================================================= 
-Log Path: C:/Users/dbosa/AppData/Local/Temp/RtmpQtOzhy/log/test.log 
-Working Directory: C:/packages/logr 
-User Name: dbosak 
-R Version: R Under development (unstable) (2020-06-29 r78751) 
-Machine: BOSAK-MAIN x86-64 
-Operating System: Windows 10 x64 build 18362 
-Log Start Time: 2020-06-30 07:15:52 
-========================================================================= 
-
-High Mileage Cars Subset 
-
-NOTE: Log Print Time:  2020-06-30 07:15:52 
-NOTE: Elapsed Time in seconds: 0.0219531059265137 
-
-                mpg cyl  disp  hp drat    wt  qsec vs am gear carb
-Mazda RX4      21.0   6 160.0 110 3.90 2.620 16.46  0  1    4    4
-Mazda RX4 Wag  21.0   6 160.0 110 3.90 2.875 17.02  0  1    4    4
-Datsun 710     22.8   4 108.0  93 3.85 2.320 18.61  1  1    4    1
-Hornet 4 Drive 21.4   6 258.0 110 3.08 3.215 19.44  1  0    3    1
-Merc 240D      24.4   4 146.7  62 3.69 3.190 20.00  1  0    4    2
-Merc 230       22.8   4 140.8  95 3.92 3.150 22.90  1  0    4    2
-Fiat 128       32.4   4  78.7  66 4.08 2.200 19.47  1  1    4    1
-Honda Civic    30.4   4  75.7  52 4.93 1.615 18.52  1  1    4    2
-Toyota Corolla 33.9   4  71.1  65 4.22 1.835 19.90  1  1    4    1
-Toyota Corona  21.5   4 120.1  97 3.70 2.465 20.01  1  0    3    1
-Fiat X1-9      27.3   4  79.0  66 4.08 1.935 18.90  1  1    4    1
-Porsche 914-2  26.0   4 120.3  91 4.43 2.140 16.70  0  1    5    2
-Lotus Europa   30.4   4  95.1 113 3.77 1.513 16.90  1  1    5    2
-Volvo 142E     21.4   4 121.0 109 4.11 2.780 18.60  1  1    4    2
-
-NOTE: Data frame has 14 rows and 11 columns. 
-
-NOTE: Log Print Time:  2020-06-30 07:15:52 
-NOTE: Elapsed Time in seconds: 0.0508558750152588 
-
-========================================================================= 
-Log End Time: 2020-06-30 07:15:53 
-Log Elapsed Time: 0 00:00:00 
-=========================================================================  </code></pre>
-</div>
-<div id="parts-of-the-log" class="section level2">
-<h2 class="hasAnchor">
-<a href="#parts-of-the-log" class="anchor"></a>Parts of the log</h2>
-<div id="log-header" class="section level4">
-<h4 class="hasAnchor">
-<a href="#log-header" class="anchor"></a>Log Header</h4>
-<p>The log header provides an introduction to your log. The header block contains the path of the log file, the working directory, the name of the user, a date-time stamp, and other useful information concerning the operating environment.</p>
-</div>
-<div id="notes" class="section level4">
-<h4 class="hasAnchor">
-<a href="#notes" class="anchor"></a>Notes</h4>
-<p>Notes will be written to the log for every call to <code><a href="reference/log_print.html">log_print()</a></code>. The notes will follow the printing of the object, and will include a date-time stamp and the elapsed time since the last call to <code><a href="reference/log_print.html">log_print()</a></code>. If the object is of class <code>data.frame</code> the number of rows and columns will also be noted.</p>
-</div>
-<div id="log-footer" class="section level4">
-<h4 class="hasAnchor">
-<a href="#log-footer" class="anchor"></a>Log Footer</h4>
-<p>The log footer concludes the log with another date-time stamp for the log end time, and a total elapsed time for the entire script. Note that during batch runs or when sourcing a script, the log footer may not be generated if the script errors. Instead, the last line of the log will be the error message.</p>
-</div>
-</div>
-<div id="additional-features" class="section level2">
-<h2 class="hasAnchor">
-<a href="#additional-features" class="anchor"></a>Additional Features</h2>
-<div id="errors-and-warnings" class="section level3">
+<div id="introduction-" class="section level3">
 <h3 class="hasAnchor">
-<a href="#errors-and-warnings" class="anchor"></a>Errors and Warnings</h3>
-<p><strong>logr</strong> will write all errors and the last warning to the log. Errors are written at the point they are encountered. Warnings will be written at the end of the log.</p>
+<a href="#introduction-" class="anchor"></a>Introduction <img src="man/images/logr2.png" align="right" height="138">
+</h3>
+<p>Here is the logr intro.</p>
 </div>
-<div id="message-file-msg" class="section level3">
+<div id="installation" class="section level3">
 <h3 class="hasAnchor">
-<a href="#message-file-msg" class="anchor"></a>Message File *.msg</h3>
-<p>If errors or warnings are generated, they will also be written to a separate file called a message file. The message file has the same name as the log, but with a <em>.msg</em> extension. The purpose of the message file is so that errors and warnings that occur during execution of the script can be observed from the file system. The presence or absence of the <em>.msg</em> file will indicate whether or not the program ran clean.</p>
+<a href="#installation" class="anchor"></a>Installation</h3>
+<p>The easiest way to install the <strong>sassy</strong> system is to run the following command from your R console:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw">install.packages</span>(<span class="st">"sassy"</span>)</span></code></pre></div>
+<p>Then put the following line at the top of your script:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="kw">library</span>(sassy)</span></code></pre></div>
+<p>That’s it!</p>
 </div>
-<div id="log-subdirectory-log" class="section level3">
+<div id="getting-help" class="section level3">
 <h3 class="hasAnchor">
-<a href="#log-subdirectory-log" class="anchor"></a>Log subdirectory /log</h3>
-<p>By default, <code>logr</code> prints the log to a subdirectory named <em>log</em>. If that subdirectory does not exist, the <code><a href="reference/log_open.html">log_open()</a></code> function will create it. The default behavior can be overridden by setting the <code>logdir</code> parameter on the <code><a href="reference/log_open.html">log_open()</a></code> function to <code>FALSE</code>.</p>
+<a href="#getting-help" class="anchor"></a>Getting Help</h3>
+<p>If you need help with the <strong>sassy</strong> family of packages, the best place to turn to is the <a href="http://www.r-sassy.org">r-sassy</a> web site.<br>
+This web site offers many examples, and full documentation on every function.</p>
+<p>If you need additional help, please turn to <a href="https://stackoverflow.com">stackoverflow.com</a>. The stackoverflow community will be very willing to answer your questions.</p>
 </div>
-<div id="integration-with-tidylog" class="section level3">
+<div id="next-steps" class="section level3">
 <h3 class="hasAnchor">
-<a href="#integration-with-tidylog" class="anchor"></a>Integration with tidylog</h3>
-<p>You can integrate <strong>logr</strong> with the popular <strong>tidylog</strong> package by assigning the <strong>tidylog</strong> options setting to <code>log_print</code>, as follows:</p>
-<p><code><a href="https://rdrr.io/r/base/options.html">options("tidylog.display" = list(log_print))</a></code></p>
-<p>This setting will cause all <strong>tidylog</strong> messages to be writted to the <strong>logr</strong> log automatically. You do not need to call <code>log_print</code> for <strong>tidylog</strong> messages. Note that you still must open and close the <strong>logr</strong> log, as per normal operation.</p>
-<p>To detach <strong>logr</strong> from <strong>tidylog</strong>, set the display option to <code>NULL</code>:</p>
-<p><code><a href="https://rdrr.io/r/base/options.html">options("tidylog.display" = NULL)</a></code></p>
-</div>
-<div id="global-options" class="section level3">
-<h3 class="hasAnchor">
-<a href="#global-options" class="anchor"></a>Global Options</h3>
-<p>There are situations when you want to control log printing globally. For those cases, <strong>logr</strong> has two global options. The option “logr.on” accepts a <code>TRUE</code> or <code>FALSE</code> value, and determines whether the <strong>logr</strong> log is on or off. The option “logr.notes” also accepts a <code>TRUE</code> or <code>FALSE</code> value, and determines whether to include notes in the log. Both of these global options will override any local settings. The following example demonstrates how to use these options:</p>
-<pre><code><a href="https://rdrr.io/r/base/options.html"># Turn logger off 
-options("logr.on" = FALSE)
-
-# Turn logger on and show notes 
-options("logr.on" = TRUE, "logr.notes" = TRUE)
-
-# Turn off notes
-options("logr.notes" = FALSE)</a></code></pre>
-</div>
-<div id="put-and-sep-functions" class="section level3">
-<h3 class="hasAnchor">
-<a href="#put-and-sep-functions" class="anchor"></a><code>put()</code> and <code>sep()</code> functions</h3>
-<p>There are two aliases for the <code><a href="reference/log_print.html">log_print()</a></code> function: <code><a href="reference/log_print.html">put()</a></code> and <code><a href="reference/log_print.html">sep()</a></code>. <code><a href="reference/log_print.html">put()</a></code> is a direct alias, and has no additional functionality. It is simply easier to type than <code><a href="reference/log_print.html">log_print()</a></code>. <code><a href="reference/log_print.html">sep()</a></code> has some additional functionality in that it will automatically print separators before and after the log output. This function is intended for documentation purposes, and can help organize your log into sections. Here is an example:</p>
-<pre><code><a href="reference/log_print.html">
-sep("High Mileage Cars Subset")
-put(mtcars[1:10, ])
-
-# ========================================================================= 
-# High Mileage Cars Subset 
-# ========================================================================= 
-# 
-#                    mpg cyl  disp  hp drat    wt  qsec vs am gear carb
-# Mazda RX4         21.0   6 160.0 110 3.90 2.620 16.46  0  1    4    4
-# Mazda RX4 Wag     21.0   6 160.0 110 3.90 2.875 17.02  0  1    4    4
-# Datsun 710        22.8   4 108.0  93 3.85 2.320 18.61  1  1    4    1
-# Hornet 4 Drive    21.4   6 258.0 110 3.08 3.215 19.44  1  0    3    1
-# Hornet Sportabout 18.7   8 360.0 175 3.15 3.440 17.02  0  0    3    2
-# Valiant           18.1   6 225.0 105 2.76 3.460 20.22  1  0    3    1
-# Duster 360        14.3   8 360.0 245 3.21 3.570 15.84  0  0    3    4
-# Merc 240D         24.4   4 146.7  62 3.69 3.190 20.00  1  0    4    2
-# Merc 230          22.8   4 140.8  95 3.92 3.150 22.90  1  0    4    2
-# Merc 280          19.2   6 167.6 123 3.92 3.440 18.30  1  0    4    4</a></code></pre>
-</div>
+<a href="#next-steps" class="anchor"></a>Next Steps</h3>
+<p>Next, you should read the <a href="http://sassy.r-sassy.org/articles/sassy.html">Get started</a> page, and look at some examples. From these pages, you will be able to link into each of the packages included in the <strong>sassy</strong> system, and explore them in depth.</p>
 </div>
 </div>
   </div>

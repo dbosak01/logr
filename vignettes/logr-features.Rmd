@@ -1,0 +1,36 @@
+---
+title: "Additional Features"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Additional Features}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+### Errors and Warnings
+**logr** will write all errors and the last warning to the log.  Errors are
+written at the point they are encountered.  Warnings will be written at the 
+end of the log.  
+
+### Message File \*.msg
+If errors or warnings are generated, they will also be written to a separate 
+file called a message file.  The message file has the same name as the log, 
+but with a *.msg* extension.  The purpose of the message file is so that 
+errors and warnings that occur during execution of the script can be 
+observed from the file system.  The presence or absence of the *.msg* file 
+will indicate whether or not the program ran clean.
+
+### Log subdirectory /log
+By default, `logr` prints the log to a subdirectory named *log*.  If that 
+subdirectory does not exist, the `log_open()` function will create it.  The 
+default behavior can be overridden by setting the `logdir` parameter on the
+`log_open()` function to `FALSE`.  
+

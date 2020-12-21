@@ -5,13 +5,13 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>tidylog Integration • logr</title>
+<title>Additional Features • logr</title>
 <!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="../bootstrap-toc.css">
 <script src="../bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
-<script src="../pkgdown.js"></script><meta property="og:title" content="tidylog Integration">
+<script src="../pkgdown.js"></script><meta property="og:title" content="Additional Features">
 <meta property="og:description" content="logr">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -94,28 +94,34 @@
 
       
 
-      </header><script src="logr-tidylog_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
+      </header><script src="logr-features_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
-      <h1 data-toc-skip>tidylog Integration</h1>
+      <h1 data-toc-skip>Additional Features</h1>
             
             <h4 class="date">2020-12-20</h4>
       
-      <small class="dont-index">Source: <a href="https://github.com/dbosak01/logr/blob/master/vignettes/logr-tidylog.Rmd"><code>vignettes/logr-tidylog.Rmd</code></a></small>
-      <div class="hidden name"><code>logr-tidylog.Rmd</code></div>
+      <small class="dont-index">Source: <a href="https://github.com/dbosak01/logr/blob/master/vignettes/logr-features.Rmd"><code>vignettes/logr-features.Rmd</code></a></small>
+      <div class="hidden name"><code>logr-features.Rmd</code></div>
 
     </div>
 
     
     
-<div id="integration-with-tidylog" class="section level3">
+<div id="errors-and-warnings" class="section level3">
 <h3 class="hasAnchor">
-<a href="#integration-with-tidylog" class="anchor"></a>Integration with tidylog</h3>
-<p>You can integrate <strong>logr</strong> with the popular <strong>tidylog</strong> package by assigning the <strong>tidylog</strong> options setting to <code>log_print</code>, as follows:</p>
-<p><code><a href="https://rdrr.io/r/base/options.html">options("tidylog.display" = list(log_print))</a></code></p>
-<p>This setting will cause all <strong>tidylog</strong> messages to be writted to the <strong>logr</strong> log automatically. You do not need to call <code>log_print</code> for <strong>tidylog</strong> messages. Note that you still must open and close the <strong>logr</strong> log, as per normal operation.</p>
-<p>To detach <strong>logr</strong> from <strong>tidylog</strong>, set the display option to <code>NULL</code>:</p>
-<p><code><a href="https://rdrr.io/r/base/options.html">options("tidylog.display" = NULL)</a></code></p>
+<a href="#errors-and-warnings" class="anchor"></a>Errors and Warnings</h3>
+<p><strong>logr</strong> will write all errors and the last warning to the log. Errors are written at the point they are encountered. Warnings will be written at the end of the log.</p>
+</div>
+<div id="message-file--msg" class="section level3">
+<h3 class="hasAnchor">
+<a href="#message-file--msg" class="anchor"></a>Message File *.msg</h3>
+<p>If errors or warnings are generated, they will also be written to a separate file called a message file. The message file has the same name as the log, but with a <em>.msg</em> extension. The purpose of the message file is so that errors and warnings that occur during execution of the script can be observed from the file system. The presence or absence of the <em>.msg</em> file will indicate whether or not the program ran clean.</p>
+</div>
+<div id="log-subdirectory-log" class="section level3">
+<h3 class="hasAnchor">
+<a href="#log-subdirectory-log" class="anchor"></a>Log subdirectory /log</h3>
+<p>By default, <code>logr</code> prints the log to a subdirectory named <em>log</em>. If that subdirectory does not exist, the <code><a href="../reference/log_open.html">log_open()</a></code> function will create it. The default behavior can be overridden by setting the <code>logdir</code> parameter on the <code><a href="../reference/log_open.html">log_open()</a></code> function to <code>FALSE</code>.</p>
 </div>
   </div>
 

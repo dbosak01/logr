@@ -1,0 +1,16 @@
+url: https://logr.r-sassy.org
+
+articles:
+- title: Examples
+  navbar: ~
+  contents:
+  - logr-parts
+  - logr-features
+  - logr-globals
+  - logr-put
+  - logr-tidylog
+
+navbar:
+  structure:
+    left:  [home, intro, reference, articles, news]
+    right: [github]

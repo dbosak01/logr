@@ -2,7 +2,14 @@ pandoc: 2.7.3
 pkgdown: 1.6.1
 pkgdown_sha: ~
 articles:
+  logr-features: logr-features.html
+  logr-globals: logr-globals.html
+  logr-parts: logr-parts.html
+  logr-put: logr-put.html
   logr-tidylog: logr-tidylog.html
   logr: logr.html
-last_built: 2020-12-21T00:11Z
+last_built: 2020-12-21T03:27Z
+urls:
+  reference: https://logr.r-sassy.org/reference
+  article: https://logr.r-sassy.org/articles
 

@@ -1,0 +1,38 @@
+---
+title: "Log Parts"
+author: "Vignette Author"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Log Parts}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+## Parts of the log
+
+#### Log Header
+The log header provides an introduction to your log. The header block 
+contains the path of the log file, the working directory, the name of the user,
+a date-time stamp, and other useful information concerning the 
+operating environment.  
+
+#### Notes
+Notes will be written to the log for every call to `log_print()`. The notes 
+will follow the printing of the object, and will include a date-time stamp
+and the elapsed time since the last call to `log_print()`. If the object
+is of class `data.frame` the number of rows and columns will also be noted. 
+
+#### Log Footer
+The log footer concludes the log with another date-time stamp for the log
+end time, and a total elapsed time for the entire script.  Note that during
+batch runs or when sourcing a script, the log
+footer may not be generated if the script errors. Instead, the last line of 
+the log will be the error message.
