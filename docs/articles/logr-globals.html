@@ -115,19 +115,17 @@
 
     
     
-<div id="global-options" class="section level3">
-<h3 class="hasAnchor">
-<a href="#global-options" class="anchor"></a>Global Options</h3>
-<p>There are situations when you want to control log printing globally. For those cases, <strong>logr</strong> has two global options. The option “logr.on” accepts a <code>TRUE</code> or <code>FALSE</code> value, and determines whether the <strong>logr</strong> log is on or off. The option “logr.notes” also accepts a <code>TRUE</code> or <code>FALSE</code> value, and determines whether to include notes in the log. Both of these global options will override any local settings. The following example demonstrates how to use these options:</p>
-<pre><code><a href="https://rdrr.io/r/base/options.html"># Turn logger off 
-options("logr.on" = FALSE)
+<p>There are situations when you want to control log printing globally. For those cases, <strong>logr</strong> has two global options. The option “logr.on” accepts a <code>TRUE</code> or <code>FALSE</code> value, and determines whether the <strong>logr</strong> log is on or off. The option “logr.notes” also accepts a <code>TRUE</code> or <code>FALSE</code> value, and determines whether to include notes in the log. Both of these global options will override any local settings.</p>
+<p>The following code sample demonstrates how to use these options:</p>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Turn logger off </span>
+<span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span><span class="op">(</span><span class="st">"logr.on"</span> <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
 
-# Turn logger on and show notes 
-options("logr.on" = TRUE, "logr.notes" = TRUE)
+<span class="co"># Turn logger on and show notes </span>
+<span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span><span class="op">(</span><span class="st">"logr.on"</span> <span class="op">=</span> <span class="cn">TRUE</span>, <span class="st">"logr.notes"</span> <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
 
-# Turn off notes
-options("logr.notes" = FALSE)</a></code></pre>
-</div>
+<span class="co"># Turn off notes</span>
+<span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span><span class="op">(</span><span class="st">"logr.notes"</span> <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

@@ -115,30 +115,72 @@
 
     
     
-<div id="put-and-sep-functions" class="section level3">
-<h3 class="hasAnchor">
-<a href="#put-and-sep-functions" class="anchor"></a><code>put()</code> and <code>sep()</code> functions</h3>
-<p>There are two aliases for the <code><a href="../reference/log_print.html">log_print()</a></code> function: <code><a href="../reference/log_print.html">put()</a></code> and <code><a href="../reference/log_print.html">sep()</a></code>. <code><a href="../reference/log_print.html">put()</a></code> is a direct alias, and has no additional functionality. It is simply easier to type than <code><a href="../reference/log_print.html">log_print()</a></code>. <code><a href="../reference/log_print.html">sep()</a></code> has some additional functionality in that it will automatically print separators before and after the log output. This function is intended for documentation purposes, and can help organize your log into sections. Here is an example:</p>
-<pre><code><a href="../reference/log_print.html">
-sep("High Mileage Cars Subset")
-put(mtcars[1:10, ])
+<p>Note that the <code><a href="../reference/log_print.html">log_print()</a></code> function has two aliases: <code><a href="../reference/log_print.html">put()</a></code> and <code><a href="../reference/log_print.html">sep()</a></code>.</p>
+<p>The <code><a href="../reference/log_print.html">put()</a></code> function is exactly like <code><a href="../reference/log_print.html">log_print()</a></code>, but it is shorter and easier to type.</p>
+<p>The <code><a href="../reference/log_print.html">sep()</a></code> function is a slight variant of <code><a href="../reference/log_print.html">log_print()</a></code> that prints separators above and below the message text. It is useful for creating sections in your log. Breaking your log into sections make it easier to read and understand.</p>
+<p>Here is example showing these aliases at work:</p>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/dbosak01/logr">logr</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://magrittr.tidyverse.org">magrittr</a></span><span class="op">)</span>
 
-# ========================================================================= 
-# High Mileage Cars Subset 
-# ========================================================================= 
-# 
-#                    mpg cyl  disp  hp drat    wt  qsec vs am gear carb
-# Mazda RX4         21.0   6 160.0 110 3.90 2.620 16.46  0  1    4    4
-# Mazda RX4 Wag     21.0   6 160.0 110 3.90 2.875 17.02  0  1    4    4
-# Datsun 710        22.8   4 108.0  93 3.85 2.320 18.61  1  1    4    1
-# Hornet 4 Drive    21.4   6 258.0 110 3.08 3.215 19.44  1  0    3    1
-# Hornet Sportabout 18.7   8 360.0 175 3.15 3.440 17.02  0  0    3    2
-# Valiant           18.1   6 225.0 105 2.76 3.460 20.22  1  0    3    1
-# Duster 360        14.3   8 360.0 245 3.21 3.570 15.84  0  0    3    4
-# Merc 240D         24.4   4 146.7  62 3.69 3.190 20.00  1  0    4    2
-# Merc 230          22.8   4 140.8  95 3.92 3.150 22.90  1  0    4    2
-# Merc 280          19.2   6 167.6 123 3.92 3.440 18.30  1  0    4    4</a></code></pre>
-</div>
+<span class="co"># Create temp file location</span>
+<span class="va">tmp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/tempfile.html">tempdir</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">"test.log"</span><span class="op">)</span>
+
+<span class="co"># Open log</span>
+<span class="va">lf</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/log_open.html">log_open</a></span><span class="op">(</span><span class="va">tmp</span><span class="op">)</span>
+
+<span class="co"># Create log section</span>
+<span class="fu"><a href="../reference/log_print.html">sep</a></span><span class="op">(</span><span class="st">"Illustration of put() and sep()"</span><span class="op">)</span>
+
+<span class="co"># Send message to log</span>
+<span class="fu"><a href="../reference/log_print.html">put</a></span><span class="op">(</span><span class="st">"High Mileage Cars Subset"</span><span class="op">)</span>
+
+<span class="co"># Perform operations</span>
+<span class="va">hmc</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html">subset</a></span><span class="op">(</span><span class="va">mtcars</span>, <span class="va">mtcars</span><span class="op">$</span><span class="va">mpg</span> <span class="op">&gt;</span> <span class="fl">20</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../reference/log_print.html">put</a></span><span class="op">(</span><span class="op">)</span> <span class="co"># prints pipeline result to log</span>
+
+<span class="co"># Close log</span>
+<span class="fu"><a href="../reference/log_close.html">log_close</a></span><span class="op">(</span><span class="op">)</span>
+
+<span class="co"># View results</span>
+<span class="fu"><a href="https://rdrr.io/r/base/writeLines.html">writeLines</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/readLines.html">readLines</a></span><span class="op">(</span><span class="va">lf</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<p>Here is the log from the above alias example:</p>
+<pre><code>========================================================================= 
+Log Path: C:/Users/User/AppData/Local/Temp/RtmpioAPbg/log/test.log 
+Working Directory: C:/packages/Testing 
+User Name: User 
+R Version: 4.0.3 (2020-10-10) 
+Machine: ZB15-5CD00276ZY x86-64 
+Operating System: Windows 10 x64 build 18363 
+Log Start Time: 2020-12-21 14:18:33 
+========================================================================= 
+
+========================================================================= 
+Illustration of put() and sep() 
+========================================================================= 
+
+High Mileage Cars Subset 
+
+                mpg cyl  disp  hp drat    wt  qsec vs am gear carb
+Mazda RX4      21.0   6 160.0 110 3.90 2.620 16.46  0  1    4    4
+Mazda RX4 Wag  21.0   6 160.0 110 3.90 2.875 17.02  0  1    4    4
+Datsun 710     22.8   4 108.0  93 3.85 2.320 18.61  1  1    4    1
+Hornet 4 Drive 21.4   6 258.0 110 3.08 3.215 19.44  1  0    3    1
+Merc 240D      24.4   4 146.7  62 3.69 3.190 20.00  1  0    4    2
+Merc 230       22.8   4 140.8  95 3.92 3.150 22.90  1  0    4    2
+Fiat 128       32.4   4  78.7  66 4.08 2.200 19.47  1  1    4    1
+Honda Civic    30.4   4  75.7  52 4.93 1.615 18.52  1  1    4    2
+Toyota Corolla 33.9   4  71.1  65 4.22 1.835 19.90  1  1    4    1
+Toyota Corona  21.5   4 120.1  97 3.70 2.465 20.01  1  0    3    1
+Fiat X1-9      27.3   4  79.0  66 4.08 1.935 18.90  1  1    4    1
+Porsche 914-2  26.0   4 120.3  91 4.43 2.140 16.70  0  1    5    2
+Lotus Europa   30.4   4  95.1 113 3.77 1.513 16.90  1  1    5    2
+Volvo 142E     21.4   4 121.0 109 4.11 2.780 18.60  1  1    4    2
+
+========================================================================= 
+Log End Time: 2020-12-21 14:18:33 
+Log Elapsed Time: 0 00:00:00 
+========================================================================= </code></pre>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

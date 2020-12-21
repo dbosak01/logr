@@ -10,9 +10,29 @@
 
 ### Introduction <img src='man/images/logr2.png' align="right" height="138" />
 
-Currently in the middle of revising 
-the documentation.  Best source is 
-[here](https://logr.r-sassy.org/articles/logr.html).
+There are already several logging packages for R.  Why create another one? 
+
+What the other logging packages have in common is that they were built
+for R package developers.  What is different about the **logr** package is
+that it is built for normal R users: statisticians, analysts, researchers, 
+students, teachers, business people, etc.
+
+The **logr** package is for those people who just need a written record of their
+program execution.  It is designed to be as simple as possible, yet still
+produce a useful and complete log.  
+
+There are only three steps to creating a **logr** log:
+
+1. Open the log
+2. Print to the log
+3. Close the log
+
+Now this a logging system that anyone can use!  
+
+For examples and additional 
+information, please visit the **logr** documentation site 
+[here](https://logr.r-sassy.org/articles/logr.html)
+
 
 ### Installation
 
@@ -25,4 +45,15 @@ command from your R console:
 Then put the following line at the top of your script:
 
     library(logr)
+    
+
+### Getting Help
+
+If you need help, the best place 
+to turn to is the [logr](http://logr.r-sassy.org) web site.  
+
+If you need additional help, please turn 
+to [stackoverflow.com](https://stackoverflow.com).  The stackoverflow 
+community will be very willing to answer your questions.  
+
 

@@ -105,7 +105,6 @@
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Log Parts</h1>
-                        <h4 class="author">Vignette Author</h4>
             
             <h4 class="date">2020-12-21</h4>
       
@@ -116,32 +115,75 @@
 
     
     
-<div id="parts-of-the-log" class="section level2">
-<h2 class="hasAnchor">
-<a href="#parts-of-the-log" class="anchor"></a>Parts of the log</h2>
+<p>A <strong>logr</strong> log is composed of three parts:</p>
 <div id="log-header" class="section level4">
 <h4 class="hasAnchor">
 <a href="#log-header" class="anchor"></a>Log Header</h4>
 <p>The log header provides an introduction to your log. The header block contains the path of the log file, the working directory, the name of the user, a date-time stamp, and other useful information concerning the operating environment.</p>
 </div>
-<div id="notes" class="section level4">
+<div id="log-body" class="section level4">
 <h4 class="hasAnchor">
-<a href="#notes" class="anchor"></a>Notes</h4>
-<p>Notes will be written to the log for every call to <code><a href="../reference/log_print.html">log_print()</a></code>. The notes will follow the printing of the object, and will include a date-time stamp and the elapsed time since the last call to <code><a href="../reference/log_print.html">log_print()</a></code>. If the object is of class <code>data.frame</code> the number of rows and columns will also be noted.</p>
+<a href="#log-body" class="anchor"></a>Log Body</h4>
+<p>The log body comprises the primary content of your log. The body will be populated with print-outs from the objects you send to the log with <code><a href="../reference/log_print.html">log_print()</a></code>, <code><a href="../reference/log_print.html">put()</a></code> and <code><a href="../reference/log_print.html">sep()</a></code>. The objects will be printed to the log just as they are printed to the console.</p>
+<p>Optional notes will be written to the log for every call to <code><a href="../reference/log_print.html">log_print()</a></code> or <code><a href="../reference/log_print.html">put()</a></code>. The notes will follow the printing of the object, and will include a date-time stamp and the elapsed time since the last call. If the object is of class <code>data.frame</code> the number of rows and columns will also be noted.</p>
+<p>Notes can be turned off with the <code>show_notes</code> parameter on <code><a href="../reference/log_open.html">log_open()</a></code>, or by setting the global option <code>logr.notes</code> to FALSE.</p>
 </div>
 <div id="log-footer" class="section level4">
 <h4 class="hasAnchor">
 <a href="#log-footer" class="anchor"></a>Log Footer</h4>
-<p>The log footer concludes the log with another date-time stamp for the log end time, and a total elapsed time for the entire script. Note that during batch runs or when sourcing a script, the log footer may not be generated if the script errors. Instead, the last line of the log will be the error message.</p>
+<p>The log footer concludes the log with another date-time stamp for the log end time, and a total elapsed time for the entire script.</p>
+<p>Note that during batch runs or when sourcing a script, the log footer may not be generated if the script errors. Instead, the last line of the log will be the error message.</p>
 </div>
+<div id="example" class="section level4">
+<h4 class="hasAnchor">
+<a href="#example" class="anchor"></a>Example</h4>
+<p>Here is an example log showing each of the log parts described above:</p>
+<pre><code>========================================================================= 
+Log Path: C:/Users/dbosa/AppData/Local/Temp/RtmpQtOzhy/log/test.log 
+Working Directory: C:/packages/logr 
+User Name: dbosak 
+R Version: R Under development (unstable) (2020-06-29 r78751) 
+Machine: BOSAK-MAIN x86-64 
+Operating System: Windows 10 x64 build 18362 
+Log Start Time: 2020-06-30 07:15:52 
+========================================================================= 
+
+High Mileage Cars Subset 
+
+NOTE: Log Print Time:  2020-06-30 07:15:52 
+NOTE: Elapsed Time in seconds: 0.0219531059265137 
+
+                mpg cyl  disp  hp drat    wt  qsec vs am gear carb
+Mazda RX4      21.0   6 160.0 110 3.90 2.620 16.46  0  1    4    4
+Mazda RX4 Wag  21.0   6 160.0 110 3.90 2.875 17.02  0  1    4    4
+Datsun 710     22.8   4 108.0  93 3.85 2.320 18.61  1  1    4    1
+Hornet 4 Drive 21.4   6 258.0 110 3.08 3.215 19.44  1  0    3    1
+Merc 240D      24.4   4 146.7  62 3.69 3.190 20.00  1  0    4    2
+Merc 230       22.8   4 140.8  95 3.92 3.150 22.90  1  0    4    2
+Fiat 128       32.4   4  78.7  66 4.08 2.200 19.47  1  1    4    1
+Honda Civic    30.4   4  75.7  52 4.93 1.615 18.52  1  1    4    2
+Toyota Corolla 33.9   4  71.1  65 4.22 1.835 19.90  1  1    4    1
+Toyota Corona  21.5   4 120.1  97 3.70 2.465 20.01  1  0    3    1
+Fiat X1-9      27.3   4  79.0  66 4.08 1.935 18.90  1  1    4    1
+Porsche 914-2  26.0   4 120.3  91 4.43 2.140 16.70  0  1    5    2
+Lotus Europa   30.4   4  95.1 113 3.77 1.513 16.90  1  1    5    2
+Volvo 142E     21.4   4 121.0 109 4.11 2.780 18.60  1  1    4    2
+
+NOTE: Data frame has 14 rows and 11 columns. 
+
+NOTE: Log Print Time:  2020-06-30 07:15:52 
+NOTE: Elapsed Time in seconds: 0.0508558750152588 
+
+========================================================================= 
+Log End Time: 2020-06-30 07:15:53 
+Log Elapsed Time: 0 00:00:00 
+========================================================================= </code></pre>
 </div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
 
-        <nav id="toc" data-toggle="toc"><h2 data-toc-skip>Contents</h2>
-    </nav>
-</div>
+      </div>
 
 </div>
 
