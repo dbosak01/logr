@@ -1,4 +1,4 @@
-# logr <img src='man/images/logr.svg' align="right" height="138" />
+# logr <img src='man/images/logr2.png' align="right" height="138" />
 <!-- badges: start -->
 
 [![logr version](https://www.r-pkg.org/badges/version/logr)](https://cran.r-project.org/package=logr)
