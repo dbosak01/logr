@@ -8,7 +8,8 @@
 
 <!-- badges: end -->
 
-### Introduction <img src='man/images/logr2.png' align="left" height="138" />
+### Introduction <img src='man/images/logr2.png' align="left" height="138" 
+                  style="margin-right:10px"/>
 
 There are already several logging packages for R.  Why create another one? 
 
