@@ -10,7 +10,16 @@ articles:
   - logr-put
   - logr-tidylog
 
+reference:
+- title: All Functions
+  desc: Functions to open, print to, and close a log file.
+  contents:
+  - log_open
+  - log_print
+  - log_close
+  
 navbar:
   structure:
-    left:  [home, intro, reference, articles, news]
+    left:  [home, intro, articles, reference, news]
     right: [github]
+

@@ -31,10 +31,6 @@ There are only three steps to creating a **logr** log:
 
 Now this a logging system that anyone can use!  
 
-For examples and additional 
-information, please visit the **logr** documentation site 
-[here](https://logr.r-sassy.org/articles/logr.html)
-
 
 ### Installation
 
@@ -48,10 +44,13 @@ Then put the following line at the top of your script:
 
     library(logr)
     
+For examples and usage 
+information, please visit the **logr** documentation site 
+[here](https://logr.r-sassy.org/articles/logr.html)
 
 ### Getting Help
 
-If you need help, the best place 
+If you need help, the first place 
 to turn to is the [logr](http://logr.r-sassy.org) web site.  
 
 If you need additional help, please consult 
