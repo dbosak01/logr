@@ -1,6 +1,5 @@
 ---
 title: "Log Parts"
-date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Log Parts}

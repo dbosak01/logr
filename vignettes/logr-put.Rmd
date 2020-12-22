@@ -1,6 +1,5 @@
 ---
 title: "Aliases for log_print()"
-date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Aliases for log_print()}
