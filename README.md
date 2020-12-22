@@ -1,4 +1,3 @@
-# logr 
 <!-- badges: start -->
 
 [![logr version](https://www.r-pkg.org/badges/version/logr)](https://cran.r-project.org/package=logr)
@@ -8,7 +7,8 @@
 
 <!-- badges: end -->
 
-### Introduction <img src='man/images/logr2.png' align="left" height="138" style="margin-right:10px"/>
+# Introduction to **logr**
+<img src='man/images/logr2.png' align="left" height="138" style="margin-right:10px"/>
 
 There are already several logging packages for R.  Why create another one? 
 
