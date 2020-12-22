@@ -6,6 +6,7 @@ knitr::opts_chunk$set(
 
 ## ----eval=FALSE, echo=TRUE----------------------------------------------------
 #  library(logr)
+#  library(magrittr)
 #  
 #  # Create temp file location
 #  tmp <- file.path(tempdir(), "test.log")
@@ -13,14 +14,15 @@ knitr::opts_chunk$set(
 #  # Open log
 #  lf <- log_open(tmp)
 #  
+#  # Create log section
+#  sep("Illustration of put() and sep()")
+#  
 #  # Send message to log
-#  log_print("High Mileage Cars Subset")
+#  put("High Mileage Cars Subset")
 #  
 #  # Perform operations
-#  hmc <- subset(mtcars, mtcars$mpg > 20)
-#  
-#  # Print data to log
-#  log_print(hmc)
+#  hmc <- subset(mtcars, mtcars$mpg > 20) %>%
+#    put() # prints pipeline result to log
 #  
 #  # Close log
 #  log_close()

@@ -38,7 +38,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">logr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.2.0</span>
       </span>
     </div>
 
@@ -153,12 +153,12 @@
 <div id="what-to-print-to-the-log" class="section level3">
 <h3 class="hasAnchor">
 <a href="#what-to-print-to-the-log" class="anchor"></a>What to print to the log</h3>
-<p>You can print to the log anything that you can print to the console; vectors, lists, and data frames are all valid objects for logging. Under the hood, <strong>logr</strong> calls the <code><a href="https://rdrr.io/r/base/print.html">print()</a></code> function on that object, and writes the results to the log. The <code><a href="../reference/log_print.html">log_print()</a></code> function, by default, will also print the object to the console. That means you can replace calls to <code><a href="https://rdrr.io/r/base/print.html">print()</a></code> with <code><a href="../reference/log_print.html">log_print()</a></code>, and there will be no loss of convenience during development.</p>
+<p>You can print to the log anything that you can print to the console: vectors, lists, and data frames are all valid objects for logging. Under the hood, <strong>logr</strong> calls the <code><a href="https://rdrr.io/r/base/print.html">print()</a></code> function on that object, and writes the results to the log. The <code><a href="../reference/log_print.html">log_print()</a></code> function, by default, will also print the object to the console. That means you can replace calls to <code><a href="https://rdrr.io/r/base/print.html">print()</a></code> with <code><a href="../reference/log_print.html">log_print()</a></code>, and there will be no loss of convenience during development.</p>
 </div>
 <div id="what-the-log-looks-like" class="section level3">
 <h3 class="hasAnchor">
 <a href="#what-the-log-looks-like" class="anchor"></a>What the log looks like</h3>
-<p>The log created by <strong>logr</strong> is simpler than most logging packages. This log is designed to be human-readable and increases the traceability of your activities. There are three main enhancements to a <strong>logr</strong> log:</p>
+<p>The log created by <strong>logr</strong> is simpler than most logging packages. This log is designed to be human-readable, and increases the traceability of your activities. There are three main enhancements to a <strong>logr</strong> log:</p>
 <ul>
 <li>A log header</li>
 <li>Notes</li>
@@ -203,75 +203,6 @@ NOTE: Elapsed Time in seconds: 0.0508558750152588
 
 ========================================================================= 
 Log End Time: 2020-06-30 07:15:53 
-Log Elapsed Time: 0 00:00:00 
-========================================================================= </code></pre>
-</div>
-<div id="aliases-to-log_print" class="section level3">
-<h3 class="hasAnchor">
-<a href="#aliases-to-log_print" class="anchor"></a>Aliases to log_print()</h3>
-<p>Note that the <code><a href="../reference/log_print.html">log_print()</a></code> function has two aliases: <code><a href="../reference/log_print.html">put()</a></code> and <code><a href="../reference/log_print.html">sep()</a></code>.</p>
-<p>The <code><a href="../reference/log_print.html">put()</a></code> function is exactly like <code><a href="../reference/log_print.html">log_print()</a></code>, but it is shorter and easier to type. The <code><a href="../reference/log_print.html">sep()</a></code> function is a slight variant of <code><a href="../reference/log_print.html">log_print()</a></code> that prints separators above and below the message text. It is useful for creating sections in your log.</p>
-<p>Here is another example showing these aliases at work:</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/dbosak01/logr">logr</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://magrittr.tidyverse.org">magrittr</a></span><span class="op">)</span>
-
-<span class="co"># Create temp file location</span>
-<span class="va">tmp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/tempfile.html">tempdir</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">"test.log"</span><span class="op">)</span>
-
-<span class="co"># Open log</span>
-<span class="va">lf</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/log_open.html">log_open</a></span><span class="op">(</span><span class="va">tmp</span><span class="op">)</span>
-
-<span class="co"># Create log section</span>
-<span class="fu"><a href="../reference/log_print.html">sep</a></span><span class="op">(</span><span class="st">"Illustration of put() and sep()"</span><span class="op">)</span>
-
-<span class="co"># Send message to log</span>
-<span class="fu"><a href="../reference/log_print.html">put</a></span><span class="op">(</span><span class="st">"High Mileage Cars Subset"</span><span class="op">)</span>
-
-<span class="co"># Perform operations</span>
-<span class="va">hmc</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html">subset</a></span><span class="op">(</span><span class="va">mtcars</span>, <span class="va">mtcars</span><span class="op">$</span><span class="va">mpg</span> <span class="op">&gt;</span> <span class="fl">20</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="../reference/log_print.html">put</a></span><span class="op">(</span><span class="op">)</span> <span class="co"># prints pipeline result to log</span>
-
-<span class="co"># Close log</span>
-<span class="fu"><a href="../reference/log_close.html">log_close</a></span><span class="op">(</span><span class="op">)</span>
-
-<span class="co"># View results</span>
-<span class="fu"><a href="https://rdrr.io/r/base/writeLines.html">writeLines</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/readLines.html">readLines</a></span><span class="op">(</span><span class="va">lf</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<p>Here is the log from the above alias example:</p>
-<pre><code>========================================================================= 
-Log Path: C:/Users/User/AppData/Local/Temp/RtmpioAPbg/log/test.log 
-Working Directory: C:/packages/Testing 
-User Name: User 
-R Version: 4.0.3 (2020-10-10) 
-Machine: ZB15-5CD00276ZY x86-64 
-Operating System: Windows 10 x64 build 18363 
-Log Start Time: 2020-12-21 14:18:33 
-========================================================================= 
-
-========================================================================= 
-Illustration of put() and sep() 
-========================================================================= 
-
-High Mileage Cars Subset 
-
-                mpg cyl  disp  hp drat    wt  qsec vs am gear carb
-Mazda RX4      21.0   6 160.0 110 3.90 2.620 16.46  0  1    4    4
-Mazda RX4 Wag  21.0   6 160.0 110 3.90 2.875 17.02  0  1    4    4
-Datsun 710     22.8   4 108.0  93 3.85 2.320 18.61  1  1    4    1
-Hornet 4 Drive 21.4   6 258.0 110 3.08 3.215 19.44  1  0    3    1
-Merc 240D      24.4   4 146.7  62 3.69 3.190 20.00  1  0    4    2
-Merc 230       22.8   4 140.8  95 3.92 3.150 22.90  1  0    4    2
-Fiat 128       32.4   4  78.7  66 4.08 2.200 19.47  1  1    4    1
-Honda Civic    30.4   4  75.7  52 4.93 1.615 18.52  1  1    4    2
-Toyota Corolla 33.9   4  71.1  65 4.22 1.835 19.90  1  1    4    1
-Toyota Corona  21.5   4 120.1  97 3.70 2.465 20.01  1  0    3    1
-Fiat X1-9      27.3   4  79.0  66 4.08 1.935 18.90  1  1    4    1
-Porsche 914-2  26.0   4 120.3  91 4.43 2.140 16.70  0  1    5    2
-Lotus Europa   30.4   4  95.1 113 3.77 1.513 16.90  1  1    5    2
-Volvo 142E     21.4   4 121.0 109 4.11 2.780 18.60  1  1    4    2
-
-========================================================================= 
-Log End Time: 2020-12-21 14:18:33 
 Log Elapsed Time: 0 00:00:00 
 ========================================================================= </code></pre>
 </div>

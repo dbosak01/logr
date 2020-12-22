@@ -12,9 +12,11 @@
 
 There are already several logging packages for R.  Why create another one? 
 
-What the other logging packages have in common is that they were built
-for R package developers.  What is different about the **logr** package is
-that it is built for normal R users: statisticians, analysts, researchers, 
+Because the other logging packages all have something in common: they were built
+for *R package developers*.  
+
+What is different about the **logr** package is
+that it is built for *normal R users*: statisticians, analysts, researchers, 
 students, teachers, business people, etc.
 
 The **logr** package is for those people who just need a written record of their
@@ -52,8 +54,9 @@ Then put the following line at the top of your script:
 If you need help, the best place 
 to turn to is the [logr](http://logr.r-sassy.org) web site.  
 
-If you need additional help, please turn 
-to [stackoverflow.com](https://stackoverflow.com).  The stackoverflow 
+If you need additional help, please consult 
+[stackoverflow.com](https://stackoverflow.com).  The stackoverflow 
 community will be very willing to answer your questions.  
 
-
+If you encounter a bug or have a feature request, please submit an issue 
+[here](https://github.com/dbosak01/logr/issues).

@@ -32,3 +32,5 @@ options("logr.on" = TRUE, "logr.notes" = TRUE)
 # Turn off notes
 options("logr.notes" = FALSE)
 ```
+
+Next: [Aliases for log_print()](https://logr.r-sassy.org/articles/logr-put.html)

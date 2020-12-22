@@ -94,3 +94,5 @@ Log End Time: 2020-12-21 14:18:33
 Log Elapsed Time: 0 00:00:00 
 ========================================================================= 
 ```
+
+Next: [tidylog Integration](https://logr.r-sassy.org/articles/logr-tidylog.html)

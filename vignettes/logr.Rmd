@@ -62,7 +62,7 @@ writeLines(readLines(lf))
 ```
 
 ### What to print to the log
-You can print to the log anything that you can print to the console; vectors,
+You can print to the log anything that you can print to the console: vectors,
 lists, and data frames are all valid objects for logging.  Under the hood, 
 **logr** calls the `print()` function on that object, and writes the results 
 to the log. The `log_print()` function, by default, will also print the 
@@ -71,7 +71,7 @@ object to the console. That means you can replace calls to `print()` with
 
 ### What the log looks like
 The log created by **logr** is simpler than most logging packages.  This 
-log is designed to be human-readable and increases the traceability of your
+log is designed to be human-readable, and increases the traceability of your
 activities.  There are three main enhancements to a **logr** log:
 
   * A log header
@@ -118,85 +118,6 @@ NOTE: Elapsed Time in seconds: 0.0508558750152588
 
 ========================================================================= 
 Log End Time: 2020-06-30 07:15:53 
-Log Elapsed Time: 0 00:00:00 
-========================================================================= 
-```
-### Aliases to log_print()
-
-Note that the `log_print()` function has two aliases: `put()` and `sep()`.  
-
-The `put()` function is exactly like `log_print()`, but it is shorter
-and easier to type. The `sep()` function is a slight variant of `log_print()`
-that prints separators above and below the message text.  It is useful for 
-creating sections in your log.
-
-Here is another example showing these aliases at work:
-
-```{r eval=FALSE, echo=TRUE}
-library(logr)
-library(magrittr)
-
-# Create temp file location
-tmp <- file.path(tempdir(), "test.log")
-
-# Open log
-lf <- log_open(tmp)
-
-# Create log section
-sep("Illustration of put() and sep()")
-
-# Send message to log
-put("High Mileage Cars Subset")
-
-# Perform operations
-hmc <- subset(mtcars, mtcars$mpg > 20) %>% 
-  put() # prints pipeline result to log
-
-# Close log
-log_close()
-
-# View results
-writeLines(readLines(lf))
-
-```
-
-Here is the log from the above alias example:
-
-```
-========================================================================= 
-Log Path: C:/Users/User/AppData/Local/Temp/RtmpioAPbg/log/test.log 
-Working Directory: C:/packages/Testing 
-User Name: User 
-R Version: 4.0.3 (2020-10-10) 
-Machine: ZB15-5CD00276ZY x86-64 
-Operating System: Windows 10 x64 build 18363 
-Log Start Time: 2020-12-21 14:18:33 
-========================================================================= 
-
-========================================================================= 
-Illustration of put() and sep() 
-========================================================================= 
-
-High Mileage Cars Subset 
-
-                mpg cyl  disp  hp drat    wt  qsec vs am gear carb
-Mazda RX4      21.0   6 160.0 110 3.90 2.620 16.46  0  1    4    4
-Mazda RX4 Wag  21.0   6 160.0 110 3.90 2.875 17.02  0  1    4    4
-Datsun 710     22.8   4 108.0  93 3.85 2.320 18.61  1  1    4    1
-Hornet 4 Drive 21.4   6 258.0 110 3.08 3.215 19.44  1  0    3    1
-Merc 240D      24.4   4 146.7  62 3.69 3.190 20.00  1  0    4    2
-Merc 230       22.8   4 140.8  95 3.92 3.150 22.90  1  0    4    2
-Fiat 128       32.4   4  78.7  66 4.08 2.200 19.47  1  1    4    1
-Honda Civic    30.4   4  75.7  52 4.93 1.615 18.52  1  1    4    2
-Toyota Corolla 33.9   4  71.1  65 4.22 1.835 19.90  1  1    4    1
-Toyota Corona  21.5   4 120.1  97 3.70 2.465 20.01  1  0    3    1
-Fiat X1-9      27.3   4  79.0  66 4.08 1.935 18.90  1  1    4    1
-Porsche 914-2  26.0   4 120.3  91 4.43 2.140 16.70  0  1    5    2
-Lotus Europa   30.4   4  95.1 113 3.77 1.513 16.90  1  1    5    2
-Volvo 142E     21.4   4 121.0 109 4.11 2.780 18.60  1  1    4    2
-
-========================================================================= 
-Log End Time: 2020-12-21 14:18:33 
 Log Elapsed Time: 0 00:00:00 
 ========================================================================= 
 ```

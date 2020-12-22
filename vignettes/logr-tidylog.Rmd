@@ -127,7 +127,7 @@ Log Elapsed Time: 0 00:00:00
 
 ```
 
-
+Next: [log_open()](https://logr.r-sassy.org/reference/log_open.html)
 
 
 
