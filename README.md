@@ -57,5 +57,16 @@ If you need additional help, please consult
 [stackoverflow.com](https://stackoverflow.com).  The stackoverflow 
 community will be very willing to answer your questions.  
 
+If you want to look at the code for the **logr** package, visit the
+github page [here](https://github.com/dbosak01/logr).
+
 If you encounter a bug or have a feature request, please submit an issue 
 [here](https://github.com/dbosak01/logr/issues).
+
+
+### See Also
+
+The **logr** package is part of the **sassy** meta-package. 
+The **sassy** meta-package includes several packages that help make R
+easier for SAS programmers.  You can read more about the **sassy** package
+[here](http://sassy.r-sassy.org)
