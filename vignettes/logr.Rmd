@@ -126,8 +126,8 @@ Log Elapsed Time: 0 00:00:00
 For addition exploration of the **logr** package, please read the 
 following articles:
 
-* [Log Parts](https://logr.r-sassy.org/articles/logr-parts.html)
-* [Additional Features](https://logr.r-sassy.org/articles/logr-features.html)
-* [Global Options](https://logr.r-sassy.org/articles/logr-globals.html)
-* [Aliases for log_print()](https://logr.r-sassy.org/articles/logr-put.html)
-* [tidylog Integration](https://logr.r-sassy.org/articles/logr-tidylog.html)
+* [Log Parts](logr-parts.html)
+* [Additional Features](logr-features.html)
+* [Global Options](logr-globals.html)
+* [Aliases for log_print()](logr-put.html)
+* [tidylog Integration](logr-tidylog.html)
