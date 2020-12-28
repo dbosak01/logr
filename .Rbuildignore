@@ -7,3 +7,5 @@
 ^docs$
 ^pkgdown$
 ^logo\.png$
+^doc$
+^Meta$
