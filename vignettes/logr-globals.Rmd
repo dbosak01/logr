@@ -32,4 +32,4 @@ options("logr.on" = TRUE, "logr.notes" = TRUE)
 options("logr.notes" = FALSE)
 ```
 
-Next: [Aliases for log_print()](https://logr.r-sassy.org/articles/logr-put.html)
+Next: [Aliases for log_print()](logr-put.html)

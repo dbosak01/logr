@@ -442,6 +442,23 @@ put <- function(x, ...,
 
 #' @aliases log_print
 #' @export
+log_hook <- function(x) {
+  
+  
+  update_status()
+  
+  if (e$log_status == "open") {
+    
+    # Pass everything to log_print()
+    log_print(x, console = FALSE, blank_after = TRUE, msg = FALSE)
+  
+  }
+  
+  invisible(x)
+}
+
+#' @aliases log_print
+#' @export
 sep <- function(x, console = TRUE) {
   
   # Pass everything to log_print()

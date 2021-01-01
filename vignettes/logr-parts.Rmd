@@ -93,4 +93,4 @@ Log Elapsed Time: 0 00:00:00
 ========================================================================= 
 ```
 
-Next: [Additional Features](https://logr.r-sassy.org/articles/logr-features.html)
+Next: [Additional Features](logr-features.html)

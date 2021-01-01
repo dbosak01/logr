@@ -100,6 +100,30 @@ test_that("the logr package can log vectors, factors, and lists with no errors o
 })
 
 
+test_that("log_hook works as expected.", {
+  
+  tmp <- tempdir()
+  
+  log_hook("Should not generate anything")
+  
+  lf <- log_open(file.path(tmp, "test.log"))
+  
+  
+  log_hook("Here is the first log message")
+
+  
+  mp <- e$msg_path
+  log_close()
+  
+  ret <- file.exists(lf)
+  ret2 <- file.exists(mp)
+  
+  expect_equal(ret, TRUE)
+  expect_equal(ret2, FALSE)
+  
+  
+})
+
 
 # Not sure how to generate an error and not cause the test to fail.
 # Commented out for now.
