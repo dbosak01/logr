@@ -4,13 +4,16 @@
 \alias{log_print}
 \alias{put}
 \alias{sep}
+\alias{log_hook}
 \title{Print an object to the log}
 \usage{
-log_print(x, ..., console = TRUE, blank_after = TRUE, msg = FALSE)
+log_print(x, ..., console = TRUE, blank_after = TRUE, msg = FALSE, hide_notes = FALSE)
 
-put(x, ..., console = TRUE, blank_after = TRUE, msg = FALSE)
+put(x, ..., console = TRUE, blank_after = TRUE, msg = FALSE, hide_notes = FALSE)
 
 sep(x, console = TRUE)
+
+log_hook(x)
 }
 \arguments{
 \item{x}{The object to print.}
@@ -27,6 +30,10 @@ are TRUE and FALSE. Default is TRUE.}
 \item{msg}{Whether to print the object to the msg log.  This parameter is
 intended to be used internally.  Value values are TRUE and FALSE.  The
 default value is FALSE.}
+
+\item{hide_notes}{If notes are on, this parameter gives you the option
+of not printing notes for a particular log entry.  Default is FALSE,
+meaning notes will be displayed.  Used internally.}
 }
 \value{
 The object, invisibly
@@ -61,6 +68,10 @@ The \code{sep} function is also a shorthand alias for \code{log_print},
 except it will print a separator before and after the printed text.  This
 function is intended for documentation purposes, and you can use it
 to help organize your log into sections.
+
+The \code{log_hook} function is for other packages that wish to
+integrate with \strong{logr}.  The function prints to the log only if
+\code{autolog} is enabled. It will not print to the console.
 }
 \examples{
 # Create temp file location

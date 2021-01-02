@@ -4,7 +4,7 @@
 \alias{log_open}
 \title{Open a log}
 \usage{
-log_open(file_name = "", logdir = TRUE, show_notes = TRUE)
+log_open(file_name = "", logdir = TRUE, show_notes = TRUE, autolog = NULL)
 }
 \arguments{
 \item{file_name}{The name of the log file.  If no path is specified, the
@@ -16,6 +16,14 @@ TRUE and FALSE. The default is TRUE.}
 
 \item{show_notes}{If true, will write notes to the log.  Valid values are
 TRUE and FALSE. Default is TRUE.}
+
+\item{autolog}{Whether to turn on autolog functionality.  Autolog
+automatically logs functions from the dplyr, tidyr, and sassy family of
+packages. To enable autolog, either set this parameter to TRUE or
+set the "logr.autolog" option to TRUE. A FALSE value on this parameter
+will override the global option.  The global option
+will override a NULL on this parameter. Default is that autolog is
+disabled.}
 }
 \value{
 The path of the log.
@@ -76,6 +84,13 @@ also accepts a TRUE or FALSE value, and determines whether or not to print
 notes in the log.  The global option will override the \code{show_notes}
 parameter on the \code{log_open} function.
 Example: \code{options("logr.notes" = FALSE)}
+
+Version v1.2.0 of the \strong{logr} package introduced \strong{autolog}.
+The autolog feature provides automatic logging for \strong{dplyr},
+\strong{tidyr}, and the \strong{sassy} family of packages.  To use autolog,
+set the \code{autolog} parameter to TRUE, or set the global option
+\code{logr.autolog} to TRUE.  To maintain backward compatibility with
+prior versions, autolog is disabled by default.
 }
 \examples{
 # Create temp file location

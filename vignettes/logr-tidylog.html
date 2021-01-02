@@ -330,49 +330,136 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 
 
 <p>The <strong><a href="https://cran.r-project.org/web/packages/tidylog/readme/README.html">tidylog</a></strong> package supports console messaging for most <strong>dplyr</strong> and <strong>tidyr</strong> functions. This package integrates nicely with <strong>logr</strong> to provide automatic logging for common data manipulation tasks.</p>
-<p>You can integrate <strong>logr</strong> with <strong>tidylog</strong> by first installing and loading the <strong>tidylog</strong> package. To reduce the number of warning messages, add the <code>warn.conflicts</code> parameter to the <code>library</code> function, as follows:</p>
+<div id="autolog-integration" class="section level4">
+<h4>Autolog Integration</h4>
+<p>For <strong>logr</strong> version 1.2.0 and later, <strong>tidylog</strong> integration has been incorporated into the <strong>autolog</strong> feature. To engage autolog, simply turn it on when you call <code>log_open</code>, or set the autolog global option, as follows:</p>
+<pre><code>globals(&quot;logr.autolog&quot; = TRUE)</code></pre>
+<p>The autolog feature also allows other packages to automatically write to the <strong>logr</strong> log. Overall, autolog makes your code cleaner and the logging more automatic. It is recommended to use autolog if the situation allows it.</p>
+</div>
+<div id="autolog-example" class="section level4">
+<h4>Autolog Example</h4>
+<p>Here is a small example showing the autolog feature:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="kw">library</span>(logr)</span>
+<span id="cb2-2"><a href="#cb2-2"></a><span class="kw">library</span>(dplyr)</span>
+<span id="cb2-3"><a href="#cb2-3"></a><span class="kw">library</span>(magrittr)</span>
+<span id="cb2-4"><a href="#cb2-4"></a></span>
+<span id="cb2-5"><a href="#cb2-5"></a><span class="co"># Create temp file location</span></span>
+<span id="cb2-6"><a href="#cb2-6"></a>tmp &lt;-<span class="st"> </span><span class="kw">file.path</span>(<span class="kw">tempdir</span>(), <span class="st">&quot;test.log&quot;</span>)</span>
+<span id="cb2-7"><a href="#cb2-7"></a></span>
+<span id="cb2-8"><a href="#cb2-8"></a><span class="co"># Open log</span></span>
+<span id="cb2-9"><a href="#cb2-9"></a>lf &lt;-<span class="st"> </span><span class="kw">log_open</span>(tmp, <span class="dt">autolog =</span> <span class="ot">TRUE</span>, <span class="dt">show_notes =</span> <span class="ot">FALSE</span>)</span>
+<span id="cb2-10"><a href="#cb2-10"></a></span>
+<span id="cb2-11"><a href="#cb2-11"></a><span class="co"># Print log header</span></span>
+<span id="cb2-12"><a href="#cb2-12"></a><span class="kw">sep</span>(<span class="st">&quot;Example of autolog feature&quot;</span>)</span>
+<span id="cb2-13"><a href="#cb2-13"></a></span>
+<span id="cb2-14"><a href="#cb2-14"></a><span class="co"># Send message to log</span></span>
+<span id="cb2-15"><a href="#cb2-15"></a><span class="kw">put</span>(<span class="st">&quot;High Mileage Cars Subset&quot;</span>)</span>
+<span id="cb2-16"><a href="#cb2-16"></a></span>
+<span id="cb2-17"><a href="#cb2-17"></a><span class="co"># Perform dplyr operations</span></span>
+<span id="cb2-18"><a href="#cb2-18"></a>hmc &lt;-<span class="st"> </span>mtcars <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb2-19"><a href="#cb2-19"></a><span class="st">  </span><span class="kw">select</span>(mpg, cyl, disp) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb2-20"><a href="#cb2-20"></a><span class="st">  </span><span class="kw">filter</span>(mpg <span class="op">&gt;</span><span class="st"> </span><span class="dv">20</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb2-21"><a href="#cb2-21"></a><span class="st">  </span><span class="kw">arrange</span>(mpg) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb2-22"><a href="#cb2-22"></a><span class="st">  </span><span class="kw">put</span>() <span class="co"># sends pipeline result to log</span></span>
+<span id="cb2-23"><a href="#cb2-23"></a></span>
+<span id="cb2-24"><a href="#cb2-24"></a><span class="co"># Close log</span></span>
+<span id="cb2-25"><a href="#cb2-25"></a><span class="kw">log_close</span>()</span>
+<span id="cb2-26"><a href="#cb2-26"></a></span>
+<span id="cb2-27"><a href="#cb2-27"></a><span class="co"># View results</span></span>
+<span id="cb2-28"><a href="#cb2-28"></a><span class="kw">writeLines</span>(<span class="kw">readLines</span>(lf))</span></code></pre></div>
+</div>
+<div id="autolog-log" class="section level4">
+<h4>Autolog Log</h4>
+<p>Here is the log from the above example:</p>
+<pre><code>========================================================================= 
+Log Path: C:/Users/User/AppData/Local/Temp/RtmpYDx4m4/log/test.log 
+Working Directory: C:/packages/logr 
+User Name: User 
+R Version: 4.0.3 (2020-10-10) 
+Machine: DESKTOP-1F27OR8 x86-64 
+Operating System: Windows 10 x64 build 18363 
+Log Start Time: 2021-01-02 12:45:06 
+========================================================================= 
+
+========================================================================= 
+Example of autolog feature
+========================================================================= 
+
+High Mileage Cars Subset 
+
+select: dropped 8 variables (hp, drat, wt, qsec, vs, …)
+
+filter: removed 18 rows (56%), 14 rows remaining
+
+                mpg cyl  disp
+Mazda RX4      21.0   6 160.0
+Mazda RX4 Wag  21.0   6 160.0
+Hornet 4 Drive 21.4   6 258.0
+Volvo 142E     21.4   4 121.0
+Toyota Corona  21.5   4 120.1
+Datsun 710     22.8   4 108.0
+Merc 230       22.8   4 140.8
+Merc 240D      24.4   4 146.7
+Porsche 914-2  26.0   4 120.3
+Fiat X1-9      27.3   4  79.0
+Honda Civic    30.4   4  75.7
+Lotus Europa   30.4   4  95.1
+Fiat 128       32.4   4  78.7
+Toyota Corolla 33.9   4  71.1
+
+========================================================================= 
+Log End Time: 2021-01-02 12:45:10 
+Log Elapsed Time: 0 00:00:03 
+========================================================================= 
+</code></pre>
+</div>
+<div id="manual-integration" class="section level4">
+<h4>Manual Integration</h4>
+<p>If you do not want to use autolog, or are using a version of <strong>logr</strong> prior to v1.2.0, you can still integrate with <strong>tidylog</strong> using a manual integration method.</p>
+<p>To integrate <strong>logr</strong> with <strong>tidylog</strong> manually, first install and load the <strong>tidylog</strong> package. To reduce the number of warning messages, add the <code>warn.conflicts</code> parameter to the <code>library</code> function, as follows:</p>
 <pre><code>library(&quot;tidylog&quot;, warn.conflicts = FALSE)</code></pre>
 <p>Then assign the <strong>tidylog</strong> <code>display</code> setting to <code>log_print</code>, like this:</p>
 <pre><code>options(&quot;tidylog.display&quot; = list(log_print))</code></pre>
 <p>This setting will cause all <strong>tidylog</strong> messages to be written to the <strong>logr</strong> log. You will not need to call <code>log_print</code> or <code>put</code> for <strong>tidylog</strong> messages. Note that you still must open and close the <strong>logr</strong> log, as per normal operation.</p>
 <p>To detach <strong>logr</strong> from <strong>tidylog</strong>, set the display option to <code>NULL</code>:</p>
 <pre><code>options(&quot;tidylog.display&quot; = NULL)</code></pre>
-<div id="example" class="section level4">
-<h4>Example</h4>
+</div>
+<div id="manual-integration-example" class="section level4">
+<h4>Manual Integration Example</h4>
 <p>Here is a small example showing <strong>logr</strong> and <strong>tidylog</strong> integration:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="kw">library</span>(logr)</span>
-<span id="cb4-2"><a href="#cb4-2"></a><span class="kw">library</span>(dplyr)</span>
-<span id="cb4-3"><a href="#cb4-3"></a><span class="kw">library</span>(magrittr)</span>
-<span id="cb4-4"><a href="#cb4-4"></a><span class="kw">library</span>(tidylog, <span class="dt">warn.conflicts =</span> <span class="ot">FALSE</span>)</span>
-<span id="cb4-5"><a href="#cb4-5"></a></span>
-<span id="cb4-6"><a href="#cb4-6"></a><span class="co"># Connect tidylog to logr</span></span>
-<span id="cb4-7"><a href="#cb4-7"></a><span class="kw">options</span>(<span class="st">&quot;tidylog.display&quot;</span> =<span class="st"> </span><span class="kw">list</span>(log_print),</span>
-<span id="cb4-8"><a href="#cb4-8"></a>        <span class="st">&quot;logr.notes&quot;</span> =<span class="st"> </span><span class="ot">FALSE</span>)</span>
-<span id="cb4-9"><a href="#cb4-9"></a> </span>
-<span id="cb4-10"><a href="#cb4-10"></a><span class="co"># Create temp file location</span></span>
-<span id="cb4-11"><a href="#cb4-11"></a>tmp &lt;-<span class="st"> </span><span class="kw">file.path</span>(<span class="kw">tempdir</span>(), <span class="st">&quot;test.log&quot;</span>)</span>
-<span id="cb4-12"><a href="#cb4-12"></a></span>
-<span id="cb4-13"><a href="#cb4-13"></a><span class="co"># Open log</span></span>
-<span id="cb4-14"><a href="#cb4-14"></a>lf &lt;-<span class="st"> </span><span class="kw">log_open</span>(tmp)</span>
-<span id="cb4-15"><a href="#cb4-15"></a></span>
-<span id="cb4-16"><a href="#cb4-16"></a><span class="co"># Print log header</span></span>
-<span id="cb4-17"><a href="#cb4-17"></a><span class="kw">sep</span>(<span class="st">&quot;Example of tidylog integration&quot;</span>)</span>
-<span id="cb4-18"><a href="#cb4-18"></a></span>
-<span id="cb4-19"><a href="#cb4-19"></a><span class="co"># Send message to log</span></span>
-<span id="cb4-20"><a href="#cb4-20"></a><span class="kw">put</span>(<span class="st">&quot;High Mileage Cars Subset&quot;</span>)</span>
-<span id="cb4-21"><a href="#cb4-21"></a></span>
-<span id="cb4-22"><a href="#cb4-22"></a><span class="co"># Perform dplyr operations</span></span>
-<span id="cb4-23"><a href="#cb4-23"></a>hmc &lt;-<span class="st"> </span>mtcars <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb4-24"><a href="#cb4-24"></a><span class="st">  </span><span class="kw">select</span>(mpg, cyl, disp) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb4-25"><a href="#cb4-25"></a><span class="st">  </span><span class="kw">filter</span>(mpg <span class="op">&gt;</span><span class="st"> </span><span class="dv">20</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb4-26"><a href="#cb4-26"></a><span class="st">  </span><span class="kw">arrange</span>(mpg) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb4-27"><a href="#cb4-27"></a><span class="st">  </span><span class="kw">put</span>() <span class="co"># sends pipeline result to log</span></span>
-<span id="cb4-28"><a href="#cb4-28"></a></span>
-<span id="cb4-29"><a href="#cb4-29"></a><span class="co"># Close log</span></span>
-<span id="cb4-30"><a href="#cb4-30"></a><span class="kw">log_close</span>()</span>
-<span id="cb4-31"><a href="#cb4-31"></a></span>
-<span id="cb4-32"><a href="#cb4-32"></a><span class="co"># View results</span></span>
-<span id="cb4-33"><a href="#cb4-33"></a><span class="kw">writeLines</span>(<span class="kw">readLines</span>(lf))</span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="kw">library</span>(logr)</span>
+<span id="cb7-2"><a href="#cb7-2"></a><span class="kw">library</span>(dplyr)</span>
+<span id="cb7-3"><a href="#cb7-3"></a><span class="kw">library</span>(magrittr)</span>
+<span id="cb7-4"><a href="#cb7-4"></a><span class="kw">library</span>(tidylog, <span class="dt">warn.conflicts =</span> <span class="ot">FALSE</span>)</span>
+<span id="cb7-5"><a href="#cb7-5"></a></span>
+<span id="cb7-6"><a href="#cb7-6"></a><span class="co"># Connect tidylog to logr</span></span>
+<span id="cb7-7"><a href="#cb7-7"></a><span class="kw">options</span>(<span class="st">&quot;tidylog.display&quot;</span> =<span class="st"> </span><span class="kw">list</span>(log_print),</span>
+<span id="cb7-8"><a href="#cb7-8"></a>        <span class="st">&quot;logr.notes&quot;</span> =<span class="st"> </span><span class="ot">FALSE</span>)</span>
+<span id="cb7-9"><a href="#cb7-9"></a> </span>
+<span id="cb7-10"><a href="#cb7-10"></a><span class="co"># Create temp file location</span></span>
+<span id="cb7-11"><a href="#cb7-11"></a>tmp &lt;-<span class="st"> </span><span class="kw">file.path</span>(<span class="kw">tempdir</span>(), <span class="st">&quot;test.log&quot;</span>)</span>
+<span id="cb7-12"><a href="#cb7-12"></a></span>
+<span id="cb7-13"><a href="#cb7-13"></a><span class="co"># Open log</span></span>
+<span id="cb7-14"><a href="#cb7-14"></a>lf &lt;-<span class="st"> </span><span class="kw">log_open</span>(tmp)</span>
+<span id="cb7-15"><a href="#cb7-15"></a></span>
+<span id="cb7-16"><a href="#cb7-16"></a><span class="co"># Print log header</span></span>
+<span id="cb7-17"><a href="#cb7-17"></a><span class="kw">sep</span>(<span class="st">&quot;Example of tidylog integration&quot;</span>)</span>
+<span id="cb7-18"><a href="#cb7-18"></a></span>
+<span id="cb7-19"><a href="#cb7-19"></a><span class="co"># Send message to log</span></span>
+<span id="cb7-20"><a href="#cb7-20"></a><span class="kw">put</span>(<span class="st">&quot;High Mileage Cars Subset&quot;</span>)</span>
+<span id="cb7-21"><a href="#cb7-21"></a></span>
+<span id="cb7-22"><a href="#cb7-22"></a><span class="co"># Perform dplyr operations</span></span>
+<span id="cb7-23"><a href="#cb7-23"></a>hmc &lt;-<span class="st"> </span>mtcars <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb7-24"><a href="#cb7-24"></a><span class="st">  </span><span class="kw">select</span>(mpg, cyl, disp) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb7-25"><a href="#cb7-25"></a><span class="st">  </span><span class="kw">filter</span>(mpg <span class="op">&gt;</span><span class="st"> </span><span class="dv">20</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb7-26"><a href="#cb7-26"></a><span class="st">  </span><span class="kw">arrange</span>(mpg) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb7-27"><a href="#cb7-27"></a><span class="st">  </span><span class="kw">put</span>() <span class="co"># sends pipeline result to log</span></span>
+<span id="cb7-28"><a href="#cb7-28"></a></span>
+<span id="cb7-29"><a href="#cb7-29"></a><span class="co"># Close log</span></span>
+<span id="cb7-30"><a href="#cb7-30"></a><span class="kw">log_close</span>()</span>
+<span id="cb7-31"><a href="#cb7-31"></a></span>
+<span id="cb7-32"><a href="#cb7-32"></a><span class="co"># View results</span></span>
+<span id="cb7-33"><a href="#cb7-33"></a><span class="kw">writeLines</span>(<span class="kw">readLines</span>(lf))</span></code></pre></div>
 </div>
 <div id="log" class="section level4">
 <h4>Log</h4>
@@ -382,7 +469,7 @@ Log Path: C:/Users/User/AppData/Local/Temp/RtmpioAPbg/log/test.log
 Working Directory: C:/packages/Testing 
 User Name: User 
 R Version: 4.0.3 (2020-10-10) 
-Machine: ZB15-5CD00276ZY x86-64 
+Machine: DESKTOP-1F27OR8 x86-64 
 Operating System: Windows 10 x64 build 18363 
 Log Start Time: 2020-12-21 13:29:03 
 ========================================================================= 

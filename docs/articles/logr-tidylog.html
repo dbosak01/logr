@@ -115,18 +115,110 @@
     
     
 <p>The <strong><a href="https://cran.r-project.org/web/packages/tidylog/readme/README.html">tidylog</a></strong> package supports console messaging for most <strong>dplyr</strong> and <strong>tidyr</strong> functions. This package integrates nicely with <strong>logr</strong> to provide automatic logging for common data manipulation tasks.</p>
-<p>You can integrate <strong>logr</strong> with <strong>tidylog</strong> by first installing and loading the <strong>tidylog</strong> package. To reduce the number of warning messages, add the <code>warn.conflicts</code> parameter to the <code>library</code> function, as follows:</p>
+<div id="autolog-integration" class="section level4">
+<h4 class="hasAnchor">
+<a href="#autolog-integration" class="anchor"></a>Autolog Integration</h4>
+<p>For <strong>logr</strong> version 1.2.0 and later, <strong>tidylog</strong> integration has been incorporated into the <strong>autolog</strong> feature. To engage autolog, simply turn it on when you call <code>log_open</code>, or set the autolog global option, as follows:</p>
+<pre><code>globals("logr.autolog" = TRUE)</code></pre>
+<p>The autolog feature also allows other packages to automatically write to the <strong>logr</strong> log. Overall, autolog makes your code cleaner and the logging more automatic. It is recommended to use autolog if the situation allows it.</p>
+</div>
+<div id="autolog-example" class="section level4">
+<h4 class="hasAnchor">
+<a href="#autolog-example" class="anchor"></a>Autolog Example</h4>
+<p>Here is a small example showing the autolog feature:</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/dbosak01/logr">logr</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://magrittr.tidyverse.org">magrittr</a></span><span class="op">)</span>
+
+<span class="co"># Create temp file location</span>
+<span class="va">tmp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/tempfile.html">tempdir</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">"test.log"</span><span class="op">)</span>
+
+<span class="co"># Open log</span>
+<span class="va">lf</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/log_open.html">log_open</a></span><span class="op">(</span><span class="va">tmp</span>, autolog <span class="op">=</span> <span class="cn">TRUE</span>, show_notes <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
+
+<span class="co"># Print log header</span>
+<span class="fu"><a href="../reference/log_print.html">sep</a></span><span class="op">(</span><span class="st">"Example of autolog feature"</span><span class="op">)</span>
+
+<span class="co"># Send message to log</span>
+<span class="fu"><a href="../reference/log_print.html">put</a></span><span class="op">(</span><span class="st">"High Mileage Cars Subset"</span><span class="op">)</span>
+
+<span class="co"># Perform dplyr operations</span>
+<span class="va">hmc</span> <span class="op">&lt;-</span> <span class="va">mtcars</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">mpg</span>, <span class="va">cyl</span>, <span class="va">disp</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">mpg</span> <span class="op">&gt;</span> <span class="fl">20</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="va">mpg</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../reference/log_print.html">put</a></span><span class="op">(</span><span class="op">)</span> <span class="co"># sends pipeline result to log</span>
+
+<span class="co"># Close log</span>
+<span class="fu"><a href="../reference/log_close.html">log_close</a></span><span class="op">(</span><span class="op">)</span>
+
+<span class="co"># View results</span>
+<span class="fu"><a href="https://rdrr.io/r/base/writeLines.html">writeLines</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/readLines.html">readLines</a></span><span class="op">(</span><span class="va">lf</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+</div>
+<div id="autolog-log" class="section level4">
+<h4 class="hasAnchor">
+<a href="#autolog-log" class="anchor"></a>Autolog Log</h4>
+<p>Here is the log from the above example:</p>
+<pre><code>========================================================================= 
+Log Path: C:/Users/User/AppData/Local/Temp/RtmpYDx4m4/log/test.log 
+Working Directory: C:/packages/logr 
+User Name: User 
+R Version: 4.0.3 (2020-10-10) 
+Machine: DESKTOP-1F27OR8 x86-64 
+Operating System: Windows 10 x64 build 18363 
+Log Start Time: 2021-01-02 12:45:06 
+========================================================================= 
+
+========================================================================= 
+Example of autolog feature
+========================================================================= 
+
+High Mileage Cars Subset 
+
+select: dropped 8 variables (hp, drat, wt, qsec, vs, …)
+
+filter: removed 18 rows (56%), 14 rows remaining
+
+                mpg cyl  disp
+Mazda RX4      21.0   6 160.0
+Mazda RX4 Wag  21.0   6 160.0
+Hornet 4 Drive 21.4   6 258.0
+Volvo 142E     21.4   4 121.0
+Toyota Corona  21.5   4 120.1
+Datsun 710     22.8   4 108.0
+Merc 230       22.8   4 140.8
+Merc 240D      24.4   4 146.7
+Porsche 914-2  26.0   4 120.3
+Fiat X1-9      27.3   4  79.0
+Honda Civic    30.4   4  75.7
+Lotus Europa   30.4   4  95.1
+Fiat 128       32.4   4  78.7
+Toyota Corolla 33.9   4  71.1
+
+========================================================================= 
+Log End Time: 2021-01-02 12:45:10 
+Log Elapsed Time: 0 00:00:03 
+========================================================================= 
+</code></pre>
+</div>
+<div id="manual-integration" class="section level4">
+<h4 class="hasAnchor">
+<a href="#manual-integration" class="anchor"></a>Manual Integration</h4>
+<p>If you do not want to use autolog, or are using a version of <strong>logr</strong> prior to v1.2.0, you can still integrate with <strong>tidylog</strong> using a manual integration method.</p>
+<p>To integrate <strong>logr</strong> with <strong>tidylog</strong> manually, first install and load the <strong>tidylog</strong> package. To reduce the number of warning messages, add the <code>warn.conflicts</code> parameter to the <code>library</code> function, as follows:</p>
 <pre><code><a href="https://rdrr.io/r/base/library.html">library("tidylog", warn.conflicts = FALSE)</a></code></pre>
 <p>Then assign the <strong>tidylog</strong> <code>display</code> setting to <code>log_print</code>, like this:</p>
 <pre><code><a href="https://rdrr.io/r/base/options.html">options("tidylog.display" = list(log_print))</a></code></pre>
 <p>This setting will cause all <strong>tidylog</strong> messages to be written to the <strong>logr</strong> log. You will not need to call <code>log_print</code> or <code>put</code> for <strong>tidylog</strong> messages. Note that you still must open and close the <strong>logr</strong> log, as per normal operation.</p>
 <p>To detach <strong>logr</strong> from <strong>tidylog</strong>, set the display option to <code>NULL</code>:</p>
 <pre><code><a href="https://rdrr.io/r/base/options.html">options("tidylog.display" = NULL)</a></code></pre>
-<div id="example" class="section level4">
+</div>
+<div id="manual-integration-example" class="section level4">
 <h4 class="hasAnchor">
-<a href="#example" class="anchor"></a>Example</h4>
+<a href="#manual-integration-example" class="anchor"></a>Manual Integration Example</h4>
 <p>Here is a small example showing <strong>logr</strong> and <strong>tidylog</strong> integration:</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/dbosak01/logr">logr</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://magrittr.tidyverse.org">magrittr</a></span><span class="op">)</span>
@@ -170,7 +262,7 @@ Log Path: C:/Users/User/AppData/Local/Temp/RtmpioAPbg/log/test.log
 Working Directory: C:/packages/Testing 
 User Name: User 
 R Version: 4.0.3 (2020-10-10) 
-Machine: ZB15-5CD00276ZY x86-64 
+Machine: DESKTOP-1F27OR8 x86-64 
 Operating System: Windows 10 x64 build 18363 
 Log Start Time: 2020-12-21 13:29:03 
 ========================================================================= 
