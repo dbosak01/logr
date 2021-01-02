@@ -506,13 +506,14 @@ log_hook <- function(x) {
   
   
   update_status()
-  
-  if (e$log_status == "open" & e$autolog == TRUE) {
+  if (!is.null(e$log_status) & !is.null(e$autolog)) {
+    if (e$log_status == "open" & e$autolog == TRUE) {
+      
+      # Pass everything to log_print()
+      log_print(x, console = FALSE, blank_after = TRUE, 
+                msg = FALSE, hide_notes = FALSE)
     
-    # Pass everything to log_print()
-    log_print(x, console = FALSE, blank_after = TRUE, 
-              msg = FALSE, hide_notes = FALSE)
-  
+    }
   }
   
   invisible(x)
