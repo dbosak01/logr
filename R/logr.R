@@ -108,6 +108,12 @@ separator <-
 #' parameter on the \code{log_open} function. 
 #' Example: \code{options("logr.notes" = FALSE)}
 #' 
+#' Version v1.2.0 of the \strong{logr} package introduced \strong{autolog}.
+#' The autolog feature provides automatic logging for \strong{dplyr},
+#' \strong{tidyr}, and the \strong{sassy} family of packages.  To use autolog,
+#' set the \code{autolog} parameter to TRUE, or set the global option
+#' \code{logr.autolog} to TRUE.  To maintain backward compatibility with 
+#' prior versions, autolog is disabled by default. 
 #' @param file_name The name of the log file.  If no path is specified, the 
 #' working directory will be used.
 #' @param logdir Send the log to a log directory named "log".  If the log 
@@ -115,6 +121,13 @@ separator <-
 #' TRUE and FALSE. The default is TRUE.
 #' @param show_notes If true, will write notes to the log.  Valid values are 
 #' TRUE and FALSE. Default is TRUE.
+#' @param autolog Whether to turn on autolog functionality.  Autolog
+#' automatically logs functions from the dplyr, tidyr, and sassy family of
+#' packages. To enable autolog, either set this parameter to TRUE or 
+#' set the "logr.autolog" option to TRUE. A FALSE value on this parameter
+#' will override the global option.  The global option
+#' will override a NULL on this parameter. Default is that autolog is
+#' disabled.
 #' @return The path of the log.
 #' @seealso \code{\link{log_print}} for printing to the log (and console), 
 #' and \code{\link{log_close}} to close the log.
@@ -140,7 +153,8 @@ separator <-
 #' 
 #' # View results
 #' writeLines(readLines(lf))
-log_open <- function(file_name = "", logdir = TRUE, show_notes = TRUE) {
+log_open <- function(file_name = "", logdir = TRUE, show_notes = TRUE,
+                     autolog = NULL) {
   
   if (is.null(options()[["logr.on"]]) == FALSE) {
     
@@ -153,6 +167,41 @@ log_open <- function(file_name = "", logdir = TRUE, show_notes = TRUE) {
     
   } else e$log_status = "on"
   
+  
+  if (!is.null(autolog)) 
+    e$autolog <- autolog
+  else if (!is.null(options()[["logr.autolog"]])) {
+    
+    autolog <- options("logr.autolog")
+    
+    if (all(autolog[[1]] == FALSE)) 
+      e$autolog <- FALSE
+    else 
+      e$autolog <- TRUE
+    
+  } else e$autolog <- FALSE
+  
+  if (e$autolog) {
+    
+    if (length(find.package('tidylog', quiet=TRUE)) == 0) {
+      utils::install.packages("tidylog", verbose = FALSE, quiet = TRUE)
+      #print("tidylog installed")
+    }
+
+    if ("tidylog" %in% .packages()) {
+      do.call("library", list(package = "tidylog", warn.conflicts = FALSE))
+      e$tidylog_loaded <- TRUE
+      #print("tidylog was loaded")
+      
+    } else {
+      do.call("library", list(package = "tidylog", warn.conflicts = FALSE))
+      e$tidylog_loaded <- FALSE
+      #print("tidylog was not loaded")
+    }
+   
+    options("tidylog.display" = list(log_print)) 
+    #print("tidylog attached")
+  }
   
   lpath <- ""
   
@@ -266,9 +315,10 @@ log_open <- function(file_name = "", logdir = TRUE, show_notes = TRUE) {
 #' 
 #' @description 
 #' The \code{log_print} function prints an object to the currently opened log.
-#' @usage log_print(x, ..., console = TRUE, blank_after = TRUE, msg = FALSE)
-#' @usage put(x, ..., console = TRUE, blank_after = TRUE, msg = FALSE)
+#' @usage log_print(x, ..., console = TRUE, blank_after = TRUE, msg = FALSE, hide_notes = FALSE)
+#' @usage put(x, ..., console = TRUE, blank_after = TRUE, msg = FALSE, hide_notes = FALSE)
 #' @usage sep(x, console = TRUE)
+#' @usage log_hook(x)
 #' @details 
 #' The log is initialized with \code{log_open}.  Once the log is open, objects
 #' like variables and data frames can be printed to the log to monitor execution
@@ -297,6 +347,10 @@ log_open <- function(file_name = "", logdir = TRUE, show_notes = TRUE) {
 #' function is intended for documentation purposes, and you can use it
 #' to help organize your log into sections.
 #' 
+#' The \code{log_hook} function is for other packages that wish to
+#' integrate with \strong{logr}.  The function prints to the log only if 
+#' \code{autolog} is enabled. It will not print to the console.
+#' 
 #' @param x The object to print.  
 #' @param ... Any parameters to pass to the print function.
 #' @param console Whether or not to print to the console.  Valid values are
@@ -307,9 +361,13 @@ log_open <- function(file_name = "", logdir = TRUE, show_notes = TRUE) {
 #' @param msg Whether to print the object to the msg log.  This parameter is
 #' intended to be used internally.  Value values are TRUE and FALSE.  The 
 #' default value is FALSE.
+#' @param hide_notes If notes are on, this parameter gives you the option 
+#' of not printing notes for a particular log entry.  Default is FALSE, 
+#' meaning notes will be displayed.  Used internally.
 #' @return The object, invisibly
 #' @aliases put 
 #' @aliases sep
+#' @aliases log_hook
 #' @seealso \code{\link{log_open}} to open the log, 
 #' and \code{\link{log_close}} to close the log.
 #' @export
@@ -337,7 +395,8 @@ log_open <- function(file_name = "", logdir = TRUE, show_notes = TRUE) {
 log_print <- function(x, ..., 
                       console = TRUE, 
                       blank_after = TRUE, 
-                      msg = FALSE) {
+                      msg = FALSE, 
+                      hide_notes = FALSE) {
   
   update_status()
   
@@ -393,7 +452,7 @@ log_print <- function(x, ...,
       finally = {
         
         # Print time stamps on normal log_print
-        if (blank_after == TRUE & console == TRUE) {
+        if (hide_notes == FALSE) {
           tc <- Sys.time()
           
           if (e$log_show_notes == TRUE) {
@@ -431,11 +490,12 @@ log_print <- function(x, ...,
 put <- function(x, ..., 
                 console = TRUE, 
                 blank_after = TRUE, 
-                msg = FALSE) {
+                msg = FALSE,
+                hide_notes = FALSE) {
   
   # Pass everything to log_print()
   ret <- log_print(x, ..., console = console, blank_after = blank_after,
-                   msg = msg)
+                   msg = msg, hide_notes = hide_notes)
   
   invisible(ret)
 }
@@ -446,15 +506,30 @@ log_hook <- function(x) {
   
   
   update_status()
-  
-  if (e$log_status == "open") {
+  if (!is.null(e$log_status) & !is.null(e$autolog)) {
+    if (e$log_status == "open" & e$autolog == TRUE) {
+      
+      # Pass everything to log_print()
+      log_print(x, console = FALSE, blank_after = TRUE, 
+                msg = FALSE, hide_notes = FALSE)
     
-    # Pass everything to log_print()
-    log_print(x, console = FALSE, blank_after = TRUE, msg = FALSE)
-  
+    }
   }
   
   invisible(x)
+}
+
+#' @description Used internally to write header, footer, etc.
+#' @noRd
+log_quiet <- function(x, blank_after = TRUE, msg = FALSE) {
+  
+ ret <- log_print(x, console = FALSE, 
+                  blank_after = blank_after, 
+                  hide_notes = TRUE, 
+                  msg = msg)  
+ 
+ return(ret)
+                  
 }
 
 #' @aliases log_print
@@ -462,11 +537,11 @@ log_hook <- function(x) {
 sep <- function(x, console = TRUE) {
   
   # Pass everything to log_print()
-  log_print(separator, blank_after = FALSE)
+  log_print(separator, blank_after = FALSE, hide_notes = TRUE)
   
   str <- paste(strwrap(x, nchar(separator)), collapse = "\n")
-  ret <- log_print(str, blank_after = FALSE)
-  log_print(separator)
+  ret <- log_print(str, blank_after = FALSE, hide_notes = TRUE)
+  log_print(separator, hide_notes = TRUE)
   
   invisible(ret)
 }
@@ -521,14 +596,24 @@ log_close <- function() {
       lw <- get("last.warning")
       has_warnings <- length(lw) > 0
       if(has_warnings) {
-        log_print(warnings(), console = FALSE)
-        log_print(warnings(), console = FALSE, msg = TRUE)
+        log_quiet(warnings())
+        log_quiet(warnings(),  msg = TRUE)
         assign("last.warning", NULL, envir = baseenv())
       }
     }
     
     # Detach error handler
     options(error = NULL)
+    
+    if (e$autolog) {
+      
+     options("tidylog.display" = NULL) 
+      
+     # Detach tidylog if not attached by user
+     if (e$tidylog_loaded == FALSE) {
+       do.call("detach", list(name = "package:tidylog", unload = TRUE))
+     }
+    }
     
     # Print out footer
     print_log_footer(has_warnings)
@@ -540,6 +625,8 @@ log_close <- function() {
     e$log_time <- NULL
     e$log_start_time <- NULL
     e$log_status <- "closed"
+    e$tidylog_loaded <- NULL
+    
   } else if (e$log_status == "off") {
   
     message("Log is off.")
@@ -560,7 +647,7 @@ log_close <- function() {
 error_handler <- function() {
   
   log_print(geterrmessage())
-  log_print(geterrmessage(), console = FALSE, msg = TRUE)
+  log_quiet(geterrmessage(), msg = TRUE)
   
 }
 
@@ -574,7 +661,7 @@ warning_handler <- function() {
   
   #print("Warning Handler")
   log_print(warnings())
-  log_print(warnings(), console = FALSE, msg = TRUE)
+  log_quiet(warnings(), msg = TRUE)
   
 }
 
@@ -592,6 +679,23 @@ update_status <- function() {
       e$log_status <- "on"
     
   }
+  
+  if (!is.null(options("logr.autolog")[[1]])) {
+    
+    if(options("logr.autolog")[[1]] == FALSE)
+      e$autolog <- FALSE
+    else if (options("logr.autolog")[[1]] == TRUE)
+      e$autolog <- TRUE
+  }
+  
+  if (!is.null(options("logr.notes")[[1]])) {
+    
+    if(options("logr.notes")[[1]] == FALSE)
+      e$log_show_notes <- FALSE
+    else if (options("logr.notes")[[1]] == TRUE)
+      e$log_show_notes <- TRUE
+  }
+
 }
 
 
@@ -599,30 +703,24 @@ update_status <- function() {
 #' @noRd
 print_log_header <- function(log_path) {
   
-  log_print(paste(separator), console = FALSE, blank_after = FALSE)
-  log_print(paste("Log Path:", log_path), console = FALSE, blank_after = FALSE)
-  log_print(paste("Working Directory:", getwd()), console = FALSE, 
-            blank_after = FALSE)
+  log_quiet(paste(separator), blank_after = FALSE)
+  log_quiet(paste("Log Path:", log_path), blank_after = FALSE)
+  log_quiet(paste("Working Directory:", getwd()), blank_after = FALSE)
   
   inf <- Sys.info()
-  log_print(paste("User Name:", inf["user"]), console = FALSE, 
-            blank_after = FALSE)
+  log_quiet(paste("User Name:", inf["user"]), blank_after = FALSE)
   
   vr <- sub("R version ", "", R.Version()["version.string"])
-  log_print(paste("R Version:", vr), console = FALSE, 
-            blank_after = FALSE)
-  log_print(paste("Machine:", inf["nodename"], inf["machine"]), 
-            console = FALSE, 
+  log_quiet(paste("R Version:", vr), blank_after = FALSE)
+  log_quiet(paste("Machine:", inf["nodename"], inf["machine"]), 
             blank_after = FALSE)
 
-  log_print(paste("Operating System:", inf["sysname"], inf["release"], 
+  log_quiet(paste("Operating System:", inf["sysname"], inf["release"], 
                   inf["version"]), 
-            console = FALSE, 
             blank_after = FALSE)
   
-  log_print(paste("Log Start Time:", Sys.time()), console = FALSE, 
-            blank_after = FALSE)
-  log_print(paste(separator), console = FALSE)
+  log_quiet(paste("Log Start Time:", Sys.time()), blank_after = FALSE)
+  log_quiet(paste(separator))
 }
 
 #' Function to print the log footer
@@ -634,10 +732,9 @@ print_log_footer <- function(has_warnings = FALSE) {
   if (e$log_show_notes == "TRUE" & has_warnings) {
     
     # Force notes after warning print, before the footer
-    log_print(paste("NOTE: Log Print Time:", Sys.time()), 
-              console = FALSE, blank_after = FALSE)
-    log_print(paste("NOTE: Log Elapsed Time:", get_time_diff(tc)), 
-              console = FALSE, blank_after = TRUE)
+    log_quiet(paste("NOTE: Log Print Time:", Sys.time()), blank_after = FALSE)
+    log_quiet(paste("NOTE: Log Elapsed Time:", get_time_diff(tc)), 
+              blank_after = TRUE)
   }
   
   # Calculate total elapsed execution time
@@ -646,14 +743,10 @@ print_log_footer <- function(has_warnings = FALSE) {
   lt <-  tc - ts
 
   # Print the log footer
-  log_print(paste(separator), console = FALSE, blank_after = FALSE)
-  log_print(paste("Log End Time:", tc), console = FALSE, 
-            blank_after = FALSE)
-
-  log_print(paste("Log Elapsed Time:", dhms(as.numeric(lt))), console = FALSE, 
-            blank_after = FALSE)
-
-  log_print(paste(separator), console = FALSE, blank_after = FALSE)
+  log_quiet(paste(separator), blank_after = FALSE)
+  log_quiet(paste("Log End Time:", tc),  blank_after = FALSE)
+  log_quiet(paste("Log Elapsed Time:", dhms(as.numeric(lt))), blank_after = FALSE)
+  log_quiet(paste(separator), blank_after = FALSE)
 }
 
 #' Get time difference between last log_print call and current call

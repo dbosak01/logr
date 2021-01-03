@@ -100,7 +100,7 @@ test_that("the logr package can log vectors, factors, and lists with no errors o
 })
 
 
-test_that("log_hook works as expected.", {
+test_that("log_hook works as expected when autolog is off.", {
   
   tmp <- tempdir()
   
@@ -109,7 +109,8 @@ test_that("log_hook works as expected.", {
   lf <- log_open(file.path(tmp, "test.log"))
   
   
-  log_hook("Here is the first log message")
+  log_print("Should show up in log")
+  log_hook("Should not show up in log")
 
   
   mp <- e$msg_path
@@ -123,6 +124,71 @@ test_that("log_hook works as expected.", {
   
   
 })
+
+
+test_that("log_hook works as expected when autolog is on.", {
+  
+  tmp <- tempdir()
+  
+  log_hook("Should not generate anything")
+  
+  lf <- log_open(file.path(tmp, "test.log"), autolog = TRUE)
+  
+  
+  log_print("Should show up in log")
+  log_hook("Should also show up in log")
+  
+  
+  mp <- e$msg_path
+  log_close()
+  
+  ret <- file.exists(lf)
+  ret2 <- file.exists(mp)
+  
+  expect_equal(ret, TRUE)
+  expect_equal(ret2, FALSE)
+  
+  
+})
+
+
+
+test_that("tidylog integration works as expected when autolog is on.", {
+  
+  library(dplyr)
+  #library(tidylog, warn.conflicts = FALSE)
+  
+  # Connect tidylog to logr
+  #options("tidylog.display" = list(log_quiet), "logr.notes" = TRUE)
+  
+  tmp <- tempdir()
+
+  
+  lf <- log_open(file.path(tmp, "test.log"), autolog = TRUE)
+  
+  
+  log_print("Should show up in log")
+  
+  log_hook("Should also show up in log")
+  
+  dat <- select(mtcars, mpg, cyl, disp) 
+  dat <- filter(dat, mpg > 20)
+  
+  put(dat)
+  
+  mp <- e$msg_path
+  log_close()
+  
+  ret <- file.exists(lf)
+  ret2 <- file.exists(mp)
+  
+  expect_equal(ret, TRUE)
+  expect_equal(ret2, FALSE)
+  
+  #writeLines(readLines(lf, encoding = "UTF-8"))
+  
+})
+
 
 
 # Not sure how to generate an error and not cause the test to fail.
