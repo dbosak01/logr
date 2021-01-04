@@ -51,7 +51,7 @@ information, please visit the **logr** documentation site
 ### Getting Help
 
 If you need help, the first place 
-to turn to is the [logr](http://logr.r-sassy.org) web site.  
+to turn to is the [logr](https://logr.r-sassy.org) web site.  
 
 If you need additional help, please consult 
 [stackoverflow.com](https://stackoverflow.com).  The stackoverflow 
@@ -69,4 +69,4 @@ If you encounter a bug or have a feature request, please submit an issue
 The **logr** package is part of the **sassy** meta-package. 
 The **sassy** meta-package includes several packages that help make R
 easier for SAS® programmers.  You can read more about the **sassy** package
-[here](http://sassy.r-sassy.org).
+[here](https://sassy.r-sassy.org).
