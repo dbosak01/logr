@@ -1,5 +1,9 @@
 # logr 1.2.0
 
+* Incorporated tidylog directly into the logr package. Can be turned on
+using the 'autolog' parameter of log_open(), or by setting the global
+option 'logr.autolog'.  
+* Added log_hook() function to allow other packages to call into logr. 
 * Added pkgdown site.
 
 # logr 1.1.1

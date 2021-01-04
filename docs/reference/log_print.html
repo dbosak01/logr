@@ -155,11 +155,13 @@
     <p>The <code>log_print</code> function prints an object to the currently opened log.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>log_print</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>...</span>, console <span class='op'>=</span> <span class='cn'>TRUE</span>, blank_after <span class='op'>=</span> <span class='cn'>TRUE</span>, msg <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
+    <pre class="usage"><span class='fu'>log_print</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>...</span>, console <span class='op'>=</span> <span class='cn'>TRUE</span>, blank_after <span class='op'>=</span> <span class='cn'>TRUE</span>, msg <span class='op'>=</span> <span class='cn'>FALSE</span>, hide_notes <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
 
-<span class='fu'>put</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>...</span>, console <span class='op'>=</span> <span class='cn'>TRUE</span>, blank_after <span class='op'>=</span> <span class='cn'>TRUE</span>, msg <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
+<span class='fu'>put</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>...</span>, console <span class='op'>=</span> <span class='cn'>TRUE</span>, blank_after <span class='op'>=</span> <span class='cn'>TRUE</span>, msg <span class='op'>=</span> <span class='cn'>FALSE</span>, hide_notes <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
 
-<span class='fu'>sep</span><span class='op'>(</span><span class='va'>x</span>, console <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></pre>
+<span class='fu'>sep</span><span class='op'>(</span><span class='va'>x</span>, console <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
+
+<span class='fu'>log_hook</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -188,6 +190,12 @@ are TRUE and FALSE. Default is TRUE.</p></td>
       <td><p>Whether to print the object to the msg log.  This parameter is
 intended to be used internally.  Value values are TRUE and FALSE.  The
 default value is FALSE.</p></td>
+    </tr>
+    <tr>
+      <th>hide_notes</th>
+      <td><p>If notes are on, this parameter gives you the option
+of not printing notes for a particular log entry.  Default is FALSE,
+meaning notes will be displayed.  Used internally.</p></td>
     </tr>
     </table>
 
@@ -218,6 +226,9 @@ is identical.</p>
 except it will print a separator before and after the printed text.  This
 function is intended for documentation purposes, and you can use it
 to help organize your log into sections.</p>
+<p>The <code>log_hook</code> function is for other packages that wish to
+integrate with <strong>logr</strong>.  The function prints to the log only if
+<code>autolog</code> is enabled. It will not print to the console.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p><code><a href='log_open.html'>log_open</a></code> to open the log,
@@ -259,19 +270,19 @@ and <code><a href='log_close.html'>log_close</a></code> to close the log.</p></d
 <span class='co'># View results</span>
 <span class='fu'><a href='https://rdrr.io/r/base/writeLines.html'>writeLines</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/readLines.html'>readLines</a></span><span class='op'>(</span><span class='va'>lf</span><span class='op'>)</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; ========================================================================= 
-#&gt; Log Path: C:/Users/User/AppData/Local/Temp/RtmpK8Vgr0/log/test.log 
+#&gt; Log Path: C:/Users/User/AppData/Local/Temp/Rtmpaw2FCj/log/test.log 
 #&gt; Working Directory: C:/packages/logr/docs/reference 
 #&gt; User Name: User 
 #&gt; R Version: 4.0.3 (2020-10-10) 
 #&gt; Machine: ZB15-5CD00276ZY x86-64 
 #&gt; Operating System: Windows 10 x64 build 18363 
-#&gt; Log Start Time: 2020-12-21 22:00:45 
+#&gt; Log Start Time: 2021-01-04 01:08:49 
 #&gt; ========================================================================= 
 #&gt; 
 #&gt; High Mileage Cars Subset 
 #&gt; 
-#&gt; NOTE: Log Print Time:  2020-12-21 22:00:45 
-#&gt; NOTE: Elapsed Time in seconds: 0.000998020172119141 
+#&gt; NOTE: Log Print Time:  2021-01-04 01:08:49 
+#&gt; NOTE: Elapsed Time in seconds: 0.00199508666992188 
 #&gt; 
 #&gt;                 mpg cyl  disp  hp drat    wt  qsec vs am gear carb
 #&gt; Mazda RX4      21.0   6 160.0 110 3.90 2.620 16.46  0  1    4    4
@@ -291,11 +302,11 @@ and <code><a href='log_close.html'>log_close</a></code> to close the log.</p></d
 #&gt; 
 #&gt; NOTE: Data frame has 14 rows and 11 columns. 
 #&gt; 
-#&gt; NOTE: Log Print Time:  2020-12-21 22:00:45 
-#&gt; NOTE: Elapsed Time in seconds: 0.00800585746765137 
+#&gt; NOTE: Log Print Time:  2021-01-04 01:08:49 
+#&gt; NOTE: Elapsed Time in seconds: 0.00997495651245117 
 #&gt; 
 #&gt; ========================================================================= 
-#&gt; Log End Time: 2020-12-21 22:00:45 
+#&gt; Log End Time: 2021-01-04 01:08:49 
 #&gt; Log Elapsed Time: 0 00:00:00 
 #&gt; ========================================================================= </div></pre>
   </div>

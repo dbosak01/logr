@@ -155,7 +155,7 @@
     <p>A function to initialize the log file.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>log_open</span><span class='op'>(</span>file_name <span class='op'>=</span> <span class='st'>""</span>, logdir <span class='op'>=</span> <span class='cn'>TRUE</span>, show_notes <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>log_open</span><span class='op'>(</span>file_name <span class='op'>=</span> <span class='st'>""</span>, logdir <span class='op'>=</span> <span class='cn'>TRUE</span>, show_notes <span class='op'>=</span> <span class='cn'>TRUE</span>, autolog <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -175,6 +175,16 @@ TRUE and FALSE. The default is TRUE.</p></td>
       <th>show_notes</th>
       <td><p>If true, will write notes to the log.  Valid values are
 TRUE and FALSE. Default is TRUE.</p></td>
+    </tr>
+    <tr>
+      <th>autolog</th>
+      <td><p>Whether to turn on autolog functionality.  Autolog
+automatically logs functions from the dplyr, tidyr, and sassy family of
+packages. To enable autolog, either set this parameter to TRUE or
+set the "logr.autolog" option to TRUE. A FALSE value on this parameter
+will override the global option.  The global option
+will override a NULL on this parameter. Default is that autolog is
+disabled.</p></td>
     </tr>
     </table>
 
@@ -226,6 +236,12 @@ also accepts a TRUE or FALSE value, and determines whether or not to print
 notes in the log.  The global option will override the <code>show_notes</code>
 parameter on the <code>log_open</code> function.
 Example: <code><a href='https://rdrr.io/r/base/options.html'>options("logr.notes" = FALSE)</a></code></p>
+<p>Version v1.2.0 of the <strong>logr</strong> package introduced <strong>autolog</strong>.
+The autolog feature provides automatic logging for <strong>dplyr</strong>,
+<strong>tidyr</strong>, and the <strong>sassy</strong> family of packages.  To use autolog,
+set the <code>autolog</code> parameter to TRUE, or set the global option
+<code>logr.autolog</code> to TRUE.  To maintain backward compatibility with
+prior versions, autolog is disabled by default.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p><code><a href='log_print.html'>log_print</a></code> for printing to the log (and console),
@@ -267,19 +283,19 @@ and <code><a href='log_close.html'>log_close</a></code> to close the log.</p></d
 <span class='co'># View results</span>
 <span class='fu'><a href='https://rdrr.io/r/base/writeLines.html'>writeLines</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/readLines.html'>readLines</a></span><span class='op'>(</span><span class='va'>lf</span><span class='op'>)</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; ========================================================================= 
-#&gt; Log Path: C:/Users/User/AppData/Local/Temp/RtmpK8Vgr0/log/test.log 
+#&gt; Log Path: C:/Users/User/AppData/Local/Temp/Rtmpaw2FCj/log/test.log 
 #&gt; Working Directory: C:/packages/logr/docs/reference 
 #&gt; User Name: User 
 #&gt; R Version: 4.0.3 (2020-10-10) 
 #&gt; Machine: ZB15-5CD00276ZY x86-64 
 #&gt; Operating System: Windows 10 x64 build 18363 
-#&gt; Log Start Time: 2020-12-21 22:00:44 
+#&gt; Log Start Time: 2021-01-04 01:08:48 
 #&gt; ========================================================================= 
 #&gt; 
 #&gt; High Mileage Cars Subset 
 #&gt; 
-#&gt; NOTE: Log Print Time:  2020-12-21 22:00:44 
-#&gt; NOTE: Elapsed Time in seconds: 0.000997066497802734 
+#&gt; NOTE: Log Print Time:  2021-01-04 01:08:48 
+#&gt; NOTE: Elapsed Time in seconds: 0.00299286842346191 
 #&gt; 
 #&gt;                 mpg cyl  disp  hp drat    wt  qsec vs am gear carb
 #&gt; Mazda RX4      21.0   6 160.0 110 3.90 2.620 16.46  0  1    4    4
@@ -299,11 +315,11 @@ and <code><a href='log_close.html'>log_close</a></code> to close the log.</p></d
 #&gt; 
 #&gt; NOTE: Data frame has 14 rows and 11 columns. 
 #&gt; 
-#&gt; NOTE: Log Print Time:  2020-12-21 22:00:44 
-#&gt; NOTE: Elapsed Time in seconds: 0.00700497627258301 
+#&gt; NOTE: Log Print Time:  2021-01-04 01:08:48 
+#&gt; NOTE: Elapsed Time in seconds: 0.0149581432342529 
 #&gt; 
 #&gt; ========================================================================= 
-#&gt; Log End Time: 2020-12-21 22:00:44 
+#&gt; Log End Time: 2021-01-04 01:08:48 
 #&gt; Log Elapsed Time: 0 00:00:00 
 #&gt; ========================================================================= </div></pre>
   </div>

@@ -230,7 +230,6 @@ Log Elapsed Time: 0 00:00:00
 
 ```
 
-Next: [log_open()](log_open.html)
 
 
 

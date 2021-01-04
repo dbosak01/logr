@@ -13,7 +13,7 @@ Description: Contains functions to help create log files.  The
 License: CC0
 Encoding: UTF-8
 LazyData: true
-URL: https://github.com/dbosak01/logr
+URL: https://logr.r-sassy.org
 BugReports: https://github.com/dbosak01/logr/issues
 Depends: R (>= 4.0.0)
 Suggests: knitr, 
