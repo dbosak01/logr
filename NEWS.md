@@ -1,4 +1,4 @@
-# logr 1.2.0
+# logr 1.2.1
 
 * Incorporated tidylog directly into the logr package. Can be turned on
 using the 'autolog' parameter of log_open(), or by setting the global

@@ -38,7 +38,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">logr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.2.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.2.1</span>
       </span>
     </div>
 
@@ -127,7 +127,7 @@
 <p>The <code><a href="../reference/log_open.html">log_open()</a></code> function initiates the log. The <code><a href="../reference/log_print.html">log_print()</a></code> function prints an object to the log. The <code><a href="../reference/log_close.html">log_close()</a></code> function closes the log. In normal situations, a user would place the call to <code><a href="../reference/log_open.html">log_open()</a></code> at the top of the program, call <code><a href="../reference/log_print.html">log_print()</a></code> as needed in the program body, and call <code><a href="../reference/log_close.html">log_close()</a></code> once at the end of the program.</p>
 <p>A sample program is as follows:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/dbosak01/logr">logr</a></span><span class="op">)</span>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://logr.r-sassy.org">logr</a></span><span class="op">)</span>
 
 <span class="co"># Create temp file location</span>
 <span class="va">tmp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/tempfile.html">tempdir</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">"test.log"</span><span class="op">)</span>
