@@ -45,6 +45,8 @@
 
 
 
+  
+  <script src="../extra.js"></script>
 
 <meta property="og:title" content="Changelog" />
 <meta property="og:image" content="https://logr.r-sassy.org/logo.png" />
@@ -68,7 +70,7 @@
   <body data-spy="scroll" data-target="#toc">
     <div class="container template-news">
       <header>
-      <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+      <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false">
@@ -85,6 +87,9 @@
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
+        
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="../index.html">
     <span class="fas fa-home fa-lg"></span>
@@ -124,9 +129,7 @@
 <li>
   <a href="../news/index.html">Changelog</a>
 </li>
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-        <li>
+<li>
   <a href="https://github.com/dbosak01/logr/">
     <span class="fab fa-github fa-lg"></span>
      
@@ -151,7 +154,7 @@
 
     <div id="logr-121" class="section level1">
 <h1 class="page-header" data-toc-text="1.2.1">
-<a href="#logr-121" class="anchor"></a>logr 1.2.1<small> Unreleased </small>
+<a href="#logr-121" class="anchor"></a>logr 1.2.1<small> 2021-01-06 </small>
 </h1>
 <ul>
 <li>Incorporated tidylog directly into the logr package. Can be turned on using the ‘autolog’ parameter of log_open(), or by setting the global option ‘logr.autolog’.<br>
