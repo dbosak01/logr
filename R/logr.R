@@ -428,7 +428,9 @@ log_print <- function(x, ...,
           } else {
             
             # Print the object
-            print(x, ...)
+            withr::with_options(c("crayon.colors" = 1), { 
+              print(x, ..., )
+            })
             
             if (blank_after == TRUE)
               cat("\n")
@@ -439,7 +441,9 @@ log_print <- function(x, ...,
         } else {
           
           # Print the object
-          print(x, ...)
+          withr::with_options(c("crayon.colors" = 1), { 
+            print(x, ...)
+          })
           
           if (blank_after == TRUE)
             cat("\n")

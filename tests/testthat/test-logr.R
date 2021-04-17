@@ -190,6 +190,33 @@ test_that("tidylog integration works as expected when autolog is on.", {
 })
 
 
+test_that("Logging of tibbles works as expected.", {
+  
+  library(dplyr)
+
+  tmp <- tempdir()
+  
+  tbl <- as_tibble(mtcars)
+  
+  
+  lf <- log_open(file.path(tmp, "test.log"), autolog = FALSE)
+  
+  
+  put(tbl)
+      
+  mp <- e$msg_path
+  log_close()
+  
+  
+  ret <- file.exists(lf)
+  ret2 <- file.exists(mp)
+  
+  expect_equal(ret, TRUE)
+  expect_equal(ret2, FALSE)
+  
+  
+})
+
 
 # Not sure how to generate an error and not cause the test to fail.
 # Commented out for now.
