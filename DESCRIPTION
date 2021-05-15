@@ -1,6 +1,6 @@
 Package: logr
 Title: Creates Log Files
-Version: 1.2.2
+Version: 1.2.3
 Authors@R: 
     person(given = "David",
            family = "Bosak",
@@ -12,7 +12,6 @@ Description: Contains functions to help create log files.  The
     without interfering in other write operations.
 License: CC0
 Encoding: UTF-8
-LazyData: true
 URL: https://logr.r-sassy.org
 BugReports: https://github.com/dbosak01/logr/issues
 Depends: R (>= 4.0.0)
