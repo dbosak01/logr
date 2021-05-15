@@ -1,3 +1,7 @@
+# logr 1.2.2
+
+* Fixed printing of crayon color codes into log.
+
 # logr 1.2.1
 
 * Incorporated tidylog directly into the logr package. Can be turned on
