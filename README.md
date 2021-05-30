@@ -5,6 +5,7 @@
 [![logr downloads](https://cranlogs.r-pkg.org/badges/grand-total/logr)](https://cran.r-project.org/package=logr)
 [![Travis build status](https://travis-ci.com/dbosak01/logr.svg?branch=master)](https://travis-ci.com/dbosak01/logr)
 
+[![R-CMD-check](https://github.com/dbosak01/logr/workflows/R-CMD-check/badge.svg)](https://github.com/dbosak01/logr/actions)
 <!-- badges: end -->
 
 # Introduction to **logr**

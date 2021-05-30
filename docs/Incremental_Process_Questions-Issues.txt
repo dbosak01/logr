@@ -1,0 +1,10 @@
+
+
+1) Ask CSS about change timestamps.  Can we get it on the extract?
+
+2) Create date after date of previous extract, or change date after previous extract.
+
+invoice last updated date
+approval action date
+
+use invoice_id to update historical data
