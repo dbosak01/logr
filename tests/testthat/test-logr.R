@@ -211,6 +211,9 @@ test_that("Logging of tibbles works as expected.", {
   ret <- file.exists(lf)
   ret2 <- file.exists(mp)
   
+  lns <- readLines(lf, encoding = "UTF-8")
+  print(lns)
+  
   expect_equal(ret, TRUE)
   expect_equal(ret2, FALSE)
   
