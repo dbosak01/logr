@@ -269,29 +269,67 @@ test_that("log_status() function works as expected", {
   
 })
 
-# 
-# 
-# test_that("Logging of Unicode characters prints correctly.", {
-#   
-#   tmp <- tempdir()
-#   
-#   lf <- log_open(file.path(tmp, "test.log"), autolog = FALSE, notes = FALSE)
-#   
-#   
-#   log_print("Here are some special chars â ã Ï Ó µ ¿ ‰")
-#   
-#   
-#   log_print("Here is some Russian Пояснения")
-#   
-#   log_print("Here is some Italian Attività")
-#   
-#   log_print("Here is some Chinese 你好")
-#   
-#   
-#   log_close()
-#   
-# })
-# 
+
+
+test_that("Logging of Unicode characters prints correctly.", {
+
+  tmp <- tempdir()
+
+  lf <- log_open(file.path(tmp, "test.log"), autolog = FALSE, 
+                 show_notes = FALSE)
+
+
+  log_print("Here are some special chars â ã Ï Ó µ ¿ ‰")
+
+
+  log_print("Here is some Russian Пояснения")
+
+  log_print("Here is some Italian Attività")
+
+  log_print("Here is some Chinese 你好")
+
+
+  log_close()
+  
+  lns <- readLines(lf, encoding = "UTF-8")
+  print(lns)
+  
+  expect_equal(file.exists(lf), TRUE)
+})
+
+
+
+
+
+test_that("Logging of Unicode dataframe prints correctly.", {
+  
+  tmp <- tempdir()
+  
+  lf <- log_open(file.path(tmp, "test.log"), autolog = FALSE, 
+                 show_notes = FALSE)
+  
+  
+  log_print("Here are some special chars â ã Ï Ó µ ¿ ‰")
+  
+  log_print("Here is a data frame with special characters:")
+  
+  df1 <- data.frame(E = c("â", "ã", "Ï", "Ó", "µ", "¿"),
+                    R = c("П", "о", "я", "с", "н", "е"),
+                    I = c("t", "i", "v", "i", "t", "à"), 
+                    C = c("你", "好", "再", "见", "家", "园"))
+  
+  log_print(df1)
+  
+  log_close()
+  
+  lns <- readLines(lf, encoding = "UTF-8")
+  print(lns)
+  
+  expect_equal(file.exists(lf), TRUE)
+  
+})
+
+
 # # Works
 # test_that("Special characters work properly.", {
 #   

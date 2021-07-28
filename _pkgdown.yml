@@ -17,7 +17,8 @@ reference:
   - log_open
   - log_print
   - log_close
-  
+  - log_path
+  - log_status
 navbar:
   type: inverse
   structure:

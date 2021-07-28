@@ -13,7 +13,13 @@
     <loc>https://logr.r-sassy.org/reference/log_open.html</loc>
   </url>
   <url>
+    <loc>https://logr.r-sassy.org/reference/log_path.html</loc>
+  </url>
+  <url>
     <loc>https://logr.r-sassy.org/reference/log_print.html</loc>
+  </url>
+  <url>
+    <loc>https://logr.r-sassy.org/reference/log_status.html</loc>
   </url>
   <url>
     <loc>https://logr.r-sassy.org/articles/logr-features.html</loc>

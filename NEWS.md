@@ -1,3 +1,9 @@
+# logr 1.2.5
+
+* Added `log_path()` function to return the path to the log.
+* Added `log_status` function to return the status of the log.
+* Added support for Unicode characters on Windows.
+
 # logr 1.2.4
 
 * Added github action checks for 4 previous versions of R.

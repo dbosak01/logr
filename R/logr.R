@@ -40,6 +40,7 @@ NULL
 # Set up environment
 e <- new.env(parent = emptyenv())
 e$log_status <- "closed"
+e$os <- Sys.info()[["sysname"]]
 
 # Log Separator
 separator <- 
@@ -155,6 +156,7 @@ separator <-
 #' writeLines(readLines(lf))
 log_open <- function(file_name = "", logdir = TRUE, show_notes = TRUE,
                      autolog = NULL) {
+
   
   if (is.null(options()[["logr.on"]]) == FALSE) {
     
@@ -411,77 +413,120 @@ log_print <- function(x, ...,
     if (msg == TRUE)
       file_path <- e$msg_path
     
+    if (e$os == "Windows") {
+      
+      print_windows(x, file_path, blank_after, hide_notes, ...)
+      
+      
+    } else {
+      
+      print_other(x, file_path, blank_after, hide_notes, ...)
+    }
+    
+    
+  } else if (e$log_status == "off") {
+    print(x, ...) 
+  }  else {
+    print(x, ...)
+    message("Log is not open.")
+  }
+  
+  invisible(x)
+}
+
+
+
+
+log_print_back <- function(x, ..., 
+                      console = TRUE, 
+                      blank_after = TRUE, 
+                      msg = FALSE, 
+                      hide_notes = FALSE) {
+  
+  update_status()
+  
+  if (e$log_status == "open") {
+    
+    # Print to console, if requested
+    if (console == TRUE)
+      print(x, ...)
+    
+    # Print to msg_path, if requested
+    file_path <- e$log_path
+    if (msg == TRUE)
+      file_path <- e$msg_path
+    
     # Print to log or msg file
     tryCatch( {
       
-        f <- file(file_path, open = "a", encoding = "UTF-8")
-        # Use sink() function so print() will work as desired
-        sink(f, append = TRUE)
-        if (all(class(x) == "character")) {
-          if (length(x) == 1 && nchar(x) < 100) {
+      f <- file(file_path, open = "a", encoding = "UTF-8")
+      # Use sink() function so print() will work as desired
+      sink(f, append = TRUE)
+      if (all(class(x) == "character")) {
+        if (length(x) == 1 && nchar(x) < 100) {
           
-            # Print the string
-            cat(x, "\n")
-            
-            # Add blank after if requested
-            if (blank_after == TRUE)
-              cat("\n")
-          } else {
-            
-            # Print the object
-            withr::with_options(c("crayon.colors" = 1), { 
-              print(x, ..., )
-            })
-            
-            if (blank_after == TRUE)
-              cat("\n")
-            
-          }
+          # Print the string
+          cat(x, "\n")
           
-          
+          # Add blank after if requested
+          if (blank_after == TRUE)
+            cat("\n")
         } else {
           
           # Print the object
           withr::with_options(c("crayon.colors" = 1), { 
-            print(x, ...)
+            print(x, ..., )
           })
           
           if (blank_after == TRUE)
             cat("\n")
-        }
-      },
-      error = function(cond) {
-        
-          print("Error: Object cannot be printed to log\n")
-        },
-      finally = {
-        
-        # Print time stamps on normal log_print
-        if (hide_notes == FALSE) {
-          tc <- Sys.time()
           
-          if (e$log_show_notes == TRUE) {
-            
-            # Print data frame row and column counts
-            if (any(class(x) == "data.frame")) {
-              cat(paste("NOTE: Data frame has", nrow(x), "rows and", ncol(x), 
-                        "columns."), "\n")
-              cat("\n")
-            }
-            
-            # Print log timestamps
-            cat(paste("NOTE: Log Print Time: ", tc), "\n")
-            cat(paste("NOTE: Elapsed Time in seconds:", get_time_diff(tc)), "\n")
+        }
+        
+        
+      } else {
+        
+        # Print the object
+        withr::with_options(c("crayon.colors" = 1), { 
+          print(x, ...)
+        })
+        
+        if (blank_after == TRUE)
+          cat("\n")
+      }
+    },
+    error = function(cond) {
+      
+      print("Error: Object cannot be printed to log\n")
+    },
+    finally = {
+      
+      # Print time stamps on normal log_print
+      if (hide_notes == FALSE) {
+        tc <- Sys.time()
+        
+        if (e$log_show_notes == TRUE) {
+          
+          # Print data frame row and column counts
+          if (any(class(x) == "data.frame")) {
+            cat(paste("NOTE: Data frame has", nrow(x), "rows and", ncol(x), 
+                      "columns."), "\n")
             cat("\n")
           }
+          
+          # Print log timestamps
+          cat(paste("NOTE: Log Print Time: ", tc), "\n")
+          cat(paste("NOTE: Elapsed Time in seconds:", get_time_diff(tc)), "\n")
+          cat("\n")
         }
-        
-        # Release sink no matter what
-        sink()
-        
-        # Close file no matter what
-        close(f)
       }
+      
+      # Release sink no matter what
+      sink()
+      
+      # Close file no matter what
+      close(f)
+    }
     )
   } else if (e$log_status == "off") {
     print(x, ...) 
@@ -492,6 +537,7 @@ log_print <- function(x, ...,
   
   invisible(x)
 }
+
 
 #' @aliases log_print
 #' @export
@@ -651,6 +697,20 @@ log_close <- function() {
 #' opened log.  This function may be useful when you want to manipulate 
 #' the log in some way, and need the path.  The function takes no parameters.
 #' @return The full path to the currently opened log, or NULL if no log is open.
+#' @examples 
+#' # Create temp file location
+#' tmp <- file.path(tempdir(), "test.log")
+#' 
+#' # Open log
+#' log_open(tmp)
+#' 
+#' # Get path
+#' lf <- log_path()
+#' 
+#' # Close log
+#' log_close()
+#' 
+#' lf
 #' @export
 log_path <- function() {
   
@@ -661,7 +721,7 @@ log_path <- function() {
 }
 
 #' @title Get the status of the log
-#' @description The \code{log_status} function gets the status of 
+#' @description The \code{log_status} function gets the status of the 
 #' log.  Possible status values are 'on', 'off', 'open', or 'closed'.  
 #' The function takes no parameters.
 #' @return The status of the log as a character string.

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Print an object to the log — log_print • logr</title>
+<title>Get the status of the log — log_status • logr</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -48,8 +48,10 @@
   
   <script src="../extra.js"></script>
 
-<meta property="og:title" content="Print an object to the log — log_print" />
-<meta property="og:description" content="The log_print function prints an object to the currently opened log." />
+<meta property="og:title" content="Get the status of the log — log_status" />
+<meta property="og:description" content="The log_status function gets the status of
+log.  Possible status values are 'on', 'off', 'open', or 'closed'.
+The function takes no parameters." />
 <meta property="og:image" content="https://logr.r-sassy.org/logo.png" />
 
 
@@ -149,115 +151,41 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Print an object to the log</h1>
+    <h1>Get the status of the log</h1>
     <small class="dont-index">Source: <a href='https://github.com/dbosak01/logr/blob/master/R/logr.R'><code>R/logr.R</code></a></small>
-    <div class="hidden name"><code>log_print.Rd</code></div>
+    <div class="hidden name"><code>log_status.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>The <code>log_print</code> function prints an object to the currently opened log.</p>
+    <p>The <code>log_status</code> function gets the status of
+log.  Possible status values are 'on', 'off', 'open', or 'closed'.
+The function takes no parameters.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>log_print</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>...</span>, console <span class='op'>=</span> <span class='cn'>TRUE</span>, blank_after <span class='op'>=</span> <span class='cn'>TRUE</span>, msg <span class='op'>=</span> <span class='cn'>FALSE</span>, hide_notes <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
+    <pre class="usage"><span class='fu'>log_status</span><span class='op'>(</span><span class='op'>)</span></pre>
 
-<span class='fu'>put</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>...</span>, console <span class='op'>=</span> <span class='cn'>TRUE</span>, blank_after <span class='op'>=</span> <span class='cn'>TRUE</span>, msg <span class='op'>=</span> <span class='cn'>FALSE</span>, hide_notes <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
-
-<span class='fu'>sep</span><span class='op'>(</span><span class='va'>x</span>, console <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
-
-<span class='fu'>log_hook</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span></pre>
-
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
-    <table class="ref-arguments">
-    <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>x</th>
-      <td><p>The object to print.</p></td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td><p>Any parameters to pass to the print function.</p></td>
-    </tr>
-    <tr>
-      <th>console</th>
-      <td><p>Whether or not to print to the console.  Valid values are
-TRUE and FALSE.  Default is TRUE.</p></td>
-    </tr>
-    <tr>
-      <th>blank_after</th>
-      <td><p>Whether or not to print a blank line following the
-printed object.  The blank line helps readability of the log.  Valid values
-are TRUE and FALSE. Default is TRUE.</p></td>
-    </tr>
-    <tr>
-      <th>msg</th>
-      <td><p>Whether to print the object to the msg log.  This parameter is
-intended to be used internally.  Value values are TRUE and FALSE.  The
-default value is FALSE.</p></td>
-    </tr>
-    <tr>
-      <th>hide_notes</th>
-      <td><p>If notes are on, this parameter gives you the option
-of not printing notes for a particular log entry.  Default is FALSE,
-meaning notes will be displayed.  Used internally.</p></td>
-    </tr>
-    </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>The object, invisibly</p>
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
-
-    <p>The log is initialized with <code>log_open</code>.  Once the log is open, objects
-like variables and data frames can be printed to the log to monitor execution
-of your script.  If working interactively, the function will print both to
-the log and to the console.  The <code>log_print</code> function is useful when
-writing and debugging batch scripts, and in situations where some record
-of a scripts' execution is required.</p>
-<p>If requested in the <code>log_open</code> function, <code>log_print</code>
-will print a note after each call.  The note will contain a date-time stamp
-and elapsed time since the last call to <code>log_print</code>.  When printing
-a data frame, the <code>log_print</code> function will also print the number
-and rows and column in the data frame.  These counts may also be useful
-in debugging.</p>
-<p>Notes may be turned off either by setting the <code>show_notes</code> parameter
-on <code>log_open</code> to FALSE, or by setting the global option "logr.notes"
-to FALSE.</p>
-<p>The <code>put</code> function is a shorthand alias for <code>log_print</code>. You can
-use <code>put</code> anywhere you would use <code>log_print</code>.  The functionality
-is identical.</p>
-<p>The <code>sep</code> function is also a shorthand alias for <code>log_print</code>,
-except it will print a separator before and after the printed text.  This
-function is intended for documentation purposes, and you can use it
-to help organize your log into sections.</p>
-<p>The <code>log_hook</code> function is for other packages that wish to
-integrate with <strong>logr</strong>.  The function prints to the log only if
-<code>autolog</code> is enabled. It will not print to the console.</p>
-    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
-
-    <div class='dont-index'><p><code><a href='log_open.html'>log_open</a></code> to open the log,
-and <code><a href='log_close.html'>log_close</a></code> to close the log.</p></div>
+    <p>The status of the log as a character string.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><span class='co'># Create temp file location</span>
+    <pre class="examples"><span class='co'># Check status before the log is opened</span>
+<span class='fu'>log_status</span><span class='op'>(</span><span class='op'>)</span>
+<span class='co'># [1] "closed"</span>
+
+<span class='co'># Create temp file location</span>
 <span class='va'>tmp</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempdir</a></span><span class='op'>(</span><span class='op'>)</span>, <span class='st'>"test.log"</span><span class='op'>)</span>
 
 <span class='co'># Open log</span>
 <span class='va'>lf</span> <span class='op'>&lt;-</span> <span class='fu'><a href='log_open.html'>log_open</a></span><span class='op'>(</span><span class='va'>tmp</span><span class='op'>)</span>
 
-<span class='co'># Send message to log</span>
-<span class='fu'>log_print</span><span class='op'>(</span><span class='st'>"High Mileage Cars Subset"</span><span class='op'>)</span>
-
-<span class='co'># Perform operations</span>
-<span class='va'>hmc</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/subset.html'>subset</a></span><span class='op'>(</span><span class='va'>mtcars</span>, <span class='va'>mtcars</span><span class='op'>$</span><span class='va'>mpg</span> <span class='op'>&gt;</span> <span class='fl'>20</span><span class='op'>)</span>
-
-<span class='co'># Print data to log</span>
-<span class='fu'>log_print</span><span class='op'>(</span><span class='va'>hmc</span><span class='op'>)</span>
+<span class='co'># Check status after log is opened</span>
+<span class='fu'>log_status</span><span class='op'>(</span><span class='op'>)</span>
+<span class='co'># [1] "open"</span>
 
 <span class='co'># Close log</span>
 <span class='fu'><a href='log_close.html'>log_close</a></span><span class='op'>(</span><span class='op'>)</span>
-
-<span class='co'># View results</span>
-<span class='fu'><a href='https://rdrr.io/r/base/writeLines.html'>writeLines</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/readLines.html'>readLines</a></span><span class='op'>(</span><span class='va'>lf</span><span class='op'>)</span><span class='op'>)</span>
 </pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
