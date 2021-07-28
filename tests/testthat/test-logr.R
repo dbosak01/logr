@@ -273,6 +273,8 @@ test_that("log_status() function works as expected", {
 
 test_that("Logging of Unicode characters prints correctly.", {
 
+  print("First just test that anything works: 你好")
+  
   tmp <- tempdir()
 
   lf <- log_open(file.path(tmp, "test.log"), autolog = FALSE, 
