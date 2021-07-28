@@ -414,8 +414,9 @@ log_print <- function(x, ...,
     # Print to log or msg file
     tryCatch( {
       
+        f <- file(file_path, open = "a", encoding = "UTF-8")
         # Use sink() function so print() will work as desired
-        sink(file_path, append = TRUE)
+        sink(f, append = TRUE)
         if (all(class(x) == "character")) {
           if (length(x) == 1 && nchar(x) < 100) {
           
@@ -477,6 +478,9 @@ log_print <- function(x, ...,
         
         # Release sink no matter what
         sink()
+        
+        # Close file no matter what
+        close(f)
       }
     )
   } else if (e$log_status == "off") {
@@ -639,6 +643,53 @@ log_close <- function() {
     message("Log is not open.")
 
   }
+  
+}
+
+#' @title Get the path of the current log
+#' @description The \code{log_path} function gets the path to the currently
+#' opened log.  This function may be useful when you want to manipulate 
+#' the log in some way, and need the path.  The function takes no parameters.
+#' @return The full path to the currently opened log, or NULL if no log is open.
+#' @export
+log_path <- function() {
+  
+  ret <- e$log_path
+  
+  return(ret)
+  
+}
+
+#' @title Get the status of the log
+#' @description The \code{log_status} function gets the status of 
+#' log.  Possible status values are 'on', 'off', 'open', or 'closed'.  
+#' The function takes no parameters.
+#' @return The status of the log as a character string.
+#' @examples 
+#' # Check status before the log is opened
+#' log_status()
+#' # [1] "closed"
+#' 
+#' # Create temp file location
+#' tmp <- file.path(tempdir(), "test.log")
+#' 
+#' # Open log
+#' lf <- log_open(tmp)
+#' 
+#' # Check status after log is opened
+#' log_status()
+#' # [1] "open"
+#' 
+#' # Close log
+#' log_close()
+#' @export
+log_status <- function() {
+  
+  update_status()
+  
+  ret <- e$log_status
+  
+  return(ret)
   
 }
 

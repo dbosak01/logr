@@ -1,5 +1,10 @@
 context("logr tests")
 
+base_path <- "c:\\packages\\logr\\tests\\testthat"
+
+base_path <- tempdir()
+
+
 test_that("the log_open function handles invalid parameters.", {
   
   tmp <- tempdir()
@@ -220,6 +225,255 @@ test_that("Logging of tibbles works as expected.", {
   
 })
 
+test_that("log_path() function works as expected", {
+  
+  tmp <- file.path(tempdir(), "test.log")
+  
+  lf <- log_open(tmp)
+  
+  lp <- log_path()
+  
+  log_close()
+  
+  
+  expect_equal(lp, lf)
+  expect_equal(is.null(log_path()), TRUE)
+  
+})
+
+
+
+test_that("log_status() function works as expected", {
+  
+  
+  options("logr.on" = FALSE)
+  
+  expect_equal(log_status(), "off")
+  
+  options("logr.on" = TRUE)
+  
+  expect_equal(log_status(), "on")
+  
+  
+  tmp <- file.path(tempdir(), "test.log")
+  
+  lf <- log_open(tmp)
+  
+  expect_equal(log_status(), "open")
+  
+
+  log_close()
+  
+  expect_equal(log_status(), "closed")
+  
+  
+})
+
+# 
+# 
+# test_that("Logging of Unicode characters prints correctly.", {
+#   
+#   tmp <- tempdir()
+#   
+#   lf <- log_open(file.path(tmp, "test.log"), autolog = FALSE, notes = FALSE)
+#   
+#   
+#   log_print("Here are some special chars â ã Ï Ó µ ¿ ‰")
+#   
+#   
+#   log_print("Here is some Russian Пояснения")
+#   
+#   log_print("Here is some Italian Attività")
+#   
+#   log_print("Here is some Chinese 你好")
+#   
+#   
+#   log_close()
+#   
+# })
+# 
+# # Works
+# test_that("Special characters work properly.", {
+#   
+#   file_path <- file.path(base_path, "log\\test1.log")
+#   
+#   v1 <- c("Here are some special characters â ã Ï Ó µ ¿ ‰", 
+#           "Here is some Russian Пояснения",
+#           "Here is some Italian Attività",
+#           "Here is some Chinese 你好")
+#   
+#   f <- file(file_path, open = "w", encoding = "native.enc")
+# 
+#   
+#   writeLines(enc2utf8(v1), con = f, useBytes = TRUE)
+#   
+#   
+#   # sink(f, append = TRUE)
+#   # 
+#   # print(enc2utf8(" â ã Ï Ó µ ¿ ‰"))
+#   # 
+#   # sink()
+#   
+#   close(f)
+#   
+#   
+# })
+# 
+# # Works, but no special characters
+# test_that("Special characters work properly.", {
+#   
+#   file_path <- file.path(base_path, "log\\test2.log")
+#   
+#   
+#   res <- utils::capture.output(print(mtcars), file = NULL)
+#   
+#   
+#   f <- file(file_path, open = "w", encoding = "native.enc")
+#   
+#   
+#   writeLines(enc2utf8(res), con = f, useBytes = TRUE)
+#   
+#   
+#   # sink(f, append = TRUE)
+#   # 
+#   # print(enc2utf8(" â ã Ï Ó µ ¿ ‰"))
+#   # 
+#   # sink()
+#   
+#   close(f)
+#   
+#   
+# })
+# 
+# 
+# # Doesn't work 
+# test_that("Special characters work properly.", {
+#   
+#   file_path <- file.path(base_path, "log\\test3.log")
+#   
+#   
+#   v1 <- c("Here are some special characters â ã Ï Ó µ ¿ ‰", 
+#           "Here is some Russian Пояснения",
+#           "Here is some Italian Attività",
+#           "Here is some Chinese 你好")
+#   
+#   v2 <- enc2utf8(v1)
+#   
+#   res <- utils::capture.output(print(v2), file = NULL)
+#   
+#   
+#   f <- file(file_path, open = "w", encoding = "native.enc")
+#   
+#   
+#   writeLines(res, con = f, useBytes = TRUE)
+#   
+#   
+#   # sink(f, append = TRUE)
+#   # 
+#   # print(enc2utf8(" â ã Ï Ó µ ¿ ‰"))
+#   # 
+#   # sink()
+#   
+#   close(f)
+#   
+#   
+# })
+# 
+# 
+# 
+# 
+# test_that("Special characters work properly with sink.", {
+#   
+#   file_path <- file.path(base_path, "log\\test4.log")
+#   
+#   v1 <- c("Here are some special characters â ã Ï Ó µ ¿ ‰", 
+#           "Here is some Russian Пояснения",
+#           "Here is some Italian Attività",
+#           "Here is some Chinese 你好")
+#   
+#   v2 <- enc2utf8(v1)
+#   
+#   f <- file(file_path, open = "w", encoding = "UTF-8")
+#   
+#   
+#   sink(f)
+#   
+#   
+#   print(v2)
+#   
+#   # sink(f, append = TRUE)
+#   # 
+#   # print(enc2utf8(" â ã Ï Ó µ ¿ ‰"))
+#   # 
+#   # sink()
+#   
+#   sink()
+#   
+#   close(f)
+#   
+#   
+# })
+# 
+# test_that("Special characters work as expected.", {
+#   
+#   file_path <- file.path(base_path, "log\\test5.log")
+#   
+#   
+#   v1 <- c("Here are some special characters â ã Ï Ó µ ¿ ‰", 
+#           "Here is some Russian Пояснения",
+#           "Here is some Italian Attività",
+#           "Here is some Chinese 你好")
+#   
+#   df1 <- data.frame(E = c("â", "ã", "Ï", "Ó", "µ", "¿"),
+#                     R = c("П", "о", "я", "с", "н", "е"),
+#                     I = c("t", "i", "v", "i", "t", "à"), 
+#                     C = c("你", "好", "再", "见", "家", "园"))
+#                     
+#   res1 <- enc2utf8(v1)
+#   
+#   as.character(df1)
+#   
+#   
+#   res2 <- utils::capture.output(cat(df1[1, "C"]), file = NULL)
+#   
+#   res2 <- encodeString(df1[1, "C"])
+#   
+#   res3 <- charToRaw(res2)
+#   
+#   f <- file(file_path, open = "wt", encoding = "native.enc")
+#   
+#   
+#   writeLines(res1, con = f, useBytes = TRUE)
+#   writeLines(res2, con = f, useBytes = TRUE)
+#   writeLines(res3, con = f, useBytes = TRUE)
+#   
+#   
+#   
+#   close(f)
+#   
+#   con <- file(file_path, open = "wt", encoding = "native.enc")
+#   
+#  # con <- rawConnection(file_path, open = "w")
+#   sink(con)
+#   
+#   # cat(res1)
+#   #res2
+#   print.default(res2)
+#   #cat(res3)
+#   # cat(res1)
+#   # cat(res2)
+#   sink()
+#   close(con)
+# 
+#   
+#   sm <- Sys.getlocale()
+#   
+#   Sys.setlocale(category = "LC_ALL", locale = "UTF-8")
+#   
+#   l10n_info()
+#   
+#   Sys.getlocale()
+# })
 
 # Not sure how to generate an error and not cause the test to fail.
 # Commented out for now.

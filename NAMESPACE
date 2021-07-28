@@ -3,6 +3,8 @@
 export(log_close)
 export(log_hook)
 export(log_open)
+export(log_path)
 export(log_print)
+export(log_status)
 export(put)
 export(sep)
