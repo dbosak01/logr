@@ -63,13 +63,13 @@ print_windows <- function(x, file_path, blank_after, hide_notes, ...) {
         # Print data frame row and column counts
         if (any(class(x) == "data.frame")) {
           writeLines(paste("NOTE: Data frame has", nrow(x), "rows and", ncol(x), 
-                    "columns.\n"), con = f, useBytes = TRUE)
-          writeLines("\n", con = f, useBytes = TRUE)
+                    "columns."), con = f, useBytes = TRUE)
+          writeLines("", con = f, useBytes = TRUE)
         }
         
         # Print log timestamps
-        writeLines(paste("NOTE: Log Print Time: ", tc, "\n"), con = f, useBytes = TRUE)
-        writeLines(paste("NOTE: Elapsed Time in seconds:", get_time_diff(tc), "\n"), 
+        writeLines(paste("NOTE: Log Print Time: ", tc), con = f, useBytes = TRUE)
+        writeLines(paste("NOTE: Elapsed Time in seconds:", get_time_diff(tc)), 
                    con = f, useBytes = TRUE)
         writeLines("", con = f, useBytes = TRUE)
       }

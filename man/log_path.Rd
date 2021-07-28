@@ -14,3 +14,18 @@ The \code{log_path} function gets the path to the currently
 opened log.  This function may be useful when you want to manipulate
 the log in some way, and need the path.  The function takes no parameters.
 }
+\examples{
+# Create temp file location
+tmp <- file.path(tempdir(), "test.log")
+
+# Open log
+log_open(tmp)
+
+# Get path
+lf <- log_path()
+
+# Close log
+log_close()
+
+lf
+}

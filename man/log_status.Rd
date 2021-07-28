@@ -10,7 +10,7 @@ log_status()
 The status of the log as a character string.
 }
 \description{
-The \code{log_status} function gets the status of
+The \code{log_status} function gets the status of the
 log.  Possible status values are 'on', 'off', 'open', or 'closed'.
 The function takes no parameters.
 }

@@ -169,6 +169,21 @@ the log in some way, and need the path.  The function takes no parameters.</p>
 
     <p>The full path to the currently opened log, or NULL if no log is open.</p>
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><span class='co'># Create temp file location</span>
+<span class='va'>tmp</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempdir</a></span><span class='op'>(</span><span class='op'>)</span>, <span class='st'>"test.log"</span><span class='op'>)</span>
+
+<span class='co'># Open log</span>
+<span class='fu'><a href='log_open.html'>log_open</a></span><span class='op'>(</span><span class='va'>tmp</span><span class='op'>)</span>
+
+<span class='co'># Get path</span>
+<span class='va'>lf</span> <span class='op'>&lt;-</span> <span class='fu'>log_path</span><span class='op'>(</span><span class='op'>)</span>
+
+<span class='co'># Close log</span>
+<span class='fu'><a href='log_close.html'>log_close</a></span><span class='op'>(</span><span class='op'>)</span>
+
+<span class='va'>lf</span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
