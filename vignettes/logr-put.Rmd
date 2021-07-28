@@ -20,7 +20,7 @@ and easier to type.
 
 The `sep()` function is a slight variant of `log_print()`
 that prints separators above and below the message text.  It is useful for 
-creating sections in your log.  Breaking your log into sections make it easier
+creating sections in your log.  Breaking your log into sections makes it easier
 to read and understand.
 
 Here is example showing these aliases at work:
