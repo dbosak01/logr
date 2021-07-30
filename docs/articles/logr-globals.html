@@ -124,6 +124,13 @@
 
 <span class="co"># Turn off notes</span>
 <span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span><span class="op">(</span><span class="st">"logr.notes"</span> <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
+<p>There is also a global option to turn on the <strong>autolog</strong> feature. Autolog will automatically print logging entries for many <strong>dplyr</strong> and <strong>tidyr</strong> functions. This option can greatly reduce the number of <code><a href="../reference/log_print.html">log_print()</a></code> or <code><a href="../reference/log_print.html">put()</a></code> statements needed to obtain a complete log. The autolog feature can be turned on or off by a parameter on the <code><a href="../reference/log_open.html">log_open()</a></code> statement, or by the “logr.autolog” global option, as follows:</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Turn autolog on</span>
+<span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span><span class="op">(</span><span class="st">"logr.autolog"</span> <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
+
+<span class="co"># Turn autolog off</span>
+<span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span><span class="op">(</span><span class="st">"logr.autolog"</span> <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
 <p>Next: <a href="logr-put.html">Aliases for log_print()</a></p>
   </div>
 

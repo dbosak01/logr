@@ -32,4 +32,23 @@ options("logr.on" = TRUE, "logr.notes" = TRUE)
 options("logr.notes" = FALSE)
 ```
 
+There is also a global option to turn on the **autolog** feature.  Autolog
+will automatically print logging entries for many **dplyr** and **tidyr**
+functions.  This option can greatly reduce the number of `log_print()` or
+`put()` statements needed to obtain a complete log. The autolog feature 
+can be turned on or off
+by a parameter on the `log_open()` statement, or by the "logr.autolog"
+global option, as follows:
+
+```{r eval=FALSE, echo=TRUE}
+# Turn autolog on
+options("logr.autolog" = TRUE)
+
+# Turn autolog off
+options("logr.autolog" = FALSE)
+
+```
+
+
+
 Next: [Aliases for log_print()](logr-put.html)

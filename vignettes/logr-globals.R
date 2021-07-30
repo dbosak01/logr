@@ -14,3 +14,11 @@ knitr::opts_chunk$set(
 #  # Turn off notes
 #  options("logr.notes" = FALSE)
 
+## ----eval=FALSE, echo=TRUE----------------------------------------------------
+#  # Turn autolog on
+#  options("logr.autolog" = TRUE)
+#  
+#  # Turn autolog off
+#  options("logr.autolog" = FALSE)
+#  
+
