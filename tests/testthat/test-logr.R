@@ -74,6 +74,103 @@ test_that("the logr package can create a log with no errors or warnings.", {
 })
 
 
+
+test_that("the logr package can create a log with warnings.", {
+  
+  tmp <- tempdir()
+  
+  lf <- log_open(file.path(tmp, "test.log"))
+  log_print("Here is the first log message")
+  expect_warning(warning("here is a test warning"))
+
+  
+  mp <- e$msg_path
+  log_close()
+  
+  ret <- file.exists(lf)
+  ret2 <- file.exists(mp)
+  
+  expect_equal(ret, TRUE)
+  expect_equal(ret2, FALSE)
+  
+  
+})
+
+
+test_that("logr.notes = FALSE works as expected.", {
+  
+  tmp <- tempdir()
+  
+ options("logr.notes" = FALSE)
+
+  
+  lf <- log_open(file.path(tmp, "test.log"))
+  log_print("No notes in this log.")
+
+  
+
+  log_close()
+  
+  ret <- file.exists(lf)
+  
+  expect_equal(ret, TRUE)
+
+  
+  readLines(lf)
+  
+  options("logr.notes" = TRUE)
+  
+})
+
+
+test_that("logr.notes = TRUE works as expected.", {
+  
+  tmp <- tempdir()
+  
+  options("logr.notes" = TRUE)
+  
+  
+  lf <- log_open(file.path(tmp, "test.log"))
+  log_print("Notes in this log.")
+  
+  
+  
+  log_close()
+  
+  ret <- file.exists(lf)
+  
+  expect_equal(ret, TRUE)
+  
+  
+  readLines(lf)
+  
+  
+})
+
+
+
+test_that("the logr package can create a log with error", {
+  
+  tmp <- tempdir()
+  
+  lf <- log_open(file.path(tmp, "test.log"))
+  log_print("Here is the first log message")
+  expect_error(stop("here is a test warning"))
+  
+  
+  mp <- e$msg_path
+  log_close()
+  
+  ret <- file.exists(lf)
+  ret2 <- file.exists(mp)
+  
+  expect_equal(ret, TRUE)
+  expect_equal(ret2, FALSE)
+  
+  
+})
+
+
 test_that("the logr package can log vectors, factors, and lists with no errors or warnings.", {
   
   tmp <- tempdir()
@@ -206,7 +303,7 @@ test_that("Logging of tibbles works as expected.", {
   
   lf <- log_open(file.path(tmp, "test.log"), autolog = FALSE)
   
-  
+  sep("Here is a tibble")
   put(tbl)
       
   mp <- e$msg_path
@@ -242,6 +339,17 @@ test_that("log_path() function works as expected", {
 })
 
 
+test_that("log_print() function works as expected when log is closed", {
+  
+
+  log_print("Log closed message")
+  
+  
+  expect_equal(TRUE, TRUE)
+
+  
+})
+
 
 test_that("log_status() function works as expected", {
   
@@ -269,15 +377,117 @@ test_that("log_status() function works as expected", {
   
 })
 
+test_that("logr.on = FALSE work as expected.", {
+
+    options("logr.on" = FALSE)
+  
+    tmp <- file.path(tempdir(), "/log/test.log")
+    
+    if (file.exists(tmp))
+      file.remove(tmp)
+    
+    lf <- log_open(tmp)
+    
+    log_print("Hello")
+    
+    log_close()
+    
+    
+    expect_equal(file.exists(lf), FALSE)
+
+    
+    
+})
+
+test_that("logr.on = TRUE works as expected.", {
+  
+  
+  options("logr.on" = TRUE)
+  
+  tmp <- file.path(tempdir(), "test.log")
+  
+  
+  if (file.exists(tmp))
+    file.remove(tmp)
+  
+  lf <- log_open(tmp)
+  
+  log_print("Hello")
+  
+  log_close()
+  
+  
+  expect_equal(file.exists(lf), TRUE)
+})
+
+test_that("logr.autolog = FALSE works as expected.", {
+  
+  library(dplyr)
+  
+  options("logr.autolog" = FALSE)
+  
+  tmp <- file.path(tempdir(), "/test.log")
+  
+  
+  if (file.exists(tmp))
+    file.remove(tmp)
+  
+  lf <- log_open(tmp)
+  
+  put("No tidy select here")
+  
+  dat <- select(mtcars, cyl = 8)
+  
+  log_close()
+  
+  
+  expect_equal(file.exists(lf), TRUE)
+  
+  readLines(lf)
+
+  
+})
+
+
+test_that("logr.autolog = TRUE works as expected.", {
+
+  library(dplyr)
+
+  options("logr.autolog" = TRUE)
+
+  tmp <- file.path(tempdir(), "test.log")
+
+
+  if (file.exists(tmp))
+    file.remove(tmp)
+
+  lf <- log_open(tmp)
+
+  log_print("Tidy select here")
+
+  dat <- select(mtcars, cyl = 8)
+
+  log_close()
+
+
+  expect_equal(file.exists(lf), TRUE)
+
+  lns <- readLines(lf, encoding = "UTF-8")
+  print(lns)
+  
+  options("logr.autolog" = FALSE)
+})
+
+
 
 
 test_that("Logging of Unicode characters prints correctly.", {
 
   print("First just test that anything works: 你好")
-  
+
   tmp <- tempdir()
 
-  lf <- log_open(file.path(tmp, "test.log"), autolog = FALSE, 
+  lf <- log_open(file.path(tmp, "test.log"), autolog = FALSE,
                  show_notes = FALSE)
 
 
@@ -292,10 +502,10 @@ test_that("Logging of Unicode characters prints correctly.", {
 
 
   log_close()
-  
+
   lns <- readLines(lf, encoding = "UTF-8")
   print(lns)
-  
+
   expect_equal(file.exists(lf), TRUE)
 })
 
@@ -332,221 +542,7 @@ test_that("Logging of Unicode dataframe prints correctly.", {
 })
 
 
-# # Works
-# test_that("Special characters work properly.", {
-#   
-#   file_path <- file.path(base_path, "log\\test1.log")
-#   
-#   v1 <- c("Here are some special characters â ã Ï Ó µ ¿ ‰", 
-#           "Here is some Russian Пояснения",
-#           "Here is some Italian Attività",
-#           "Here is some Chinese 你好")
-#   
-#   f <- file(file_path, open = "w", encoding = "native.enc")
-# 
-#   
-#   writeLines(enc2utf8(v1), con = f, useBytes = TRUE)
-#   
-#   
-#   # sink(f, append = TRUE)
-#   # 
-#   # print(enc2utf8(" â ã Ï Ó µ ¿ ‰"))
-#   # 
-#   # sink()
-#   
-#   close(f)
-#   
-#   
-# })
-# 
-# # Works, but no special characters
-# test_that("Special characters work properly.", {
-#   
-#   file_path <- file.path(base_path, "log\\test2.log")
-#   
-#   
-#   res <- utils::capture.output(print(mtcars), file = NULL)
-#   
-#   
-#   f <- file(file_path, open = "w", encoding = "native.enc")
-#   
-#   
-#   writeLines(enc2utf8(res), con = f, useBytes = TRUE)
-#   
-#   
-#   # sink(f, append = TRUE)
-#   # 
-#   # print(enc2utf8(" â ã Ï Ó µ ¿ ‰"))
-#   # 
-#   # sink()
-#   
-#   close(f)
-#   
-#   
-# })
-# 
-# 
-# # Doesn't work 
-# test_that("Special characters work properly.", {
-#   
-#   file_path <- file.path(base_path, "log\\test3.log")
-#   
-#   
-#   v1 <- c("Here are some special characters â ã Ï Ó µ ¿ ‰", 
-#           "Here is some Russian Пояснения",
-#           "Here is some Italian Attività",
-#           "Here is some Chinese 你好")
-#   
-#   v2 <- enc2utf8(v1)
-#   
-#   res <- utils::capture.output(print(v2), file = NULL)
-#   
-#   
-#   f <- file(file_path, open = "w", encoding = "native.enc")
-#   
-#   
-#   writeLines(res, con = f, useBytes = TRUE)
-#   
-#   
-#   # sink(f, append = TRUE)
-#   # 
-#   # print(enc2utf8(" â ã Ï Ó µ ¿ ‰"))
-#   # 
-#   # sink()
-#   
-#   close(f)
-#   
-#   
-# })
-# 
-# 
-# 
-# 
-# test_that("Special characters work properly with sink.", {
-#   
-#   file_path <- file.path(base_path, "log\\test4.log")
-#   
-#   v1 <- c("Here are some special characters â ã Ï Ó µ ¿ ‰", 
-#           "Here is some Russian Пояснения",
-#           "Here is some Italian Attività",
-#           "Here is some Chinese 你好")
-#   
-#   v2 <- enc2utf8(v1)
-#   
-#   f <- file(file_path, open = "w", encoding = "UTF-8")
-#   
-#   
-#   sink(f)
-#   
-#   
-#   print(v2)
-#   
-#   # sink(f, append = TRUE)
-#   # 
-#   # print(enc2utf8(" â ã Ï Ó µ ¿ ‰"))
-#   # 
-#   # sink()
-#   
-#   sink()
-#   
-#   close(f)
-#   
-#   
-# })
-# 
-# test_that("Special characters work as expected.", {
-#   
-#   file_path <- file.path(base_path, "log\\test5.log")
-#   
-#   
-#   v1 <- c("Here are some special characters â ã Ï Ó µ ¿ ‰", 
-#           "Here is some Russian Пояснения",
-#           "Here is some Italian Attività",
-#           "Here is some Chinese 你好")
-#   
-#   df1 <- data.frame(E = c("â", "ã", "Ï", "Ó", "µ", "¿"),
-#                     R = c("П", "о", "я", "с", "н", "е"),
-#                     I = c("t", "i", "v", "i", "t", "à"), 
-#                     C = c("你", "好", "再", "见", "家", "园"))
-#                     
-#   res1 <- enc2utf8(v1)
-#   
-#   as.character(df1)
-#   
-#   
-#   res2 <- utils::capture.output(cat(df1[1, "C"]), file = NULL)
-#   
-#   res2 <- encodeString(df1[1, "C"])
-#   
-#   res3 <- charToRaw(res2)
-#   
-#   f <- file(file_path, open = "wt", encoding = "native.enc")
-#   
-#   
-#   writeLines(res1, con = f, useBytes = TRUE)
-#   writeLines(res2, con = f, useBytes = TRUE)
-#   writeLines(res3, con = f, useBytes = TRUE)
-#   
-#   
-#   
-#   close(f)
-#   
-#   con <- file(file_path, open = "wt", encoding = "native.enc")
-#   
-#  # con <- rawConnection(file_path, open = "w")
-#   sink(con)
-#   
-#   # cat(res1)
-#   #res2
-#   print.default(res2)
-#   #cat(res3)
-#   # cat(res1)
-#   # cat(res2)
-#   sink()
-#   close(con)
-# 
-#   
-#   sm <- Sys.getlocale()
-#   
-#   Sys.setlocale(category = "LC_ALL", locale = "UTF-8")
-#   
-#   l10n_info()
-#   
-#   Sys.getlocale()
-# })
 
-# Not sure how to generate an error and not cause the test to fail.
-# Commented out for now.
-# test_that("the logr package can create a log with errors and warnings.", {
-# 
-# 
-#   lf <- log_open("test.log")
-#   log_print("Here is the first log message")
-#   log_print(mtcars)
-#   warning("Test warning")
-#   generror
-#   log_print("Here is a second log message")
-#   mp <- e$msg_path
-#   log_close()
-# 
-#   ret <- file.exists(lf)
-#   ret2 <- file.exists(mp)
-# 
-#   expect_equal(ret, TRUE)
-#   expect_equal(ret2, TRUE)
-# 
-#   # clean up
-#   if (ret) {
-#     file.remove(lf)
-#   }
-#   if (ret2) {
-#     file.remove(mp)
-#   }
-#   if (dir.exists("log")) {
-#     unlink("log", force = TRUE, recursive = TRUE)
-#   }
-# 
-# })
 
 
 

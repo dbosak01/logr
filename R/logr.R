@@ -436,109 +436,6 @@ log_print <- function(x, ...,
 
 
 
-
-log_print_back <- function(x, ..., 
-                      console = TRUE, 
-                      blank_after = TRUE, 
-                      msg = FALSE, 
-                      hide_notes = FALSE) {
-  
-  update_status()
-  
-  if (e$log_status == "open") {
-    
-    # Print to console, if requested
-    if (console == TRUE)
-      print(x, ...)
-    
-    # Print to msg_path, if requested
-    file_path <- e$log_path
-    if (msg == TRUE)
-      file_path <- e$msg_path
-    
-    # Print to log or msg file
-    tryCatch( {
-      
-      f <- file(file_path, open = "a", encoding = "UTF-8")
-      # Use sink() function so print() will work as desired
-      sink(f, append = TRUE)
-      if (all(class(x) == "character")) {
-        if (length(x) == 1 && nchar(x) < 100) {
-          
-          # Print the string
-          cat(x, "\n")
-          
-          # Add blank after if requested
-          if (blank_after == TRUE)
-            cat("\n")
-        } else {
-          
-          # Print the object
-          withr::with_options(c("crayon.colors" = 1), { 
-            print(x, ..., )
-          })
-          
-          if (blank_after == TRUE)
-            cat("\n")
-          
-        }
-        
-        
-      } else {
-        
-        # Print the object
-        withr::with_options(c("crayon.colors" = 1), { 
-          print(x, ...)
-        })
-        
-        if (blank_after == TRUE)
-          cat("\n")
-      }
-    },
-    error = function(cond) {
-      
-      print("Error: Object cannot be printed to log\n")
-    },
-    finally = {
-      
-      # Print time stamps on normal log_print
-      if (hide_notes == FALSE) {
-        tc <- Sys.time()
-        
-        if (e$log_show_notes == TRUE) {
-          
-          # Print data frame row and column counts
-          if (any(class(x) == "data.frame")) {
-            cat(paste("NOTE: Data frame has", nrow(x), "rows and", ncol(x), 
-                      "columns."), "\n")
-            cat("\n")
-          }
-          
-          # Print log timestamps
-          cat(paste("NOTE: Log Print Time: ", tc), "\n")
-          cat(paste("NOTE: Elapsed Time in seconds:", get_time_diff(tc)), "\n")
-          cat("\n")
-        }
-      }
-      
-      # Release sink no matter what
-      sink()
-      
-      # Close file no matter what
-      close(f)
-    }
-    )
-  } else if (e$log_status == "off") {
-    print(x, ...) 
-  }  else {
-    print(x, ...)
-    message("Log is not open.")
-  }
-  
-  invisible(x)
-}
-
-
 #' @aliases log_print
 #' @export
 put <- function(x, ..., 
@@ -771,14 +668,14 @@ error_handler <- function() {
 # Will revisit at some point.
 # In the meantime, warnings will be printed at 
 # the end of the log, above the footer.
-#' @noRd
-warning_handler <- function() {
-  
-  #print("Warning Handler")
-  log_print(warnings())
-  log_quiet(warnings(), msg = TRUE)
-  
-}
+# @noRd
+# warning_handler <- function() {
+#   
+#   #print("Warning Handler")
+#   log_print(warnings())
+#   log_quiet(warnings(), msg = TRUE)
+#   
+# }
 
 
 # Utilities ---------------------------------------------------------------

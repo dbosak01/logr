@@ -1,3 +1,7 @@
+# logr 1.2.6
+
+* Added covr and codecov
+
 # logr 1.2.5
 
 * Added `log_path()` function to return the path to the log.
