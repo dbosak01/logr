@@ -55,3 +55,16 @@ test_that("the print_other() function works as expected.", {
 
 
 })
+
+test_that("get_unicode() works as expected.", {
+  
+  v <- c("Hello 你好", "再见 goodbye", "Hello", "再见", "Hello 再见 goodbye")
+  
+  v2 <- enc2native(v)
+  
+  res <- get_unicode(v2)
+  
+  expect_equal(v, res)
+  
+  
+})
