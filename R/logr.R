@@ -661,11 +661,18 @@ print_log_header <- function(log_path) {
   
   log_quiet(paste(separator), blank_after = FALSE)
   log_quiet(paste("Log Path:", log_path), blank_after = FALSE)
-  ppth <- this.path::this.path()
+  
+  ppth <- NULL
+  tryCatch({
+    ppth <- this.path::this.path()
+  }, error = function(e) { ppth <- NULL})
+  
   if (!is.null(ppth)) {
     if (file.exists(ppth))
       log_quiet(paste("Program Path:", ppth), blank_after = FALSE)
   }
+  
+  
   log_quiet(paste("Working Directory:", getwd()), blank_after = FALSE)
   
   inf <- Sys.info()
