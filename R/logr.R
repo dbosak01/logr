@@ -592,66 +592,6 @@ log_close <- function() {
   
 }
 
-#' @title Get the path of the current log
-#' @description The \code{log_path} function gets the path to the currently
-#' opened log.  This function may be useful when you want to manipulate 
-#' the log in some way, and need the path.  The function takes no parameters.
-#' @return The full path to the currently opened log, or NULL if no log is open.
-#' @examples 
-#' # Create temp file location
-#' tmp <- file.path(tempdir(), "test.log")
-#' 
-#' # Open log
-#' log_open(tmp)
-#' 
-#' # Get path
-#' lf <- log_path()
-#' 
-#' # Close log
-#' log_close()
-#' 
-#' lf
-#' @export
-log_path <- function() {
-  
-  ret <- e$log_path
-  
-  return(ret)
-  
-}
-
-#' @title Get the status of the log
-#' @description The \code{log_status} function gets the status of the 
-#' log.  Possible status values are 'on', 'off', 'open', or 'closed'.  
-#' The function takes no parameters.
-#' @return The status of the log as a character string.
-#' @examples 
-#' # Check status before the log is opened
-#' log_status()
-#' # [1] "closed"
-#' 
-#' # Create temp file location
-#' tmp <- file.path(tempdir(), "test.log")
-#' 
-#' # Open log
-#' lf <- log_open(tmp)
-#' 
-#' # Check status after log is opened
-#' log_status()
-#' # [1] "open"
-#' 
-#' # Close log
-#' log_close()
-#' @export
-log_status <- function() {
-  
-  update_status()
-  
-  ret <- e$log_status
-  
-  return(ret)
-  
-}
 
 
 # Event Handlers ----------------------------------------------------------
@@ -715,11 +655,17 @@ update_status <- function() {
 
 
 #' Function to print the log header
+#' @import this.path
 #' @noRd
 print_log_header <- function(log_path) {
   
   log_quiet(paste(separator), blank_after = FALSE)
   log_quiet(paste("Log Path:", log_path), blank_after = FALSE)
+  ppth <- this.path::this.path()
+  if (!is.null(ppth)) {
+    if (file.exists(ppth))
+      log_quiet(paste("Program Path:", ppth), blank_after = FALSE)
+  }
   log_quiet(paste("Working Directory:", getwd()), blank_after = FALSE)
   
   inf <- Sys.info()

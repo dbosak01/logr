@@ -19,6 +19,7 @@ reference:
   - log_close
   - log_path
   - log_status
+  - log_code
 navbar:
   type: inverse
   structure:

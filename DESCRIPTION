@@ -23,7 +23,8 @@ Suggests:
     dplyr,
     covr
 Imports: withr,
-         utils
+         utils,
+         this.path
 VignetteBuilder: knitr
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1

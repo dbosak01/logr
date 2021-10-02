@@ -4,7 +4,6 @@
 [![logr lifecycle](https://img.shields.io/badge/lifecycle-stable-blue.svg)](https://cran.r-project.org/package=logr)
 [![logr downloads](https://cranlogs.r-pkg.org/badges/logr)](https://cran.r-project.org/package=logr)
 [![logr total downloads](https://cranlogs.r-pkg.org/badges/grand-total/logr)](https://cran.r-project.org/package=logr)
-[![Travis build status](https://travis-ci.com/dbosak01/logr.svg?branch=master)](https://travis-ci.com/dbosak01/logr)
 [![R-CMD-check](https://github.com/dbosak01/logr/workflows/R-CMD-check/badge.svg)](https://github.com/dbosak01/logr/actions)
 [![Codecov test coverage](https://codecov.io/gh/dbosak01/logr/branch/master/graph/badge.svg)](https://codecov.io/gh/dbosak01/logr?branch=master)
 

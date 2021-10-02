@@ -55,7 +55,7 @@ test_that("the log_print function handles invalid parameters.", {
 
 test_that("the logr package can create a log with no errors or warnings.", {
   
-  tmp <- tempdir()
+  tmp <- base_path
   
   lf <- log_open(file.path(tmp, "test.log"))
   log_print("Here is the first log message")
@@ -323,22 +323,6 @@ test_that("Logging of tibbles works as expected.", {
   
 })
 
-test_that("log_path() function works as expected", {
-  
-  tmp <- file.path(tempdir(), "test.log")
-  
-  lf <- log_open(tmp)
-  
-  lp <- log_path()
-  
-  log_close()
-  
-  
-  expect_equal(lp, lf)
-  expect_equal(is.null(log_path()), TRUE)
-  
-})
-
 
 test_that("log_print() function works as expected when log is closed", {
   
@@ -352,31 +336,6 @@ test_that("log_print() function works as expected when log is closed", {
 })
 
 
-test_that("log_status() function works as expected", {
-  
-  
-  options("logr.on" = FALSE)
-  
-  expect_equal(log_status(), "off")
-  
-  options("logr.on" = TRUE)
-  
-  expect_equal(log_status(), "on")
-  
-  
-  tmp <- file.path(tempdir(), "test.log")
-  
-  lf <- log_open(tmp)
-  
-  expect_equal(log_status(), "open")
-  
-
-  log_close()
-  
-  expect_equal(log_status(), "closed")
-  
-  
-})
 
 test_that("logr.on = FALSE work as expected.", {
 
