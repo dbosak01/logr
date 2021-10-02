@@ -1,0 +1,93 @@
+=========================================================================
+Log Path: ./log/test.log
+Working Directory: C:/Projects/Archytas/SESUG/Tutorial
+User Name: dbosa
+R Version: 4.1.1 (2021-08-10)
+Machine: SOCRATES x86-64
+Operating System: Windows 10 x64 build 19041
+Log Start Time: 2021-10-01 19:30:50
+=========================================================================
+
+=========================================================================
+Load the data
+=========================================================================
+
+# library 'sdtm': 8 items
+- attributes: csv not loaded
+- path: C:/Users/dbosa/Documents/R/win-library/4.1/libr/extdata
+- items:
+  Name Extension Rows Cols     Size        LastModified
+1   AE       csv  150   27  88.1 Kb 2021-10-01 10:49:44
+2   DA       csv 3587   18 527.8 Kb 2021-10-01 10:49:44
+3   DM       csv   87   24  45.2 Kb 2021-10-01 10:49:44
+4   DS       csv  174    9  33.7 Kb 2021-10-01 10:49:44
+5   EX       csv   84   11    26 Kb 2021-10-01 10:49:44
+6   IE       csv    2   14    13 Kb 2021-10-01 10:49:44
+7   SV       csv  685   10  69.9 Kb 2021-10-01 10:49:44
+8   VS       csv 3358   17   467 Kb 2021-10-01 10:49:44
+
+NOTE: Log Print Time:  2021-10-01 19:31:02
+NOTE: Elapsed Time in seconds: 11.9083199501038
+
+lib_load: library 'sdtm' loaded
+
+NOTE: Log Print Time:  2021-10-01 19:31:02
+NOTE: Elapsed Time in seconds: 0.792669057846069
+
+=========================================================================
+Prepare the data
+=========================================================================
+
+Error in arrange(., AGEG, AGE) : could not find function "arrange"
+
+
+NOTE: Log Print Time:  2021-10-01 19:31:32
+NOTE: Elapsed Time in seconds: 29.4837491512299
+
+datastep: columns increased from 25 to 29
+
+NOTE: Log Print Time:  2021-10-01 19:31:56
+NOTE: Elapsed Time in seconds: 24.3070449829102
+
+=========================================================================
+Create report
+=========================================================================
+
+# A report specification: 3 pages
+- file_path: './output/sassy1.txt'
+- output_type: TXT
+- units: inches
+- orientation: landscape
+- margins: top 0.5 bottom 0.5 left 1 right 1
+- line size/count: 108/45
+- title 1: 'Our first report'
+- content: 
+# A table specification:
+- data: tibble 'age_formatted' 87 rows 8 cols
+- show_cols: all
+- use_attributes: all
+
+NOTE: Log Print Time:  2021-10-01 19:32:04
+NOTE: Elapsed Time in seconds: 7.61070895195007
+
+# A report specification: 3 pages
+- file_path: './output/sassy1.rtf'
+- output_type: RTF
+- units: inches
+- orientation: landscape
+- margins: top 0.5 bottom 0.5 left 1 right 1
+- line size/count: 107/47
+- title 1: 'Our first report'
+- content: 
+# A table specification:
+- data: tibble 'age_formatted' 87 rows 8 cols
+- show_cols: all
+- use_attributes: all
+
+NOTE: Log Print Time:  2021-10-01 19:32:26
+NOTE: Elapsed Time in seconds: 21.8838489055634
+
+=========================================================================
+Log End Time: 2021-10-01 19:32:28
+Log Elapsed Time: 0 00:00:01
+=========================================================================

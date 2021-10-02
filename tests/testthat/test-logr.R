@@ -4,6 +4,7 @@ base_path <- "c:\\packages\\logr\\tests\\testthat"
 
 base_path <- tempdir()
 
+DEV <- FALSE
 
 test_that("the log_open function handles invalid parameters.", {
   
@@ -296,7 +297,7 @@ test_that("Logging of tibbles works as expected.", {
   
   library(dplyr)
 
-  tmp <- tempdir()
+  tmp <- base_path
   
   tbl <- as_tibble(mtcars)
   
@@ -543,7 +544,37 @@ test_that("Logging of Unicode dataframe prints correctly.", {
 
 
 
+test_that("clear_codes function works as expected.", {
+  
+  if (DEV) {
+    
+    tmp1 <- file.path(base_path, "log/test8.log")
+    tmp2 <- file.path(base_path, "log/test9.log")
+    
+    file.copy(tmp1, tmp2)
+    
+    
+    clear_codes(tmp1)
+    
+    
+    expect_equal(file.exists(tmp1), TRUE)
+    
+    lns <- readLines(tmp1, encoding = "UTF-8")
+    
+    res <- grep("\x1B[90m", lns, fixed = TRUE)
+    
+    expect_equal(length(res), 0)
+  
+    
+    file.remove(tmp1)
+    file.copy(tmp2, tmp1)
+    file.remove(tmp2)
+  
+  } else 
+    expect_equal(TRUE, TRUE)
 
+  
+})
 
 
 

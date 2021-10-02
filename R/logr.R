@@ -569,6 +569,9 @@ log_close <- function() {
     # Print out footer
     print_log_footer(has_warnings)
     
+    # Clean up color codes
+    clear_codes()
+    
     # Clean up environment variables
     e$log_path <- NULL
     e$msg_path <- NULL
@@ -792,6 +795,69 @@ dhms <- function(t){
                ,sep = ":"
         )
   )
+}
+
+#' @description Should not be this complicated.  Unfortunately, tidylog
+#' decided to use a Unicode ellipsis character in their log entries. 
+#' This character causes gsub to crash. grep just gives a warning.
+#' So we suppressWarnings, find the lines with strings to replace, 
+#' then loop through each and tryCatch to suppress the error.  Horrible pain.
+#' 
+#' This whole thing is necessary because crayon codes are still being printed
+#' to the log.  So the purpose of the function is to remove the crayon
+#' color codes.  Generally, should not have to do this.
+#' @noRd
+clear_codes <- function(path = NULL) {
+  
+  if (is.null(path))
+    pth <- e$log_path
+  else 
+    pth <- path
+  
+  
+  if (file.exists(pth)) {
+  
+    lns <- readLines(pth, encoding = "UTF-8")
+    
+    f <- file(pth, open = "w", encoding = "native.enc")
+    #f <- file(pth, open = "w", encoding = "UTF-8")
+    
+    # lns <- gsub("[90m", "", lns, fixed = TRUE)
+    res90 <- suppressWarnings(grep("\033[90m", lns, fixed = TRUE))
+    res39 <- suppressWarnings(grep("\033[39m", lns, fixed = TRUE))
+    #lns <- gsub("\033[39m", "", lns, fixed = TRUE, useBytes = TRUE)
+    
+    if (length(res90) > 0 | length(res39) > 0) {
+     # print(res90)
+    #  print(res39)
+      
+      if (length(res90) > 0) {
+        for (ln in res90) {
+          tryCatch({ 
+            lns[ln] <- gsub("\033[90m", "", lns[ln], fixed = TRUE)
+          })
+        }
+      }
+      
+      if (length(res39) > 0) {
+        for (ln in res39) {
+          tryCatch({ 
+            lns[ln] <- gsub("\033[39m", "", lns[ln], fixed = TRUE)
+          })
+        }
+      }
+    }
+    
+    
+    # Print the string
+    writeLines(lns, con = f, useBytes = TRUE)
+    
+    # Close file
+    close(f) 
+    
+    
+  }
+  
 }
 
 # Test Case ---------------------------------------------------------------

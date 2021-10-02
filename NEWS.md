@@ -1,6 +1,10 @@
 # logr 1.2.6
 
 * Added covr and codecov
+* Removed extraneous color codes from log by adding stripping function 
+to `log_close()`.
+* Added path to source program to log header.
+* Added `log_code()` function to dump code to the log.
 
 # logr 1.2.5
 

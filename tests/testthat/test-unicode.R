@@ -7,7 +7,7 @@ base_path <- tempdir()
 
 test_that("the print_windows() function works as expected.", {
 
-  pth <- file.path(base_path, "/test6.log")
+  pth <- file.path(base_path, "log/test6.log")
 
   if (file.exists(pth))
     file.remove(pth)
@@ -34,7 +34,7 @@ test_that("the print_windows() function works as expected.", {
 
 test_that("the print_other() function works as expected.", {
 
-  pth <- file.path(base_path, "/test7.log")
+  pth <- file.path(base_path, "log/test7.log")
 
   if (file.exists(pth))
     file.remove(pth)
