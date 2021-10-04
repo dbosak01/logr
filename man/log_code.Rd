@@ -16,7 +16,11 @@ currently opened log.  The log must be opened first with
 \code{\link{log_open}}.  Code will be prefixed with a right arrow (">")
 to differentiate it from standard logging lines.  The \code{log_code}
 function may be called from anywhere within the program.  Code will
-be inserted into the log at the point where it is called.
+be inserted into the log at the point where it is called.  The
+\code{log_code} function will log the code as it is saved on disk.  It
+will not capture any unsaved changes in the editor.  If the current
+program file cannot be found, the function will return FALSE and no
+code will be written.
 }
 \examples{
 # Create temp file location

@@ -67,7 +67,11 @@ log_status <- function() {
 #' \code{\link{log_open}}.  Code will be prefixed with a right arrow (">")
 #' to differentiate it from standard logging lines.  The \code{log_code}
 #' function may be called from anywhere within the program.  Code will
-#' be inserted into the log at the point where it is called.
+#' be inserted into the log at the point where it is called.  The 
+#' \code{log_code} function will log the code as it is saved on disk.  It 
+#' will not capture any unsaved changes in the editor.  If the current
+#' program file cannot be found, the function will return FALSE and no
+#' code will be written.
 #' @return A TRUE or FALSE value to indicate success or failure of the 
 #' function.
 #' @seealso \code{\link{log_open}} to open the log, 
