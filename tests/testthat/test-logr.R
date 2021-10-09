@@ -171,6 +171,51 @@ test_that("the logr package can create a log with error", {
   
 })
 
+# This won't work.  Need to actually generate a warning.
+test_that("the logr package can create a log with warning", {
+  
+  tmp <- tempdir()
+  
+  lf <- log_open(file.path(tmp, "test.log"))
+  log_print("Here is the first log message")
+  expect_warning(warning("here is a test warning"))
+  
+  
+  mp <- e$msg_path
+  log_close()
+  
+  ret <- file.exists(lf)
+  ret2 <- file.exists(mp)
+  
+  expect_equal(ret, TRUE)
+  expect_equal(ret2, FALSE)
+  
+  
+})
+
+# This won't work.  Need to actually generate a warning.
+test_that("the logr package can clear warnings", {
+  
+  tmp <- tempdir()
+  
+  suppressWarnings(warning("here is a warning"))
+  
+  lf <- log_open(file.path(tmp, "test.log"))
+  log_print("Here is the first log message")
+  
+  mp <- e$msg_path
+  
+  log_close()
+  
+  ret <- file.exists(lf)
+  ret2 <- file.exists(mp)
+  
+  expect_equal(ret, TRUE)
+  expect_equal(ret2, FALSE)
+  
+  
+})
+
 
 test_that("the logr package can log vectors, factors, and lists with no errors or warnings.", {
   
