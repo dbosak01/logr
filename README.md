@@ -59,7 +59,7 @@ If you want to look at the code for the **logr** package, visit the
 github page [here](https://github.com/dbosak01/logr).
 
 If you encounter a bug or have a feature request, please submit an issue 
-[here](https://github.com/dbosak01/logr/issues).
+[here](https://github.com/dbosak01/logr/issues). 
 
 
 ### See Also
