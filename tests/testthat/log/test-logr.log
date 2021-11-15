@@ -1,0 +1,20 @@
+=========================================================================
+Log Path: C:/packages/logr/tests/testthat/log/test-logr.log
+Program Path: C:\packages\logr\tests\testthat\test-logr.R
+Working Directory: C:/packages/logr
+User Name: dbosa
+R Version: 4.1.2 (2021-11-01)
+Machine: SOCRATES x86-64
+Operating System: Windows 10 x64 build 19041
+Log Start Time: 2021-11-15 07:46:02
+=========================================================================
+
+Here is a log message
+
+NOTE: Log Print Time:  2021-11-15 07:46:02
+NOTE: Elapsed Time in seconds: 0
+
+=========================================================================
+Log End Time: 2021-11-15 07:46:02
+Log Elapsed Time: 0 00:00:00
+=========================================================================

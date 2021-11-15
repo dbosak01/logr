@@ -1,3 +1,10 @@
+# logr 1.2.7
+
+* Use current script path and name for log file name if not supplied by user.
+* Added attached base and other packages to log header.
+* Added FAQ page to documentation site.
+
+
 # logr 1.2.6
 
 * Added covr and codecov

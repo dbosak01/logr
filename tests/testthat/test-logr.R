@@ -8,7 +8,7 @@ DEV <- FALSE
 
 test_that("the log_open function handles invalid parameters.", {
   
-  tmp <- tempdir()
+  tmp <- base_path
   
   nm <- log_open(file.path(tmp, "test.log"))
   log_print("Here is the first log message")
@@ -27,7 +27,7 @@ test_that("the log_open function handles invalid parameters.", {
 
 test_that("the log_print function handles invalid parameters.", {
   
-  tmp <- tempdir()
+  tmp <- base_path
   
   lp <- log_open(file.path(tmp, "test.log"))
   
@@ -78,7 +78,7 @@ test_that("the logr package can create a log with no errors or warnings.", {
 
 test_that("the logr package can create a log with warnings.", {
   
-  tmp <- tempdir()
+  tmp <- base_path
   
   lf <- log_open(file.path(tmp, "test.log"))
   log_print("Here is the first log message")
@@ -100,7 +100,7 @@ test_that("the logr package can create a log with warnings.", {
 
 test_that("logr.notes = FALSE works as expected.", {
   
-  tmp <- tempdir()
+  tmp <- base_path
   
  options("logr.notes" = FALSE)
 
@@ -126,7 +126,7 @@ test_that("logr.notes = FALSE works as expected.", {
 
 test_that("logr.notes = TRUE works as expected.", {
   
-  tmp <- tempdir()
+  tmp <- base_path
   
   options("logr.notes" = TRUE)
   
@@ -152,7 +152,7 @@ test_that("logr.notes = TRUE works as expected.", {
 
 test_that("the logr package can create a log with error", {
   
-  tmp <- tempdir()
+  tmp <- base_path
   
   lf <- log_open(file.path(tmp, "test.log"))
   log_print("Here is the first log message")
@@ -174,7 +174,7 @@ test_that("the logr package can create a log with error", {
 # This won't work.  Need to actually generate a warning.
 test_that("the logr package can create a log with warning", {
   
-  tmp <- tempdir()
+  tmp <- base_path
   
   lf <- log_open(file.path(tmp, "test.log"))
   log_print("Here is the first log message")
@@ -196,7 +196,7 @@ test_that("the logr package can create a log with warning", {
 # This won't work.  Need to actually generate a warning.
 test_that("the logr package can clear warnings", {
   
-  tmp <- tempdir()
+  tmp <- base_path
   
   suppressWarnings(warning("here is a warning"))
   
@@ -219,7 +219,7 @@ test_that("the logr package can clear warnings", {
 
 test_that("the logr package can log vectors, factors, and lists with no errors or warnings.", {
   
-  tmp <- tempdir()
+  tmp <- base_path
   
   lf <- log_open(file.path(tmp, "test.log"))
   
@@ -250,7 +250,7 @@ test_that("the logr package can log vectors, factors, and lists with no errors o
 
 test_that("log_hook works as expected when autolog is off.", {
   
-  tmp <- tempdir()
+  tmp <- base_path
   
   log_hook("Should not generate anything")
   
@@ -276,7 +276,7 @@ test_that("log_hook works as expected when autolog is off.", {
 
 test_that("log_hook works as expected when autolog is on.", {
   
-  tmp <- tempdir()
+  tmp <- base_path
   
   log_hook("Should not generate anything")
   
@@ -309,7 +309,7 @@ test_that("tidylog integration works as expected when autolog is on.", {
   # Connect tidylog to logr
   #options("tidylog.display" = list(log_quiet), "logr.notes" = TRUE)
   
-  tmp <- tempdir()
+  tmp <- base_path
 
   
   lf <- log_open(file.path(tmp, "test.log"), autolog = TRUE)
@@ -386,7 +386,7 @@ test_that("logr.on = FALSE work as expected.", {
 
     options("logr.on" = FALSE)
   
-    tmp <- file.path(tempdir(), "/log/test.log")
+    tmp <- file.path(base_path, "/log/test.log")
     
     if (file.exists(tmp))
       file.remove(tmp)
@@ -409,7 +409,7 @@ test_that("logr.on = TRUE works as expected.", {
   
   options("logr.on" = TRUE)
   
-  tmp <- file.path(tempdir(), "test.log")
+  tmp <- file.path(base_path, "test.log")
   
   
   if (file.exists(tmp))
@@ -431,7 +431,7 @@ test_that("logr.autolog = FALSE works as expected.", {
   
   options("logr.autolog" = FALSE)
   
-  tmp <- file.path(tempdir(), "/test.log")
+  tmp <- file.path(base_path, "/test.log")
   
   
   if (file.exists(tmp))
@@ -460,7 +460,7 @@ test_that("logr.autolog = TRUE works as expected.", {
 
   options("logr.autolog" = TRUE)
 
-  tmp <- file.path(tempdir(), "test.log")
+  tmp <- file.path(base_path, "test.log")
 
 
   if (file.exists(tmp))
@@ -490,7 +490,7 @@ test_that("Logging of Unicode characters prints correctly.", {
 
   print("First just test that anything works: 你好")
 
-  tmp <- tempdir()
+  tmp <- base_path
 
   lf <- log_open(file.path(tmp, "test.log"), autolog = FALSE,
                  show_notes = FALSE)
@@ -520,7 +520,7 @@ test_that("Logging of Unicode characters prints correctly.", {
 
 test_that("Logging of Unicode dataframe prints correctly.", {
   
-  tmp <- tempdir()
+  tmp <- base_path
   
   lf <- log_open(file.path(tmp, "test.log"), autolog = FALSE, 
                  show_notes = FALSE)
@@ -582,5 +582,24 @@ test_that("clear_codes function works as expected.", {
 
 
 
-
+test_that("default name works as expected.", {
+  if (DEV) {
+    
+  
+    
+    lf <- log_open()
+    
+    
+    put("Here is a log message")
+    
+    
+    log_close()
+    
+    expect_equal(file.exists(lf), TRUE)
+    
+    
+  } else 
+    expect_equal(TRUE, TRUE)
+  
+})
 

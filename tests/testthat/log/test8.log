@@ -12,8 +12,8 @@ Log Start Time: 2021-10-01 19:30:50
 Load the data
 =========================================================================
 
-# library 'sdtm': 8 items
-- attributes: csv not loaded
+[90m# library 'sdtm': 8 items
+[39m- attributes: csv not loaded
 - path: C:/Users/dbosa/Documents/R/win-library/4.1/libr/extdata
 - items:
   Name Extension Rows Cols     Size        LastModified
@@ -53,7 +53,7 @@ NOTE: Elapsed Time in seconds: 24.3070449829102
 Create report
 =========================================================================
 
-# A report specification: 3 pages
+[90m# A report specification: [39m[90m3 pages[39m
 - file_path: './output/sassy1.txt'
 - output_type: TXT
 - units: inches
@@ -62,15 +62,15 @@ Create report
 - line size/count: 108/45
 - title 1: 'Our first report'
 - content: 
-# A table specification:
-- data: tibble 'age_formatted' 87 rows 8 cols
+[90m# A table specification:
+[39m- data: tibble 'age_formatted' 87 rows 8 cols
 - show_cols: all
 - use_attributes: all
 
 NOTE: Log Print Time:  2021-10-01 19:32:04
 NOTE: Elapsed Time in seconds: 7.61070895195007
 
-# A report specification: 3 pages
+[90m# A report specification: [39m[90m3 pages[39m
 - file_path: './output/sassy1.rtf'
 - output_type: RTF
 - units: inches
@@ -79,8 +79,8 @@ NOTE: Elapsed Time in seconds: 7.61070895195007
 - line size/count: 107/47
 - title 1: 'Our first report'
 - content: 
-# A table specification:
-- data: tibble 'age_formatted' 87 rows 8 cols
+[90m# A table specification:
+[39m- data: tibble 'age_formatted' 87 rows 8 cols
 - show_cols: all
 - use_attributes: all
 
