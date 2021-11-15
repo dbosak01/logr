@@ -80,6 +80,8 @@ User Name: User
 R Version: 4.0.3 (2020-10-10) 
 Machine: DESKTOP-1F27OR8 x86-64 
 Operating System: Windows 10 x64 build 18363 
+Base Packages: stats graphics grDevices utils datasets methods base
+Other Packages: logr_1.2.6 dplyr_1.0.7 
 Log Start Time: 2021-01-02 12:45:06 
 ========================================================================= 
 

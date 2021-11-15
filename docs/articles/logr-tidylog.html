@@ -100,7 +100,7 @@
 
       
 
-      </header><script src="logr-tidylog_files/header-attrs-2.9/header-attrs.js"></script><div class="row">
+      </header><script src="logr-tidylog_files/header-attrs-2.11/header-attrs.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>tidylog Integration</h1>
@@ -143,10 +143,10 @@
 <span class="fu"><a href="../reference/log_print.html">put</a></span><span class="op">(</span><span class="st">"High Mileage Cars Subset"</span><span class="op">)</span>
 
 <span class="co"># Perform dplyr operations</span>
-<span class="va">hmc</span> <span class="op">&lt;-</span> <span class="va">mtcars</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">mpg</span>, <span class="va">cyl</span>, <span class="va">disp</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">mpg</span> <span class="op">&gt;</span> <span class="fl">20</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="va">mpg</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+<span class="va">hmc</span> <span class="op">&lt;-</span> <span class="va">mtcars</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">mpg</span>, <span class="va">cyl</span>, <span class="va">disp</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">mpg</span> <span class="op">&gt;</span> <span class="fl">20</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="va">mpg</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="../reference/log_print.html">put</a></span><span class="op">(</span><span class="op">)</span> <span class="co"># sends pipeline result to log</span>
 
 <span class="co"># Close log</span>
@@ -166,6 +166,8 @@ User Name: User
 R Version: 4.0.3 (2020-10-10) 
 Machine: DESKTOP-1F27OR8 x86-64 
 Operating System: Windows 10 x64 build 18363 
+Base Packages: stats graphics grDevices utils datasets methods base
+Other Packages: logr_1.2.6 dplyr_1.0.7 
 Log Start Time: 2021-01-02 12:45:06 
 ========================================================================= 
 
@@ -208,10 +210,10 @@ Log Elapsed Time: 0 00:00:03
 <p>To integrate <strong>logr</strong> with <strong>tidylog</strong> manually, first install and load the <strong>tidylog</strong> package. To reduce the number of warning messages, add the <code>warn.conflicts</code> parameter to the <code>library</code> function, as follows:</p>
 <pre><code><a href="https://rdrr.io/r/base/library.html">library("tidylog", warn.conflicts = FALSE)</a></code></pre>
 <p>Then assign the <strong>tidylog</strong> <code>display</code> setting to <code>log_print</code>, like this:</p>
-<pre><code><a href="https://rdrr.io/r/base/options.html">options("tidylog.display" = list(log_print))</a></code></pre>
+<pre><code>options("tidylog.display" = list(log_print))</code></pre>
 <p>This setting will cause all <strong>tidylog</strong> messages to be written to the <strong>logr</strong> log. You will not need to call <code>log_print</code> or <code>put</code> for <strong>tidylog</strong> messages. Note that you still must open and close the <strong>logr</strong> log, as per normal operation.</p>
 <p>To detach <strong>logr</strong> from <strong>tidylog</strong>, set the display option to <code>NULL</code>:</p>
-<pre><code><a href="https://rdrr.io/r/base/options.html">options("tidylog.display" = NULL)</a></code></pre>
+<pre><code>options("tidylog.display" = NULL)</code></pre>
 </div>
 <div id="manual-integration-example" class="section level4">
 <h4 class="hasAnchor">
@@ -240,10 +242,10 @@ Log Elapsed Time: 0 00:00:03
 <span class="fu"><a href="../reference/log_print.html">put</a></span><span class="op">(</span><span class="st">"High Mileage Cars Subset"</span><span class="op">)</span>
 
 <span class="co"># Perform dplyr operations</span>
-<span class="va">hmc</span> <span class="op">&lt;-</span> <span class="va">mtcars</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">mpg</span>, <span class="va">cyl</span>, <span class="va">disp</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">mpg</span> <span class="op">&gt;</span> <span class="fl">20</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="va">mpg</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+<span class="va">hmc</span> <span class="op">&lt;-</span> <span class="va">mtcars</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">mpg</span>, <span class="va">cyl</span>, <span class="va">disp</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">mpg</span> <span class="op">&gt;</span> <span class="fl">20</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="va">mpg</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="../reference/log_print.html">put</a></span><span class="op">(</span><span class="op">)</span> <span class="co"># sends pipeline result to log</span>
 
 <span class="co"># Close log</span>

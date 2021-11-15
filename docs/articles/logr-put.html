@@ -100,7 +100,7 @@
 
       
 
-      </header><script src="logr-put_files/header-attrs-2.9/header-attrs.js"></script><div class="row">
+      </header><script src="logr-put_files/header-attrs-2.11/header-attrs.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Aliases for log_print()</h1>
@@ -134,7 +134,7 @@
 <span class="fu"><a href="../reference/log_print.html">put</a></span><span class="op">(</span><span class="st">"High Mileage Cars Subset"</span><span class="op">)</span>
 
 <span class="co"># Perform operations</span>
-<span class="va">hmc</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html">subset</a></span><span class="op">(</span><span class="va">mtcars</span>, <span class="va">mtcars</span><span class="op">$</span><span class="va">mpg</span> <span class="op">&gt;</span> <span class="fl">20</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+<span class="va">hmc</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html">subset</a></span><span class="op">(</span><span class="va">mtcars</span>, <span class="va">mtcars</span><span class="op">$</span><span class="va">mpg</span> <span class="op">&gt;</span> <span class="fl">20</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="../reference/log_print.html">put</a></span><span class="op">(</span><span class="op">)</span> <span class="co"># prints pipeline result to log</span>
 
 <span class="co"># Close log</span>
@@ -150,6 +150,8 @@ User Name: User
 R Version: 4.0.3 (2020-10-10) 
 Machine: DESKTOP-1F27OR8 x86-64 
 Operating System: Windows 10 x64 build 18363 
+Base Packages: stats graphics grDevices utils datasets methods base
+Other Packages: logr_1.2.6 dplyr_1.0.7 
 Log Start Time: 2020-12-21 14:18:33 
 ========================================================================= 
 
