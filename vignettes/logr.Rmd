@@ -87,7 +87,7 @@ R Version: R Under development (unstable) (2020-06-29 r78751)
 Machine: BOSAK-MAIN x86-64 
 Operating System: Windows 10 x64 build 18362 
 Base Packages: stats graphics grDevices utils datasets methods base
-Other Packages: logr_1.2.6 dplyr_1.0.7 testthat_3.1.0 
+Other Packages: logr_1.2.7 dplyr_1.0.7 testthat_3.1.0 
 Log Start Time: 2020-06-30 07:15:52 
 ========================================================================= 
 
