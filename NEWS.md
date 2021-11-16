@@ -3,6 +3,7 @@
 * Use current script path and name for log file name if not supplied by user.
 * Added attached base packages and other packages to log header.
 * Added FAQ page to documentation site.
+* Added Complete Example vignette.
 
 
 # logr 1.2.6
