@@ -232,7 +232,6 @@ Log Elapsed Time: 0 00:00:00
 
 ```
 
-
-
+Next: [Complete Example](logr-example1.html)
 
 

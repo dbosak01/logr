@@ -5,7 +5,6 @@
 * Added FAQ page to documentation site.
 * Added Complete Example vignette.
 
-
 # logr 1.2.6
 
 * Added covr and codecov
