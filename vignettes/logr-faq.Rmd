@@ -1,0 +1,355 @@
+---
+title: "Frequently Asked Questions"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{FAQ}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+
+options(rmarkdown.html_vignette.check_title = FALSE)
+
+```
+
+Below are some frequently asked questions about the **logr** package. Click
+on the links below to navigate to the full question and answer content.
+
+## Index{#top}
+
+* [Where is my log?](#location)
+* [How come it didn't log anything?](#nolog)
+* [How do I change the name of the log?](#name)
+* [How do I add a timestamp to the log name?](#timestamp)
+* [How do I log my code?](#code)
+* [How do I turn on symbolgen?](#symbolgen)
+* [How do I log environment variables and their values?](#environment)
+* [How do I turn off the notes?](#notes)
+* [How is put() different from log_print()?](#put)
+* [What are the "Base Packages" and "Other Packages" lines in the header?](#packages)
+* [How come the warnings are at the bottom of the log?](#warnings)
+* [How come only the last warning is logged?](#last)
+
+
+## Content
+
+### Where is my log? {#location}
+
+**Q:** I followed the examples to add **logr** functions to my script, and I think
+I created a log.  But I can't find it.  Where does the log go?
+
+
+**A:** It depends on what you passed to the `file_name` parameter on the 
+`log_open()` function.  
+
+If you passed nothing, the log will be created in a subdirectory 
+named "log" in the same directory as your program, and with the program name.  
+
+If you passed a file name without a path, the log subdirectory will be created
+in your working directory, and the log will be named with the name you 
+assigned it.
+
+If you passed a full path, it will be created in the full path, but will still
+be created in a subdirectory named "log" unless the `logdir` parameter on
+`log_open()` is set to FALSE.
+
+If you still can't find it, add the following line to your program someplace
+after the call to `log_open()`:
+
+```
+print(log_path())
+```
+Then rerun the program.  The path to the log will be printed to the console.
+
+Note that the `log_open()` function also returns the path to the log.  You can
+save this path in a variable for easy access, like this:
+
+```
+pth <- log_open()
+print(pth)
+```
+
+[top](#top) 
+
+******
+
+
+### How come it didn't log anything? {#nolog}
+
+**Q:** I am able to create a log.  But it doesn't contain anything.  Just
+a header and footer.  How come nothing was logged?
+
+**A:** The **logr** log is not a fully automatic log, such as a SAS log.
+The primary way to get something logged is to log it explicitly with 
+`log_print()` or `put()`.  This is the only way to guarantee that something
+will be logged.  Generally, if you want a complete log, it is best to 
+sprinkle these functions liberally throughout the program, logging anything 
+you feel is relevant.
+
+The other way to get something to log is by using the **autolog** feature.  This
+feature can be turned on in one of two ways:  
+1. Set the `autolog` parameter on the `log_open()` function to TRUE.  
+2. Set the "logr.autolog" option using an `options()` function, like so:  
+```
+options("logr.autolog" = TRUE)
+```
+The autolog feature will automatically log function calls from the **dplyr**,
+**tidyr**, and the **sassy** family of packages.  It will not log Base R 
+functions, or the functions from any other packages.  It takes some experience
+to understand which functions will be automatically logged, and which will not.
+
+To maximize the autolog feature, it is a best practice to use **tidyverse** 
+functions, rather than the Base R equivalents.  These functions stand a better
+chance of being logged automatically.  
+
+It is also a best practice to place a `put()` statement at the end of your
+**dplyr** pipelines.  This is a very good habit to develop, and will greatly 
+improve the quantity and quality of your logs.  Here is an example:
+```
+dat <- mtcars %>% 
+       subset(mpg < 20) %>% 
+       arrange(mpg) %>% 
+       put()
+
+```
+Note that the above `put()` statement has no effect on the resulting data frame.
+It simply logs the pipeline result before assigning it to the variable `dat`.
+
+[top](#top)
+
+******
+
+
+### How do I change the name of the log? {#name}
+
+**Q:** I have a log. But I don't want the default name.  How can I change it 
+to something else?
+
+
+**A:** The `file_name` parameter on the `log_open()` function controls the log
+name.  You can set this parameter to be any log name you like.  When the log
+is created, it will use the name set on this parameter.  Example:
+```
+log_open("MyCustomName.log")
+```
+
+[top](#top)
+
+******
+
+### How do I add a timestamp to the log name? {#timestamp}
+
+**Q:** I have an R program that runs on a schedule every day. I want to keep
+the logs from this program for a certain period of time.  But **logr** always
+overwrites the log from the last run. Is there a way to get a datestamp
+on the log name, so it won't overwrite?
+
+
+**A:** You can append the datestamp to the log name on the `file_name`
+parameter.  Like this:
+```
+# Concatenate log name with datestamp
+nm <- paste0("mylog_", format(Sys.Date(), "%Y-%m-%d"))
+
+# Open log
+lf <- log_open(nm)
+
+```
+Then **logr** will not delete the previous day's log.  
+
+If you want a full date and time stamp,
+adjust the codes on the `format()` function to your liking.  
+
+[top](#top)
+
+******
+
+### How do I log my code? {#code}
+
+**Q:** In SAS there is an option to log all the code in my program at the 
+top of the log.  I like this because it is a good record of my program
+at the time it was run.  Is there a similar option in **logr**?
+
+
+**A:** There is not an option, but there is a `log_code()` function that will
+allow you to accomplish the same thing.  You just call the `log_code()` 
+function at the point where you want the code logged.  Normally this would
+be at the top of the program, after the call to `log_open()`.  Like this:
+
+```
+# Open log
+log_open("mylog.log")
+
+# Dump code to log
+log_code()
+
+# Continue program...
+
+```
+The above code will dump the entire program contents to the log.  The code lines
+will be prefixed with a right arrow (">") to distinguish these lines
+from the rest of your log.
+
+[top](#top)
+
+******
+
+### How do I turn on symbolgen? {#symbolgen}
+
+**Q:** In SAS there is an option called _symbolgen_ that will log all the
+variable values in my program.  This option is useful for debugging.  Is there
+a similar option in **logr**?
+
+
+**A:** Not really.  You can log the values of individual variables by sending
+them to the log with a `put()` function.  You can also log the entire 
+environment with all variable values like this:
+```
+# Open log
+log_open("test.log")
+
+# Write current variables to log
+put(ls().str())
+
+# Close log
+log_close()
+```
+Otherwise, it is better to debug R programs interactively.  The interactive
+debugging features in R are much better than in SAS.  The **logr** log is geared
+more toward recording the execution of your program than debugging.
+
+[top](#top)
+
+******
+### How do I log environment variables and their values? {#environment}
+
+**Q:** I want to write all the environment variables and their values to 
+the **logr** log.  Is there a way to do that?
+
+
+**A:** There is no built-in feature to log the environment variables.  But there
+is a Base R function `Sys.getenv()` that will retrieve the environment variables
+and their values.  Then you can put them to the log like any other object:
+```
+# Open log
+log_open("test.log")
+
+# Send environment variables to log
+put(Sys.getenv())
+
+# Close log
+log_close()
+```
+
+[top](#top)
+
+******
+
+### How do I turn off the notes? {#notes}
+
+**Q:** The notes are cluttering up my log, and are not providing anything
+that I need.  I don't need the elapsed time, etc.  How can I turn them off?
+
+
+**A:** The notes can be disabled in one of two ways:  
+  1. Set the `show_notes` parameter on `log_open()` to FALSE.  
+  2. Set the `logr.notes` option to FALSE using an `options()` function.  Like
+   this: 
+```
+   options("logr.notes" = FALSE)
+```
+
+[top](#top)
+
+******
+
+### How is put() different from log_print()? {#put}
+
+**Q:** There is another function `put()` that seems similar to `log_print()`.  What
+is the difference between them?
+
+**A:** There is no difference in functionality.  `put()` is a direct alias of 
+`log_print()`.  The only difference is that `put()` is faster to type.  It is also
+easy to remember for anyone who has used SAS software.  The `put()`
+function in the **logr** package does the same thing as the `%put()` function in SAS.
+So this alias will warm the hearts of current/former SAS programmers.
+
+[top](#top)
+
+******
+
+### What are the "Base Packages" and "Other Packages" lines in the header? {#packages}
+
+**Q:** Recently I noticed the "Base Packages" and "Other Packages" lines show up
+in the log header.  What are these lines?  Are they supposed to have all my 
+referenced packages?  How come some are missing?
+
+
+**A:** The "Base Packages" and "Other Packages" lines in the header 
+are attempting to more fully
+describe the environment the program/script is running in.  They are showing
+the packages that are installed and attached at the point the `log_open()` 
+function was called.  
+
+The information from these lines is taken from Base R `sessionInfo()`, and 
+shows a subset of information from that function.  This information is being logged
+so that you have some record of the packages and versions that were in
+use at the time the script was ran.  This is useful information if
+you need to recreate the output from a particular point in time.
+
+Note that if you attach packages in the middle of the program, after the 
+call to `log_open()`, these packages may not be recorded in the header.  It is 
+therefore best practice to place all of your `library()` calls at the top of
+your program, load up everything you need, and then call `log_open()`.  This 
+practice will help ensure that the header contains all the packages that are
+used by your program.  This practice also makes your program easier to read,
+understand, and maintain.
+
+[top](#top)
+
+******
+
+
+### How come the warnings are at the bottom of the log? {#warnings}
+
+**Q:** I noticed that errors are logged at the point they are generated.  But 
+warnings are only logged at the end of the log file.  Why?
+
+**A:** Base R provides an error event that can be triggered when an error 
+occurs, and therefore the errors can be logged at the point in the program
+where they are encountered.  The corresponding event for warnings does not work
+(at least on Windows).
+
+If anyone can find a way to trigger the warnings event, please submit 
+an issue to the **logr** Github 
+[issue list](https://github.com/dbosak01/logr/issues) and I will add it to
+the package.
+
+[top](#top)
+
+******
+
+
+### How come only the last warning is logged? {#last}
+
+**Q:** It appears that only the last warning is logged.  But I have a lot of 
+warnings.  How come only the last warning is recorded?  Is there a way 
+to make it log all of them?
+
+**A:** The last warning is recorded in the log because only the last warning 
+is stored and can be easily retrieved in Base R. Further, because the warnings
+event does not trigger properly, dumping all the warnings to the log at the end
+would make no sense.  If anyone can find a better way
+to trigger and log warnings at the point where the warning is generated, 
+please submit an issue to the **logr** Github 
+[issue list](https://github.com/dbosak01/logr/issues) and I will add it to
+the package.
+
+[top](#top)
+
+******

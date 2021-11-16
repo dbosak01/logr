@@ -5,7 +5,7 @@
 [![logr downloads](https://cranlogs.r-pkg.org/badges/logr)](https://cran.r-project.org/package=logr)
 [![logr total downloads](https://cranlogs.r-pkg.org/badges/grand-total/logr)](https://cran.r-project.org/package=logr)
 [![R-CMD-check](https://github.com/dbosak01/logr/workflows/R-CMD-check/badge.svg)](https://github.com/dbosak01/logr/actions)
-[![Codecov test coverage](https://codecov.io/gh/dbosak01/logr/branch/master/graph/badge.svg)](https://codecov.io/gh/dbosak01/logr?branch=master)
+[![Codecov test coverage](https://codecov.io/gh/dbosak01/logr/branch/master/graph/badge.svg)](https://app.codecov.io/gh/dbosak01/logr?branch=master)
 
 <!-- badges: end -->
 

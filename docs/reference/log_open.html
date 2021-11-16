@@ -128,6 +128,9 @@
   <a href="../reference/index.html">Reference</a>
 </li>
 <li>
+  <a href=".././articles/logr-faq.html">FAQ</a>
+</li>
+<li>
   <a href="../news/index.html">Changelog</a>
 </li>
 <li>
@@ -233,12 +236,12 @@ and call <code>log_close</code> at the bottom of the script.</p>
 <p>Logging may be controlled globally using the "logr.on" option.  This option
 accepts a TRUE or FALSE value. If the option is set to FALSE, <strong>logr</strong>
 will print to the console, but not to the log.
-Example: <code><a href='https://rdrr.io/r/base/options.html'>options("logr.on" = TRUE)</a></code></p>
+Example: <code>options("logr.on" = TRUE)</code></p>
 <p>Notes may be controlled globally using the "logr.notes" option.  This option
 also accepts a TRUE or FALSE value, and determines whether or not to print
 notes in the log.  The global option will override the <code>show_notes</code>
 parameter on the <code>log_open</code> function.
-Example: <code><a href='https://rdrr.io/r/base/options.html'>options("logr.notes" = FALSE)</a></code></p>
+Example: <code>options("logr.notes" = FALSE)</code></p>
 <p>Version v1.2.0 of the <strong>logr</strong> package introduced <strong>autolog</strong>.
 The autolog feature provides automatic logging for <strong>dplyr</strong>,
 <strong>tidyr</strong>, and the <strong>sassy</strong> family of packages.  To use autolog,
