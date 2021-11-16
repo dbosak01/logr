@@ -32,7 +32,7 @@ these functions.
 The data for this example has been included in the **logr** package as an
 external data file.  It may be accessed using the `system.file()` function
 as shown below, or downloaded directly from the **logr** GitHub site 
-[here](https://github.com/dbosak01/logr/inst/extdata/DM.csv)
+[here](https://raw.githubusercontent.com/dbosak01/logr/master/inst/extdata/DM.csv)
 
 ```{r eval=FALSE, echo=TRUE}
 library(tidyverse)
