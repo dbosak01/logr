@@ -8,7 +8,9 @@ log_open(file_name = "", logdir = TRUE, show_notes = TRUE, autolog = NULL)
 }
 \arguments{
 \item{file_name}{The name of the log file.  If no path is specified, the
-working directory will be used.}
+working directory will be used.  As of v1.2.7, the name and path of the
+program or script will be used as a default if the \code{file_name} parameter
+is not supplied.}
 
 \item{logdir}{Send the log to a log directory named "log".  If the log
 directory does not exist, the function will create it.  Valid values are
@@ -41,6 +43,10 @@ The \code{file_name} parameter may be a full path, a relative path, or
 a file name.  An relative path or file name will be assumed to be relative
 to the current working directory.  If the \code{file_name} does
 not have a '.log' extension, the \code{log_open} function will add it.
+
+As of v1.2.7, if the \code{file_name} parameter is not supplied,
+the function will use the program/script name as the default
+log file name, and the program/script path as the default path.
 
 If requested in the \code{logdir} parameter, the \code{log_open}
 function will write to a 'log' subdirectory of the path specified in the

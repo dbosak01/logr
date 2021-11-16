@@ -169,7 +169,9 @@
     <tr>
       <th>file_name</th>
       <td><p>The name of the log file.  If no path is specified, the
-working directory will be used.</p></td>
+working directory will be used.  As of v1.2.7, the name and path of the
+program or script will be used as a default if the <code>file_name</code> parameter
+is not supplied.</p></td>
     </tr>
     <tr>
       <th>logdir</th>
@@ -207,6 +209,9 @@ clears existing log files, and initiates a new log.</p>
 a file name.  An relative path or file name will be assumed to be relative
 to the current working directory.  If the <code>file_name</code> does
 not have a '.log' extension, the <code>log_open</code> function will add it.</p>
+<p>As of v1.2.7, if the <code>file_name</code> parameter is not supplied,
+the function will use the program/script name as the default
+log file name, and the program/script path as the default path.</p>
 <p>If requested in the <code>logdir</code> parameter, the <code>log_open</code>
 function will write to a 'log' subdirectory of the path specified in the
 <code>file_name</code>.  If the 'log' subdirectory does not exist,
