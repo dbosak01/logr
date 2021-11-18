@@ -133,3 +133,4 @@ following articles:
 * [Global Options](logr-globals.html)
 * [Aliases for log_print()](logr-put.html)
 * [tidylog Integration](logr-tidylog.html)
+* [Complete Example](logr-example1.html)
