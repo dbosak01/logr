@@ -162,7 +162,7 @@ print(pth)</code></pre>
 <h3 class="hasAnchor">
 <a href="#nolog" class="anchor"></a>How come it didn’t log anything?</h3>
 <p><strong>Q:</strong> I am able to create a log. But it doesn’t contain anything. Just a header and footer. How come nothing was logged?</p>
-<p><strong>A:</strong> The <strong>logr</strong> log is not a fully automatic log, such as a SAS log. The primary way to get something logged is to log it explicitly with <code><a href="../reference/log_print.html">log_print()</a></code> or <code><a href="../reference/log_print.html">put()</a></code>. This is the only way to guarantee that something will be logged. Generally, if you want a complete log, it is best to sprinkle these functions liberally throughout the program, logging anything you feel is relevant.</p>
+<p><strong>A:</strong> The <strong>logr</strong> log is not a fully automatic log, such as a SAS® log. The primary way to get something logged is to log it explicitly with <code><a href="../reference/log_print.html">log_print()</a></code> or <code><a href="../reference/log_print.html">put()</a></code>. This is the only way to guarantee that something will be logged. Generally, if you want a complete log, it is best to sprinkle these functions liberally throughout the program, logging anything you feel is relevant.</p>
 <p>The other way to get something to log is by using the <strong>autolog</strong> feature. This feature can be turned on in one of two ways:<br>
 1. Set the <code>autolog</code> parameter on the <code><a href="../reference/log_open.html">log_open()</a></code> function to TRUE.<br>
 2. Set the “logr.autolog” option using an <code><a href="https://rdrr.io/r/base/options.html">options()</a></code> function, like so:</p>
@@ -207,7 +207,7 @@ lf &lt;- log_open(nm)
 <div id="code" class="section level3">
 <h3 class="hasAnchor">
 <a href="#code" class="anchor"></a>How do I log my code?</h3>
-<p><strong>Q:</strong> In SAS there is an option to log all the code in my program at the top of the log. I like this because it is a good record of my program at the time it was run. Is there a similar option in <strong>logr</strong>?</p>
+<p><strong>Q:</strong> In SAS® there is an option to log all the code in my program at the top of the log. I like this because it is a good record of my program at the time it was run. Is there a similar option in <strong>logr</strong>?</p>
 <p><strong>A:</strong> There is not an option, but there is a <code><a href="../reference/log_code.html">log_code()</a></code> function that will allow you to accomplish the same thing. You just call the <code><a href="../reference/log_code.html">log_code()</a></code> function at the point where you want the code logged. Normally this would be at the top of the program, after the call to <code><a href="../reference/log_open.html">log_open()</a></code>. Like this:</p>
 <pre><code># Open log
 log_open("mylog.log")
@@ -224,7 +224,7 @@ log_code()
 <div id="symbolgen" class="section level3">
 <h3 class="hasAnchor">
 <a href="#symbolgen" class="anchor"></a>How do I turn on symbolgen?</h3>
-<p><strong>Q:</strong> In SAS there is an option called <em>symbolgen</em> that will log all the variable values in my program. This option is useful for debugging. Is there a similar option in <strong>logr</strong>?</p>
+<p><strong>Q:</strong> In SAS® there is an option called <em>symbolgen</em> that will log all the variable values in my program. This option is useful for debugging. Is there a similar option in <strong>logr</strong>?</p>
 <p><strong>A:</strong> Not really. You can log the values of individual variables by sending them to the log with a <code><a href="../reference/log_print.html">put()</a></code> function. You can also log the entire environment with all variable values like this:</p>
 <pre><code># Open log
 log_open("test.log")
@@ -234,7 +234,7 @@ put(ls().str())
 
 # Close log
 log_close()</code></pre>
-<p>Otherwise, it is better to debug R programs interactively. The interactive debugging features in R are much better than in SAS. The <strong>logr</strong> log is geared more toward recording the execution of your program than debugging.</p>
+<p>Otherwise, it is better to debug R programs interactively. The interactive debugging features in R are much better than in SAS®. The <strong>logr</strong> log is geared more toward recording the execution of your program than debugging.</p>
 <p><a href="#top">top</a></p>
 <hr>
 </div>
@@ -269,7 +269,7 @@ log_close()</code></pre>
 <h3 class="hasAnchor">
 <a href="#put" class="anchor"></a>How is put() different from log_print()?</h3>
 <p><strong>Q:</strong> There is another function <code><a href="../reference/log_print.html">put()</a></code> that seems similar to <code><a href="../reference/log_print.html">log_print()</a></code>. What is the difference between them?</p>
-<p><strong>A:</strong> There is no difference in functionality. <code><a href="../reference/log_print.html">put()</a></code> is a direct alias of <code><a href="../reference/log_print.html">log_print()</a></code>. The only difference is that <code><a href="../reference/log_print.html">put()</a></code> is faster to type. It is also easy to remember for anyone who has used SAS software. The <code><a href="../reference/log_print.html">put()</a></code> function in the <strong>logr</strong> package does the same thing as the <code>%put()</code> function in SAS. So this alias will warm the hearts of current/former SAS programmers.</p>
+<p><strong>A:</strong> There is no difference in functionality. <code><a href="../reference/log_print.html">put()</a></code> is a direct alias of <code><a href="../reference/log_print.html">log_print()</a></code>. The only difference is that <code><a href="../reference/log_print.html">put()</a></code> is faster to type. It is also easy to remember for anyone who has used SAS® software. The <code><a href="../reference/log_print.html">put()</a></code> function in the <strong>logr</strong> package does the same thing as the <code>%put()</code> function in SAS®. So this alias will warm the hearts of current/former SAS® programmers.</p>
 <p><a href="#top">top</a></p>
 <hr>
 </div>

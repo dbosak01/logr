@@ -84,7 +84,7 @@ print(pth)
 **Q:** I am able to create a log.  But it doesn't contain anything.  Just
 a header and footer.  How come nothing was logged?
 
-**A:** The **logr** log is not a fully automatic log, such as a SAS log.
+**A:** The **logr** log is not a fully automatic log, such as a SAS® log.
 The primary way to get something logged is to log it explicitly with 
 `log_print()` or `put()`.  This is the only way to guarantee that something
 will be logged.  Generally, if you want a complete log, it is best to 
@@ -171,7 +171,7 @@ adjust the codes on the `format()` function to your liking.
 
 ### How do I log my code? {#code}
 
-**Q:** In SAS there is an option to log all the code in my program at the 
+**Q:** In SAS® there is an option to log all the code in my program at the 
 top of the log.  I like this because it is a good record of my program
 at the time it was run.  Is there a similar option in **logr**?
 
@@ -201,7 +201,7 @@ from the rest of your log.
 
 ### How do I turn on symbolgen? {#symbolgen}
 
-**Q:** In SAS there is an option called _symbolgen_ that will log all the
+**Q:** In SAS® there is an option called _symbolgen_ that will log all the
 variable values in my program.  This option is useful for debugging.  Is there
 a similar option in **logr**?
 
@@ -220,7 +220,7 @@ put(ls().str())
 log_close()
 ```
 Otherwise, it is better to debug R programs interactively.  The interactive
-debugging features in R are much better than in SAS.  The **logr** log is geared
+debugging features in R are much better than in SAS®.  The **logr** log is geared
 more toward recording the execution of your program than debugging.
 
 [top](#top)
@@ -275,9 +275,9 @@ is the difference between them?
 
 **A:** There is no difference in functionality.  `put()` is a direct alias of 
 `log_print()`.  The only difference is that `put()` is faster to type.  It is also
-easy to remember for anyone who has used SAS software.  The `put()`
-function in the **logr** package does the same thing as the `%put()` function in SAS.
-So this alias will warm the hearts of current/former SAS programmers.
+easy to remember for anyone who has used SAS® software.  The `put()`
+function in the **logr** package does the same thing as the `%put()` function in SAS®.
+So this alias will warm the hearts of current/former SAS® programmers.
 
 [top](#top)
 
