@@ -119,6 +119,9 @@
 
     
     
+<div id="program" class="section level2">
+<h2 class="hasAnchor">
+<a href="#program" class="anchor"></a>Program</h2>
 <p>The previous examples in the <strong>logr</strong> documentation were intentionally simplified to focus on the workings of a particular function. It is helpful, however, to also view <strong>logr</strong> functions in the context of a complete program. The following example shows a complete program. The example illustrates how <strong>logr</strong> functions work together, and interact with <strong>tidyverse</strong> and <strong>sassy</strong> functions to create a comprehensive log.</p>
 <p>This example has been chosen because it incorporates many of the functions that will log automatically. If you want to maximize the auto-generation features of <strong>logr</strong>, take note of these functions.</p>
 <p>The data for this example has been included in the <strong>logr</strong> package as an external data file. It may be accessed using the <code><a href="https://rdrr.io/r/base/system.file.html">system.file()</a></code> function as shown below, or downloaded directly from the <strong>logr</strong> GitHub site <a href="https://raw.githubusercontent.com/dbosak01/logr/master/inst/extdata/DM.csv">here</a></p>
@@ -244,6 +247,10 @@
 
 <span class="co"># View Report</span>
 <span class="co"># file.show(res$modified_path)</span></code></pre></div>
+</div>
+<div id="log" class="section level2">
+<h2 class="hasAnchor">
+<a href="#log" class="anchor"></a>Log</h2>
 <p>The above program produces the following log:</p>
 <pre><code>=========================================================================
 Log Path: C:/Users/dbosa/AppData/Local/Temp/Rtmp6DW7BF/log/example1.log
@@ -385,7 +392,7 @@ Load the data
 
 # library 'sdtm': 8 items
 - attributes: csv not loaded
-- path: C:/Users/dbosa/Documents/R/win-library/4.1/libr/extdata
+- path: C:/Users/dbosa/Documents/R/win-library/4.1/logr/extdata
 - items:
   Name Extension Rows Cols     Size        LastModified
 1   AE       csv  150   27  88.3 Kb 2021-10-08 15:02:15
@@ -510,13 +517,20 @@ NOTE: Elapsed Time in seconds: 0.00399112701416016
 Log End Time: 2021-11-16 08:41:19
 Log Elapsed Time: 0 00:00:01
 =========================================================================</code></pre>
+</div>
+<div id="output" class="section level2">
+<h2 class="hasAnchor">
+<a href="#output" class="anchor"></a>Output</h2>
 <p>Here is the report produced by the sample program above:</p>
 <p><img src="../man/images/example1a.png"><img src="../man/images/example1b.png"><img src="../man/images/example1c.png"></p>
+</div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
 
-      </div>
+        <nav id="toc" data-toggle="toc"><h2 data-toc-skip>Contents</h2>
+    </nav>
+</div>
 
 </div>
 

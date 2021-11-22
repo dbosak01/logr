@@ -16,6 +16,7 @@ knitr::opts_chunk$set(
 options(rmarkdown.html_vignette.check_title = FALSE)
 
 ```
+## Program
 
 The previous examples in the **logr** documentation were intentionally
 simplified to focus on the workings of a particular function.  It is helpful,
@@ -160,6 +161,8 @@ writeLines(readLines(lf, encoding = "UTF-8"))
 
 ```
 
+## Log
+
 The above program produces the following log:
 ```
 =========================================================================
@@ -302,7 +305,7 @@ Load the data
 
 # library 'sdtm': 8 items
 - attributes: csv not loaded
-- path: C:/Users/dbosa/Documents/R/win-library/4.1/libr/extdata
+- path: C:/Users/dbosa/Documents/R/win-library/4.1/logr/extdata
 - items:
   Name Extension Rows Cols     Size        LastModified
 1   AE       csv  150   27  88.3 Kb 2021-10-08 15:02:15
@@ -428,6 +431,8 @@ Log End Time: 2021-11-16 08:41:19
 Log Elapsed Time: 0 00:00:01
 =========================================================================
 ```
+
+## Output
 
 Here is the report produced by the sample program above:
 
