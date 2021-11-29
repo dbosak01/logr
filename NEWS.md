@@ -1,3 +1,7 @@
+# logr 1.2.8
+
+* Ceased redundant printing of tidylog messages to console.
+
 # logr 1.2.7
 
 * Use current script path and name for log file name if not supplied by user.

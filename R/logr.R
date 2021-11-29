@@ -207,7 +207,7 @@ log_open <- function(file_name = "", logdir = TRUE, show_notes = TRUE,
       #print("tidylog was not loaded")
     }
    
-    options("tidylog.display" = list(log_print)) 
+    options("tidylog.display" = list(log_hook)) 
     #print("tidylog attached")
   }
   
