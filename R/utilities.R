@@ -88,7 +88,7 @@ print_log_footer <- function(has_warnings = FALSE) {
   # Calculate total elapsed execution time
   ts <- e$log_start_time
   #tn <- as.POSIXct(as.double(ts), origin = "1970-01-01")
-  lt <-  (tc - ts) 
+  lt <-  difftime(tc, ts, units = "secs") 
   
   # Print the log footer
   log_quiet(paste(separator), blank_after = FALSE)
