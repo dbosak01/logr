@@ -93,7 +93,7 @@ print_log_footer <- function(has_warnings = FALSE) {
   # Print the log footer
   log_quiet(paste(separator), blank_after = FALSE)
   log_quiet(paste("Log End Time:", tc),  blank_after = FALSE)
-  log_quiet(paste("Log Elapsed Time:", dhms(as.numeric(lt) * 60)), blank_after = FALSE)
+  log_quiet(paste("Log Elapsed Time:", dhms(as.numeric(lt))), blank_after = FALSE)
   log_quiet(paste(separator), blank_after = FALSE)
 }
 
