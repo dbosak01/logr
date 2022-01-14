@@ -1,6 +1,7 @@
 # logr 1.2.8
 
 * Ceased redundant printing of tidylog messages to console.
+* Fixed bug in elapsed time in log footer.
 
 # logr 1.2.7
 
