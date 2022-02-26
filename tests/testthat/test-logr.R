@@ -156,8 +156,8 @@ test_that("the logr package can create a log with error", {
   
   lf <- log_open(file.path(tmp, "test.log"))
   log_print("Here is the first log message")
-  expect_error(stop("here is a test warning"))
-  
+  expect_error(stop("here is a test error"))
+  #stop("here is a test error")
   
   mp <- e$msg_path
   log_close()
