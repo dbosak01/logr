@@ -620,10 +620,10 @@ error_handler <- function() {
   
   log_print(geterrmessage(), hide_notes = TRUE, blank_after = FALSE)
   log_print("Traceback:", hide_notes = TRUE, blank_after = FALSE)
-  log_print(capture.output(traceback(1, max.lines = 1000)))
+  log_print(capture.output(traceback(7, max.lines = 1000)))
   log_quiet(geterrmessage(), msg = TRUE, blank_after = FALSE)
   log_quiet("Traceback:", msg = TRUE, blank_after = FALSE)
-  log_quiet(capture.output(traceback(1, max.lines = 1000)), msg = TRUE)
+  log_quiet(capture.output(traceback(7, max.lines = 1000)), msg = TRUE)
 
   
 }

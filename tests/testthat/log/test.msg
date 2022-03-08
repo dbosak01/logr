@@ -1,12 +1,6 @@
 Error: here is a test error
 
 Traceback:
-12: traceback(1, max.lines = 200)
-11: withVisible(...elt(i))
-10: capture.output(traceback(1, max.lines = 200)) at unicode.R#16
-9: doTryCatch(return(expr), name, parentenv, handler)
-8: tryCatchOne(expr, names, parentenv, handlers[[1L]])
-7: tryCatchList(expr, classes, parentenv, handlers)
 6: tryCatch({
        f <- file(file_path, open = "a", encoding = "native.enc")
        if (all(class(x) == "character")) {
@@ -31,15 +25,15 @@ Traceback:
 5: print_windows(x, file_path, blank_after, hide_notes, ...) at logr.R#435
 4: log_print(x, console = FALSE, blank_after = blank_after, hide_notes = TRUE, 
        msg = msg) at logr.R#494
-3: log_quiet(capture.output(traceback(1, max.lines = 200)), msg = TRUE) at logr.R#626
+3: log_quiet(capture.output(traceback(7, max.lines = 1000)), msg = TRUE) at logr.R#626
 2: (function () 
    {
        log_print(geterrmessage(), hide_notes = TRUE, blank_after = FALSE)
        log_print("Traceback:", hide_notes = TRUE, blank_after = FALSE)
-       log_print(capture.output(traceback(1, max.lines = 200)))
+       log_print(capture.output(traceback(7, max.lines = 1000)))
        log_quiet(geterrmessage(), msg = TRUE, blank_after = FALSE)
        log_quiet("Traceback:", msg = TRUE, blank_after = FALSE)
-       log_quiet(capture.output(traceback(1, max.lines = 200)), 
+       log_quiet(capture.output(traceback(7, max.lines = 1000)), 
            msg = TRUE)
    })()
 1: stop("here is a test error")
