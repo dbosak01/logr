@@ -1,8 +1,6 @@
 # logr 1.2.9
 
 * Added `traceback()` message when program errors.
-* Added variable name to put statements.
-
 
 # logr 1.2.8
 
