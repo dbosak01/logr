@@ -149,7 +149,6 @@ test_that("logr.notes = TRUE works as expected.", {
 })
 
 
-
 test_that("the logr package can create a log with error", {
   
   tmp <- base_path
