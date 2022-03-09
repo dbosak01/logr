@@ -68,8 +68,9 @@ print_windows <- function(x, file_path, blank_after, hide_notes, ...) {
         }
         
         # Print log timestamps
+        ts <- get_time_diff(tc)
         writeLines(paste("NOTE: Log Print Time: ", tc), con = f, useBytes = TRUE)
-        writeLines(paste("NOTE: Elapsed Time in seconds:", get_time_diff(tc)), 
+        writeLines(paste("NOTE: Elapsed Time:", ts, attributes(ts)$units), 
                    con = f, useBytes = TRUE)
         writeLines("", con = f, useBytes = TRUE)
       }
@@ -144,8 +145,9 @@ print_other <- function(x, file_path, blank_after, hide_notes, ...) {
         }
         
         # Print log timestamps
+        ts <- get_time_diff(tc)
         cat(paste("NOTE: Log Print Time: ", tc), "\n")
-        cat(paste("NOTE: Elapsed Time in seconds:", get_time_diff(tc)), "\n")
+        cat(paste("NOTE: Elapsed Time:", ts, attributes(ts)$units), "\n")
         cat("\n")
       }
     }
