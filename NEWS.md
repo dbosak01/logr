@@ -1,6 +1,6 @@
 # logr 1.3.0
 
-* Fixed but in elapsed time in notes.
+* Fixed bug in elapsed time in notes.
 * Added log_compare() function.
 
 # logr 1.2.9
