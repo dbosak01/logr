@@ -26,6 +26,9 @@ navbar:
   structure:
     right: [home, intro, articles, reference, faq, news, github]
   components:
+    training:
+      text: Training
+      href: ./articles/logr-training.html
     faq:
       text: FAQ
       href: ./articles/logr-faq.html
