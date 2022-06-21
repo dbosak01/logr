@@ -504,7 +504,7 @@ log_hook <- function(x) {
     if (e$log_status == "open" & e$autolog == TRUE) {
       
       # Pass everything to log_print()
-      log_print(x, console = FALSE, blank_after = TRUE, 
+      log_print(x, console = FALSE, blank_after = e$log_blank_after, 
                 msg = FALSE, hide_notes = FALSE)
     
     }
