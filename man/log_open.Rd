@@ -110,7 +110,8 @@ set the \code{autolog} parameter to TRUE, or set the global option
 prior versions, autolog is disabled by default.
 
 The "compact" parameter will remove all the blank lines between log
-entries.  This option makes the log harder to read.  The benefit is
+entries.  The downside of a compact log is that it makes the log
+harder to read.  The benefit is
 that it will take up less space.  The global option "logr.compact" will
 achieve the same result.
 }
