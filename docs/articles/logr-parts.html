@@ -38,7 +38,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">logr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.1</span>
       </span>
     </div>
 
@@ -106,7 +106,7 @@
 
       
 
-      </header><script src="logr-parts_files/header-attrs-2.13/header-attrs.js"></script><div class="row">
+      </header><script src="logr-parts_files/header-attrs-2.14/header-attrs.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Log Parts</h1>
@@ -123,25 +123,43 @@
 <div id="log-header" class="section level4">
 <h4 class="hasAnchor">
 <a href="#log-header" class="anchor"></a>Log Header</h4>
-<p>The log header provides an introduction to your log. The header block contains the path of the log file, the working directory, the name of the user, a date-time stamp, and other useful information concerning the operating environment.</p>
+<p>The log header provides an introduction to your log. The header block
+contains the path of the log file, the working directory, the name of
+the user, a date-time stamp, and other useful information concerning the
+operating environment.</p>
 </div>
 <div id="log-body" class="section level4">
 <h4 class="hasAnchor">
 <a href="#log-body" class="anchor"></a>Log Body</h4>
-<p>The log body comprises the primary content of your log. The body will be populated with print-outs from the objects you send to the log with <code><a href="../reference/log_print.html">log_print()</a></code>, <code><a href="../reference/log_print.html">put()</a></code> and <code><a href="../reference/log_print.html">sep()</a></code>. The objects will be printed to the log just as they are printed to the console.</p>
-<p>Optional notes will be written to the log for every call to <code><a href="../reference/log_print.html">log_print()</a></code> or <code><a href="../reference/log_print.html">put()</a></code>. The notes will follow the printing of the object, and will include a date-time stamp and the elapsed time since the last call. If the object is of class <code>data.frame</code> the number of rows and columns will also be noted.</p>
-<p>Notes can be turned off with the <code>show_notes</code> parameter on <code><a href="../reference/log_open.html">log_open()</a></code>, or by setting the global option <code>logr.notes</code> to FALSE.</p>
+<p>The log body comprises the primary content of your log. The body will
+be populated with print-outs from the objects you send to the log with
+<code><a href="../reference/log_print.html">log_print()</a></code>, <code><a href="../reference/log_print.html">put()</a></code> and <code><a href="../reference/log_print.html">sep()</a></code>. The
+objects will be printed to the log just as they are printed to the
+console.</p>
+<p>Optional notes will be written to the log for every call to
+<code><a href="../reference/log_print.html">log_print()</a></code> or <code><a href="../reference/log_print.html">put()</a></code>. The notes will follow
+the printing of the object, and will include a date-time stamp and the
+elapsed time since the last call. If the object is of class
+<code>data.frame</code> the number of rows and columns will also be
+noted.</p>
+<p>Notes can be turned off with the <code>show_notes</code> parameter on
+<code><a href="../reference/log_open.html">log_open()</a></code>, or by setting the global option
+<code>logr.notes</code> to FALSE.</p>
 </div>
 <div id="log-footer" class="section level4">
 <h4 class="hasAnchor">
 <a href="#log-footer" class="anchor"></a>Log Footer</h4>
-<p>The log footer concludes the log with another date-time stamp for the log end time, and a total elapsed time for the entire script.</p>
-<p>Note that during batch runs or when sourcing a script, the log footer may not be generated if the script errors. Instead, the last line of the log will be the error message.</p>
+<p>The log footer concludes the log with another date-time stamp for the
+log end time, and a total elapsed time for the entire script.</p>
+<p>Note that during batch runs or when sourcing a script, the log footer
+may not be generated if the script errors. Instead, the last line of the
+log will be the error message.</p>
 </div>
 <div id="example" class="section level4">
 <h4 class="hasAnchor">
 <a href="#example" class="anchor"></a>Example</h4>
-<p>Here is an example log showing each of the log parts described above:</p>
+<p>Here is an example log showing each of the log parts described
+above:</p>
 <pre><code>========================================================================= 
 Log Path: C:/Users/dbosa/AppData/Local/Temp/RtmpQtOzhy/log/test.log 
 Working Directory: C:/packages/logr 

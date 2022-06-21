@@ -34,6 +34,7 @@ on the links below to navigate to the full question and answer content.
 * [What are the "Base Packages" and "Other Packages" lines in the header?](#packages)
 * [How come the warnings are at the bottom of the log?](#warnings)
 * [How come only the last warning is logged?](#last)
+* [How can I get rid of the blank lines?](#compact)
 
 
 ## Content
@@ -349,6 +350,22 @@ to trigger and log warnings at the point where the warning is generated,
 please submit an issue to the **logr** Github 
 [issue list](https://github.com/dbosak01/logr/issues) and I will add it to
 the package.
+
+[top](#top)
+
+******
+
+### How can I get rid of the blank lines? {#compact}
+
+**Q:** I want to remove the blank lines in the log, to make it as small
+as possible.  I see there is a 'blank_after' parameter on `log_print()` to
+remove the blank line for a single log entry.  But how can I get rid of all of
+them?
+
+**A:** There is a parameter on the `log_open()` function called "compact" 
+that will remove all the blank lines between log entries.  Simply set
+compact = TRUE to remove all blank lines from the log.  You may acheive 
+the same result by setting the global option logr.compact = TRUE.
 
 [top](#top)
 

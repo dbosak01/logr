@@ -82,7 +82,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">logr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.1</span>
       </span>
     </div>
 
@@ -164,7 +164,13 @@
     <p>A function to initialize the log file.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>log_open</span><span class='op'>(</span>file_name <span class='op'>=</span> <span class='st'>""</span>, logdir <span class='op'>=</span> <span class='cn'>TRUE</span>, show_notes <span class='op'>=</span> <span class='cn'>TRUE</span>, autolog <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>log_open</span><span class='op'>(</span>
+  file_name <span class='op'>=</span> <span class='st'>""</span>,
+  logdir <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  show_notes <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  autolog <span class='op'>=</span> <span class='cn'>NULL</span>,
+  compact <span class='op'>=</span> <span class='cn'>FALSE</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -196,6 +202,13 @@ set the "logr.autolog" option to TRUE. A FALSE value on this parameter
 will override the global option.  The global option
 will override a NULL on this parameter. Default is that autolog is
 disabled.</p></td>
+    </tr>
+    <tr>
+      <th>compact</th>
+      <td><p>When the compact option is TRUE, <strong>logr</strong> will
+minimize the number of blank spaces in the log.  This option generates
+the same logging information, but in less space. The "logr.compact" global
+option does the same thing.</p></td>
     </tr>
     </table>
 
@@ -256,6 +269,10 @@ The autolog feature provides automatic logging for <strong>dplyr</strong>,
 set the <code>autolog</code> parameter to TRUE, or set the global option
 <code>logr.autolog</code> to TRUE.  To maintain backward compatibility with
 prior versions, autolog is disabled by default.</p>
+<p>The "compact" parameter will remove all the blank lines between log
+entries.  This option makes the log harder to read.  The benefit is
+that it will take up less space.  The global option "logr.compact" will
+achieve the same result.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p><code><a href='log_print.html'>log_print</a></code> for printing to the log (and console),

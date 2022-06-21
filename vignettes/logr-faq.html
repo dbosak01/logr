@@ -14,7 +14,19 @@
 
 <title>Frequently Asked Questions</title>
 
-<script src="data:application/javascript;base64,Ly8gUGFuZG9jIDIuOSBhZGRzIGF0dHJpYnV0ZXMgb24gYm90aCBoZWFkZXIgYW5kIGRpdi4gV2UgcmVtb3ZlIHRoZSBmb3JtZXIgKHRvCi8vIGJlIGNvbXBhdGlibGUgd2l0aCB0aGUgYmVoYXZpb3Igb2YgUGFuZG9jIDwgMi44KS4KZG9jdW1lbnQuYWRkRXZlbnRMaXN0ZW5lcignRE9NQ29udGVudExvYWRlZCcsIGZ1bmN0aW9uKGUpIHsKICB2YXIgaHMgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yQWxsKCJkaXYuc2VjdGlvbltjbGFzcyo9J2xldmVsJ10gPiA6Zmlyc3QtY2hpbGQiKTsKICB2YXIgaSwgaCwgYTsKICBmb3IgKGkgPSAwOyBpIDwgaHMubGVuZ3RoOyBpKyspIHsKICAgIGggPSBoc1tpXTsKICAgIGlmICghL15oWzEtNl0kL2kudGVzdChoLnRhZ05hbWUpKSBjb250aW51ZTsgIC8vIGl0IHNob3VsZCBiZSBhIGhlYWRlciBoMS1oNgogICAgYSA9IGguYXR0cmlidXRlczsKICAgIHdoaWxlIChhLmxlbmd0aCA+IDApIGgucmVtb3ZlQXR0cmlidXRlKGFbMF0ubmFtZSk7CiAgfQp9KTsK"></script>
+<script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
+// be compatible with the behavior of Pandoc < 2.8).
+document.addEventListener('DOMContentLoaded', function(e) {
+  var hs = document.querySelectorAll("div.section[class*='level'] > :first-child");
+  var i, h, a;
+  for (i = 0; i < hs.length; i++) {
+    h = hs[i];
+    if (!/^h[1-6]$/i.test(h.tagName)) continue;  // it should be a header h1-h6
+    a = h.attributes;
+    while (a.length > 0) h.removeAttribute(a[0].name);
+  }
+});
+</script>
 
 <style type="text/css">
   code{white-space: pre-wrap;}
@@ -30,7 +42,188 @@
 
 
 
-<link rel="stylesheet" href="data:text/css,body%20%7B%0Abackground%2Dcolor%3A%20%23fff%3B%0Amargin%3A%201em%20auto%3B%0Amax%2Dwidth%3A%20700px%3B%0Aoverflow%3A%20visible%3B%0Apadding%2Dleft%3A%202em%3B%0Apadding%2Dright%3A%202em%3B%0Afont%2Dfamily%3A%20%22Open%20Sans%22%2C%20%22Helvetica%20Neue%22%2C%20Helvetica%2C%20Arial%2C%20sans%2Dserif%3B%0Afont%2Dsize%3A%2014px%3B%0Aline%2Dheight%3A%201%2E35%3B%0A%7D%0A%23TOC%20%7B%0Aclear%3A%20both%3B%0Amargin%3A%200%200%2010px%2010px%3B%0Apadding%3A%204px%3B%0Awidth%3A%20400px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Aborder%2Dradius%3A%205px%3B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Afont%2Dsize%3A%2013px%3B%0Aline%2Dheight%3A%201%2E3%3B%0A%7D%0A%23TOC%20%2Etoctitle%20%7B%0Afont%2Dweight%3A%20bold%3B%0Afont%2Dsize%3A%2015px%3B%0Amargin%2Dleft%3A%205px%3B%0A%7D%0A%23TOC%20ul%20%7B%0Apadding%2Dleft%3A%2040px%3B%0Amargin%2Dleft%3A%20%2D1%2E5em%3B%0Amargin%2Dtop%3A%205px%3B%0Amargin%2Dbottom%3A%205px%3B%0A%7D%0A%23TOC%20ul%20ul%20%7B%0Amargin%2Dleft%3A%20%2D2em%3B%0A%7D%0A%23TOC%20li%20%7B%0Aline%2Dheight%3A%2016px%3B%0A%7D%0Atable%20%7B%0Amargin%3A%201em%20auto%3B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dcolor%3A%20%23DDDDDD%3B%0Aborder%2Dstyle%3A%20outset%3B%0Aborder%2Dcollapse%3A%20collapse%3B%0A%7D%0Atable%20th%20%7B%0Aborder%2Dwidth%3A%202px%3B%0Apadding%3A%205px%3B%0Aborder%2Dstyle%3A%20inset%3B%0A%7D%0Atable%20td%20%7B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dstyle%3A%20inset%3B%0Aline%2Dheight%3A%2018px%3B%0Apadding%3A%205px%205px%3B%0A%7D%0Atable%2C%20table%20th%2C%20table%20td%20%7B%0Aborder%2Dleft%2Dstyle%3A%20none%3B%0Aborder%2Dright%2Dstyle%3A%20none%3B%0A%7D%0Atable%20thead%2C%20table%20tr%2Eeven%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Ap%20%7B%0Amargin%3A%200%2E5em%200%3B%0A%7D%0Ablockquote%20%7B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Apadding%3A%200%2E25em%200%2E75em%3B%0A%7D%0Ahr%20%7B%0Aborder%2Dstyle%3A%20solid%3B%0Aborder%3A%20none%3B%0Aborder%2Dtop%3A%201px%20solid%20%23777%3B%0Amargin%3A%2028px%200%3B%0A%7D%0Adl%20%7B%0Amargin%2Dleft%3A%200%3B%0A%7D%0Adl%20dd%20%7B%0Amargin%2Dbottom%3A%2013px%3B%0Amargin%2Dleft%3A%2013px%3B%0A%7D%0Adl%20dt%20%7B%0Afont%2Dweight%3A%20bold%3B%0A%7D%0Aul%20%7B%0Amargin%2Dtop%3A%200%3B%0A%7D%0Aul%20li%20%7B%0Alist%2Dstyle%3A%20circle%20outside%3B%0A%7D%0Aul%20ul%20%7B%0Amargin%2Dbottom%3A%200%3B%0A%7D%0Apre%2C%20code%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0Aborder%2Dradius%3A%203px%3B%0Acolor%3A%20%23333%3B%0Awhite%2Dspace%3A%20pre%2Dwrap%3B%20%0A%7D%0Apre%20%7B%0Aborder%2Dradius%3A%203px%3B%0Amargin%3A%205px%200px%2010px%200px%3B%0Apadding%3A%2010px%3B%0A%7D%0Apre%3Anot%28%5Bclass%5D%29%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Acode%20%7B%0Afont%2Dfamily%3A%20Consolas%2C%20Monaco%2C%20%27Courier%20New%27%2C%20monospace%3B%0Afont%2Dsize%3A%2085%25%3B%0A%7D%0Ap%20%3E%20code%2C%20li%20%3E%20code%20%7B%0Apadding%3A%202px%200px%3B%0A%7D%0Adiv%2Efigure%20%7B%0Atext%2Dalign%3A%20center%3B%0A%7D%0Aimg%20%7B%0Abackground%2Dcolor%3A%20%23FFFFFF%3B%0Apadding%3A%202px%3B%0Aborder%3A%201px%20solid%20%23DDDDDD%3B%0Aborder%2Dradius%3A%203px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Amargin%3A%200%205px%3B%0A%7D%0Ah1%20%7B%0Amargin%2Dtop%3A%200%3B%0Afont%2Dsize%3A%2035px%3B%0Aline%2Dheight%3A%2040px%3B%0A%7D%0Ah2%20%7B%0Aborder%2Dbottom%3A%204px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Apadding%2Dbottom%3A%202px%3B%0Afont%2Dsize%3A%20145%25%3B%0A%7D%0Ah3%20%7B%0Aborder%2Dbottom%3A%202px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Afont%2Dsize%3A%20120%25%3B%0A%7D%0Ah4%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23f7f7f7%3B%0Amargin%2Dleft%3A%208px%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Ah5%2C%20h6%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23ccc%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Aa%20%7B%0Acolor%3A%20%230033dd%3B%0Atext%2Ddecoration%3A%20none%3B%0A%7D%0Aa%3Ahover%20%7B%0Acolor%3A%20%236666ff%3B%20%7D%0Aa%3Avisited%20%7B%0Acolor%3A%20%23800080%3B%20%7D%0Aa%3Avisited%3Ahover%20%7B%0Acolor%3A%20%23BB00BB%3B%20%7D%0Aa%5Bhref%5E%3D%22http%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0Aa%5Bhref%5E%3D%22https%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0A%0Acode%20%3E%20span%2Ekw%20%7B%20color%3A%20%23555%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Edt%20%7B%20color%3A%20%23902000%3B%20%7D%20%0Acode%20%3E%20span%2Edv%20%7B%20color%3A%20%2340a070%3B%20%7D%20%0Acode%20%3E%20span%2Ebn%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Efl%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Ech%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Est%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Eco%20%7B%20color%3A%20%23888888%3B%20font%2Dstyle%3A%20italic%3B%20%7D%20%0Acode%20%3E%20span%2Eot%20%7B%20color%3A%20%23007020%3B%20%7D%20%0Acode%20%3E%20span%2Eal%20%7B%20color%3A%20%23ff0000%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Efu%20%7B%20color%3A%20%23900%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Eer%20%7B%20color%3A%20%23a61717%3B%20background%2Dcolor%3A%20%23e3d2d2%3B%20%7D%20%0A" type="text/css" />
+
+<style type="text/css">body {
+background-color: #fff;
+margin: 1em auto;
+max-width: 700px;
+overflow: visible;
+padding-left: 2em;
+padding-right: 2em;
+font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+font-size: 14px;
+line-height: 1.35;
+}
+#TOC {
+clear: both;
+margin: 0 0 10px 10px;
+padding: 4px;
+width: 400px;
+border: 1px solid #CCCCCC;
+border-radius: 5px;
+background-color: #f6f6f6;
+font-size: 13px;
+line-height: 1.3;
+}
+#TOC .toctitle {
+font-weight: bold;
+font-size: 15px;
+margin-left: 5px;
+}
+#TOC ul {
+padding-left: 40px;
+margin-left: -1.5em;
+margin-top: 5px;
+margin-bottom: 5px;
+}
+#TOC ul ul {
+margin-left: -2em;
+}
+#TOC li {
+line-height: 16px;
+}
+table {
+margin: 1em auto;
+border-width: 1px;
+border-color: #DDDDDD;
+border-style: outset;
+border-collapse: collapse;
+}
+table th {
+border-width: 2px;
+padding: 5px;
+border-style: inset;
+}
+table td {
+border-width: 1px;
+border-style: inset;
+line-height: 18px;
+padding: 5px 5px;
+}
+table, table th, table td {
+border-left-style: none;
+border-right-style: none;
+}
+table thead, table tr.even {
+background-color: #f7f7f7;
+}
+p {
+margin: 0.5em 0;
+}
+blockquote {
+background-color: #f6f6f6;
+padding: 0.25em 0.75em;
+}
+hr {
+border-style: solid;
+border: none;
+border-top: 1px solid #777;
+margin: 28px 0;
+}
+dl {
+margin-left: 0;
+}
+dl dd {
+margin-bottom: 13px;
+margin-left: 13px;
+}
+dl dt {
+font-weight: bold;
+}
+ul {
+margin-top: 0;
+}
+ul li {
+list-style: circle outside;
+}
+ul ul {
+margin-bottom: 0;
+}
+pre, code {
+background-color: #f7f7f7;
+border-radius: 3px;
+color: #333;
+white-space: pre-wrap; 
+}
+pre {
+border-radius: 3px;
+margin: 5px 0px 10px 0px;
+padding: 10px;
+}
+pre:not([class]) {
+background-color: #f7f7f7;
+}
+code {
+font-family: Consolas, Monaco, 'Courier New', monospace;
+font-size: 85%;
+}
+p > code, li > code {
+padding: 2px 0px;
+}
+div.figure {
+text-align: center;
+}
+img {
+background-color: #FFFFFF;
+padding: 2px;
+border: 1px solid #DDDDDD;
+border-radius: 3px;
+border: 1px solid #CCCCCC;
+margin: 0 5px;
+}
+h1 {
+margin-top: 0;
+font-size: 35px;
+line-height: 40px;
+}
+h2 {
+border-bottom: 4px solid #f7f7f7;
+padding-top: 10px;
+padding-bottom: 2px;
+font-size: 145%;
+}
+h3 {
+border-bottom: 2px solid #f7f7f7;
+padding-top: 10px;
+font-size: 120%;
+}
+h4 {
+border-bottom: 1px solid #f7f7f7;
+margin-left: 8px;
+font-size: 105%;
+}
+h5, h6 {
+border-bottom: 1px solid #ccc;
+font-size: 105%;
+}
+a {
+color: #0033dd;
+text-decoration: none;
+}
+a:hover {
+color: #6666ff; }
+a:visited {
+color: #800080; }
+a:visited:hover {
+color: #BB00BB; }
+a[href^="http:"] {
+text-decoration: underline; }
+a[href^="https:"] {
+text-decoration: underline; }
+
+code > span.kw { color: #555; font-weight: bold; } 
+code > span.dt { color: #902000; } 
+code > span.dv { color: #40a070; } 
+code > span.bn { color: #d14; } 
+code > span.fl { color: #d14; } 
+code > span.ch { color: #d14; } 
+code > span.st { color: #d14; } 
+code > span.co { color: #888888; font-style: italic; } 
+code > span.ot { color: #007020; } 
+code > span.al { color: #ff0000; font-weight: bold; } 
+code > span.fu { color: #900; font-weight: bold; } 
+code > span.er { color: #a61717; background-color: #e3d2d2; } 
+</style>
 
 
 
@@ -46,37 +239,59 @@
 
 
 
-<p>Below are some frequently asked questions about the <strong>logr</strong> package. Click on the links below to navigate to the full question and answer content.</p>
+<p>Below are some frequently asked questions about the
+<strong>logr</strong> package. Click on the links below to navigate to
+the full question and answer content.</p>
 <div id="top" class="section level2">
 <h2>Index</h2>
 <ul>
 <li><a href="#location">Where is my log?</a></li>
 <li><a href="#nolog">How come it didn’t log anything?</a></li>
 <li><a href="#name">How do I change the name of the log?</a></li>
-<li><a href="#timestamp">How do I add a timestamp to the log name?</a></li>
+<li><a href="#timestamp">How do I add a timestamp to the log
+name?</a></li>
 <li><a href="#code">How do I log my code?</a></li>
 <li><a href="#symbolgen">How do I turn on symbolgen?</a></li>
-<li><a href="#environment">How do I log environment variables and their values?</a></li>
+<li><a href="#environment">How do I log environment variables and their
+values?</a></li>
 <li><a href="#notes">How do I turn off the notes?</a></li>
 <li><a href="#put">How is put() different from log_print()?</a></li>
-<li><a href="#packages">What are the “Base Packages” and “Other Packages” lines in the header?</a></li>
-<li><a href="#warnings">How come the warnings are at the bottom of the log?</a></li>
+<li><a href="#packages">What are the “Base Packages” and “Other
+Packages” lines in the header?</a></li>
+<li><a href="#warnings">How come the warnings are at the bottom of the
+log?</a></li>
 <li><a href="#last">How come only the last warning is logged?</a></li>
+<li><a href="#compact">How can I get rid of the blank lines?</a></li>
 </ul>
 </div>
 <div id="content" class="section level2">
 <h2>Content</h2>
 <div id="location" class="section level3">
 <h3>Where is my log?</h3>
-<p><strong>Q:</strong> I followed the examples to add <strong>logr</strong> functions to my script, and I think I created a log. But I can’t find it. Where does the log go?</p>
-<p><strong>A:</strong> It depends on what you passed to the <code>file_name</code> parameter on the <code>log_open()</code> function.</p>
-<p>If you passed nothing, the log will be created in a subdirectory named “log” in the same directory as your program, and with the program name.</p>
-<p>If you passed a file name without a path, the log subdirectory will be created in your working directory, and the log will be named with the name you assigned it.</p>
-<p>If you passed a full path, it will be created in the full path, but will still be created in a subdirectory named “log” unless the <code>logdir</code> parameter on <code>log_open()</code> is set to FALSE.</p>
-<p>If you still can’t find it, add the following line to your program someplace after the call to <code>log_open()</code>:</p>
+<p><strong>Q:</strong> I followed the examples to add
+<strong>logr</strong> functions to my script, and I think I created a
+log. But I can’t find it. Where does the log go?</p>
+<p><strong>A:</strong> It depends on what you passed to the
+<code>file_name</code> parameter on the <code>log_open()</code>
+function.</p>
+<p>If you passed nothing, the log will be created in a subdirectory
+named “log” in the same directory as your program, and with the program
+name.</p>
+<p>If you passed a file name without a path, the log subdirectory will
+be created in your working directory, and the log will be named with the
+name you assigned it.</p>
+<p>If you passed a full path, it will be created in the full path, but
+will still be created in a subdirectory named “log” unless the
+<code>logdir</code> parameter on <code>log_open()</code> is set to
+FALSE.</p>
+<p>If you still can’t find it, add the following line to your program
+someplace after the call to <code>log_open()</code>:</p>
 <pre><code>print(log_path())</code></pre>
-<p>Then rerun the program. The path to the log will be printed to the console.</p>
-<p>Note that the <code>log_open()</code> function also returns the path to the log. You can save this path in a variable for easy access, like this:</p>
+<p>Then rerun the program. The path to the log will be printed to the
+console.</p>
+<p>Note that the <code>log_open()</code> function also returns the path
+to the log. You can save this path in a variable for easy access, like
+this:</p>
 <pre><code>pth &lt;- log_open()
 print(pth)</code></pre>
 <p><a href="#top">top</a></p>
@@ -84,51 +299,94 @@ print(pth)</code></pre>
 </div>
 <div id="nolog" class="section level3">
 <h3>How come it didn’t log anything?</h3>
-<p><strong>Q:</strong> I am able to create a log. But it doesn’t contain anything. Just a header and footer. How come nothing was logged?</p>
-<p><strong>A:</strong> The <strong>logr</strong> log is not a fully automatic log, such as a SAS® log. The primary way to get something logged is to log it explicitly with <code>log_print()</code> or <code>put()</code>. This is the only way to guarantee that something will be logged. Generally, if you want a complete log, it is best to sprinkle these functions liberally throughout the program, logging anything you feel is relevant.</p>
-<p>The other way to get something to log is by using the <strong>autolog</strong> feature. This feature can be turned on in one of two ways:<br />
-1. Set the <code>autolog</code> parameter on the <code>log_open()</code> function to TRUE.<br />
-2. Set the “logr.autolog” option using an <code>options()</code> function, like so:</p>
+<p><strong>Q:</strong> I am able to create a log. But it doesn’t contain
+anything. Just a header and footer. How come nothing was logged?</p>
+<p><strong>A:</strong> The <strong>logr</strong> log is not a fully
+automatic log, such as a SAS® log. The primary way to get something
+logged is to log it explicitly with <code>log_print()</code> or
+<code>put()</code>. This is the only way to guarantee that something
+will be logged. Generally, if you want a complete log, it is best to
+sprinkle these functions liberally throughout the program, logging
+anything you feel is relevant.</p>
+<p>The other way to get something to log is by using the
+<strong>autolog</strong> feature. This feature can be turned on in one
+of two ways:<br />
+1. Set the <code>autolog</code> parameter on the <code>log_open()</code>
+function to TRUE.<br />
+2. Set the “logr.autolog” option using an <code>options()</code>
+function, like so:</p>
 <pre><code>options(&quot;logr.autolog&quot; = TRUE)</code></pre>
-<p>The autolog feature will automatically log function calls from the <strong>dplyr</strong>, <strong>tidyr</strong>, and the <strong>sassy</strong> family of packages. It will not log Base R functions, or the functions from any other packages. It takes some experience to understand which functions will be automatically logged, and which will not.</p>
-<p>To maximize the autolog feature, it is a best practice to use <strong>tidyverse</strong> functions, rather than the Base R equivalents. These functions stand a better chance of being logged automatically.</p>
-<p>It is also a best practice to place a <code>put()</code> statement at the end of your <strong>dplyr</strong> pipelines. This is a very good habit to develop, and will greatly improve the quantity and quality of your logs. Here is an example:</p>
+<p>The autolog feature will automatically log function calls from the
+<strong>dplyr</strong>, <strong>tidyr</strong>, and the
+<strong>sassy</strong> family of packages. It will not log Base R
+functions, or the functions from any other packages. It takes some
+experience to understand which functions will be automatically logged,
+and which will not.</p>
+<p>To maximize the autolog feature, it is a best practice to use
+<strong>tidyverse</strong> functions, rather than the Base R
+equivalents. These functions stand a better chance of being logged
+automatically.</p>
+<p>It is also a best practice to place a <code>put()</code> statement at
+the end of your <strong>dplyr</strong> pipelines. This is a very good
+habit to develop, and will greatly improve the quantity and quality of
+your logs. Here is an example:</p>
 <pre><code>dat &lt;- mtcars %&gt;% 
        subset(mpg &lt; 20) %&gt;% 
        arrange(mpg) %&gt;% 
        put()
 </code></pre>
-<p>Note that the above <code>put()</code> statement has no effect on the resulting data frame. It simply logs the pipeline result before assigning it to the variable <code>dat</code>.</p>
+<p>Note that the above <code>put()</code> statement has no effect on the
+resulting data frame. It simply logs the pipeline result before
+assigning it to the variable <code>dat</code>.</p>
 <p><a href="#top">top</a></p>
 <hr />
 </div>
 <div id="name" class="section level3">
 <h3>How do I change the name of the log?</h3>
-<p><strong>Q:</strong> I have a log. But I don’t want the default name. How can I change it to something else?</p>
-<p><strong>A:</strong> The <code>file_name</code> parameter on the <code>log_open()</code> function controls the log name. You can set this parameter to be any log name you like. When the log is created, it will use the name set on this parameter. Example:</p>
+<p><strong>Q:</strong> I have a log. But I don’t want the default name.
+How can I change it to something else?</p>
+<p><strong>A:</strong> The <code>file_name</code> parameter on the
+<code>log_open()</code> function controls the log name. You can set this
+parameter to be any log name you like. When the log is created, it will
+use the name set on this parameter. Example:</p>
 <pre><code>log_open(&quot;MyCustomName.log&quot;)</code></pre>
 <p><a href="#top">top</a></p>
 <hr />
 </div>
 <div id="timestamp" class="section level3">
 <h3>How do I add a timestamp to the log name?</h3>
-<p><strong>Q:</strong> I have an R program that runs on a schedule every day. I want to keep the logs from this program for a certain period of time. But <strong>logr</strong> always overwrites the log from the last run. Is there a way to get a datestamp on the log name, so it won’t overwrite?</p>
-<p><strong>A:</strong> You can append the datestamp to the log name on the <code>file_name</code> parameter. Like this:</p>
+<p><strong>Q:</strong> I have an R program that runs on a schedule every
+day. I want to keep the logs from this program for a certain period of
+time. But <strong>logr</strong> always overwrites the log from the last
+run. Is there a way to get a datestamp on the log name, so it won’t
+overwrite?</p>
+<p><strong>A:</strong> You can append the datestamp to the log name on
+the <code>file_name</code> parameter. Like this:</p>
 <pre><code># Concatenate log name with datestamp
 nm &lt;- paste0(&quot;mylog_&quot;, format(Sys.Date(), &quot;%Y-%m-%d&quot;))
 
 # Open log
 lf &lt;- log_open(nm)
 </code></pre>
-<p>Then <strong>logr</strong> will not delete the previous day’s log.</p>
-<p>If you want a full date and time stamp, adjust the codes on the <code>format()</code> function to your liking.</p>
+<p>Then <strong>logr</strong> will not delete the previous day’s
+log.</p>
+<p>If you want a full date and time stamp, adjust the codes on the
+<code>format()</code> function to your liking.</p>
 <p><a href="#top">top</a></p>
 <hr />
 </div>
 <div id="code" class="section level3">
 <h3>How do I log my code?</h3>
-<p><strong>Q:</strong> In SAS® there is an option to log all the code in my program at the top of the log. I like this because it is a good record of my program at the time it was run. Is there a similar option in <strong>logr</strong>?</p>
-<p><strong>A:</strong> There is not an option, but there is a <code>log_code()</code> function that will allow you to accomplish the same thing. You just call the <code>log_code()</code> function at the point where you want the code logged. Normally this would be at the top of the program, after the call to <code>log_open()</code>. Like this:</p>
+<p><strong>Q:</strong> In SAS® there is an option to log all the code in
+my program at the top of the log. I like this because it is a good
+record of my program at the time it was run. Is there a similar option
+in <strong>logr</strong>?</p>
+<p><strong>A:</strong> There is not an option, but there is a
+<code>log_code()</code> function that will allow you to accomplish the
+same thing. You just call the <code>log_code()</code> function at the
+point where you want the code logged. Normally this would be at the top
+of the program, after the call to <code>log_open()</code>. Like
+this:</p>
 <pre><code># Open log
 log_open(&quot;mylog.log&quot;)
 
@@ -137,14 +395,22 @@ log_code()
 
 # Continue program...
 </code></pre>
-<p>The above code will dump the entire program contents to the log. The code lines will be prefixed with a right arrow (“&gt;”) to distinguish these lines from the rest of your log.</p>
+<p>The above code will dump the entire program contents to the log. The
+code lines will be prefixed with a right arrow (“&gt;”) to distinguish
+these lines from the rest of your log.</p>
 <p><a href="#top">top</a></p>
 <hr />
 </div>
 <div id="symbolgen" class="section level3">
 <h3>How do I turn on symbolgen?</h3>
-<p><strong>Q:</strong> In SAS® there is an option called <em>symbolgen</em> that will log all the variable values in my program. This option is useful for debugging. Is there a similar option in <strong>logr</strong>?</p>
-<p><strong>A:</strong> Not really. You can log the values of individual variables by sending them to the log with a <code>put()</code> function. You can also log the entire environment with all variable values like this:</p>
+<p><strong>Q:</strong> In SAS® there is an option called
+<em>symbolgen</em> that will log all the variable values in my program.
+This option is useful for debugging. Is there a similar option in
+<strong>logr</strong>?</p>
+<p><strong>A:</strong> Not really. You can log the values of individual
+variables by sending them to the log with a <code>put()</code> function.
+You can also log the entire environment with all variable values like
+this:</p>
 <pre><code># Open log
 log_open(&quot;test.log&quot;)
 
@@ -153,14 +419,23 @@ put(ls().str())
 
 # Close log
 log_close()</code></pre>
-<p>Otherwise, it is better to debug R programs interactively. The interactive debugging features in R are much better than in SAS®. The <strong>logr</strong> log is geared more toward recording the execution of your program than debugging.</p>
+<p>Otherwise, it is better to debug R programs interactively. The
+interactive debugging features in R are much better than in SAS®. The
+<strong>logr</strong> log is geared more toward recording the execution
+of your program than debugging.</p>
 <p><a href="#top">top</a></p>
 <hr />
 </div>
 <div id="environment" class="section level3">
 <h3>How do I log environment variables and their values?</h3>
-<p><strong>Q:</strong> I want to write all the environment variables and their values to the <strong>logr</strong> log. Is there a way to do that?</p>
-<p><strong>A:</strong> There is no built-in feature to log the environment variables. But there is a Base R function <code>Sys.getenv()</code> that will retrieve the environment variables and their values. Then you can put them to the log like any other object:</p>
+<p><strong>Q:</strong> I want to write all the environment variables and
+their values to the <strong>logr</strong> log. Is there a way to do
+that?</p>
+<p><strong>A:</strong> There is no built-in feature to log the
+environment variables. But there is a Base R function
+<code>Sys.getenv()</code> that will retrieve the environment variables
+and their values. Then you can put them to the log like any other
+object:</p>
 <pre><code># Open log
 log_open(&quot;test.log&quot;)
 
@@ -174,42 +449,106 @@ log_close()</code></pre>
 </div>
 <div id="notes" class="section level3">
 <h3>How do I turn off the notes?</h3>
-<p><strong>Q:</strong> The notes are cluttering up my log, and are not providing anything that I need. I don’t need the elapsed time, etc. How can I turn them off?</p>
-<p><strong>A:</strong> The notes can be disabled in one of two ways:<br />
-1. Set the <code>show_notes</code> parameter on <code>log_open()</code> to FALSE.<br />
-2. Set the <code>logr.notes</code> option to FALSE using an <code>options()</code> function. Like this:</p>
+<p><strong>Q:</strong> The notes are cluttering up my log, and are not
+providing anything that I need. I don’t need the elapsed time, etc. How
+can I turn them off?</p>
+<p><strong>A:</strong> The notes can be disabled in one of two
+ways:<br />
+1. Set the <code>show_notes</code> parameter on <code>log_open()</code>
+to FALSE.<br />
+2. Set the <code>logr.notes</code> option to FALSE using an
+<code>options()</code> function. Like this:</p>
 <pre><code>   options(&quot;logr.notes&quot; = FALSE)</code></pre>
 <p><a href="#top">top</a></p>
 <hr />
 </div>
 <div id="put" class="section level3">
 <h3>How is put() different from log_print()?</h3>
-<p><strong>Q:</strong> There is another function <code>put()</code> that seems similar to <code>log_print()</code>. What is the difference between them?</p>
-<p><strong>A:</strong> There is no difference in functionality. <code>put()</code> is a direct alias of <code>log_print()</code>. The only difference is that <code>put()</code> is faster to type. It is also easy to remember for anyone who has used SAS® software. The <code>put()</code> function in the <strong>logr</strong> package does the same thing as the <code>%put()</code> function in SAS®. So this alias will warm the hearts of current/former SAS® programmers.</p>
+<p><strong>Q:</strong> There is another function <code>put()</code> that
+seems similar to <code>log_print()</code>. What is the difference
+between them?</p>
+<p><strong>A:</strong> There is no difference in functionality.
+<code>put()</code> is a direct alias of <code>log_print()</code>. The
+only difference is that <code>put()</code> is faster to type. It is also
+easy to remember for anyone who has used SAS® software. The
+<code>put()</code> function in the <strong>logr</strong> package does
+the same thing as the <code>%put()</code> function in SAS®. So this
+alias will warm the hearts of current/former SAS® programmers.</p>
 <p><a href="#top">top</a></p>
 <hr />
 </div>
 <div id="packages" class="section level3">
-<h3>What are the “Base Packages” and “Other Packages” lines in the header?</h3>
-<p><strong>Q:</strong> Recently I noticed the “Base Packages” and “Other Packages” lines show up in the log header. What are these lines? Are they supposed to have all my referenced packages? How come some are missing?</p>
-<p><strong>A:</strong> The “Base Packages” and “Other Packages” lines in the header are attempting to more fully describe the environment the program/script is running in. They are showing the packages that are installed and attached at the point the <code>log_open()</code> function was called.</p>
-<p>The information from these lines is taken from Base R <code>sessionInfo()</code>, and shows a subset of information from that function. This information is being logged so that you have some record of the packages and versions that were in use at the time the script was ran. This is useful information if you need to recreate the output from a particular point in time.</p>
-<p>Note that if you attach packages in the middle of the program, after the call to <code>log_open()</code>, these packages may not be recorded in the header. It is therefore best practice to place all of your <code>library()</code> calls at the top of your program, load up everything you need, and then call <code>log_open()</code>. This practice will help ensure that the header contains all the packages that are used by your program. This practice also makes your program easier to read, understand, and maintain.</p>
+<h3>What are the “Base Packages” and “Other Packages” lines in the
+header?</h3>
+<p><strong>Q:</strong> Recently I noticed the “Base Packages” and “Other
+Packages” lines show up in the log header. What are these lines? Are
+they supposed to have all my referenced packages? How come some are
+missing?</p>
+<p><strong>A:</strong> The “Base Packages” and “Other Packages” lines in
+the header are attempting to more fully describe the environment the
+program/script is running in. They are showing the packages that are
+installed and attached at the point the <code>log_open()</code> function
+was called.</p>
+<p>The information from these lines is taken from Base R
+<code>sessionInfo()</code>, and shows a subset of information from that
+function. This information is being logged so that you have some record
+of the packages and versions that were in use at the time the script was
+ran. This is useful information if you need to recreate the output from
+a particular point in time.</p>
+<p>Note that if you attach packages in the middle of the program, after
+the call to <code>log_open()</code>, these packages may not be recorded
+in the header. It is therefore best practice to place all of your
+<code>library()</code> calls at the top of your program, load up
+everything you need, and then call <code>log_open()</code>. This
+practice will help ensure that the header contains all the packages that
+are used by your program. This practice also makes your program easier
+to read, understand, and maintain.</p>
 <p><a href="#top">top</a></p>
 <hr />
 </div>
 <div id="warnings" class="section level3">
 <h3>How come the warnings are at the bottom of the log?</h3>
-<p><strong>Q:</strong> I noticed that errors are logged at the point they are generated. But warnings are only logged at the end of the log file. Why?</p>
-<p><strong>A:</strong> Base R provides an error event that can be triggered when an error occurs, and therefore the errors can be logged at the point in the program where they are encountered. The corresponding event for warnings does not work (at least on Windows).</p>
-<p>If anyone can find a way to trigger the warnings event, please submit an issue to the <strong>logr</strong> Github <a href="https://github.com/dbosak01/logr/issues">issue list</a> and I will add it to the package.</p>
+<p><strong>Q:</strong> I noticed that errors are logged at the point
+they are generated. But warnings are only logged at the end of the log
+file. Why?</p>
+<p><strong>A:</strong> Base R provides an error event that can be
+triggered when an error occurs, and therefore the errors can be logged
+at the point in the program where they are encountered. The
+corresponding event for warnings does not work (at least on
+Windows).</p>
+<p>If anyone can find a way to trigger the warnings event, please submit
+an issue to the <strong>logr</strong> Github <a href="https://github.com/dbosak01/logr/issues">issue list</a> and I will
+add it to the package.</p>
 <p><a href="#top">top</a></p>
 <hr />
 </div>
 <div id="last" class="section level3">
 <h3>How come only the last warning is logged?</h3>
-<p><strong>Q:</strong> It appears that only the last warning is logged. But I have a lot of warnings. How come only the last warning is recorded? Is there a way to make it log all of them?</p>
-<p><strong>A:</strong> The last warning is recorded in the log because only the last warning is stored and can be easily retrieved in Base R. Further, because the warnings event does not trigger properly, dumping all the warnings to the log at the end would make no sense. If anyone can find a better way to trigger and log warnings at the point where the warning is generated, please submit an issue to the <strong>logr</strong> Github <a href="https://github.com/dbosak01/logr/issues">issue list</a> and I will add it to the package.</p>
+<p><strong>Q:</strong> It appears that only the last warning is logged.
+But I have a lot of warnings. How come only the last warning is
+recorded? Is there a way to make it log all of them?</p>
+<p><strong>A:</strong> The last warning is recorded in the log because
+only the last warning is stored and can be easily retrieved in Base R.
+Further, because the warnings event does not trigger properly, dumping
+all the warnings to the log at the end would make no sense. If anyone
+can find a better way to trigger and log warnings at the point where the
+warning is generated, please submit an issue to the
+<strong>logr</strong> Github <a href="https://github.com/dbosak01/logr/issues">issue list</a> and I will
+add it to the package.</p>
+<p><a href="#top">top</a></p>
+<hr />
+</div>
+<div id="compact" class="section level3">
+<h3>How can I get rid of the blank lines?</h3>
+<p><strong>Q:</strong> I want to remove the blank lines in the log, to
+make it as small as possible. I see there is a ‘blank_after’ parameter
+on <code>log_print()</code> to remove the blank line for a single log
+entry. But how can I get rid of all of them?</p>
+<p><strong>A:</strong> There is a parameter on the
+<code>log_open()</code> function called “compact” that will remove all
+the blank lines between log entries. Simply set compact = TRUE to remove
+all blank lines from the log. You may acheive the same result by setting
+the global option logr.compact = TRUE.</p>
 <p><a href="#top">top</a></p>
 <hr />
 </div>

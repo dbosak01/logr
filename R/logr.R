@@ -119,6 +119,12 @@ separator <-
 #' set the \code{autolog} parameter to TRUE, or set the global option
 #' \code{logr.autolog} to TRUE.  To maintain backward compatibility with 
 #' prior versions, autolog is disabled by default. 
+#' 
+#' The "compact" parameter will remove all the blank lines between log
+#' entries.  This option makes the log harder to read.  The benefit is
+#' that it will take up less space.  The global option "logr.compact" will
+#' achieve the same result.
+#' 
 #' @param file_name The name of the log file.  If no path is specified, the 
 #' working directory will be used.  As of v1.2.7, the name and path of the 
 #' program or script will be used as a default if the \code{file_name} parameter

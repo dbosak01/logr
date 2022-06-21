@@ -81,7 +81,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">logr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.1</span>
       </span>
     </div>
 
@@ -158,9 +158,18 @@
       <small>Source: <a href='https://github.com/dbosak01/logr/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
+    <div id="logr-131" class="section level1">
+<h1 class="page-header" data-toc-text="1.3.1">
+<a href="#logr-131" class="anchor"></a>logr 1.3.1<small> Unreleased </small>
+</h1>
+<ul>
+<li>Added compact option to log_open to remove unnecessary blank lines.
+Also added global option “logr.compact” for same functionality.</li>
+</ul>
+</div>
     <div id="logr-130" class="section level1">
 <h1 class="page-header" data-toc-text="1.3.0">
-<a href="#logr-130" class="anchor"></a>logr 1.3.0<small> Unreleased </small>
+<a href="#logr-130" class="anchor"></a>logr 1.3.0<small> 2022-04-22 </small>
 </h1>
 <ul>
 <li>Fixed bug in elapsed time in notes.</li>
@@ -187,7 +196,8 @@
 <a href="#logr-127" class="anchor"></a>logr 1.2.7<small> 2021-11-16 </small>
 </h1>
 <ul>
-<li>Use current script path and name for log file name if not supplied by user.</li>
+<li>Use current script path and name for log file name if not supplied
+by user.</li>
 <li>Added attached base packages and other packages to log header.</li>
 <li>Added FAQ page to documentation site.</li>
 <li>Added Complete Example vignette.</li>
@@ -199,8 +209,10 @@
 </h1>
 <ul>
 <li>Added covr and codecov</li>
-<li>Removed extraneous color codes from log by adding stripping function to <code><a href="../reference/log_close.html">log_close()</a></code>.</li>
-<li>Added program path to log header. Can now get this using <code>this.path()</code>.</li>
+<li>Removed extraneous color codes from log by adding stripping function
+to <code><a href="../reference/log_close.html">log_close()</a></code>.</li>
+<li>Added program path to log header. Can now get this using
+<code>this.path()</code>.</li>
 <li>Added <code><a href="../reference/log_code.html">log_code()</a></code> function to dump code to the log.</li>
 </ul>
 </div>
@@ -209,8 +221,10 @@
 <a href="#logr-125" class="anchor"></a>logr 1.2.5<small> 2021-07-30 </small>
 </h1>
 <ul>
-<li>Added <code><a href="../reference/log_path.html">log_path()</a></code> function to return the path to the log.</li>
-<li>Added <code><a href="../reference/log_status.html">log_status()</a></code> function to return the status of the log.</li>
+<li>Added <code><a href="../reference/log_path.html">log_path()</a></code> function to return the path to the
+log.</li>
+<li>Added <code><a href="../reference/log_status.html">log_status()</a></code> function to return the status of the
+log.</li>
 <li>Added support for Unicode characters on Windows.</li>
 </ul>
 </div>
@@ -235,9 +249,12 @@
 <a href="#logr-121" class="anchor"></a>logr 1.2.1<small> 2021-01-06 </small>
 </h1>
 <ul>
-<li>Incorporated tidylog directly into the logr package. Can be turned on using the ‘autolog’ parameter of <code><a href="../reference/log_open.html">log_open()</a></code>, or by setting the global option ‘logr.autolog’.<br>
+<li>Incorporated tidylog directly into the logr package. Can be turned
+on using the ‘autolog’ parameter of <code><a href="../reference/log_open.html">log_open()</a></code>, or by
+setting the global option ‘logr.autolog’.<br>
 </li>
-<li>Added <code><a href="../reference/log_print.html">log_hook()</a></code> function to allow other packages to call into logr.</li>
+<li>Added <code><a href="../reference/log_print.html">log_hook()</a></code> function to allow other packages to
+call into logr.</li>
 <li>Added pkgdown site.</li>
 </ul>
 </div>
@@ -254,8 +271,10 @@
 <a href="#logr-110" class="anchor"></a>logr 1.1.0<small> 2020-08-10 </small>
 </h1>
 <ul>
-<li>Added <code><a href="../reference/log_print.html">put()</a></code> function as an alias to <code><a href="../reference/log_print.html">log_print()</a></code>.</li>
-<li>Added <code><a href="../reference/log_print.html">sep()</a></code> function to create a log separator. This make the log better organized and easier to read</li>
+<li>Added <code><a href="../reference/log_print.html">put()</a></code> function as an alias to
+<code><a href="../reference/log_print.html">log_print()</a></code>.</li>
+<li>Added <code><a href="../reference/log_print.html">sep()</a></code> function to create a log separator. This
+make the log better organized and easier to read</li>
 <li>Fixed bug to clear any existing errors/warnings on log_open</li>
 </ul>
 </div>

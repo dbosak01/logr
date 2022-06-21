@@ -38,7 +38,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">logr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.1</span>
       </span>
     </div>
 
@@ -106,7 +106,7 @@
 
       
 
-      </header><script src="logr-features_files/header-attrs-2.13/header-attrs.js"></script><div class="row">
+      </header><script src="logr-features_files/header-attrs-2.14/header-attrs.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Additional Features</h1>
@@ -122,17 +122,29 @@
 <div id="errors-and-warnings" class="section level3">
 <h3 class="hasAnchor">
 <a href="#errors-and-warnings" class="anchor"></a>Errors and Warnings</h3>
-<p><strong>logr</strong> will write all errors and the last warning to the log. Errors are written at the point they are encountered. Warnings will be written at the end of the log.</p>
+<p><strong>logr</strong> will write all errors and the last warning to
+the log. Errors are written at the point they are encountered. Warnings
+will be written at the end of the log.</p>
 </div>
 <div id="message-file--msg" class="section level3">
 <h3 class="hasAnchor">
 <a href="#message-file--msg" class="anchor"></a>Message File *.msg</h3>
-<p>If errors or warnings are generated, they will also be written to a separate file called a message file. The message file has the same name as the log, but with a <em>.msg</em> extension. The purpose of the message file is so that errors and warnings that occur during execution of the script can be observed from the file system. The presence or absence of the <em>.msg</em> file will indicate whether or not the program ran clean.</p>
+<p>If errors or warnings are generated, they will also be written to a
+separate file called a message file. The message file has the same name
+as the log, but with a <em>.msg</em> extension. The purpose of the
+message file is so that errors and warnings that occur during execution
+of the script can be observed from the file system. The presence or
+absence of the <em>.msg</em> file will indicate whether or not the
+program ran clean.</p>
 </div>
 <div id="log-subdirectory-log" class="section level3">
 <h3 class="hasAnchor">
 <a href="#log-subdirectory-log" class="anchor"></a>Log subdirectory /log</h3>
-<p>By default, <code>logr</code> prints the log to a subdirectory named <em>log</em>. If that subdirectory does not exist, the <code><a href="../reference/log_open.html">log_open()</a></code> function will create it. The default behavior can be overridden by setting the <code>logdir</code> parameter on the <code><a href="../reference/log_open.html">log_open()</a></code> function to <code>FALSE</code>.</p>
+<p>By default, <code>logr</code> prints the log to a subdirectory named
+<em>log</em>. If that subdirectory does not exist, the
+<code><a href="../reference/log_open.html">log_open()</a></code> function will create it. The default behavior
+can be overridden by setting the <code>logdir</code> parameter on the
+<code><a href="../reference/log_open.html">log_open()</a></code> function to <code>FALSE</code>.</p>
 <p>Next: <a href="logr-globals.html">Global Options</a></p>
 </div>
   </div>
