@@ -126,7 +126,8 @@ log_code <- function() {
         lns <- paste(">", lns)
         
         writeLines(lns, con = f, useBytes = TRUE)
-        writeLines("", con = f, useBytes = TRUE)
+        if (e$log_blank_after)
+          writeLines("", con = f, useBytes = TRUE)
         
         close(f)
         
