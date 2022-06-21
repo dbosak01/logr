@@ -1,3 +1,7 @@
+# logr 1.3.1
+* Added compact option to log_open to remove unnecessary blank lines.  Also
+added global option "logr.compact" for same functionality.
+
 # logr 1.3.0
 
 * Fixed bug in elapsed time in notes.

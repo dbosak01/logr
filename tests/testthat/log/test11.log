@@ -1,5 +1,5 @@
 =========================================================================
-Log Path: c:/packages/logr/tests/testthat/log/test.log
+Log Path: c:/packages/logr/tests/testthat/log/test11.log
 Program Path: C:/packages/logr/tests/testthat/test-logr.R
 Working Directory: C:/packages/logr
 User Name: dbosa
@@ -8,14 +8,11 @@ Machine: SOCRATES x86-64
 Operating System: Windows 10 x64 build 19044
 Base Packages: stats graphics grDevices utils datasets methods base
 Other Packages: logr_1.3.1 testthat_3.1.4 
-Log Start Time: 2022-06-20 13:00:48
+Log Start Time: 2022-06-20 13:48:30
 =========================================================================
-
 Here is the first log message
-
-NOTE: Log Print Time:  2022-06-20 13:00:48
-NOTE: Elapsed Time: 0.000829935073852539 secs
-
+NOTE: Log Print Time:  2022-06-20 13:48:30
+NOTE: Elapsed Time: 0.387925863265991 secs
                      mpg cyl  disp  hp drat    wt  qsec vs am gear carb
 Mazda RX4           21.0   6 160.0 110 3.90 2.620 16.46  0  1    4    4
 Mazda RX4 Wag       21.0   6 160.0 110 3.90 2.875 17.02  0  1    4    4
@@ -49,18 +46,13 @@ Ford Pantera L      15.8   8 351.0 264 4.22 3.170 14.50  0  1    5    4
 Ferrari Dino        19.7   6 145.0 175 3.62 2.770 15.50  0  1    5    6
 Maserati Bora       15.0   8 301.0 335 3.54 3.570 14.60  0  1    5    8
 Volvo 142E          21.4   4 121.0 109 4.11 2.780 18.60  1  1    4    2
-
 NOTE: Data frame has 32 rows and 11 columns.
-
-NOTE: Log Print Time:  2022-06-20 13:00:48
-NOTE: Elapsed Time: 0.0102241039276123 secs
-
+NOTE: Log Print Time:  2022-06-20 13:48:32
+NOTE: Elapsed Time: 1.8473219871521 secs
 Here is a second log message
-
-NOTE: Log Print Time:  2022-06-20 13:00:48
-NOTE: Elapsed Time: 0.00341296195983887 secs
-
+NOTE: Log Print Time:  2022-06-20 13:48:33
+NOTE: Elapsed Time: 0.379367113113403 secs
 =========================================================================
-Log End Time: 2022-06-20 13:00:48
-Log Elapsed Time: 0 00:00:00
+Log End Time: 2022-06-20 13:48:33
+Log Elapsed Time: 0 00:00:02
 =========================================================================

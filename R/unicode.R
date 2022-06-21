@@ -64,7 +64,8 @@ print_windows <- function(x, file_path, blank_after, hide_notes, ...) {
         if (any(class(x) == "data.frame")) {
           writeLines(paste("NOTE: Data frame has", nrow(x), "rows and", ncol(x), 
                     "columns."), con = f, useBytes = TRUE)
-          writeLines("", con = f, useBytes = TRUE)
+          if (e$log_blank_after)
+            writeLines("", con = f, useBytes = TRUE)
         }
         
         # Print log timestamps
@@ -72,7 +73,8 @@ print_windows <- function(x, file_path, blank_after, hide_notes, ...) {
         writeLines(paste("NOTE: Log Print Time: ", tc), con = f, useBytes = TRUE)
         writeLines(paste("NOTE: Elapsed Time:", ts, attributes(ts)$units), 
                    con = f, useBytes = TRUE)
-        writeLines("", con = f, useBytes = TRUE)
+        if (e$log_blank_after)
+          writeLines("", con = f, useBytes = TRUE)
       }
     }
     

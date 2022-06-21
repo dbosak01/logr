@@ -4,7 +4,13 @@
 \alias{log_open}
 \title{Open a log}
 \usage{
-log_open(file_name = "", logdir = TRUE, show_notes = TRUE, autolog = NULL)
+log_open(
+  file_name = "",
+  logdir = TRUE,
+  show_notes = TRUE,
+  autolog = NULL,
+  compact = FALSE
+)
 }
 \arguments{
 \item{file_name}{The name of the log file.  If no path is specified, the
@@ -26,6 +32,11 @@ set the "logr.autolog" option to TRUE. A FALSE value on this parameter
 will override the global option.  The global option
 will override a NULL on this parameter. Default is that autolog is
 disabled.}
+
+\item{compact}{When the compact option is TRUE, \strong{logr} will
+minimize the number of blank spaces in the log.  This option generates
+the same logging information, but in less space. The "logr.compact" global
+option does the same thing.}
 }
 \value{
 The path of the log.

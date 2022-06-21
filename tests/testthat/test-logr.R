@@ -602,3 +602,41 @@ test_that("default name works as expected.", {
   
 })
 
+
+
+test_that("compact option works as expected.", {
+  
+  tmp <- base_path
+  
+  lf <- log_open(file.path(tmp, "test11.log"), compact = TRUE)
+  log_print("Here is the first log message")
+  log_print(mtcars)
+  log_print("Here is a second log message")
+  
+  log_close()
+  
+  ret <- file.exists(lf)
+
+  expect_equal(ret, TRUE)
+  
+})
+
+test_that("compact option works as expected.", {
+  
+  tmp <- base_path
+  
+  options("logr.compact" = TRUE)
+  
+  lf <- log_open(file.path(tmp, "test12.log"))
+  log_print("Here is the first log message")
+  log_print(mtcars)
+  log_print("Here is a second log message")
+  
+  log_close()
+  
+  ret <- file.exists(lf)
+  
+  expect_equal(ret, TRUE)
+  
+})
+

@@ -14,7 +14,9 @@ knitr::opts_chunk$set(
 )
 ```
 There are situations when you want to control log printing globally.  For
-those cases, **logr** has two global options.  The option "logr.on" accepts
+those cases, **logr** has some global options.  
+
+The option "logr.on" accepts
 a `TRUE` or `FALSE` value, and determines whether the **logr** log is on 
 or off.  The option "logr.notes" also accepts a `TRUE` or `FALSE` value,
 and determines whether to include notes in the log.  Both of these global 
@@ -49,6 +51,17 @@ options("logr.autolog" = FALSE)
 
 ```
 
+If you want to minimize the size of the log, there is a global option 
+called "compact" to remove any blank spaces between log entries.  This setting
+essentially forces the "blank_after" parameter on `log_print()` to FALSE
+for all entries.
 
+```{r eval=FALSE, echo=TRUE}
+# Turn on compact option
+options("logr.compact" = TRUE)
+
+# Turn off compact option
+options("logr.compact" = FALSE)
+```
 
 Next: [Aliases for log_print()](logr-put.html)

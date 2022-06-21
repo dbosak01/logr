@@ -7,9 +7,9 @@
 \alias{log_hook}
 \title{Print an object to the log}
 \usage{
-log_print(x, ..., console = TRUE, blank_after = TRUE, msg = FALSE, hide_notes = FALSE)
+log_print(x, ..., console = TRUE, blank_after = NULL, msg = FALSE, hide_notes = FALSE)
 
-put(x, ..., console = TRUE, blank_after = TRUE, msg = FALSE, hide_notes = FALSE)
+put(x, ..., console = TRUE, blank_after = NULL, msg = FALSE, hide_notes = FALSE)
 
 sep(x, console = TRUE)
 

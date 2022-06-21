@@ -29,6 +29,16 @@ update_status <- function() {
       e$log_show_notes <- TRUE
   }
   
+  if (!is.null(options("logr.compact")[[1]])) {
+    
+    if(options("logr.compact")[[1]] == FALSE)
+      e$log_blank_after <- TRUE
+    else if (options("logr.compact")[[1]] == TRUE)
+      e$log_blank_after <- FALSE
+  }
+  
+  
+  
 }
 
 
@@ -68,7 +78,7 @@ print_log_header <- function(log_path) {
   log_quiet(get_package_versions(), blank_after = FALSE)
   
   log_quiet(paste("Log Start Time:", Sys.time()), blank_after = FALSE)
-  log_quiet(paste(separator))
+  log_quiet(paste(separator), blank_after = e$log_blank_after)
 }
 
 #' Function to print the log footer
@@ -82,7 +92,7 @@ print_log_footer <- function(has_warnings = FALSE) {
     # Force notes after warning print, before the footer
     log_quiet(paste("NOTE: Log Print Time:", Sys.time()), blank_after = FALSE)
     log_quiet(paste("NOTE: Log Elapsed Time:", get_time_diff(tc)), 
-              blank_after = TRUE)
+              blank_after = e$log_blank_after)
   }
   
   # Calculate total elapsed execution time
