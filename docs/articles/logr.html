@@ -141,28 +141,28 @@ program, call <code><a href="../reference/log_print.html">log_print()</a></code>
 and call <code><a href="../reference/log_close.html">log_close()</a></code> once at the end of the program.</p>
 <p>A sample program is as follows:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://logr.r-sassy.org">logr</a></span><span class="op">)</span>
-
-<span class="co"># Create temp file location</span>
-<span class="va">tmp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/tempfile.html">tempdir</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">"test.log"</span><span class="op">)</span>
-
-<span class="co"># Open log</span>
-<span class="va">lf</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/log_open.html">log_open</a></span><span class="op">(</span><span class="va">tmp</span><span class="op">)</span>
-
-<span class="co"># Send message to log</span>
-<span class="fu"><a href="../reference/log_print.html">log_print</a></span><span class="op">(</span><span class="st">"High Mileage Cars Subset"</span><span class="op">)</span>
-
-<span class="co"># Perform operations</span>
-<span class="va">hmc</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html">subset</a></span><span class="op">(</span><span class="va">mtcars</span>, <span class="va">mtcars</span><span class="op">$</span><span class="va">mpg</span> <span class="op">&gt;</span> <span class="fl">20</span><span class="op">)</span>
-
-<span class="co"># Print data to log</span>
-<span class="fu"><a href="../reference/log_print.html">log_print</a></span><span class="op">(</span><span class="va">hmc</span><span class="op">)</span>
-
-<span class="co"># Close log</span>
-<span class="fu"><a href="../reference/log_close.html">log_close</a></span><span class="op">(</span><span class="op">)</span>
-
-<span class="co"># View results</span>
-<span class="fu"><a href="https://rdrr.io/r/base/writeLines.html">writeLines</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/readLines.html">readLines</a></span><span class="op">(</span><span class="va">lf</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://logr.r-sassy.org">logr</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Create temp file location</span></span>
+<span><span class="va">tmp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/tempfile.html">tempdir</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">"test.log"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Open log</span></span>
+<span><span class="va">lf</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/log_open.html">log_open</a></span><span class="op">(</span><span class="va">tmp</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Send message to log</span></span>
+<span><span class="fu"><a href="../reference/log_print.html">log_print</a></span><span class="op">(</span><span class="st">"High Mileage Cars Subset"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Perform operations</span></span>
+<span><span class="va">hmc</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html">subset</a></span><span class="op">(</span><span class="va">mtcars</span>, <span class="va">mtcars</span><span class="op">$</span><span class="va">mpg</span> <span class="op">&gt;</span> <span class="fl">20</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Print data to log</span></span>
+<span><span class="fu"><a href="../reference/log_print.html">log_print</a></span><span class="op">(</span><span class="va">hmc</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Close log</span></span>
+<span><span class="fu"><a href="../reference/log_close.html">log_close</a></span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># View results</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/writeLines.html">writeLines</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/readLines.html">readLines</a></span><span class="op">(</span><span class="va">lf</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <div id="what-to-print-to-the-log" class="section level3">
 <h3 class="hasAnchor">
 <a href="#what-to-print-to-the-log" class="anchor"></a>What to print to the log</h3>
