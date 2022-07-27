@@ -542,11 +542,11 @@ log_quiet <- function(x, blank_after = NULL, msg = FALSE) {
 sep <- function(x, console = TRUE) {
   
   # Pass everything to log_print()
-  log_print(separator, blank_after = FALSE, hide_notes = TRUE)
+  log_print(separator, blank_after = FALSE, hide_notes = TRUE, console = console)
   
   str <- paste(strwrap(x, nchar(separator)), collapse = "\n")
-  ret <- log_print(str, blank_after = FALSE, hide_notes = TRUE)
-  log_print(separator, hide_notes = TRUE, blank_after = e$log_blank_after)
+  ret <- log_print(str, blank_after = FALSE, hide_notes = TRUE, console = console)
+  log_print(separator, hide_notes = TRUE, blank_after = e$log_blank_after, console = console)
   
   invisible(ret)
 }
