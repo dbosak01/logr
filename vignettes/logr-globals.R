@@ -29,3 +29,10 @@ knitr::opts_chunk$set(
 #  # Turn off compact option
 #  options("logr.compact" = FALSE)
 
+## ----eval=FALSE, echo=TRUE----------------------------------------------------
+#  # Turn on traceback messaging
+#  options("logr.traceback" = TRUE)
+#  
+#  # Turn off traceback messaging
+#  options("logr.traceback" = FALSE)
+

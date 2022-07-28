@@ -126,6 +126,14 @@ separator <-
 #' that it will take up less space.  The global option "logr.compact" will
 #' achieve the same result.
 #' 
+#' If an error is encountered, a traceback of the error message is printed
+#' to the log and message files by default. This traceback helps in finding
+#' the source of the error, particularly in situations where you have deeply
+#' nested functions. If you wish to turn the traceback off, set 
+#' the \code{traceback} parameter of the \code{log_open} function to FALSE.
+#' You may also use the global option \code{logr.traceback} to control printing
+#' of this information.
+#' 
 #' @param file_name The name of the log file.  If no path is specified, the 
 #' working directory will be used.  As of v1.2.7, the name and path of the 
 #' program or script will be used as a default if the \code{file_name} parameter
@@ -146,6 +154,9 @@ separator <-
 #' minimize the number of blank spaces in the log.  This option generates
 #' the same logging information, but in less space. The "logr.compact" global
 #' option does the same thing.
+#' @param traceback By default, if there is an error in the program
+#' being logged, \strong{logr} will print a traceback of the error. You may
+#' turn this feature off by setting the \code{traceback} parameter to FALSE.
 #' @return The path of the log.
 #' @seealso \code{\link{log_print}} for printing to the log (and console), 
 #' and \code{\link{log_close}} to close the log.
@@ -172,7 +183,10 @@ separator <-
 #' # View results
 #' writeLines(readLines(lf))
 log_open <- function(file_name = "", logdir = TRUE, show_notes = TRUE,
-                     autolog = NULL, compact = FALSE) {
+                     autolog = NULL, compact = FALSE, traceback = TRUE) {
+  
+  # Does not work
+  # options(warn = 1, warning.expression = warning_handler())
   
   # Deal with compact log
   if (is.null(options()[["logr.compact"]]) == FALSE) {
@@ -183,10 +197,22 @@ log_open <- function(file_name = "", logdir = TRUE, show_notes = TRUE,
     
   } else {
     
-    # Capture show_notes parameter
+    # Capture compact parameter
     e$log_blank_after = !compact
   }
 
+  # Deal with traceback option
+  if (is.null(options()[["logr.traceback"]]) == FALSE) {
+    
+    optc <- options("logr.traceback")
+    
+    e$log_traceback = optc[[1]] 
+    
+  } else {
+    
+    # Capture traceback parameter
+    e$log_traceback = traceback
+  }
   
   if (is.null(options()[["logr.on"]]) == FALSE) {
     
@@ -318,7 +344,13 @@ log_open <- function(file_name = "", logdir = TRUE, show_notes = TRUE,
       lw <- get("last.warning")
       has_warnings <- length(lw) > 0
       if(has_warnings) {
-        assign("last.warning", NULL, envir = baseenv())
+        # Would like to do this, but CRAN does not allow it.
+        #unlockBinding("last.warning", baseenv()) # Necessary for some OSes
+        tryCatch({assign("last.warning", NULL, envir = baseenv())},
+                 error = function(cond){},
+                 warning = function(cond){},
+                 finally = {})
+        
       }
     }
     
@@ -603,7 +635,10 @@ log_close <- function() {
       if(has_warnings) {
         log_quiet(warnings())
         log_quiet(warnings(),  msg = TRUE)
-        assign("last.warning", NULL, envir = baseenv())
+        tryCatch({assign("last.warning", NULL, envir = baseenv())},
+                 error = function(cond){},
+                 warning = function(cond){},
+                 finally = {})
       }
     }
     
@@ -658,15 +693,24 @@ error_handler <- function() {
   er <- geterrmessage()
 
   
-  tb <- capture.output(traceback(5, max.lines = 1000))
+  if (e$log_traceback) {
+    tb <- capture.output(traceback(5, max.lines = 1000))
+  }
   
   log_print(er, hide_notes = TRUE, blank_after = FALSE)
-  log_print("Traceback:", hide_notes = TRUE, blank_after = FALSE)
-  log_print(tb)
+  if (e$log_traceback) {
+    log_print("Traceback:", hide_notes = TRUE, blank_after = FALSE)
+    log_print(tb)
+  }
   log_quiet(er, msg = TRUE, blank_after = FALSE)
-  log_quiet("Traceback:", msg = TRUE, blank_after = FALSE)
-  log_quiet(tb, msg = TRUE)
+  if (e$log_traceback) {
+    log_quiet("Traceback:", msg = TRUE, blank_after = FALSE)
+    log_quiet(tb, msg = TRUE)
+  }
 
+  # User requested to close log if there is an error issue #38.
+  # Hopefully this will not cause trouble.
+  log_close()
   
 }
 
@@ -677,9 +721,9 @@ error_handler <- function() {
 # the end of the log, above the footer.
 # @noRd
 # warning_handler <- function() {
-#   
+# 
 #   #print("Warning Handler")
 #   log_print(warnings())
 #   log_quiet(warnings(), msg = TRUE)
-#   
+# 
 # }

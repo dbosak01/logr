@@ -1,3 +1,10 @@
+# logr 1.3.2
+
+* Added option to turn off traceback if desired.
+* Added `log_close()` to error handling function so that the log will
+now close when an error is encountered.
+* Fixed bug which gave an error on some operating systems when clearing warnings.
+
 # logr 1.3.1
 * Added compact option to log_open to remove unnecessary blank lines.  Also
 added global option "logr.compact" for same functionality.

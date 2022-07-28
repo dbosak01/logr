@@ -35,7 +35,7 @@ on the links below to navigate to the full question and answer content.
 * [How come the warnings are at the bottom of the log?](#warnings)
 * [How come only the last warning is logged?](#last)
 * [How can I get rid of the blank lines?](#compact)
-
+* [How can I get rid of the traceback?](#traceback)
 
 ## Content
 
@@ -364,8 +364,24 @@ them?
 
 **A:** There is a parameter on the `log_open()` function called "compact" 
 that will remove all the blank lines between log entries.  Simply set
-compact = TRUE to remove all blank lines from the log.  You may acheive 
+compact = TRUE to remove all blank lines from the log.  You may achieve 
 the same result by setting the global option logr.compact = TRUE.
+
+[top](#top)
+
+******
+
+### How can I get rid of the traceback? {#traceback}
+
+**Q:** The traceback is dumping a huge amount of stuff into the log when 
+there is an error.
+There is so much stuff, that I find this feature annoying and useless. How
+can I turn it off?
+
+**A:** There is a parameter on the `log_open()` function called "traceback" 
+that you can use to turn off the traceback messaging.  Simply set
+traceback = FALSE. The global option logr.traceback = FALSE will do
+the same thing.
 
 [top](#top)
 

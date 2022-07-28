@@ -9,7 +9,8 @@ log_open(
   logdir = TRUE,
   show_notes = TRUE,
   autolog = NULL,
-  compact = FALSE
+  compact = FALSE,
+  traceback = TRUE
 )
 }
 \arguments{
@@ -37,6 +38,10 @@ disabled.}
 minimize the number of blank spaces in the log.  This option generates
 the same logging information, but in less space. The "logr.compact" global
 option does the same thing.}
+
+\item{traceback}{By default, if there is an error in the program
+being logged, \strong{logr} will print a traceback of the error. You may
+turn this feature off by setting the \code{traceback} parameter to FALSE.}
 }
 \value{
 The path of the log.
@@ -114,6 +119,14 @@ entries.  The downside of a compact log is that it makes the log
 harder to read.  The benefit is
 that it will take up less space.  The global option "logr.compact" will
 achieve the same result.
+
+If an error is encountered, a traceback of the error message is printed
+to the log and message files by default. This traceback helps in finding
+the source of the error, particularly in situations where you have deeply
+nested functions. If you wish to turn the traceback off, set
+the \code{traceback} parameter of the \code{log_open} function to FALSE.
+You may also use the global option \code{logr.traceback} to control printing
+of this information.
 }
 \examples{
 # Create temp file location

@@ -161,6 +161,19 @@ setting essentially forces the “blank_after” parameter on
 <span></span>
 <span><span class="co"># Turn off compact option</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span><span class="op">(</span><span class="st">"logr.compact"</span> <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
+<p>By default, <strong>logr</strong> will print a traceback of all error
+messages. In most cases, this is a useful feature to help you precisely
+identify the source of an error. In some cases, the traceback provides
+too much unnecessary information. The “logr.traceback” global option can
+be used to turn the traceback messaging on or off. The option accepts a
+TRUE or FALSE value, which will override anything set on
+<code><a href="../reference/log_open.html">log_open()</a></code>.</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Turn on traceback messaging</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span><span class="op">(</span><span class="st">"logr.traceback"</span> <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Turn off traceback messaging</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span><span class="op">(</span><span class="st">"logr.traceback"</span> <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
 <p>Next: <a href="logr-put.html">Aliases for log_print()</a></p>
   </div>
 

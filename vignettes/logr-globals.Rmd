@@ -64,4 +64,19 @@ options("logr.compact" = TRUE)
 options("logr.compact" = FALSE)
 ```
 
+By default, **logr** will print a traceback of all error messages.  In most
+cases, this is a useful feature to help you precisely identify the source of
+an error.  In some cases, the traceback provides too much unnecessary information.
+The "logr.traceback" global option can be used to turn the traceback messaging
+on or off.  The option accepts a TRUE or FALSE value, which will override
+anything set on `log_open()`.
+
+```{r eval=FALSE, echo=TRUE}
+# Turn on traceback messaging
+options("logr.traceback" = TRUE)
+
+# Turn off traceback messaging
+options("logr.traceback" = FALSE)
+```
+
 Next: [Aliases for log_print()](logr-put.html)

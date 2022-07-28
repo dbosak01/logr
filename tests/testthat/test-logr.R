@@ -83,7 +83,9 @@ test_that("the logr package can create a log with warnings.", {
   lf <- log_open(file.path(tmp, "test.log"))
   log_print("Here is the first log message")
   expect_warning(warning("here is a test warning"))
-
+  #warning("here is a test warning")
+  
+  log_print("Another message")
   
   mp <- e$msg_path
   log_close()
@@ -178,7 +180,7 @@ test_that("the logr package can create a log with warning", {
   lf <- log_open(file.path(tmp, "test.log"))
   log_print("Here is the first log message")
   expect_warning(warning("here is a test warning"))
-  
+  #warning("here is a test warning")
   
   mp <- e$msg_path
   log_close()
@@ -639,4 +641,49 @@ test_that("compact option works as expected.", {
   expect_equal(ret, TRUE)
   
 })
+
+test_that("traceback parameter works as expected.", {
+  
+  tmp <- base_path
+  
+  lf <- log_open(file.path(tmp, "test.log"), traceback = FALSE)
+  log_print("Here is the first log message")
+  expect_error(stop("here is a test error"))
+  #stop("here is a test error")
+  
+  mp <- e$msg_path
+  log_close()
+  
+  ret <- file.exists(lf)
+  ret2 <- file.exists(mp)
+  
+  expect_equal(ret, TRUE)
+  expect_equal(ret2, FALSE)
+  
+  
+})
+
+test_that("traceback option works as expected.", {
+  
+  tmp <- base_path
+  
+  options("logr.traceback" = FALSE)
+  
+  lf <- log_open(file.path(tmp, "test.log"), traceback = FALSE)
+  log_print("Here is the first log message")
+  expect_error(stop("here is a test error"))
+  #stop("here is a test error")
+  
+  mp <- e$msg_path
+  log_close()
+  
+  ret <- file.exists(lf)
+  ret2 <- file.exists(mp)
+  
+  expect_equal(ret, TRUE)
+  expect_equal(ret2, FALSE)
+  
+  
+})
+
 

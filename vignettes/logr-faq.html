@@ -262,6 +262,7 @@ Packages” lines in the header?</a></li>
 log?</a></li>
 <li><a href="#last">How come only the last warning is logged?</a></li>
 <li><a href="#compact">How can I get rid of the blank lines?</a></li>
+<li><a href="#traceback">How can I get rid of the traceback?</a></li>
 </ul>
 </div>
 <div id="content" class="section level2">
@@ -547,8 +548,20 @@ entry. But how can I get rid of all of them?</p>
 <p><strong>A:</strong> There is a parameter on the
 <code>log_open()</code> function called “compact” that will remove all
 the blank lines between log entries. Simply set compact = TRUE to remove
-all blank lines from the log. You may acheive the same result by setting
+all blank lines from the log. You may achieve the same result by setting
 the global option logr.compact = TRUE.</p>
+<p><a href="#top">top</a></p>
+<hr />
+</div>
+<div id="traceback" class="section level3">
+<h3>How can I get rid of the traceback?</h3>
+<p><strong>Q:</strong> The traceback is dumping a huge amount of stuff
+into the log when there is an error. There is so much stuff, that I find
+this feature annoying and useless. How can I turn it off?</p>
+<p><strong>A:</strong> There is a parameter on the
+<code>log_open()</code> function called “traceback” that you can use to
+turn off the traceback messaging. Simply set traceback = FALSE. The
+global option logr.traceback = FALSE will do the same thing.</p>
 <p><a href="#top">top</a></p>
 <hr />
 </div>

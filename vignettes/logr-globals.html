@@ -373,6 +373,18 @@ setting essentially forces the “blank_after” parameter on
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Turn off compact option</span></span>
 <span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="st">&quot;logr.compact&quot;</span> <span class="ot">=</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<p>By default, <strong>logr</strong> will print a traceback of all error
+messages. In most cases, this is a useful feature to help you precisely
+identify the source of an error. In some cases, the traceback provides
+too much unnecessary information. The “logr.traceback” global option can
+be used to turn the traceback messaging on or off. The option accepts a
+TRUE or FALSE value, which will override anything set on
+<code>log_open()</code>.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Turn on traceback messaging</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="st">&quot;logr.traceback&quot;</span> <span class="ot">=</span> <span class="cn">TRUE</span>)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Turn off traceback messaging</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="st">&quot;logr.traceback&quot;</span> <span class="ot">=</span> <span class="cn">FALSE</span>)</span></code></pre></div>
 <p>Next: <a href="logr-put.html">Aliases for log_print()</a></p>
 
 
