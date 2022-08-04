@@ -6,22 +6,14 @@ User Name: dbosa
 R Version: 4.2.1 (2022-06-23 ucrt)
 Machine: SOCRATES x86-64
 Operating System: Windows 10 x64 build 19044
-Base Packages: stats graphics grDevices utils datasets methods base
-Other Packages: logr_1.3.1 testthat_3.1.4 
-Log Start Time: 2022-07-27 23:24:10
+Base Packages: stats graphics grDevices utils datasets methods base Other
+Packages: dplyr_1.0.9 logr_1.3.2 testthat_3.1.4
+Log Start Time: 2022-08-04 15:23:46
 =========================================================================
-
 Here is the first log message
-
-NOTE: Log Print Time:  2022-07-27 23:24:10
-NOTE: Elapsed Time: 0.601963043212891 secs
-
-Another message
-
-NOTE: Log Print Time:  2022-07-27 23:24:14
-NOTE: Elapsed Time: 3.34201884269714 secs
-
+NOTE: Log Print Time:  2022-08-04 15:23:48
+NOTE: Elapsed Time: 1.68432903289795 secs
 =========================================================================
-Log End Time: 2022-07-27 23:24:15
-Log Elapsed Time: 0 00:00:04
+Log End Time: 2022-08-04 15:23:49
+Log Elapsed Time: 0 00:00:02
 =========================================================================

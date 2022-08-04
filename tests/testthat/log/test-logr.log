@@ -1,20 +1,22 @@
 =========================================================================
 Log Path: C:/packages/logr/tests/testthat/log/test-logr.log
-Program Path: C:\packages\logr\tests\testthat\test-logr.R
+Program Path: C:/packages/logr/tests/testthat/test-logr.R
 Working Directory: C:/packages/logr
 User Name: dbosa
-R Version: 4.1.2 (2021-11-01)
+R Version: 4.2.1 (2022-06-23 ucrt)
 Machine: SOCRATES x86-64
-Operating System: Windows 10 x64 build 19041
-Log Start Time: 2021-11-15 07:46:02
+Operating System: Windows 10 x64 build 19044
+Base Packages: stats graphics grDevices utils datasets methods base Other
+Packages: dplyr_1.0.9 logr_1.3.2 testthat_3.1.4
+Log Start Time: 2022-08-04 15:21:39
 =========================================================================
 
 Here is a log message
 
-NOTE: Log Print Time:  2021-11-15 07:46:02
-NOTE: Elapsed Time in seconds: 0
+NOTE: Log Print Time:  2022-08-04 15:21:39
+NOTE: Elapsed Time: 0.262073993682861 secs
 
 =========================================================================
-Log End Time: 2021-11-15 07:46:02
-Log Elapsed Time: 0 00:00:00
+Log End Time: 2022-08-04 15:21:42
+Log Elapsed Time: 0 00:00:03
 =========================================================================

@@ -686,4 +686,26 @@ test_that("traceback option works as expected.", {
   
 })
 
+test_that("can log a very long string.", {
+
+tmp <- base_path
+
+lf <- log_open(file.path(tmp, "test13.log"))
+log_print("Here is the first log message")
+log_print(mtcars)
+log_print(paste("Here is a second log message that is really long",
+                "it's going to get longer and longer and see if it will wrap", 
+                "but we're not done yet going to keep going and going", 
+                "like the energizer bunny. So let's go even further, and",
+                "further, I say, just so we can see if the wrapping is",
+                "working as expected."))
+
+
+log_close()
+
+ret <- file.exists(lf)
+
+expect_equal(ret, TRUE)
+
+})
 

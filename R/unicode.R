@@ -14,11 +14,11 @@ print_windows <- function(x, file_path, blank_after, hide_notes, ...) {
     f <- file(file_path, open = "a", encoding = "native.enc")
  
     if (all(class(x) == "character")) {
-      if (length(x) == 1 && nchar(x) < 100) {
+      if (length(x) == 1) {
+        
         
         # Print the string
-        writeLines(enc2utf8(x), con = f, useBytes = TRUE)
-        
+        writeLines(enc2utf8(strwrap(x, width = 80)), con = f, useBytes = TRUE)
 
       } else {
         
@@ -99,10 +99,10 @@ print_other <- function(x, file_path, blank_after, hide_notes, ...) {
     # Use sink() function so print() will work as desired
     sink(f, append = TRUE)
     if (all(class(x) == "character")) {
-      if (length(x) == 1 && nchar(x) < 100) {
+      if (length(x) == 1) {
         
         # Print the string
-        cat(x, "\n")
+        cat(strwrap(x, width = 80), "\n")
         
       } else {
         
