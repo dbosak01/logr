@@ -1,3 +1,8 @@
+# logr 1.3.3
+
+* Fixed error when passing full path and logdir parameter was TRUE. 
+* Updated logo.
+
 # logr 1.3.2
 
 * Added option to turn off traceback if desired.
