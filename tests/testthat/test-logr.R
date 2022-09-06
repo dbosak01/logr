@@ -6,7 +6,7 @@ base_path <- tempdir()
 
 DEV <- FALSE
 
-test_that("the log_open function handles invalid parameters.", {
+test_that("logr1: the log_open function handles invalid parameters.", {
   
   tmp <- base_path
   
@@ -25,7 +25,7 @@ test_that("the log_open function handles invalid parameters.", {
   
 })
 
-test_that("the log_print function handles invalid parameters.", {
+test_that("logr2: the log_print function handles invalid parameters.", {
   
   tmp <- base_path
   
@@ -53,7 +53,7 @@ test_that("the log_print function handles invalid parameters.", {
 
 
 
-test_that("the logr package can create a log with no errors or warnings.", {
+test_that("logr3: the logr package can create a log with no errors or warnings.", {
   
   tmp <- base_path
   
@@ -76,14 +76,14 @@ test_that("the logr package can create a log with no errors or warnings.", {
 
 
 
-test_that("the logr package can create a log with warnings.", {
+test_that("logr4: the logr package can create a log with warnings.", {
   
   tmp <- base_path
   
   lf <- log_open(file.path(tmp, "test.log"))
   log_print("Here is the first log message")
   expect_warning(warning("here is a test warning"))
-  #warning("here is a test warning")
+  # warning("here is a test warning")
   
   log_print("Another message")
   
@@ -100,7 +100,7 @@ test_that("the logr package can create a log with warnings.", {
 })
 
 
-test_that("logr.notes = FALSE works as expected.", {
+test_that("logr5: logr.notes = FALSE works as expected.", {
   
   tmp <- base_path
   
@@ -126,7 +126,7 @@ test_that("logr.notes = FALSE works as expected.", {
 })
 
 
-test_that("logr.notes = TRUE works as expected.", {
+test_that("logr6: logr.notes = TRUE works as expected.", {
   
   tmp <- base_path
   
@@ -151,7 +151,7 @@ test_that("logr.notes = TRUE works as expected.", {
 })
 
 
-test_that("the logr package can create a log with error", {
+test_that("logr7: the logr package can create a log with error", {
   
   tmp <- base_path
   
@@ -173,7 +173,7 @@ test_that("the logr package can create a log with error", {
 })
 
 # This won't work.  Need to actually generate a warning.
-test_that("the logr package can create a log with warning", {
+test_that("logr8: the logr package can create a log with warning", {
   
   tmp <- base_path
   
@@ -195,7 +195,7 @@ test_that("the logr package can create a log with warning", {
 })
 
 # This won't work.  Need to actually generate a warning.
-test_that("the logr package can clear warnings", {
+test_that("logr9: the logr package can clear warnings", {
   
   tmp <- base_path
   
@@ -218,7 +218,7 @@ test_that("the logr package can clear warnings", {
 })
 
 
-test_that("the logr package can log vectors, factors, and lists with no errors or warnings.", {
+test_that("logr10: the logr package can log vectors, factors, and lists with no errors or warnings.", {
   
   tmp <- base_path
   
@@ -249,7 +249,7 @@ test_that("the logr package can log vectors, factors, and lists with no errors o
 })
 
 
-test_that("log_hook works as expected when autolog is off.", {
+test_that("logr11: log_hook works as expected when autolog is off.", {
   
   tmp <- base_path
   
@@ -275,7 +275,7 @@ test_that("log_hook works as expected when autolog is off.", {
 })
 
 
-test_that("log_hook works as expected when autolog is on.", {
+test_that("logr12: log_hook works as expected when autolog is on.", {
   
   tmp <- base_path
   
@@ -302,7 +302,7 @@ test_that("log_hook works as expected when autolog is on.", {
 
 
 
-test_that("tidylog integration works as expected when autolog is on.", {
+test_that("logr13: tidylog integration works as expected when autolog is on.", {
   
   library(dplyr)
   #library(tidylog, warn.conflicts = FALSE)
@@ -339,7 +339,7 @@ test_that("tidylog integration works as expected when autolog is on.", {
 })
 
 
-test_that("Logging of tibbles works as expected.", {
+test_that("logr14: Logging of tibbles works as expected.", {
   
   library(dplyr)
 
@@ -370,7 +370,7 @@ test_that("Logging of tibbles works as expected.", {
 })
 
 
-test_that("log_print() function works as expected when log is closed", {
+test_that("logr15: log_print() function works as expected when log is closed", {
   
 
   log_print("Log closed message")
@@ -383,7 +383,7 @@ test_that("log_print() function works as expected when log is closed", {
 
 
 
-test_that("logr.on = FALSE work as expected.", {
+test_that("logr16: logr.on = FALSE work as expected.", {
 
     options("logr.on" = FALSE)
   
@@ -405,7 +405,7 @@ test_that("logr.on = FALSE work as expected.", {
     
 })
 
-test_that("logr.on = TRUE works as expected.", {
+test_that("logr17: logr.on = TRUE works as expected.", {
   
   
   options("logr.on" = TRUE)
@@ -426,7 +426,7 @@ test_that("logr.on = TRUE works as expected.", {
   expect_equal(file.exists(lf), TRUE)
 })
 
-test_that("logr.autolog = FALSE works as expected.", {
+test_that("logr18: logr.autolog = FALSE works as expected.", {
   
   library(dplyr)
   
@@ -455,7 +455,7 @@ test_that("logr.autolog = FALSE works as expected.", {
 })
 
 
-test_that("logr.autolog = TRUE works as expected.", {
+test_that("logr19: logr.autolog = TRUE works as expected.", {
 
   library(dplyr)
 
@@ -487,7 +487,7 @@ test_that("logr.autolog = TRUE works as expected.", {
 
 
 
-test_that("Logging of Unicode characters prints correctly.", {
+test_that("logr20: Logging of Unicode characters prints correctly.", {
 
   print("First just test that anything works: 你好")
 
@@ -519,7 +519,7 @@ test_that("Logging of Unicode characters prints correctly.", {
 
 
 
-test_that("Logging of Unicode dataframe prints correctly.", {
+test_that("logr21: Logging of Unicode dataframe prints correctly.", {
   
   tmp <- base_path
   
@@ -549,7 +549,7 @@ test_that("Logging of Unicode dataframe prints correctly.", {
 
 
 
-test_that("clear_codes function works as expected.", {
+test_that("logr22: clear_codes function works as expected.", {
   
   if (DEV) {
     
@@ -583,7 +583,7 @@ test_that("clear_codes function works as expected.", {
 
 
 
-test_that("default name works as expected.", {
+test_that("logr23: default name works as expected.", {
   if (DEV) {
     
   
@@ -606,7 +606,7 @@ test_that("default name works as expected.", {
 
 
 
-test_that("compact option works as expected.", {
+test_that("logr24: compact option works as expected.", {
   
   tmp <- base_path
   
@@ -623,7 +623,7 @@ test_that("compact option works as expected.", {
   
 })
 
-test_that("compact option works as expected.", {
+test_that("logr24: compact option works as expected.", {
   
   tmp <- base_path
   
@@ -642,7 +642,7 @@ test_that("compact option works as expected.", {
   
 })
 
-test_that("traceback parameter works as expected.", {
+test_that("logr26: traceback parameter works as expected.", {
   
   tmp <- base_path
   
@@ -663,7 +663,7 @@ test_that("traceback parameter works as expected.", {
   
 })
 
-test_that("traceback option works as expected.", {
+test_that("logr27: traceback option works as expected.", {
   
   tmp <- base_path
   
@@ -686,7 +686,7 @@ test_that("traceback option works as expected.", {
   
 })
 
-test_that("can log a very long string.", {
+test_that("logr28: can log a very long string.", {
 
 tmp <- base_path
 
@@ -709,3 +709,54 @@ expect_equal(ret, TRUE)
 
 })
 
+
+test_that("logr29: Log directory is not appended if user specifies it.", {
+  
+  tmp <- base_path
+  
+  pth <- file.path(tmp, "log/test29.log")
+  
+  lf <- log_open(pth)
+  log_print("Here is the first log message")
+
+  
+  
+  log_close()
+  
+  ret <- file.exists(lf)
+  
+  expect_equal(lf, pth)
+  
+  
+  
+  pth <- file.path(tmp, "fork/test29.log")
+  
+  lf <- log_open(pth)
+  log_print("Here is the first log message")
+  
+  
+  
+  log_close()
+  
+  ret <- file.exists(lf)
+  
+  exp <- file.path(dirname(pth), "log", basename(pth))
+  
+  expect_equal(lf, exp)
+  
+  
+  pth <- file.path(tmp, "fork/test29.log")
+  
+  lf <- log_open(pth, logdir = FALSE)
+  log_print("Here is the first log message")
+  
+  
+  
+  log_close()
+  
+  ret <- file.exists(lf)
+
+  expect_equal(lf, pth)
+  
+  
+})

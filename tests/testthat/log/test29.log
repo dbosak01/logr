@@ -1,5 +1,5 @@
 =========================================================================
-Log Path: c:/packages/logr/tests/testthat/log/test.log
+Log Path: c:\packages\logr\tests\testthat/log/test29.log
 Program Path: C:/packages/logr/tests/testthat/test-logr.R
 Working Directory: C:/packages/logr
 User Name: dbosa
@@ -8,26 +8,15 @@ Machine: SOCRATES x86-64
 Operating System: Windows 10 x64 build 19044
 Base Packages: stats graphics grDevices utils datasets methods base Other
 Packages: logr_1.3.2 testthat_3.1.4
-Log Start Time: 2022-09-06 06:54:49
+Log Start Time: 2022-09-06 06:45:34
 =========================================================================
 
 Here is the first log message
 
-NOTE: Log Print Time:  2022-09-06 06:54:50
-NOTE: Elapsed Time: 0.458199024200439 secs
-
-Another message
-
-NOTE: Log Print Time:  2022-09-06 06:54:57
-NOTE: Elapsed Time: 6.76703095436096 secs
-
-Warning message:
-here is a test warning
-
-NOTE: Log Print Time: 2022-09-06 06:54:58
-NOTE: Log Elapsed Time: 1.7249128818512
+NOTE: Log Print Time:  2022-09-06 06:45:34
+NOTE: Elapsed Time: 0.00100302696228027 secs
 
 =========================================================================
-Log End Time: 2022-09-06 06:54:58
-Log Elapsed Time: 0 00:00:08
+Log End Time: 2022-09-06 06:45:34
+Log Elapsed Time: 0 00:00:00
 =========================================================================

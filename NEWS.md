@@ -1,6 +1,6 @@
 # logr 1.3.3
 
-* Fixed error when passing full path and logdir parameter was TRUE. 
+* Fixed bug when passing full path and logdir parameter was TRUE. 
 * Updated logo.
 
 # logr 1.3.2

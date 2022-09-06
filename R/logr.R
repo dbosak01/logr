@@ -263,9 +263,7 @@ log_open <- function(file_name = "", logdir = TRUE, show_notes = TRUE,
   
   lpath <- ""
   
-  # If no filename is specified, make up something.
-  # If R had a good way of getting the name of the currently
-  # executing script, I would do that instead.  But it doesn't.
+  # If no filename is specified, use current program path.
   if (file_name == "") {
     
     ppth <- NULL
@@ -290,11 +288,11 @@ log_open <- function(file_name = "", logdir = TRUE, show_notes = TRUE,
     
     # Create log directory if needed
     d <- dirname(lpath)
-    if (logdir == TRUE & substr(d, length(d) - 3, length(d)) != "log") {
+    if (logdir == TRUE & basename(d) != "log") {
       tryCatch({
         ldir <- file.path(d, "log")
         if (!dir.exists(ldir))
-          dir.create(ldir)
+          dir.create(ldir, recursive = TRUE)
         lpath <- file.path(ldir, basename(lpath))
       },
       error = function(cond) {
