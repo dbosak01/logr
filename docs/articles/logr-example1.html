@@ -26,6 +26,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-article">
       <header><div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
   <div class="container">
@@ -38,19 +40,13 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">logr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.3.4</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav"></ul>
 <ul class="nav navbar-nav navbar-right">
-<li>
-  <a href="../index.html">
-    <span class="fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
 <li>
   <a href="../articles/logr.html">Get started</a>
 </li>
@@ -79,6 +75,9 @@
     <li>
       <a href="../articles/logr-example1.html">Complete Example</a>
     </li>
+    <li>
+      <a href="../articles/logr-faq.html">Frequently Asked Questions</a>
+    </li>
   </ul>
 </li>
 <li>
@@ -91,7 +90,7 @@
   <a href="../news/index.html">Changelog</a>
 </li>
 <li>
-  <a href="https://github.com/dbosak01/logr/">
+  <a href="https://github.com/dbosak01/logr/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -106,22 +105,22 @@
 
       
 
-      </header><script src="logr-example1_files/header-attrs-2.14/header-attrs.js"></script><div class="row">
+      </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Complete Example</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/dbosak01/logr/blob/master/vignettes/logr-example1.Rmd"><code>vignettes/logr-example1.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/dbosak01/logr/blob/HEAD/vignettes/logr-example1.Rmd" class="external-link"><code>vignettes/logr-example1.Rmd</code></a></small>
       <div class="hidden name"><code>logr-example1.Rmd</code></div>
 
     </div>
 
     
     
-<div id="program" class="section level2">
-<h2 class="hasAnchor">
-<a href="#program" class="anchor"></a>Program</h2>
+<div class="section level2">
+<h2 id="program">Program<a class="anchor" aria-label="anchor" href="#program"></a>
+</h2>
 <p>The previous examples in the <strong>logr</strong> documentation were
 intentionally simplified to focus on the workings of a particular
 function. It is helpful, however, to also view <strong>logr</strong>
@@ -136,19 +135,19 @@ auto-generation features of <strong>logr</strong>, take note of these
 functions.</p>
 <p>The data for this example has been included in the
 <strong>logr</strong> package as an external data file. It may be
-accessed using the <code><a href="https://rdrr.io/r/base/system.file.html">system.file()</a></code> function as shown below,
-or downloaded directly from the <strong>logr</strong> GitHub site <a href="https://raw.githubusercontent.com/dbosak01/logr/master/inst/extdata/DM.csv">here</a></p>
+accessed using the <code><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file()</a></code> function as shown below,
+or downloaded directly from the <strong>logr</strong> GitHub site <a href="https://raw.githubusercontent.com/dbosak01/logr/master/inst/extdata/DM.csv" class="external-link">here</a></p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://r-sassy.org">sassy</a></span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org" class="external-link">tidyverse</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://r-sassy.org" class="external-link">sassy</a></span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span><span class="op">(</span><span class="st">"logr.autolog"</span> <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span><span class="st">"logr.autolog"</span> <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Get temp location for log and report output</span></span>
-<span><span class="va">tmp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html">tempdir</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="va">tmp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Open the log</span></span>
-<span><span class="va">lf</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/log_open.html">log_open</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="va">tmp</span>, <span class="st">"example1.log"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">lf</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/log_open.html">log_open</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">tmp</span>, <span class="st">"example1.log"</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Send code to the log</span></span>
 <span><span class="fu"><a href="../reference/log_code.html">log_code</a></span><span class="op">(</span><span class="op">)</span></span>
@@ -156,7 +155,7 @@ or downloaded directly from the <strong>logr</strong> GitHub site <a href="https
 <span><span class="fu"><a href="../reference/log_print.html">sep</a></span><span class="op">(</span><span class="st">"Load the data"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Get path to sample data</span></span>
-<span><span class="va">pkg</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, package <span class="op">=</span> <span class="st">"logr"</span><span class="op">)</span></span>
+<span><span class="va">pkg</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, package <span class="op">=</span> <span class="st">"logr"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Define data library</span></span>
 <span><span class="fu">libname</span><span class="op">(</span><span class="va">sdtm</span>, <span class="va">pkg</span>, <span class="st">"csv"</span><span class="op">)</span> </span>
@@ -176,14 +175,14 @@ or downloaded directly from the <strong>logr</strong> GitHub site <a href="https
 <span></span>
 <span></span>
 <span><span class="co"># Manipulate data</span></span>
-<span><span class="va">final</span> <span class="op">&lt;-</span> <span class="va">sdtm.DM</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">USUBJID</span>, <span class="va">BRTHDTC</span>, <span class="va">AGE</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>AGEG <span class="op">=</span> <span class="fu">fapply</span><span class="op">(</span><span class="va">AGE</span>, <span class="va">ageg</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="va">AGEG</span>, <span class="va">AGE</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">AGEG</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
-<span>  <span class="fu">datastep</span><span class="op">(</span>retain <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>SEQ <span class="op">=</span> <span class="fl">0</span><span class="op">)</span>, </span>
-<span>           calculate <span class="op">=</span> <span class="op">{</span><span class="va">AGEM</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">AGE</span><span class="op">)</span><span class="op">}</span>,</span>
-<span>           attrib <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>USUBJID <span class="op">=</span> <span class="fu">dsattr</span><span class="op">(</span>label <span class="op">=</span> <span class="st">"Universal Subject ID"</span><span class="op">)</span>,</span>
+<span><span class="va">final</span> <span class="op">&lt;-</span> <span class="va">sdtm.DM</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">USUBJID</span>, <span class="va">BRTHDTC</span>, <span class="va">AGE</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>AGEG <span class="op">=</span> <span class="fu">fapply</span><span class="op">(</span><span class="va">AGE</span>, <span class="va">ageg</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html" class="external-link">arrange</a></span><span class="op">(</span><span class="va">AGEG</span>, <span class="va">AGE</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">AGEG</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<span>  <span class="fu">datastep</span><span class="op">(</span>retain <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>SEQ <span class="op">=</span> <span class="fl">0</span><span class="op">)</span>, </span>
+<span>           calculate <span class="op">=</span> <span class="op">{</span><span class="va">AGEM</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">AGE</span><span class="op">)</span><span class="op">}</span>,</span>
+<span>           attrib <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>USUBJID <span class="op">=</span> <span class="fu">dsattr</span><span class="op">(</span>label <span class="op">=</span> <span class="st">"Universal Subject ID"</span><span class="op">)</span>,</span>
 <span>                         BRTHDTC <span class="op">=</span> <span class="fu">dsattr</span><span class="op">(</span>label <span class="op">=</span> <span class="st">"Subject Birth Date"</span>, </span>
 <span>                                          format <span class="op">=</span> <span class="st">"%m %B %Y"</span><span class="op">)</span>,</span>
 <span>                         AGE <span class="op">=</span> <span class="fu">dsattr</span><span class="op">(</span>label <span class="op">=</span> <span class="st">"Subject Age in Years"</span>, </span>
@@ -196,7 +195,7 @@ or downloaded directly from the <strong>logr</strong> GitHub site <a href="https
 <span>                         AGEM <span class="op">=</span> <span class="fu">dsattr</span><span class="op">(</span>label <span class="op">=</span> <span class="st">"Mean Subject Age"</span>, </span>
 <span>                                       format <span class="op">=</span> <span class="st">"%1.2f"</span><span class="op">)</span>,</span>
 <span>                         AGEMC <span class="op">=</span> <span class="fu">dsattr</span><span class="op">(</span>label <span class="op">=</span> <span class="st">"Subject Age Mean Category"</span>,</span>
-<span>                                        format <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>B <span class="op">=</span> <span class="st">"Below"</span>, A <span class="op">=</span> <span class="st">"Above"</span><span class="op">)</span>, </span>
+<span>                                        format <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>B <span class="op">=</span> <span class="st">"Below"</span>, A <span class="op">=</span> <span class="st">"Above"</span><span class="op">)</span>, </span>
 <span>                                        justify <span class="op">=</span> <span class="st">"right"</span><span class="op">)</span><span class="op">)</span>, </span>
 <span>           <span class="op">{</span></span>
 <span>             </span>
@@ -222,12 +221,12 @@ or downloaded directly from the <strong>logr</strong> GitHub site <a href="https
 <span>             <span class="kw">else</span> </span>
 <span>               <span class="va">AGEMC</span> <span class="op">&lt;-</span> <span class="st">"B"</span></span>
 <span>             </span>
-<span>           <span class="op">}</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">ungroup</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>           <span class="op">}</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">ungroup</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="../reference/log_print.html">put</a></span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Put dictionary to log</span></span>
-<span><span class="fu">dictionary</span><span class="op">(</span><span class="va">final</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="../reference/log_print.html">put</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="fu">dictionary</span><span class="op">(</span><span class="va">final</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/log_print.html">put</a></span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Create Report ------------------------------------------------------------</span></span>
 <span><span class="fu"><a href="../reference/log_print.html">sep</a></span><span class="op">(</span><span class="st">"Create report"</span><span class="op">)</span></span>
@@ -237,9 +236,9 @@ or downloaded directly from the <strong>logr</strong> GitHub site <a href="https
 <span><span class="va">tbl</span> <span class="op">&lt;-</span> <span class="fu">create_table</span><span class="op">(</span><span class="va">final</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Create report</span></span>
-<span><span class="va">rpt</span> <span class="op">&lt;-</span> <span class="fu">create_report</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="va">tmp</span>, <span class="st">"./output/example1.rtf"</span><span class="op">)</span>, </span>
-<span>                     output_type <span class="op">=</span> <span class="st">"RTF"</span>, font <span class="op">=</span> <span class="st">"Arial"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
-<span>  <span class="fu">titles</span><span class="op">(</span><span class="st">"Our first SASSY report"</span>, bold <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span><span class="va">rpt</span> <span class="op">&lt;-</span> <span class="fu">create_report</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">tmp</span>, <span class="st">"./output/example1.rtf"</span><span class="op">)</span>, </span>
+<span>                     output_type <span class="op">=</span> <span class="st">"RTF"</span>, font <span class="op">=</span> <span class="st">"Arial"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<span>  <span class="fu">titles</span><span class="op">(</span><span class="st">"Our first SASSY report"</span>, bold <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
 <span>  <span class="fu">add_content</span><span class="op">(</span><span class="va">tbl</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># write out the report</span></span>
@@ -256,20 +255,20 @@ or downloaded directly from the <strong>logr</strong> GitHub site <a href="https
 <span><span class="fu"><a href="../reference/log_close.html">log_close</a></span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># View log</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/writeLines.html">writeLines</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/readLines.html">readLines</a></span><span class="op">(</span><span class="va">lf</span>, encoding <span class="op">=</span> <span class="st">"UTF-8"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/writeLines.html" class="external-link">writeLines</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/readLines.html" class="external-link">readLines</a></span><span class="op">(</span><span class="va">lf</span>, encoding <span class="op">=</span> <span class="st">"UTF-8"</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># View Report</span></span>
 <span><span class="co"># file.show(res$modified_path)</span></span></code></pre></div>
 </div>
-<div id="output" class="section level2">
-<h2 class="hasAnchor">
-<a href="#output" class="anchor"></a>Output</h2>
+<div class="section level2">
+<h2 id="output">Output<a class="anchor" aria-label="anchor" href="#output"></a>
+</h2>
 <p>Here is the report produced by the sample program:</p>
 <p><img src="../man/images/example1a.png"><img src="../man/images/example1b.png"><img src="../man/images/example1c.png"></p>
 </div>
-<div id="log" class="section level2">
-<h2 class="hasAnchor">
-<a href="#log" class="anchor"></a>Log</h2>
+<div class="section level2">
+<h2 id="log">Log<a class="anchor" aria-label="anchor" href="#log"></a>
+</h2>
 <p>The above program produces the following log:</p>
 <pre><code>=========================================================================
 Log Path: C:/Users/dbosa/AppData/Local/Temp/Rtmp6DW7BF/log/example1.log
@@ -550,11 +549,13 @@ Log Elapsed Time: 0 00:00:01
 
 
       <footer><div class="copyright">
-  <p>Developed by David Bosak.</p>
+  <p></p>
+<p>Developed by David Bosak.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer>
@@ -562,6 +563,8 @@ Log Elapsed Time: 0 00:00:01
 
   
 
+
+  
 
   </body>
 </html>

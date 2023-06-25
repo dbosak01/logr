@@ -1,3 +1,8 @@
+# logr 1.3.4
+
+* Changed reference from this.path() to Sys.path() to avoid breaking changes
+in this.path package.
+
 # logr 1.3.3
 
 * Fixed bug when passing full path and logdir parameter was TRUE. 

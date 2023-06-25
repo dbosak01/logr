@@ -10,6 +10,7 @@ articles:
   - logr-put
   - logr-tidylog
   - logr-example1
+  - logr-faq
 
 reference:
 - title: All Functions
@@ -25,6 +26,7 @@ navbar:
   type: inverse
   structure:
     right: [home, intro, articles, reference, faq, news, github]
+    left: []
   components:
     faq:
       text: FAQ

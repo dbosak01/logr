@@ -33,6 +33,7 @@
 #' See function documentation for additional details.
 #' @docType package
 #' @name logr
+#' @keywords internal
 NULL
 
 # Globals -----------------------------------------------------------------
@@ -268,7 +269,7 @@ log_open <- function(file_name = "", logdir = TRUE, show_notes = TRUE,
     
     ppth <- NULL
     tryCatch({
-      ppth <- this.path::this.path()
+      ppth <- common::Sys.path()
     }, error = function(e) { ppth <- NULL})
     
     if (is.null(ppth))

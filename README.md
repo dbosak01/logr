@@ -10,7 +10,7 @@
 <!-- badges: end -->
 
 # Introduction to **logr**
-<img src='man/images/logr_new.png' align="left" height="138" style="margin-right:10px"/>
+<img src='man/images/logr_new.png' align="left" height="138" style="margin-right:10px;height:138px"/>
 
 There are already several logging packages for R.  Why create another one? 
 

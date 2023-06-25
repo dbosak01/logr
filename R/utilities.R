@@ -43,7 +43,7 @@ update_status <- function() {
 
 
 #' Function to print the log header
-#' @import this.path
+#' @import common
 #' @noRd
 print_log_header <- function(log_path) {
   
@@ -52,7 +52,7 @@ print_log_header <- function(log_path) {
   
   ppth <- NULL
   tryCatch({
-    ppth <- this.path::this.path()
+    ppth <- common::Sys.path()
   }, error = function(e) { ppth <- NULL})
   
   if (!is.null(ppth)) {

@@ -76,7 +76,7 @@ log_status <- function() {
 #' function.
 #' @seealso \code{\link{log_open}} to open the log, 
 #' and \code{\link{log_close}} to close the log.
-#' @import this.path
+#' @import common
 #' @export
 #' @examples 
 #' # Create temp file location
@@ -106,7 +106,7 @@ log_code <- function() {
   
  pth <- NULL
  tryCatch({
-   pth <- this.path::this.path()
+   pth <- common::Sys.path()
  }, error = function(e) { pth <- NULL})
  
  

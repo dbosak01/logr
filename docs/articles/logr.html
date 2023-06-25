@@ -26,6 +26,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-article">
       <header><div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
   <div class="container">
@@ -38,19 +40,13 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">logr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.3.4</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav"></ul>
 <ul class="nav navbar-nav navbar-right">
-<li>
-  <a href="../index.html">
-    <span class="fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
 <li>
   <a href="../articles/logr.html">Get started</a>
 </li>
@@ -79,6 +75,9 @@
     <li>
       <a href="../articles/logr-example1.html">Complete Example</a>
     </li>
+    <li>
+      <a href="../articles/logr-faq.html">Frequently Asked Questions</a>
+    </li>
   </ul>
 </li>
 <li>
@@ -91,7 +90,7 @@
   <a href="../news/index.html">Changelog</a>
 </li>
 <li>
-  <a href="https://github.com/dbosak01/logr/">
+  <a href="https://github.com/dbosak01/logr/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -106,13 +105,13 @@
 
       
 
-      </header><script src="logr_files/header-attrs-2.14/header-attrs.js"></script><div class="row">
+      </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>logr</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/dbosak01/logr/blob/master/vignettes/logr.Rmd"><code>vignettes/logr.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/dbosak01/logr/blob/HEAD/vignettes/logr.Rmd" class="external-link"><code>vignettes/logr.Rmd</code></a></small>
       <div class="hidden name"><code>logr.Rmd</code></div>
 
     </div>
@@ -123,10 +122,10 @@
 scripts. The package provides easy logging, without the complexity of
 other logging systems. It is designed for analysts who simply want a
 written log of their program execution. The package is implemented as a
-wrapper to the base R <code><a href="https://rdrr.io/r/base/sink.html">sink()</a></code> function.</p>
-<div id="how-to-use" class="section level2">
-<h2 class="hasAnchor">
-<a href="#how-to-use" class="anchor"></a>How to use</h2>
+wrapper to the base R <code><a href="https://rdrr.io/r/base/sink.html" class="external-link">sink()</a></code> function.</p>
+<div class="section level2">
+<h2 id="how-to-use">How to use<a class="anchor" aria-label="anchor" href="#how-to-use"></a>
+</h2>
 <p>There are really only three <strong>logr</strong> functions:</p>
 <ul>
 <li><code><a href="../reference/log_open.html">log_open()</a></code></li>
@@ -141,10 +140,10 @@ program, call <code><a href="../reference/log_print.html">log_print()</a></code>
 and call <code><a href="../reference/log_close.html">log_close()</a></code> once at the end of the program.</p>
 <p>A sample program is as follows:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://logr.r-sassy.org">logr</a></span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://logr.r-sassy.org">logr</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Create temp file location</span></span>
-<span><span class="va">tmp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/tempfile.html">tempdir</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">"test.log"</span><span class="op">)</span></span>
+<span><span class="va">tmp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">"test.log"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Open log</span></span>
 <span><span class="va">lf</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/log_open.html">log_open</a></span><span class="op">(</span><span class="va">tmp</span><span class="op">)</span></span>
@@ -153,7 +152,7 @@ and call <code><a href="../reference/log_close.html">log_close()</a></code> once
 <span><span class="fu"><a href="../reference/log_print.html">log_print</a></span><span class="op">(</span><span class="st">"High Mileage Cars Subset"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Perform operations</span></span>
-<span><span class="va">hmc</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html">subset</a></span><span class="op">(</span><span class="va">mtcars</span>, <span class="va">mtcars</span><span class="op">$</span><span class="va">mpg</span> <span class="op">&gt;</span> <span class="fl">20</span><span class="op">)</span></span>
+<span><span class="va">hmc</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span><span class="va">mtcars</span>, <span class="va">mtcars</span><span class="op">$</span><span class="va">mpg</span> <span class="op">&gt;</span> <span class="fl">20</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Print data to log</span></span>
 <span><span class="fu"><a href="../reference/log_print.html">log_print</a></span><span class="op">(</span><span class="va">hmc</span><span class="op">)</span></span>
@@ -162,22 +161,22 @@ and call <code><a href="../reference/log_close.html">log_close()</a></code> once
 <span><span class="fu"><a href="../reference/log_close.html">log_close</a></span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># View results</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/writeLines.html">writeLines</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/readLines.html">readLines</a></span><span class="op">(</span><span class="va">lf</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<div id="what-to-print-to-the-log" class="section level3">
-<h3 class="hasAnchor">
-<a href="#what-to-print-to-the-log" class="anchor"></a>What to print to the log</h3>
+<span><span class="fu"><a href="https://rdrr.io/r/base/writeLines.html" class="external-link">writeLines</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/readLines.html" class="external-link">readLines</a></span><span class="op">(</span><span class="va">lf</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<div class="section level3">
+<h3 id="what-to-print-to-the-log">What to print to the log<a class="anchor" aria-label="anchor" href="#what-to-print-to-the-log"></a>
+</h3>
 <p>You can print to the log anything that you can print to the console:
 vectors, lists, and data frames are all valid objects for logging. Under
-the hood, <strong>logr</strong> calls the <code><a href="https://rdrr.io/r/base/print.html">print()</a></code> function
+the hood, <strong>logr</strong> calls the <code><a href="https://rdrr.io/r/base/print.html" class="external-link">print()</a></code> function
 on that object, and writes the results to the log. The
 <code><a href="../reference/log_print.html">log_print()</a></code> function, by default, will also print the
 object to the console. That means you can replace calls to
-<code><a href="https://rdrr.io/r/base/print.html">print()</a></code> with <code><a href="../reference/log_print.html">log_print()</a></code>, and there will be no
+<code><a href="https://rdrr.io/r/base/print.html" class="external-link">print()</a></code> with <code><a href="../reference/log_print.html">log_print()</a></code>, and there will be no
 loss of convenience during development.</p>
 </div>
-<div id="what-the-log-looks-like" class="section level3">
-<h3 class="hasAnchor">
-<a href="#what-the-log-looks-like" class="anchor"></a>What the log looks like</h3>
+<div class="section level3">
+<h3 id="what-the-log-looks-like">What the log looks like<a class="anchor" aria-label="anchor" href="#what-the-log-looks-like"></a>
+</h3>
 <p>The log created by <strong>logr</strong> is simpler than most logging
 packages. This log is designed to be human-readable, and increases the
 traceability of your activities. There are three main enhancements to a
@@ -231,9 +230,9 @@ Log End Time: 2020-06-30 07:15:53
 Log Elapsed Time: 0 00:00:00 
 ========================================================================= </code></pre>
 </div>
-<div id="next-steps" class="section level3">
-<h3 class="hasAnchor">
-<a href="#next-steps" class="anchor"></a>Next Steps</h3>
+<div class="section level3">
+<h3 id="next-steps">Next Steps<a class="anchor" aria-label="anchor" href="#next-steps"></a>
+</h3>
 <p>For addition exploration of the <strong>logr</strong> package, please
 read the following articles:</p>
 <ul>
@@ -259,11 +258,13 @@ read the following articles:</p>
 
 
       <footer><div class="copyright">
-  <p>Developed by David Bosak.</p>
+  <p></p>
+<p>Developed by David Bosak.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer>
@@ -271,6 +272,8 @@ read the following articles:</p>
 
   
 
+
+  
 
   </body>
 </html>

@@ -26,6 +26,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-article">
       <header><div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
   <div class="container">
@@ -38,19 +40,13 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">logr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.3.4</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav"></ul>
 <ul class="nav navbar-nav navbar-right">
-<li>
-  <a href="../index.html">
-    <span class="fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
 <li>
   <a href="../articles/logr.html">Get started</a>
 </li>
@@ -79,6 +75,9 @@
     <li>
       <a href="../articles/logr-example1.html">Complete Example</a>
     </li>
+    <li>
+      <a href="../articles/logr-faq.html">Frequently Asked Questions</a>
+    </li>
   </ul>
 </li>
 <li>
@@ -91,7 +90,7 @@
   <a href="../news/index.html">Changelog</a>
 </li>
 <li>
-  <a href="https://github.com/dbosak01/logr/">
+  <a href="https://github.com/dbosak01/logr/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -106,13 +105,13 @@
 
       
 
-      </header><script src="logr-faq_files/header-attrs-2.14/header-attrs.js"></script><div class="row">
+      </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Frequently Asked Questions</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/dbosak01/logr/blob/master/vignettes/logr-faq.Rmd"><code>vignettes/logr-faq.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/dbosak01/logr/blob/HEAD/vignettes/logr-faq.Rmd" class="external-link"><code>vignettes/logr-faq.Rmd</code></a></small>
       <div class="hidden name"><code>logr-faq.Rmd</code></div>
 
     </div>
@@ -122,9 +121,9 @@
 <p>Below are some frequently asked questions about the
 <strong>logr</strong> package. Click on the links below to navigate to
 the full question and answer content.</p>
-<div id="top" class="section level2">
-<h2 class="hasAnchor">
-<a href="#top" class="anchor"></a>Index</h2>
+<div class="section level2">
+<h2 id="top">Index<a class="anchor" aria-label="anchor" href="#top"></a>
+</h2>
 <ul>
 <li><a href="#location">Where is my log?</a></li>
 <li><a href="#nolog">How come it didn’t log anything?</a></li>
@@ -146,12 +145,12 @@ log?</a></li>
 <li><a href="#traceback">How can I get rid of the traceback?</a></li>
 </ul>
 </div>
-<div id="content" class="section level2">
-<h2 class="hasAnchor">
-<a href="#content" class="anchor"></a>Content</h2>
-<div id="location" class="section level3">
-<h3 class="hasAnchor">
-<a href="#location" class="anchor"></a>Where is my log?</h3>
+<div class="section level2">
+<h2 id="content">Content<a class="anchor" aria-label="anchor" href="#content"></a>
+</h2>
+<div class="section level3">
+<h3 id="location">Where is my log?<a class="anchor" aria-label="anchor" href="#location"></a>
+</h3>
 <p><strong>Q:</strong> I followed the examples to add
 <strong>logr</strong> functions to my script, and I think I created a
 log. But I can’t find it. Where does the log go?</p>
@@ -170,20 +169,20 @@ will still be created in a subdirectory named “log” unless the
 FALSE.</p>
 <p>If you still can’t find it, add the following line to your program
 someplace after the call to <code><a href="../reference/log_open.html">log_open()</a></code>:</p>
-<pre><code>print(log_path())</code></pre>
+<pre><code><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="fu"><a href="../reference/log_path.html">log_path</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code></pre>
 <p>Then rerun the program. The path to the log will be printed to the
 console.</p>
 <p>Note that the <code><a href="../reference/log_open.html">log_open()</a></code> function also returns the path
 to the log. You can save this path in a variable for easy access, like
 this:</p>
-<pre><code>pth &lt;- log_open()
-print(pth)</code></pre>
+<pre><code><span><span class="va">pth</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/log_open.html">log_open</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">pth</span><span class="op">)</span></span></code></pre>
 <p><a href="#top">top</a></p>
 <hr>
 </div>
-<div id="nolog" class="section level3">
-<h3 class="hasAnchor">
-<a href="#nolog" class="anchor"></a>How come it didn’t log anything?</h3>
+<div class="section level3">
+<h3 id="nolog">How come it didn’t log anything?<a class="anchor" aria-label="anchor" href="#nolog"></a>
+</h3>
 <p><strong>Q:</strong> I am able to create a log. But it doesn’t contain
 anything. Just a header and footer. How come nothing was logged?</p>
 <p><strong>A:</strong> The <strong>logr</strong> log is not a fully
@@ -198,9 +197,9 @@ anything you feel is relevant.</p>
 of two ways:<br>
 1. Set the <code>autolog</code> parameter on the <code><a href="../reference/log_open.html">log_open()</a></code>
 function to TRUE.<br>
-2. Set the “logr.autolog” option using an <code><a href="https://rdrr.io/r/base/options.html">options()</a></code>
+2. Set the “logr.autolog” option using an <code><a href="https://rdrr.io/r/base/options.html" class="external-link">options()</a></code>
 function, like so:</p>
-<pre><code>options("logr.autolog" = TRUE)</code></pre>
+<pre><code><span><span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span><span class="st">"logr.autolog"</span> <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre>
 <p>The autolog feature will automatically log function calls from the
 <strong>dplyr</strong>, <strong>tidyr</strong>, and the
 <strong>sassy</strong> family of packages. It will not log Base R
@@ -215,33 +214,32 @@ automatically.</p>
 the end of your <strong>dplyr</strong> pipelines. This is a very good
 habit to develop, and will greatly improve the quantity and quality of
 your logs. Here is an example:</p>
-<pre><code>dat &lt;- mtcars %&gt;% 
-       subset(mpg &lt; 20) %&gt;% 
-       arrange(mpg) %&gt;% 
-       put()
-</code></pre>
+<pre><code><span><span class="va">dat</span> <span class="op">&lt;-</span> <span class="va">mtcars</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<span>       <span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span><span class="va">mpg</span> <span class="op">&lt;</span> <span class="fl">20</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<span>       <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html" class="external-link">arrange</a></span><span class="op">(</span><span class="va">mpg</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<span>       <span class="fu"><a href="../reference/log_print.html">put</a></span><span class="op">(</span><span class="op">)</span></span></code></pre>
 <p>Note that the above <code><a href="../reference/log_print.html">put()</a></code> statement has no effect on the
 resulting data frame. It simply logs the pipeline result before
 assigning it to the variable <code>dat</code>.</p>
 <p><a href="#top">top</a></p>
 <hr>
 </div>
-<div id="name" class="section level3">
-<h3 class="hasAnchor">
-<a href="#name" class="anchor"></a>How do I change the name of the log?</h3>
+<div class="section level3">
+<h3 id="name">How do I change the name of the log?<a class="anchor" aria-label="anchor" href="#name"></a>
+</h3>
 <p><strong>Q:</strong> I have a log. But I don’t want the default name.
 How can I change it to something else?</p>
 <p><strong>A:</strong> The <code>file_name</code> parameter on the
 <code><a href="../reference/log_open.html">log_open()</a></code> function controls the log name. You can set this
 parameter to be any log name you like. When the log is created, it will
 use the name set on this parameter. Example:</p>
-<pre><code>log_open("MyCustomName.log")</code></pre>
+<pre><code><span><span class="fu"><a href="../reference/log_open.html">log_open</a></span><span class="op">(</span><span class="st">"MyCustomName.log"</span><span class="op">)</span></span></code></pre>
 <p><a href="#top">top</a></p>
 <hr>
 </div>
-<div id="timestamp" class="section level3">
-<h3 class="hasAnchor">
-<a href="#timestamp" class="anchor"></a>How do I add a timestamp to the log name?</h3>
+<div class="section level3">
+<h3 id="timestamp">How do I add a timestamp to the log name?<a class="anchor" aria-label="anchor" href="#timestamp"></a>
+</h3>
 <p><strong>Q:</strong> I have an R program that runs on a schedule every
 day. I want to keep the logs from this program for a certain period of
 time. But <strong>logr</strong> always overwrites the log from the last
@@ -249,22 +247,21 @@ run. Is there a way to get a datestamp on the log name, so it won’t
 overwrite?</p>
 <p><strong>A:</strong> You can append the datestamp to the log name on
 the <code>file_name</code> parameter. Like this:</p>
-<pre><code># Concatenate log name with datestamp
-nm &lt;- paste0("mylog_", format(Sys.Date(), "%Y-%m-%d"))
-
-# Open log
-lf &lt;- log_open(nm)
-</code></pre>
+<pre><code><span><span class="co"># Concatenate log name with datestamp</span></span>
+<span><span class="va">nm</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"mylog_"</span>, <span class="fu"><a href="https://rdrr.io/r/base/format.html" class="external-link">format</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.Date</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">"%Y-%m-%d"</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Open log</span></span>
+<span><span class="va">lf</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/log_open.html">log_open</a></span><span class="op">(</span><span class="va">nm</span><span class="op">)</span></span></code></pre>
 <p>Then <strong>logr</strong> will not delete the previous day’s
 log.</p>
 <p>If you want a full date and time stamp, adjust the codes on the
-<code><a href="https://rdrr.io/r/base/format.html">format()</a></code> function to your liking.</p>
+<code><a href="https://rdrr.io/r/base/format.html" class="external-link">format()</a></code> function to your liking.</p>
 <p><a href="#top">top</a></p>
 <hr>
 </div>
-<div id="code" class="section level3">
-<h3 class="hasAnchor">
-<a href="#code" class="anchor"></a>How do I log my code?</h3>
+<div class="section level3">
+<h3 id="code">How do I log my code?<a class="anchor" aria-label="anchor" href="#code"></a>
+</h3>
 <p><strong>Q:</strong> In SAS® there is an option to log all the code in
 my program at the top of the log. I like this because it is a good
 record of my program at the time it was run. Is there a similar option
@@ -275,23 +272,22 @@ same thing. You just call the <code><a href="../reference/log_code.html">log_cod
 point where you want the code logged. Normally this would be at the top
 of the program, after the call to <code><a href="../reference/log_open.html">log_open()</a></code>. Like
 this:</p>
-<pre><code># Open log
-log_open("mylog.log")
-
-# Dump code to log
-log_code()
-
-# Continue program...
-</code></pre>
+<pre><code><span><span class="co"># Open log</span></span>
+<span><span class="fu"><a href="../reference/log_open.html">log_open</a></span><span class="op">(</span><span class="st">"mylog.log"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Dump code to log</span></span>
+<span><span class="fu"><a href="../reference/log_code.html">log_code</a></span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Continue program...</span></span></code></pre>
 <p>The above code will dump the entire program contents to the log. The
 code lines will be prefixed with a right arrow (“&gt;”) to distinguish
 these lines from the rest of your log.</p>
 <p><a href="#top">top</a></p>
 <hr>
 </div>
-<div id="symbolgen" class="section level3">
-<h3 class="hasAnchor">
-<a href="#symbolgen" class="anchor"></a>How do I turn on symbolgen?</h3>
+<div class="section level3">
+<h3 id="symbolgen">How do I turn on symbolgen?<a class="anchor" aria-label="anchor" href="#symbolgen"></a>
+</h3>
 <p><strong>Q:</strong> In SAS® there is an option called
 <em>symbolgen</em> that will log all the variable values in my program.
 This option is useful for debugging. Is there a similar option in
@@ -315,31 +311,31 @@ of your program than debugging.</p>
 <p><a href="#top">top</a></p>
 <hr>
 </div>
-<div id="environment" class="section level3">
-<h3 class="hasAnchor">
-<a href="#environment" class="anchor"></a>How do I log environment variables and their values?</h3>
+<div class="section level3">
+<h3 id="environment">How do I log environment variables and their values?<a class="anchor" aria-label="anchor" href="#environment"></a>
+</h3>
 <p><strong>Q:</strong> I want to write all the environment variables and
 their values to the <strong>logr</strong> log. Is there a way to do
 that?</p>
 <p><strong>A:</strong> There is no built-in feature to log the
 environment variables. But there is a Base R function
-<code><a href="https://rdrr.io/r/base/Sys.getenv.html">Sys.getenv()</a></code> that will retrieve the environment variables
+<code><a href="https://rdrr.io/r/base/Sys.getenv.html" class="external-link">Sys.getenv()</a></code> that will retrieve the environment variables
 and their values. Then you can put them to the log like any other
 object:</p>
-<pre><code># Open log
-log_open("test.log")
-
-# Send environment variables to log
-put(Sys.getenv())
-
-# Close log
-log_close()</code></pre>
+<pre><code><span><span class="co"># Open log</span></span>
+<span><span class="fu"><a href="../reference/log_open.html">log_open</a></span><span class="op">(</span><span class="st">"test.log"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Send environment variables to log</span></span>
+<span><span class="fu"><a href="../reference/log_print.html">put</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Sys.getenv.html" class="external-link">Sys.getenv</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Close log</span></span>
+<span><span class="fu"><a href="../reference/log_close.html">log_close</a></span><span class="op">(</span><span class="op">)</span></span></code></pre>
 <p><a href="#top">top</a></p>
 <hr>
 </div>
-<div id="notes" class="section level3">
-<h3 class="hasAnchor">
-<a href="#notes" class="anchor"></a>How do I turn off the notes?</h3>
+<div class="section level3">
+<h3 id="notes">How do I turn off the notes?<a class="anchor" aria-label="anchor" href="#notes"></a>
+</h3>
 <p><strong>Q:</strong> The notes are cluttering up my log, and are not
 providing anything that I need. I don’t need the elapsed time, etc. How
 can I turn them off?</p>
@@ -348,14 +344,14 @@ ways:<br>
 1. Set the <code>show_notes</code> parameter on <code><a href="../reference/log_open.html">log_open()</a></code>
 to FALSE.<br>
 2. Set the <code>logr.notes</code> option to FALSE using an
-<code><a href="https://rdrr.io/r/base/options.html">options()</a></code> function. Like this:</p>
-<pre><code>   options("logr.notes" = FALSE)</code></pre>
+<code><a href="https://rdrr.io/r/base/options.html" class="external-link">options()</a></code> function. Like this:</p>
+<pre><code><span>   <span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span><span class="st">"logr.notes"</span> <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre>
 <p><a href="#top">top</a></p>
 <hr>
 </div>
-<div id="put" class="section level3">
-<h3 class="hasAnchor">
-<a href="#put" class="anchor"></a>How is put() different from log_print()?</h3>
+<div class="section level3">
+<h3 id="put">How is put() different from log_print()?<a class="anchor" aria-label="anchor" href="#put"></a>
+</h3>
 <p><strong>Q:</strong> There is another function <code><a href="../reference/log_print.html">put()</a></code> that
 seems similar to <code><a href="../reference/log_print.html">log_print()</a></code>. What is the difference
 between them?</p>
@@ -369,10 +365,10 @@ alias will warm the hearts of current/former SAS® programmers.</p>
 <p><a href="#top">top</a></p>
 <hr>
 </div>
-<div id="packages" class="section level3">
-<h3 class="hasAnchor">
-<a href="#packages" class="anchor"></a>What are the “Base Packages” and “Other Packages” lines in the
-header?</h3>
+<div class="section level3">
+<h3 id="packages">What are the “Base Packages” and “Other Packages” lines in the
+header?<a class="anchor" aria-label="anchor" href="#packages"></a>
+</h3>
 <p><strong>Q:</strong> Recently I noticed the “Base Packages” and “Other
 Packages” lines show up in the log header. What are these lines? Are
 they supposed to have all my referenced packages? How come some are
@@ -383,7 +379,7 @@ program/script is running in. They are showing the packages that are
 installed and attached at the point the <code><a href="../reference/log_open.html">log_open()</a></code> function
 was called.</p>
 <p>The information from these lines is taken from Base R
-<code><a href="https://rdrr.io/r/utils/sessionInfo.html">sessionInfo()</a></code>, and shows a subset of information from that
+<code><a href="https://rdrr.io/r/utils/sessionInfo.html" class="external-link">sessionInfo()</a></code>, and shows a subset of information from that
 function. This information is being logged so that you have some record
 of the packages and versions that were in use at the time the script was
 ran. This is useful information if you need to recreate the output from
@@ -391,7 +387,7 @@ a particular point in time.</p>
 <p>Note that if you attach packages in the middle of the program, after
 the call to <code><a href="../reference/log_open.html">log_open()</a></code>, these packages may not be recorded
 in the header. It is therefore best practice to place all of your
-<code><a href="https://rdrr.io/r/base/library.html">library()</a></code> calls at the top of your program, load up
+<code><a href="https://rdrr.io/r/base/library.html" class="external-link">library()</a></code> calls at the top of your program, load up
 everything you need, and then call <code><a href="../reference/log_open.html">log_open()</a></code>. This
 practice will help ensure that the header contains all the packages that
 are used by your program. This practice also makes your program easier
@@ -399,9 +395,9 @@ to read, understand, and maintain.</p>
 <p><a href="#top">top</a></p>
 <hr>
 </div>
-<div id="warnings" class="section level3">
-<h3 class="hasAnchor">
-<a href="#warnings" class="anchor"></a>How come the warnings are at the bottom of the log?</h3>
+<div class="section level3">
+<h3 id="warnings">How come the warnings are at the bottom of the log?<a class="anchor" aria-label="anchor" href="#warnings"></a>
+</h3>
 <p><strong>Q:</strong> I noticed that errors are logged at the point
 they are generated. But warnings are only logged at the end of the log
 file. Why?</p>
@@ -411,14 +407,14 @@ at the point in the program where they are encountered. The
 corresponding event for warnings does not work (at least on
 Windows).</p>
 <p>If anyone can find a way to trigger the warnings event, please submit
-an issue to the <strong>logr</strong> Github <a href="https://github.com/dbosak01/logr/issues">issue list</a> and I will
+an issue to the <strong>logr</strong> Github <a href="https://github.com/dbosak01/logr/issues" class="external-link">issue list</a> and I will
 add it to the package.</p>
 <p><a href="#top">top</a></p>
 <hr>
 </div>
-<div id="last" class="section level3">
-<h3 class="hasAnchor">
-<a href="#last" class="anchor"></a>How come only the last warning is logged?</h3>
+<div class="section level3">
+<h3 id="last">How come only the last warning is logged?<a class="anchor" aria-label="anchor" href="#last"></a>
+</h3>
 <p><strong>Q:</strong> It appears that only the last warning is logged.
 But I have a lot of warnings. How come only the last warning is
 recorded? Is there a way to make it log all of them?</p>
@@ -428,14 +424,14 @@ Further, because the warnings event does not trigger properly, dumping
 all the warnings to the log at the end would make no sense. If anyone
 can find a better way to trigger and log warnings at the point where the
 warning is generated, please submit an issue to the
-<strong>logr</strong> Github <a href="https://github.com/dbosak01/logr/issues">issue list</a> and I will
+<strong>logr</strong> Github <a href="https://github.com/dbosak01/logr/issues" class="external-link">issue list</a> and I will
 add it to the package.</p>
 <p><a href="#top">top</a></p>
 <hr>
 </div>
-<div id="compact" class="section level3">
-<h3 class="hasAnchor">
-<a href="#compact" class="anchor"></a>How can I get rid of the blank lines?</h3>
+<div class="section level3">
+<h3 id="compact">How can I get rid of the blank lines?<a class="anchor" aria-label="anchor" href="#compact"></a>
+</h3>
 <p><strong>Q:</strong> I want to remove the blank lines in the log, to
 make it as small as possible. I see there is a ‘blank_after’ parameter
 on <code><a href="../reference/log_print.html">log_print()</a></code> to remove the blank line for a single log
@@ -448,9 +444,9 @@ the global option logr.compact = TRUE.</p>
 <p><a href="#top">top</a></p>
 <hr>
 </div>
-<div id="traceback" class="section level3">
-<h3 class="hasAnchor">
-<a href="#traceback" class="anchor"></a>How can I get rid of the traceback?</h3>
+<div class="section level3">
+<h3 id="traceback">How can I get rid of the traceback?<a class="anchor" aria-label="anchor" href="#traceback"></a>
+</h3>
 <p><strong>Q:</strong> The traceback is dumping a huge amount of stuff
 into the log when there is an error. There is so much stuff, that I find
 this feature annoying and useless. How can I turn it off?</p>
@@ -475,11 +471,13 @@ global option logr.traceback = FALSE will do the same thing.</p>
 
 
       <footer><div class="copyright">
-  <p>Developed by David Bosak.</p>
+  <p></p>
+<p>Developed by David Bosak.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer>
@@ -487,6 +485,8 @@ global option logr.traceback = FALSE will do the same thing.</p>
 
   
 
+
+  
 
   </body>
 </html>

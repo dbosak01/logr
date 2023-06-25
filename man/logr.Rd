@@ -39,3 +39,4 @@ log printing or log notes, respectively.
 See function documentation for additional details.
 }
 
+\keyword{internal}

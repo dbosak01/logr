@@ -26,6 +26,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-article">
       <header><div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
   <div class="container">
@@ -38,19 +40,13 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">logr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.3.4</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav"></ul>
 <ul class="nav navbar-nav navbar-right">
-<li>
-  <a href="../index.html">
-    <span class="fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
 <li>
   <a href="../articles/logr.html">Get started</a>
 </li>
@@ -79,6 +75,9 @@
     <li>
       <a href="../articles/logr-example1.html">Complete Example</a>
     </li>
+    <li>
+      <a href="../articles/logr-faq.html">Frequently Asked Questions</a>
+    </li>
   </ul>
 </li>
 <li>
@@ -91,7 +90,7 @@
   <a href="../news/index.html">Changelog</a>
 </li>
 <li>
-  <a href="https://github.com/dbosak01/logr/">
+  <a href="https://github.com/dbosak01/logr/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -106,49 +105,49 @@
 
       
 
-      </header><script src="logr-tidylog_files/header-attrs-2.14/header-attrs.js"></script><div class="row">
+      </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>tidylog Integration</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/dbosak01/logr/blob/master/vignettes/logr-tidylog.Rmd"><code>vignettes/logr-tidylog.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/dbosak01/logr/blob/HEAD/vignettes/logr-tidylog.Rmd" class="external-link"><code>vignettes/logr-tidylog.Rmd</code></a></small>
       <div class="hidden name"><code>logr-tidylog.Rmd</code></div>
 
     </div>
 
     
     
-<p>The <strong><a href="https://CRAN.R-project.org/package=tidylog">tidylog</a></strong>
+<p>The <strong><a href="https://CRAN.R-project.org/package=tidylog" class="external-link">tidylog</a></strong>
 package supports console messaging for most <strong>dplyr</strong> and
 <strong>tidyr</strong> functions. This package integrates nicely with
 <strong>logr</strong> to provide automatic logging for common data
 manipulation tasks.</p>
-<div id="autolog-integration" class="section level4">
-<h4 class="hasAnchor">
-<a href="#autolog-integration" class="anchor"></a>Autolog Integration</h4>
+<div class="section level4">
+<h4 id="autolog-integration">Autolog Integration<a class="anchor" aria-label="anchor" href="#autolog-integration"></a>
+</h4>
 <p>For <strong>logr</strong> version 1.2.0 and later,
 <strong>tidylog</strong> integration has been incorporated into the
 <strong>autolog</strong> feature. To engage autolog, simply turn it on
 when you call <code>log_open</code>, or set the autolog global option,
 as follows:</p>
-<pre><code>globals("logr.autolog" = TRUE)</code></pre>
+<pre><code><span><span class="fu">globals</span><span class="op">(</span><span class="st">"logr.autolog"</span> <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre>
 <p>The autolog feature also allows other packages to automatically write
 to the <strong>logr</strong> log. Overall, autolog makes your code
 cleaner and the logging more automatic. It is recommended to use autolog
 if the situation allows it.</p>
 </div>
-<div id="autolog-example" class="section level4">
-<h4 class="hasAnchor">
-<a href="#autolog-example" class="anchor"></a>Autolog Example</h4>
+<div class="section level4">
+<h4 id="autolog-example">Autolog Example<a class="anchor" aria-label="anchor" href="#autolog-example"></a>
+</h4>
 <p>Here is a small example showing the autolog feature:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://logr.r-sassy.org">logr</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://magrittr.tidyverse.org">magrittr</a></span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://logr.r-sassy.org">logr</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://magrittr.tidyverse.org" class="external-link">magrittr</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Create temp file location</span></span>
-<span><span class="va">tmp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/tempfile.html">tempdir</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">"test.log"</span><span class="op">)</span></span>
+<span><span class="va">tmp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">"test.log"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Open log</span></span>
 <span><span class="va">lf</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/log_open.html">log_open</a></span><span class="op">(</span><span class="va">tmp</span>, autolog <span class="op">=</span> <span class="cn">TRUE</span>, show_notes <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
@@ -160,21 +159,21 @@ if the situation allows it.</p>
 <span><span class="fu"><a href="../reference/log_print.html">put</a></span><span class="op">(</span><span class="st">"High Mileage Cars Subset"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Perform dplyr operations</span></span>
-<span><span class="va">hmc</span> <span class="op">&lt;-</span> <span class="va">mtcars</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">mpg</span>, <span class="va">cyl</span>, <span class="va">disp</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">mpg</span> <span class="op">&gt;</span> <span class="fl">20</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="va">mpg</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span><span class="va">hmc</span> <span class="op">&lt;-</span> <span class="va">mtcars</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">mpg</span>, <span class="va">cyl</span>, <span class="va">disp</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">mpg</span> <span class="op">&gt;</span> <span class="fl">20</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html" class="external-link">arrange</a></span><span class="op">(</span><span class="va">mpg</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="../reference/log_print.html">put</a></span><span class="op">(</span><span class="op">)</span> <span class="co"># sends pipeline result to log</span></span>
 <span></span>
 <span><span class="co"># Close log</span></span>
 <span><span class="fu"><a href="../reference/log_close.html">log_close</a></span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># View results</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/writeLines.html">writeLines</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/readLines.html">readLines</a></span><span class="op">(</span><span class="va">lf</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="https://rdrr.io/r/base/writeLines.html" class="external-link">writeLines</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/readLines.html" class="external-link">readLines</a></span><span class="op">(</span><span class="va">lf</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 </div>
-<div id="autolog-log" class="section level4">
-<h4 class="hasAnchor">
-<a href="#autolog-log" class="anchor"></a>Autolog Log</h4>
+<div class="section level4">
+<h4 id="autolog-log">Autolog Log<a class="anchor" aria-label="anchor" href="#autolog-log"></a>
+</h4>
 <p>Here is the log from the above example:</p>
 <pre><code>========================================================================= 
 Log Path: C:/Users/User/AppData/Local/Temp/RtmpYDx4m4/log/test.log 
@@ -220,9 +219,9 @@ Log Elapsed Time: 0 00:00:03
 ========================================================================= 
 </code></pre>
 </div>
-<div id="manual-integration" class="section level4">
-<h4 class="hasAnchor">
-<a href="#manual-integration" class="anchor"></a>Manual Integration</h4>
+<div class="section level4">
+<h4 id="manual-integration">Manual Integration<a class="anchor" aria-label="anchor" href="#manual-integration"></a>
+</h4>
 <p>If you do not want to use autolog, or are using a version of
 <strong>logr</strong> prior to v1.2.0, you can still integrate with
 <strong>tidylog</strong> using a manual integration method.</p>
@@ -231,10 +230,10 @@ manually, first install and load the <strong>tidylog</strong> package.
 To reduce the number of warning messages, add the
 <code>warn.conflicts</code> parameter to the <code>library</code>
 function, as follows:</p>
-<pre><code><a href="https://rdrr.io/r/base/library.html">library("tidylog", warn.conflicts = FALSE)</a></code></pre>
+<pre><code><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://github.com/elbersb/tidylog/" class="external-link">"tidylog"</a></span>, warn.conflicts <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre>
 <p>Then assign the <strong>tidylog</strong> <code>display</code> setting
 to <code>log_print</code>, like this:</p>
-<pre><code>options("tidylog.display" = list(log_print))</code></pre>
+<pre><code><span><span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span><span class="st">"tidylog.display"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">log_print</span><span class="op">)</span><span class="op">)</span></span></code></pre>
 <p>This setting will cause all <strong>tidylog</strong> messages to be
 written to the <strong>logr</strong> log. You will not need to call
 <code>log_print</code> or <code>put</code> for <strong>tidylog</strong>
@@ -242,25 +241,25 @@ messages. Note that you still must open and close the
 <strong>logr</strong> log, as per normal operation.</p>
 <p>To detach <strong>logr</strong> from <strong>tidylog</strong>, set
 the display option to <code>NULL</code>:</p>
-<pre><code>options("tidylog.display" = NULL)</code></pre>
+<pre><code><span><span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span><span class="st">"tidylog.display"</span> <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre>
 </div>
-<div id="manual-integration-example" class="section level4">
-<h4 class="hasAnchor">
-<a href="#manual-integration-example" class="anchor"></a>Manual Integration Example</h4>
+<div class="section level4">
+<h4 id="manual-integration-example">Manual Integration Example<a class="anchor" aria-label="anchor" href="#manual-integration-example"></a>
+</h4>
 <p>Here is a small example showing <strong>logr</strong> and
 <strong>tidylog</strong> integration:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://logr.r-sassy.org">logr</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://magrittr.tidyverse.org">magrittr</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/elbersb/tidylog/">tidylog</a></span>, warn.conflicts <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://logr.r-sassy.org">logr</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://magrittr.tidyverse.org" class="external-link">magrittr</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/elbersb/tidylog/" class="external-link">tidylog</a></span>, warn.conflicts <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Connect tidylog to logr</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span><span class="op">(</span><span class="st">"tidylog.display"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">log_print</span><span class="op">)</span>,</span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span><span class="st">"tidylog.display"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">log_print</span><span class="op">)</span>,</span>
 <span>        <span class="st">"logr.notes"</span> <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span> </span>
 <span><span class="co"># Create temp file location</span></span>
-<span><span class="va">tmp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/tempfile.html">tempdir</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">"test.log"</span><span class="op">)</span></span>
+<span><span class="va">tmp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">"test.log"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Open log</span></span>
 <span><span class="va">lf</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/log_open.html">log_open</a></span><span class="op">(</span><span class="va">tmp</span><span class="op">)</span></span>
@@ -272,21 +271,21 @@ the display option to <code>NULL</code>:</p>
 <span><span class="fu"><a href="../reference/log_print.html">put</a></span><span class="op">(</span><span class="st">"High Mileage Cars Subset"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Perform dplyr operations</span></span>
-<span><span class="va">hmc</span> <span class="op">&lt;-</span> <span class="va">mtcars</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">mpg</span>, <span class="va">cyl</span>, <span class="va">disp</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">mpg</span> <span class="op">&gt;</span> <span class="fl">20</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="va">mpg</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span><span class="va">hmc</span> <span class="op">&lt;-</span> <span class="va">mtcars</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">mpg</span>, <span class="va">cyl</span>, <span class="va">disp</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">mpg</span> <span class="op">&gt;</span> <span class="fl">20</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html" class="external-link">arrange</a></span><span class="op">(</span><span class="va">mpg</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="../reference/log_print.html">put</a></span><span class="op">(</span><span class="op">)</span> <span class="co"># sends pipeline result to log</span></span>
 <span></span>
 <span><span class="co"># Close log</span></span>
 <span><span class="fu"><a href="../reference/log_close.html">log_close</a></span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># View results</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/writeLines.html">writeLines</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/readLines.html">readLines</a></span><span class="op">(</span><span class="va">lf</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="https://rdrr.io/r/base/writeLines.html" class="external-link">writeLines</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/readLines.html" class="external-link">readLines</a></span><span class="op">(</span><span class="va">lf</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 </div>
-<div id="log" class="section level4">
-<h4 class="hasAnchor">
-<a href="#log" class="anchor"></a>Log</h4>
+<div class="section level4">
+<h4 id="log">Log<a class="anchor" aria-label="anchor" href="#log"></a>
+</h4>
 <p>Here is the log from the above example:</p>
 <pre><code>========================================================================= 
 Log Path: C:/Users/User/AppData/Local/Temp/RtmpioAPbg/log/test.log 
@@ -342,11 +341,13 @@ Log Elapsed Time: 0 00:00:00
 
 
       <footer><div class="copyright">
-  <p>Developed by David Bosak.</p>
+  <p></p>
+<p>Developed by David Bosak.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer>
@@ -354,6 +355,8 @@ Log Elapsed Time: 0 00:00:00
 
   
 
+
+  
 
   </body>
 </html>
