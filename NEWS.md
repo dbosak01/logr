@@ -1,3 +1,8 @@
+# logr 1.3.5
+
+* Fixed issue with UTF-8 characters in `log_code()` function.
+* Removed code to strip color codes inserted by crayon package.
+
 # logr 1.3.4
 
 * Changed reference from this.path() to Sys.path() to avoid breaking changes

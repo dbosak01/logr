@@ -33,6 +33,7 @@
 #' See function documentation for additional details.
 #' @docType package
 #' @name logr
+#' @aliases logr-package
 #' @keywords internal
 NULL
 
@@ -626,11 +627,16 @@ log_close <- function() {
   
   update_status()
   
+  # print(paste0("Warnings: ", names(warnings())))
+  # print(paste0("Exists: ", exists("last.warning")))
+  # print(paste0("Get: ", unclass(get("last.warning"))))
+  
   if (e$log_status == "open") {
     has_warnings <- FALSE
-    if(exists("last.warning")) {
-      lw <- get("last.warning")
+    if(exists("last.warning", envir = baseenv())) {
+      lw <- get("last.warning", envir = baseenv())
       has_warnings <- length(lw) > 0
+
       if(has_warnings) {
         log_quiet(warnings())
         log_quiet(warnings(),  msg = TRUE)
@@ -658,7 +664,8 @@ log_close <- function() {
     print_log_footer(has_warnings)
     
     # Clean up color codes
-    clear_codes()
+    # Commented out because crayon is fixed. 11/8/2023
+    # clear_codes()
     
     # Clean up environment variables
     e$log_path <- NULL

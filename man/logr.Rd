@@ -3,6 +3,7 @@
 \docType{package}
 \name{logr}
 \alias{logr}
+\alias{logr-package}
 \title{Creates log files}
 \description{
 The \strong{logr} package contains functions to
