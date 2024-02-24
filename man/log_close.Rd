@@ -13,13 +13,8 @@ None
 The \code{log_close} function closes the log file.
 }
 \details{
-The \code{log_close} function terminates logging.  As part of the termination
-process, the function prints any outstanding warnings to the log.  Errors are
-printed at the point at which they occur. But warnings can be captured only
-at the end of the logging session. Therefore, any warning messages will only
-be printed at the bottom of the log.
-
-The function also prints the log footer.  The log footer contains a
+The \code{log_close} function terminates logging. The function also prints
+the log footer.  The log footer contains a
 date-time stamp of when the log was closed.
 }
 \examples{

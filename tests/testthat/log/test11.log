@@ -3,16 +3,16 @@ Log Path: c:/packages/logr/tests/testthat/log/test11.log
 Program Path: C:/packages/logr/tests/testthat/test-logr.R
 Working Directory: C:/packages/logr
 User Name: dbosa
-R Version: 4.2.1 (2022-06-23 ucrt)
+R Version: 4.3.2 (2023-10-31 ucrt)
 Machine: SOCRATES x86-64
-Operating System: Windows 10 x64 build 19044
+Operating System: Windows 10 x64 build 22621
 Base Packages: stats graphics grDevices utils datasets methods base Other
-Packages: dplyr_1.0.9 logr_1.3.2 testthat_3.1.4
-Log Start Time: 2022-08-04 15:21:52
+Packages: dplyr_1.1.3 logr_1.3.6 testthat_3.1.10
+Log Start Time: 2024-02-11 10:27:07.405052
 =========================================================================
 Here is the first log message
-NOTE: Log Print Time:  2022-08-04 15:21:52
-NOTE: Elapsed Time: 0.297528982162476 secs
+NOTE: Log Print Time:  2024-02-11 10:27:07.40759
+NOTE: Elapsed Time: 0.00109195709228516 secs
                      mpg cyl  disp  hp drat    wt  qsec vs am gear carb
 Mazda RX4           21.0   6 160.0 110 3.90 2.620 16.46  0  1    4    4
 Mazda RX4 Wag       21.0   6 160.0 110 3.90 2.875 17.02  0  1    4    4
@@ -47,12 +47,12 @@ Ferrari Dino        19.7   6 145.0 175 3.62 2.770 15.50  0  1    5    6
 Maserati Bora       15.0   8 301.0 335 3.54 3.570 14.60  0  1    5    8
 Volvo 142E          21.4   4 121.0 109 4.11 2.780 18.60  1  1    4    2
 NOTE: Data frame has 32 rows and 11 columns.
-NOTE: Log Print Time:  2022-08-04 15:21:52
-NOTE: Elapsed Time: 0.148651123046875 secs
+NOTE: Log Print Time:  2024-02-11 10:27:07.416869
+NOTE: Elapsed Time: 0.00927901268005371 secs
 Here is a second log message
-NOTE: Log Print Time:  2022-08-04 15:21:52
-NOTE: Elapsed Time: 0.291010856628418 secs
+NOTE: Log Print Time:  2024-02-11 10:27:07.418316
+NOTE: Elapsed Time: 0.00144696235656738 secs
 =========================================================================
-Log End Time: 2022-08-04 15:21:53
-Log Elapsed Time: 0 00:00:01
+Log End Time: 2024-02-11 10:27:07.419052
+Log Elapsed Time: 0 00:00:00
 =========================================================================

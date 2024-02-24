@@ -15,9 +15,8 @@ knitr::opts_chunk$set(
 ```
 
 ### Errors and Warnings
-**logr** will write all errors and the last warning to the log.  Errors are
-written at the point they are encountered.  Warnings will be written at the 
-end of the log.  
+**logr** will write all errors and warnings to the log.  Errors and warnings are
+both written at the point they are encountered.  
 
 ### Message File \*.msg
 If errors or warnings are generated, they will also be written to a separate 

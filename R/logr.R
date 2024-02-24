@@ -31,11 +31,10 @@
 #' log printing or log notes, respectively. 
 #'
 #' See function documentation for additional details.
-#' @docType package
 #' @name logr
 #' @aliases logr-package
 #' @keywords internal
-NULL
+"_PACKAGE"
 
 # Globals -----------------------------------------------------------------
 
@@ -186,9 +185,6 @@ separator <-
 #' writeLines(readLines(lf))
 log_open <- function(file_name = "", logdir = TRUE, show_notes = TRUE,
                      autolog = NULL, compact = FALSE, traceback = TRUE) {
-  
-  # Does not work
-  # options(warn = 1, warning.expression = warning_handler())
   
   # Deal with compact log
   if (is.null(options()[["logr.compact"]]) == FALSE) {
@@ -354,8 +350,8 @@ log_open <- function(file_name = "", logdir = TRUE, show_notes = TRUE,
       }
     }
     
-    # Doesn't seem to work. At least on Windows. Bummer.
-    #options(warn = 1, warning = warning_handler)
+    # Attach warning event handler
+    options(warning.expression = quote({log_warning()}))
     
     # Create the log header
     print_log_header(lpath)
@@ -590,13 +586,8 @@ sep <- function(x, console = TRUE) {
 #' The \code{log_close} function closes the log file. 
 #' 
 #' @details 
-#' The \code{log_close} function terminates logging.  As part of the termination
-#' process, the function prints any outstanding warnings to the log.  Errors are
-#' printed at the point at which they occur. But warnings can be captured only 
-#' at the end of the logging session. Therefore, any warning messages will only
-#' be printed at the bottom of the log.  
-#' 
-#' The function also prints the log footer.  The log footer contains a 
+#' The \code{log_close} function terminates logging. The function also prints 
+#' the log footer.  The log footer contains a 
 #' date-time stamp of when the log was closed.  
 #' @return None
 #' @seealso \code{\link{log_open}} to open the log, and \code{\link{log_print}} 
@@ -632,23 +623,9 @@ log_close <- function() {
   # print(paste0("Get: ", unclass(get("last.warning"))))
   
   if (e$log_status == "open") {
-    has_warnings <- FALSE
-    if(exists("last.warning", envir = baseenv())) {
-      lw <- get("last.warning", envir = baseenv())
-      has_warnings <- length(lw) > 0
-
-      if(has_warnings) {
-        log_quiet(warnings())
-        log_quiet(warnings(),  msg = TRUE)
-        tryCatch({assign("last.warning", NULL, envir = baseenv())},
-                 error = function(cond){},
-                 warning = function(cond){},
-                 finally = {})
-      }
-    }
     
     # Detach error handler
-    options(error = NULL)
+    options(error = NULL, warning.expression = NULL)
     
     if (e$autolog) {
       
@@ -661,7 +638,7 @@ log_close <- function() {
     }
     
     # Print out footer
-    print_log_footer(has_warnings)
+    print_log_footer()
     
     # Clean up color codes
     # Commented out because crayon is fixed. 11/8/2023
@@ -697,7 +674,6 @@ log_close <- function() {
 error_handler <- function() {
   
   er <- geterrmessage()
-
   
   if (e$log_traceback) {
     tb <- capture.output(traceback(5, max.lines = 1000))
@@ -717,19 +693,38 @@ error_handler <- function() {
   # User requested to close log if there is an error issue #38.
   # Hopefully this will not cause trouble.
   log_close()
-  
 }
 
-# Currently Not Used
-# Was not able to get warning event to trigger properly.
-# Will revisit at some point.
-# In the meantime, warnings will be printed at 
-# the end of the log, above the footer.
-# @noRd
-# warning_handler <- function() {
-# 
-#   #print("Warning Handler")
-#   log_print(warnings())
-#   log_quiet(warnings(), msg = TRUE)
-# 
-# }
+# Finally got this working
+#' @title Logs a warning
+#' @description Writes a warning message to the log. Warning will be written
+#' both to the log at the point the function is called, and also written to the 
+#' message file.  This function is used internally.
+#' @param msg The message to log.
+#' @export
+log_warning <- function(msg = NULL) {
+
+  # print("Warning Handler")
+  if (!is.null(msg)) {
+    msg1 <- paste("Warning:", msg)
+    log_print(msg1, console = FALSE)
+    log_quiet(msg1, msg = TRUE)
+    message(msg1)
+  } else {
+    for (n in seq.int(to = 1, by = -1, length.out = sys.nframe() - 1)) {
+      e1 = sys.frame(n)
+      # print(paste("frame: ", n))
+      lse <- ls(e1)
+      #print(lse)
+      
+      if ("call" %in% lse && "msg" %in% lse) {
+        # call1 <- capture.output(print(get("call", envir = e1)))
+        # print(msg) 
+        msg1 <- paste("Warning:", get("msg", envir = e1))
+        log_print(msg1, console = FALSE)
+        log_quiet(msg1, msg = TRUE)
+        message(msg1)
+      }
+    }
+  }
+}

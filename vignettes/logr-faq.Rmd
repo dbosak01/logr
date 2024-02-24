@@ -32,8 +32,6 @@ on the links below to navigate to the full question and answer content.
 * [How do I turn off the notes?](#notes)
 * [How is put() different from log_print()?](#put)
 * [What are the "Base Packages" and "Other Packages" lines in the header?](#packages)
-* [How come the warnings are at the bottom of the log?](#warnings)
-* [How come only the last warning is logged?](#last)
 * [How can I get rid of the blank lines?](#compact)
 * [How can I get rid of the traceback?](#traceback)
 
@@ -310,46 +308,6 @@ your program, load up everything you need, and then call `log_open()`.  This
 practice will help ensure that the header contains all the packages that are
 used by your program.  This practice also makes your program easier to read,
 understand, and maintain.
-
-[top](#top)
-
-******
-
-
-### How come the warnings are at the bottom of the log? {#warnings}
-
-**Q:** I noticed that errors are logged at the point they are generated.  But 
-warnings are only logged at the end of the log file.  Why?
-
-**A:** Base R provides an error event that can be triggered when an error 
-occurs, and therefore the errors can be logged at the point in the program
-where they are encountered.  The corresponding event for warnings does not work
-(at least on Windows).
-
-If anyone can find a way to trigger the warnings event, please submit 
-an issue to the **logr** Github 
-[issue list](https://github.com/dbosak01/logr/issues) and I will add it to
-the package.
-
-[top](#top)
-
-******
-
-
-### How come only the last warning is logged? {#last}
-
-**Q:** It appears that only the last warning is logged.  But I have a lot of 
-warnings.  How come only the last warning is recorded?  Is there a way 
-to make it log all of them?
-
-**A:** The last warning is recorded in the log because only the last warning 
-is stored and can be easily retrieved in Base R. Further, because the warnings
-event does not trigger properly, dumping all the warnings to the log at the end
-would make no sense.  If anyone can find a better way
-to trigger and log warnings at the point where the warning is generated, 
-please submit an issue to the **logr** Github 
-[issue list](https://github.com/dbosak01/logr/issues) and I will add it to
-the package.
 
 [top](#top)
 

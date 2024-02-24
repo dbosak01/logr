@@ -1,3 +1,8 @@
+# logr 1.3.6
+
+* Fixed warnings. They are now printing as expected.
+* Added line feed before other packages in log header.
+
 # logr 1.3.5
 
 * Fixed issue with UTF-8 characters in `log_code()` function.

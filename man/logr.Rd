@@ -40,4 +40,21 @@ log printing or log notes, respectively.
 See function documentation for additional details.
 }
 
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://logr.r-sassy.org}
+  \item Report bugs at \url{https://github.com/dbosak01/logr/issues}
+}
+
+}
+\author{
+\strong{Maintainer}: David Bosak \email{dbosak01@gmail.com}
+
+Other contributors:
+\itemize{
+  \item Rikard Isaksson [contributor]
+}
+
+}
 \keyword{internal}

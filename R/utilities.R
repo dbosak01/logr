@@ -75,7 +75,8 @@ print_log_header <- function(log_path) {
                   inf["version"]), 
             blank_after = FALSE)
   
-  log_quiet(get_package_versions(), blank_after = FALSE)
+  log_quiet(get_base_package_versions(), blank_after = FALSE)
+  log_quiet(get_other_package_versions(), blank_after = FALSE)
   
   log_quiet(paste("Log Start Time:", Sys.time()), blank_after = FALSE)
   log_quiet(paste(separator), blank_after = e$log_blank_after)
@@ -205,7 +206,7 @@ clear_codes <- function(path = NULL) {
 
 #' @import utils
 #' @noRd
-get_package_versions <- function() {
+get_base_package_versions <- function() {
   
   
   si <- sessionInfo()
@@ -239,9 +240,22 @@ get_package_versions <- function() {
   ret <- paste0("Base Packages: ", bpstr, "\n")
 
   
+  return(ret)
+  
+}
+
+
+#' @import utils
+#' @noRd
+get_other_package_versions <- function() {
+  
+  
+  si <- sessionInfo()
+  
   oth <- si$otherPkgs
   othstr <- ""
   cntr <- 0
+  ret <- c()
   
   for (nm in names(oth)) {
     cntr <- cntr + 1
@@ -263,12 +277,12 @@ get_package_versions <- function() {
       
       othstr <- paste0(othstr, nm, "_", oth[[nm]]$Version, " ") 
     }
-      
+    
   }
   
   if (othstr != "") {
     
-    ret <- paste0(ret, "Other Packages: ", othstr) 
+    ret <- paste0("Other Packages: ", othstr) 
     
   }
   
@@ -276,3 +290,4 @@ get_package_versions <- function() {
   return(ret)
   
 }
+

@@ -40,7 +40,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">logr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.3.5</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.3.6</span>
       </span>
     </div>
 
@@ -138,9 +138,6 @@ values?</a></li>
 <li><a href="#put">How is put() different from log_print()?</a></li>
 <li><a href="#packages">What are the “Base Packages” and “Other
 Packages” lines in the header?</a></li>
-<li><a href="#warnings">How come the warnings are at the bottom of the
-log?</a></li>
-<li><a href="#last">How come only the last warning is logged?</a></li>
 <li><a href="#compact">How can I get rid of the blank lines?</a></li>
 <li><a href="#traceback">How can I get rid of the traceback?</a></li>
 </ul>
@@ -392,40 +389,6 @@ everything you need, and then call <code><a href="../reference/log_open.html">lo
 practice will help ensure that the header contains all the packages that
 are used by your program. This practice also makes your program easier
 to read, understand, and maintain.</p>
-<p><a href="#top">top</a></p>
-<hr>
-</div>
-<div class="section level3">
-<h3 id="warnings">How come the warnings are at the bottom of the log?<a class="anchor" aria-label="anchor" href="#warnings"></a>
-</h3>
-<p><strong>Q:</strong> I noticed that errors are logged at the point
-they are generated. But warnings are only logged at the end of the log
-file. Why?</p>
-<p><strong>A:</strong> Base R provides an error event that can be
-triggered when an error occurs, and therefore the errors can be logged
-at the point in the program where they are encountered. The
-corresponding event for warnings does not work (at least on
-Windows).</p>
-<p>If anyone can find a way to trigger the warnings event, please submit
-an issue to the <strong>logr</strong> Github <a href="https://github.com/dbosak01/logr/issues" class="external-link">issue list</a> and I will
-add it to the package.</p>
-<p><a href="#top">top</a></p>
-<hr>
-</div>
-<div class="section level3">
-<h3 id="last">How come only the last warning is logged?<a class="anchor" aria-label="anchor" href="#last"></a>
-</h3>
-<p><strong>Q:</strong> It appears that only the last warning is logged.
-But I have a lot of warnings. How come only the last warning is
-recorded? Is there a way to make it log all of them?</p>
-<p><strong>A:</strong> The last warning is recorded in the log because
-only the last warning is stored and can be easily retrieved in Base R.
-Further, because the warnings event does not trigger properly, dumping
-all the warnings to the log at the end would make no sense. If anyone
-can find a better way to trigger and log warnings at the point where the
-warning is generated, please submit an issue to the
-<strong>logr</strong> Github <a href="https://github.com/dbosak01/logr/issues" class="external-link">issue list</a> and I will
-add it to the package.</p>
 <p><a href="#top">top</a></p>
 <hr>
 </div>
