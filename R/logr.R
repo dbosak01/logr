@@ -622,20 +622,25 @@ log_close <- function() {
   # print(paste0("Exists: ", exists("last.warning")))
   # print(paste0("Get: ", unclass(get("last.warning"))))
   
-  if (e$log_status == "open") {
-    
-    # Detach error handler
-    options(error = NULL, warning.expression = NULL)
-    
+  # Detach error handler no matter what
+  options(error = NULL, warning.expression = NULL)
+  
+  if (!is.null(e$autolog)) {
     if (e$autolog) {
       
-     options("tidylog.display" = NULL) 
+      options("tidylog.display" = NULL) 
       
-     # Detach tidylog if not attached by user
-     if (e$tidylog_loaded == FALSE) {
-       do.call("detach", list(name = "package:tidylog", unload = TRUE))
-     }
+      # Detach tidylog if not attached by user
+      if (!is.null(e$tidylog_loaded)) {
+        if (e$tidylog_loaded == FALSE) {
+          do.call("detach", list(name = "package:tidylog", unload = TRUE))
+        }
+      }
     }
+  }
+  
+  
+  if (e$log_status == "open") {
     
     # Print out footer
     print_log_footer()
@@ -673,26 +678,52 @@ log_close <- function() {
 #' @noRd
 error_handler <- function() {
   
-  er <- geterrmessage()
   
-  if (e$log_traceback) {
-    tb <- capture.output(traceback(5, max.lines = 1000))
-  }
+  update_status()
   
-  log_print(er, hide_notes = TRUE, blank_after = FALSE)
-  if (e$log_traceback) {
-    log_print("Traceback:", hide_notes = TRUE, blank_after = FALSE)
-    log_print(tb)
+  
+  if (e$log_status == "open") {
+    er <- geterrmessage()
+    
+    if (e$log_traceback) {
+      tb <- capture.output(traceback(5, max.lines = 1000))
+    }
+    
+    log_print(er, hide_notes = TRUE, blank_after = FALSE)
+    if (e$log_traceback) {
+      log_print("Traceback:", hide_notes = TRUE, blank_after = FALSE)
+      log_print(tb)
+    }
+    log_quiet(er, msg = TRUE, blank_after = FALSE)
+    if (e$log_traceback) {
+      log_quiet("Traceback:", msg = TRUE, blank_after = FALSE)
+      log_quiet(tb, msg = TRUE)
+    }
+  
+    # User requested to close log if there is an error issue #38.
+    # Hopefully this will not cause trouble.
+    log_close()
+    
+  } else {
+    
+    # Detach error handler
+    options(error = NULL, warning.expression = NULL)
+    
+    if (!is.null(e$autolog)) {
+      if (e$autolog) {
+        
+        options("tidylog.display" = NULL) 
+        
+        # Detach tidylog if not attached by user
+        if (!is.null(e$tidylog_loaded)) {
+          if (e$tidylog_loaded == FALSE) {
+            do.call("detach", list(name = "package:tidylog", unload = TRUE))
+          }
+        }
+      }
+    }
+    
   }
-  log_quiet(er, msg = TRUE, blank_after = FALSE)
-  if (e$log_traceback) {
-    log_quiet("Traceback:", msg = TRUE, blank_after = FALSE)
-    log_quiet(tb, msg = TRUE)
-  }
-
-  # User requested to close log if there is an error issue #38.
-  # Hopefully this will not cause trouble.
-  log_close()
 }
 
 # Finally got this working
@@ -703,28 +734,55 @@ error_handler <- function() {
 #' @param msg The message to log.
 #' @export
 log_warning <- function(msg = NULL) {
+  
+  
+  update_status()
+  
+  
+  if (e$log_status == "open") {
+    
 
-  # print("Warning Handler")
-  if (!is.null(msg)) {
-    msg1 <- paste("Warning:", msg)
-    log_print(msg1, console = FALSE)
-    log_quiet(msg1, msg = TRUE)
-    message(msg1)
-  } else {
-    for (n in seq.int(to = 1, by = -1, length.out = sys.nframe() - 1)) {
-      e1 = sys.frame(n)
-      # print(paste("frame: ", n))
-      lse <- ls(e1)
-      #print(lse)
-      
-      if ("call" %in% lse && "msg" %in% lse) {
-        # call1 <- capture.output(print(get("call", envir = e1)))
-        # print(msg) 
-        msg1 <- paste("Warning:", get("msg", envir = e1))
-        log_print(msg1, console = FALSE)
-        log_quiet(msg1, msg = TRUE)
-        message(msg1)
+    # print("Warning Handler")
+    if (!is.null(msg)) {
+      msg1 <- paste("Warning:", msg)
+      log_print(msg1, console = FALSE)
+      log_quiet(msg1, msg = TRUE)
+      message(msg1)
+    } else {
+      for (n in seq.int(to = 1, by = -1, length.out = sys.nframe() - 1)) {
+        e1 = sys.frame(n)
+        # print(paste("frame: ", n))
+        lse <- ls(e1)
+        #print(lse)
+        
+        if ("call" %in% lse && "msg" %in% lse) {
+          # call1 <- capture.output(print(get("call", envir = e1)))
+          # print(msg) 
+          msg1 <- paste("Warning:", get("msg", envir = e1))
+          log_print(msg1, console = FALSE)
+          log_quiet(msg1, msg = TRUE)
+          message(msg1)
+        }
       }
     }
+  } else {
+    
+    # Detach error handler
+    options(error = NULL, warning.expression = NULL)
+    
+    if (!is.null(e$autolog)) {
+      if (e$autolog) {
+        
+        options("tidylog.display" = NULL) 
+        
+        # Detach tidylog if not attached by user
+        if (!is.null(e$tidylog_loaded)) {
+          if (e$tidylog_loaded == FALSE) {
+            do.call("detach", list(name = "package:tidylog", unload = TRUE))
+          }
+        }
+      }
+    }
+    
   }
 }

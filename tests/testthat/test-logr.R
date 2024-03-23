@@ -761,3 +761,33 @@ test_that("logr29: Log directory is not appended if user specifies it.", {
 
 })
 
+
+test_that("logr30: Errors are recorded on source.", {
+  
+  if (DEV) {
+    tmp <- base_path
+    
+    lpth <- file.path(tmp, "/programs/log/srctest.msg")
+    
+    if (file.exists(lpth)) {
+      
+      file.remove(lpth) 
+    }
+    
+    
+    pth <- file.path(tmp, "/programs/srctest.R")
+    
+    e <- new.env()
+    
+    source(pth)
+    
+    
+    expect_equal(file.exists(lpth), TRUE)
+  
+  } else {
+    
+    expect_equal(TRUE, TRUE) 
+    
+  }
+  
+})

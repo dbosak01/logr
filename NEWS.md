@@ -1,3 +1,7 @@
+# logr 1.3.7
+
+* Ensure that error and warning handlers are disconnected if log is closed.
+
 # logr 1.3.6
 
 * Fixed warnings. They are now printing as expected.
