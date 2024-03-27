@@ -55,6 +55,9 @@
     <loc>https://logr.r-sassy.org/reference/log_code.html</loc>
   </url>
   <url>
+    <loc>https://logr.r-sassy.org/reference/log_error.html</loc>
+  </url>
+  <url>
     <loc>https://logr.r-sassy.org/reference/log_open.html</loc>
   </url>
   <url>
@@ -64,7 +67,13 @@
     <loc>https://logr.r-sassy.org/reference/log_print.html</loc>
   </url>
   <url>
+    <loc>https://logr.r-sassy.org/reference/log_resume.html</loc>
+  </url>
+  <url>
     <loc>https://logr.r-sassy.org/reference/log_status.html</loc>
+  </url>
+  <url>
+    <loc>https://logr.r-sassy.org/reference/log_suspend.html</loc>
   </url>
   <url>
     <loc>https://logr.r-sassy.org/reference/log_warning.html</loc>

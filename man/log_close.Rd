@@ -4,7 +4,11 @@
 \alias{log_close}
 \title{Close the log}
 \usage{
-log_close()
+log_close(footer = TRUE)
+}
+\arguments{
+\item{footer}{Whether or not to print the log footer.
+Valid values are TRUE and FALSE.  Default is TRUE.}
 }
 \value{
 None
@@ -18,6 +22,8 @@ the log footer.  The log footer contains a
 date-time stamp of when the log was closed.
 }
 \examples{
+library(logr)
+
 # Create temp file location
 tmp <- file.path(tempdir(), "test.log")
 

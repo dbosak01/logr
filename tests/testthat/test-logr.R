@@ -762,12 +762,12 @@ test_that("logr29: Log directory is not appended if user specifies it.", {
 })
 
 
-test_that("logr30: Errors are recorded on source.", {
+test_that("logr30: Warnings are recorded on source.", {
   
   if (DEV) {
     tmp <- base_path
     
-    lpth <- file.path(tmp, "/programs/log/srctest.msg")
+    lpth <- file.path(tmp, "/programs/log/srctest1.msg")
     
     if (file.exists(lpth)) {
       
@@ -775,7 +775,7 @@ test_that("logr30: Errors are recorded on source.", {
     }
     
     
-    pth <- file.path(tmp, "/programs/srctest.R")
+    pth <- file.path(tmp, "/programs/srctest1.R")
     
     e <- new.env()
     
@@ -791,3 +791,146 @@ test_that("logr30: Errors are recorded on source.", {
   }
   
 })
+
+test_that("logr31: Errors are recorded on source.", {
+  
+  if (DEV) {
+    tmp <- base_path
+    
+    lpth <- file.path(tmp, "/programs/log/srctest2.msg")
+    
+    if (file.exists(lpth)) {
+      
+      file.remove(lpth) 
+    }
+    
+    
+    pth <- file.path(tmp, "/programs/srctest2.R")
+    
+    e <- new.env()
+    
+    source(pth)
+    
+    
+    expect_equal(file.exists(lpth), TRUE)
+    
+  } else {
+    
+    expect_equal(TRUE, TRUE) 
+    
+  }
+  
+})
+
+
+
+test_that("logr32: Warnings are recorded on source.all().", {
+  
+  if (DEV) {
+    tmp <- base_path
+    
+    lpth <- file.path(tmp, "/programs/log/srctest1.msg")
+    
+    if (file.exists(lpth)) {
+      
+      file.remove(lpth) 
+    }
+    
+    
+    pth <- file.path(tmp, "/programs")
+    
+    
+    expect_warning(source.all(pth, isolate = TRUE, pattern = "srctest1"))
+    
+    
+    expect_equal(file.exists(lpth), TRUE)
+    
+  } else {
+    
+    expect_equal(TRUE, TRUE) 
+    
+  }
+  
+})
+
+
+test_that("logr33: Errors are recorded on source.all().", {
+  
+  if (DEV) {
+    tmp <- base_path
+    
+    lpth <- file.path(tmp, "/programs/log/srctest2.msg")
+    
+    if (file.exists(lpth)) {
+      
+      file.remove(lpth) 
+    }
+    
+    
+    pth <- file.path(tmp, "/programs")
+  
+    
+    source.all(pth, isolate = TRUE, pattern = "srctest2")
+    
+    
+    expect_equal(file.exists(lpth), TRUE)
+    
+  } else {
+    
+    expect_equal(TRUE, TRUE) 
+    
+  }
+  
+})
+
+
+test_that("logr34: header and footer options work as expected.", {
+  
+  tmp <- base_path
+  
+  lf <- log_open(file.path(tmp, "test35.log"), header = FALSE)
+  log_print("Here is the first log message")
+  log_print(mtcars)
+  
+  
+  
+  log_close(footer = FALSE)
+  
+  ret <- file.exists(lf)
+  
+  expect_equal(ret, TRUE)
+  
+})
+
+
+
+
+test_that("logr35: suspend and resume functions works as expected.", {
+  
+  
+  tmp <- base_path
+  
+  lf <- log_open(file.path(tmp, "test35.log"))
+  log_print("Before suspend")
+  
+  
+  log_suspend()
+  
+  
+  log_print("During suspend")
+  
+  log_resume(lf)
+  
+  log_print("After suspend")
+  
+  log_close()
+  
+  ret <- file.exists(lf)
+  
+  expect_equal(ret, TRUE)
+  
+})
+
+
+
+

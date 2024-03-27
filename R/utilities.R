@@ -291,3 +291,87 @@ get_other_package_versions <- function() {
   
 }
 
+
+read_suspended_log <- function(file_name) {
+  
+  
+  lns <- readLines(file_name, encoding = "UTF-8")
+  
+  ret <- list()
+  
+  hlen <- 17
+  
+  if (length(lns) > hlen) {
+    
+    slns <- lns[seq(length(lns) - hlen, length(lns))]
+    
+    spos <- grep("Log suspended", slns, fixed = TRUE)
+    
+    ret[["StartPos"]] <- length(lns) - hlen + spos - 3
+    
+    seqparms <- seq(spos + 3, length(slns))
+    
+    parmlns <- strsplit(slns[seqparms], ":", fixed = TRUE) 
+    
+    for (i in seq_len(length(parmlns))) {
+      
+      ln <- parmlns[[i]]
+      
+      nm <- ln[1]
+      
+      if (!is.na(nm)) {
+        if (nm != "" && length(ln) > 1) {
+          tval <- ln[seq(2, length(ln))]
+          ret[[nm]] <- trimws(paste0(tval, collapse = ":"))
+          
+        }
+      }
+    }
+    
+  }
+  
+  return(ret)
+
+}
+
+
+print_resume_header <- function(file_name, startpos, suspendtime) {
+  
+  lns <- readLines(file_name, encoding = "UTF-8")
+  
+  mlns <- lns[seq(1, startpos)]
+  
+  st <- Sys.time()
+  
+  stm <-  difftime(st, as.POSIXct(suspendtime), units = "secs")
+  
+  mlns[length(mlns) + 1] <- separator
+  mlns[length(mlns) + 1] <- "Log Suspended: " %p% suspendtime
+
+  mlns[length(mlns) + 1] <- "Log Resumed: " %p% st
+  mlns[length(mlns) + 1] <- "Elapsed Time: " %p% dhms(as.numeric(stm))
+  
+  mlns[length(mlns) + 1] <- separator
+  
+  blnk <- TRUE
+  if (!is.null(e$log_blank_after)) {
+    blnk <- e$log_blank_after 
+  }
+  if (blnk) {
+    mlns[length(mlns) + 1] <- ""
+  }
+  
+  
+  file.remove(file_name)
+  
+  f <- file(file_name, open = "a", encoding = "native.enc")
+  
+
+  # Print the string
+  writeLines(enc2utf8(mlns), con = f, useBytes = TRUE)
+  
+  close(f)
+  
+  
+  return(file_name)
+}

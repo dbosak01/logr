@@ -6,17 +6,19 @@ User Name: dbosa
 R Version: 4.3.2 (2023-10-31 ucrt)
 Machine: SOCRATES x86-64
 Operating System: Windows 10 x64 build 22621
-Base Packages: stats graphics grDevices utils datasets methods base Other
-Packages: dplyr_1.1.3 logr_1.3.6 testthat_3.1.10
-Log Start Time: 2024-02-11 10:27:06.414519
+Base Packages: stats graphics grDevices utils datasets methods base
+Other Packages: logr_1.3.7 testthat_3.1.10
+Log Start Time: 2024-03-23 01:20:10.397345
 =========================================================================
 
-Here is a log message
+object 'autolog' not found
+Traceback:
+No traceback available
 
-NOTE: Log Print Time:  2024-02-11 10:27:06.41929
-NOTE: Elapsed Time: 0.00121307373046875 secs
+NOTE: Log Print Time:  2024-03-23 01:21:36.753361
+NOTE: Elapsed Time: 1.43923988342285 mins
 
 =========================================================================
-Log End Time: 2024-02-11 10:27:06.419756
-Log Elapsed Time: 0 00:00:00
+Log End Time: 2024-03-23 01:21:48.167217
+Log Elapsed Time: 0 00:01:37
 =========================================================================

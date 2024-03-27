@@ -1,0 +1,49 @@
+=========================================================================
+Log Path: C:/packages/logr/tests/testthat/programs/log/srctest2.log
+Program Path: C:/packages/logr/tests/testthat/programs/srctest2.R
+Working Directory: C:/packages/logr
+User Name: dbosa
+R Version: 4.3.2 (2023-10-31 ucrt)
+Machine: SOCRATES x86-64
+Operating System: Windows 10 x64 build 22621
+Base Packages: stats graphics grDevices utils datasets methods base
+Other Packages: logr_1.3.7 testthat_3.1.10
+Log Start Time: 2024-03-24 21:45:19.593802
+=========================================================================
+
+Hello
+
+NOTE: Log Print Time:  2024-03-24 21:45:19.595936
+NOTE: Elapsed Time: 0.000991106033325195 secs
+
+Error in reporter$stop_if_needed() :
+Traceback:
+6: stop(fallback)
+5: signal_abort(cnd, .file)
+4: abort("Test failed")
+3: reporter$stop_if_needed()
+2: (function () 
+   expr)()
+1: test_that("logr33: Errors are recorded on source.all().", {
+       if (DEV) {
+           tmp <- base_path
+           lpth <- file.path(tmp, "/programs/log/srctest2.msg")
+           if (file.exists(lpth)) {
+               file.remove(lpth)
+           }
+           pth <- file.path(tmp, "/programs")
+           source.all(pth, isolate = TRUE, pattern = "srctest2")
+           expect_equal(file.exists(lpth), TRUE)
+       }
+       else {
+           expect_equal(TRUE, TRUE)
+       }
+   })
+
+NOTE: Log Print Time:  2024-03-24 21:45:21.291803
+NOTE: Elapsed Time: 1.69586682319641 secs
+
+=========================================================================
+Log End Time: 2024-03-24 21:45:21.294559
+Log Elapsed Time: 0 00:00:01
+=========================================================================

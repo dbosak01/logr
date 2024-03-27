@@ -158,11 +158,15 @@ separator <-
 #' @param traceback By default, if there is an error in the program
 #' being logged, \strong{logr} will print a traceback of the error. You may
 #' turn this feature off by setting the \code{traceback} parameter to FALSE.
+#' @param header Whether or not to print the log header.  Value values
+#' are TRUE and FALSE.  Default is TRUE.
 #' @return The path of the log.
 #' @seealso \code{\link{log_print}} for printing to the log (and console), 
 #' and \code{\link{log_close}} to close the log.
 #' @export
 #' @examples 
+#' library(logr)
+#' 
 #' # Create temp file location
 #' tmp <- file.path(tempdir(), "test.log")
 #' 
@@ -184,7 +188,8 @@ separator <-
 #' # View results
 #' writeLines(readLines(lf))
 log_open <- function(file_name = "", logdir = TRUE, show_notes = TRUE,
-                     autolog = NULL, compact = FALSE, traceback = TRUE) {
+                     autolog = NULL, compact = FALSE, traceback = TRUE, 
+                     header = TRUE) {
   
   # Deal with compact log
   if (is.null(options()[["logr.compact"]]) == FALSE) {
@@ -221,7 +226,11 @@ log_open <- function(file_name = "", logdir = TRUE, show_notes = TRUE,
    else 
      e$log_status = "on"
     
-  } else e$log_status = "on"
+  } else {
+    
+    e$log_status = "on"
+    
+  }
   
   
   if (!is.null(autolog)) 
@@ -332,7 +341,7 @@ log_open <- function(file_name = "", logdir = TRUE, show_notes = TRUE,
     e$log_status = "open"
     
     # Attach error event handler
-    options(error = error_handler)
+    options(error = log_error)
     
     # Clear any warnings
     has_warnings <- FALSE
@@ -354,7 +363,9 @@ log_open <- function(file_name = "", logdir = TRUE, show_notes = TRUE,
     options(warning.expression = quote({log_warning()}))
     
     # Create the log header
-    print_log_header(lpath)
+    if (header) {
+      print_log_header(lpath)
+    }
     
     # Record timestamp for later use by log_print
     ts <- Sys.time()
@@ -442,6 +453,8 @@ log_open <- function(file_name = "", logdir = TRUE, show_notes = TRUE,
 #' and \code{\link{log_close}} to close the log.
 #' @export
 #' @examples 
+#' library(logr)
+#' 
 #' # Create temp file location
 #' tmp <- file.path(tempdir(), "test.log")
 #' 
@@ -499,7 +512,9 @@ log_print <- function(x, ...,
     
   } else if (e$log_status == "off") {
     print(x, ...) 
-  }  else {
+  } else if (e$log_status == "suspended") {
+    print(x, ...)    
+  } else {
     print(x, ...)
     message("Log is not open.")
   }
@@ -589,11 +604,15 @@ sep <- function(x, console = TRUE) {
 #' The \code{log_close} function terminates logging. The function also prints 
 #' the log footer.  The log footer contains a 
 #' date-time stamp of when the log was closed.  
+#' @param footer Whether or not to print the log footer.  
+#' Valid values are TRUE and FALSE.  Default is TRUE.
 #' @return None
 #' @seealso \code{\link{log_open}} to open the log, and \code{\link{log_print}} 
 #' for printing to the log.
 #' @export
 #' @examples 
+#' library(logr)
+#' 
 #' # Create temp file location
 #' tmp <- file.path(tempdir(), "test.log")
 #' 
@@ -614,7 +633,7 @@ sep <- function(x, console = TRUE) {
 #' 
 #' # View results
 #' writeLines(readLines(lf))
-log_close <- function() {
+log_close <- function(footer = TRUE) {
   
   update_status()
   
@@ -639,11 +658,12 @@ log_close <- function() {
     }
   }
   
-  
   if (e$log_status == "open") {
     
     # Print out footer
-    print_log_footer()
+    if (footer) {
+      print_log_footer()
+    }
     
     # Clean up color codes
     # Commented out because crayon is fixed. 11/8/2023
@@ -670,34 +690,350 @@ log_close <- function() {
 }
 
 
+#' @title
+#' Suspends the log
+#'
+#' @description 
+#' The \code{log_suspend} function function suspends printing to the log, but
+#' does not close it. The function will 
+#' not print the log footer. To reopen the log, call \code{\link{log_resume}}. 
+#' @return None
+#' @export
+#' @examples 
+#' library(logr)
+#' 
+#' # Create temp file location
+#' tmp <- file.path(tempdir(), "test.log")
+#' 
+#' # Open log
+#' lf <- log_open(tmp)
+#' 
+#' # Send message to log
+#' log_print("Before suspend")
+#' 
+#' # Suspend log
+#' log_suspend()
+#' 
+#' # View suspended log
+#' writeLines(readLines(lf))
+#' 
+#' # Resume log
+#' log_resume(lf)
+#' 
+#' # Print data to log
+#' log_print("After suspend")
+#' 
+#' # Close log
+#' log_close()
+#' 
+#' # View results
+#' writeLines(readLines(lf))
+log_suspend <- function() {
+  
+  update_status()
+
+  if (e$log_status %in% c("open")) {
+    
+    log_quiet(paste(separator), blank_after = FALSE)
+    log_quiet("Log suspended", blank_after = FALSE)
+    log_quiet(paste(separator), blank_after = TRUE)
+    
+    log_quiet(paste0("Autolog: ", e$autolog), blank_after = FALSE)
+    log_quiet(paste0("Log Path: ", e$log_path), blank_after = FALSE)
+    log_quiet(paste0("Msg Path: ", e$msg_path), blank_after = FALSE)
+    log_quiet(paste0("Show Notes: ", e$log_show_notes), blank_after = FALSE)
+    log_quiet(paste0("Blank After: ", e$log_blank_after), blank_after = FALSE)
+    log_quiet(paste0("Traceback: ", e$log_traceback), blank_after = FALSE)
+    log_quiet(paste0("Status: ", e$log_status), blank_after = FALSE)
+    log_quiet(paste0("Tidylog: ", e$tidylog_loaded), blank_after = FALSE)
+    log_quiet(paste0("Log Time: ", e$log_time), blank_after = FALSE)
+    log_quiet(paste0("Start Time: ", e$log_start_time), blank_after = FALSE)
+    st <- Sys.time()
+    log_quiet(paste0("Suspend Time: ", st ), blank_after = FALSE)
+    log_quiet(paste0("Elapsed Time: ", get_time_diff(st))) 
+              
+    e$log_status <- "suspended"
+    message("Log suspended")
+    
+  } else if (e$log_status == "off") {
+    
+    message("Log is off.")
+    
+  } else {
+    message("Log is not open.")
+    
+  }
+}
+
+
+#' @title
+#' Resume writing to a log
+#' 
+#' @description 
+#' A function to reopen and resume writing to a log file that has been suspended. 
+#' @param file_name The name of the log file to resume. 
+#' If the \code{file_name} parameter is not supplied, the function will look
+#' in the current session for the original name and path of the log.  If that
+#' name and path is not found, an error will be generated.
+#' @return The path of the log.
+#' @seealso \code{\link{log_suspend}} for suspending the log, 
+#' and \code{\link{log_close}} to close the log.
+#' @export
+#' @examples 
+#' library(logr)
+#' 
+#' # Create temp file location
+#' tmp <- file.path(tempdir(), "test.log")
+#' 
+#' # Open log
+#' lf <- log_open(tmp)
+#' 
+#' # Send message to log
+#' log_print("Before suspend")
+#' 
+#' # Suspend log
+#' log_suspend()
+#' 
+#' # View suspended log
+#' writeLines(readLines(lf))
+#' 
+#' # Resume log
+#' log_resume(lf)
+#' 
+#' # Print data to log
+#' log_print("After suspend")
+#' 
+#' # Close log
+#' log_close()
+#' 
+#' # View results
+#' writeLines(readLines(lf))
+log_resume <- function(file_name = NULL) {
+  
+  
+  # If no filename is specified, use current program path.
+  if (is.null(file_name)) {
+
+    if (!is.null(e$log_path))
+      file_name <- e$log_path
+    else
+      stop("Log file name to resume is required.")
+  }
+
+  if (!file.exists(file_name)) {
+    
+    stop("Log resume file not found: " %p% file_name)
+  }
+  
+  lpath <- file_name
+  
+  rparms <- read_suspended_log(lpath)
+  
+  # Deal with compact log
+  if (is.null(options()[["logr.compact"]]) == FALSE) {
+    
+    optc <- options("logr.compact")
+    
+    e$log_blank_after = !optc[[1]] 
+    
+  } else {
+    
+    e$log_blank_after <- TRUE
+      
+    # Capture compact parameter
+    if (!is.null(rparms[["Blank After"]])) {
+      
+      e$log_blank_after = as.logical(rparms[["Blank After"]])
+    }
+
+  }
+  
+  # Deal with traceback option
+  if (is.null(options()[["logr.traceback"]]) == FALSE) {
+    
+    optc <- options("logr.traceback")
+    
+    e$log_traceback = optc[[1]] 
+    
+  } else {
+    
+    e$log_traceback <- TRUE
+    
+    # Capture traceback parameter
+    if (!is.null(rparms[["Traceback"]])) {
+      e$log_traceback <- as.logical(rparms[["Traceback"]])
+    }
+  }
+  
+  if (is.null(options()[["logr.on"]]) == FALSE) {
+    
+    opt <- options("logr.on")
+    
+    if (all(opt[[1]] == FALSE)) 
+      e$log_status = "off"
+    else 
+      e$log_status = "on"
+    
+  } else {
+    
+    e$log_status = "on"
+    
+    if (!is.null(rparms[["Status"]])) {
+      e$log_status <-rparms[["Status"]]
+    }
+    
+  }
+  
+  if (!is.null(options()[["logr.autolog"]])) {
+    
+    autolog <- options("logr.autolog")
+    
+    if (all(autolog[[1]] == FALSE)) 
+      e$autolog <- FALSE
+    else 
+      e$autolog <- TRUE
+    
+  } else {
+    
+    e$autolog <- FALSE
+    
+    if (!is.null(rparms[["Autolog"]])) {
+      
+      e$autolog <- as.logical(rparms[["Autolog"]])
+    }
+    
+  }
+  
+  if (e$autolog) {
+    
+    if (length(find.package('tidylog', quiet=TRUE)) == 0) {
+      utils::install.packages("tidylog", verbose = FALSE, quiet = TRUE)
+      #print("tidylog installed")
+    }
+    
+    if ("tidylog" %in% .packages()) {
+      do.call("library", list(package = "tidylog", warn.conflicts = FALSE))
+      e$tidylog_loaded <- TRUE
+      #print("tidylog was loaded")
+      
+    } else {
+      do.call("library", list(package = "tidylog", warn.conflicts = FALSE))
+      e$tidylog_loaded <- FALSE
+      #print("tidylog was not loaded")
+    }
+    
+    options("tidylog.display" = list(log_print)) 
+    #print("tidylog attached")
+  }
+  
+    
+  # Create path for message file
+  mpath <- sub(".log", ".msg", lpath, fixed = TRUE)
+  e$msg_path <- mpath
+
+  # Set global variable
+  e$log_path <- lpath
+  
+  # Attach error event handler
+  options(error = log_error)
+
+  
+  # Attach warning event handler
+  options(warning.expression = quote({log_warning()}))
+  
+  # Create the log header
+  print_resume_header(lpath, rparms[["StartPos"]], rparms[["Suspend Time"]])
+  
+  # Record timestamp for later use by log_print
+  e$log_time <- Sys.time()
+
+  if (is.null(options()[["logr.notes"]]) == FALSE) {
+    
+    optn <- options("logr.notes")
+    
+    e$log_show_notes = optn[[1]] 
+    
+  } else {
+    
+    e$log_show_notes = TRUE
+    
+    # Capture show_notes parameter
+    if (!is.null(rparms[["Show Notes"]])) {
+      e$log_show_notes = rparms[["Show Notes"]]
+    }
+  }
+  
+  
+  return(lpath)
+  
+}
+
+
+
 
 # Event Handlers ----------------------------------------------------------
 
-#' Event handler for errors.  This works.
-#' Is attached using options function in log_open.
-#' @noRd
-error_handler <- function() {
+# Event handler for errors.  This works.
+# Is attached using options function in log_open.
+#' @title Logs an error
+#' @description Writes an error message to the log. Error will be written
+#' both to the log at the point the function is called, and also written to the 
+#' message file.  This function is used internally.
+#' @param msg The message to log.
+#' @examples
+#' library(logr)
+#' 
+#' # Create temp file location
+#' tmp <- file.path(tempdir(), "test.log")
+#' 
+#' # Open log
+#' lf <- log_open(tmp)
+#' 
+#' # Send warning message to log
+#' log_error("Here is a error")
+#'
+#' # Close log
+#' log_close()
+#' 
+#' # View results
+#' writeLines(readLines(lf))
+#' 
+#' @export
+log_error <- function(msg = NULL) {
   
   
   update_status()
+  # print(e$log_status)
   
   
-  if (e$log_status == "open") {
-    er <- geterrmessage()
+   if (e$log_status == "open" || TRUE) {
+     tb <- NULL
+     
+    if (!is.null(msg)) {
+      er <- paste0("Error: ", msg)
+      message(er)
+    } else {
+     
+      er <- geterrmessage()
     
-    if (e$log_traceback) {
-      tb <- capture.output(traceback(5, max.lines = 1000))
+      if (e$log_traceback) {
+        tb <- capture.output(traceback(5, max.lines = 1000))
+      }
     }
     
     log_print(er, hide_notes = TRUE, blank_after = FALSE)
     if (e$log_traceback) {
-      log_print("Traceback:", hide_notes = TRUE, blank_after = FALSE)
-      log_print(tb)
+      if (!is.null(tb)) {
+        log_print("Traceback:", hide_notes = TRUE, blank_after = FALSE)
+        log_print(tb)
+      }
     }
     log_quiet(er, msg = TRUE, blank_after = FALSE)
     if (e$log_traceback) {
-      log_quiet("Traceback:", msg = TRUE, blank_after = FALSE)
-      log_quiet(tb, msg = TRUE)
+      if (!is.null(tb)) {
+        log_quiet("Traceback:", msg = TRUE, blank_after = FALSE)
+        log_quiet(tb, msg = TRUE)
+      }
     }
   
     # User requested to close log if there is an error issue #38.
@@ -708,12 +1044,12 @@ error_handler <- function() {
     
     # Detach error handler
     options(error = NULL, warning.expression = NULL)
-    
+
     if (!is.null(e$autolog)) {
       if (e$autolog) {
-        
-        options("tidylog.display" = NULL) 
-        
+
+        options("tidylog.display" = NULL)
+
         # Detach tidylog if not attached by user
         if (!is.null(e$tidylog_loaded)) {
           if (e$tidylog_loaded == FALSE) {
@@ -733,14 +1069,32 @@ error_handler <- function() {
 #' message file.  This function is used internally.
 #' @param msg The message to log.
 #' @export
+#' @examples
+#' library(logr)
+#' 
+#' # Create temp file location
+#' tmp <- file.path(tempdir(), "test.log")
+#' 
+#' # Open log
+#' lf <- log_open(tmp)
+#' 
+#' # Send warning message to log
+#' log_warning("Here is a warning")
+#'
+#' # Close log
+#' log_close()
+#' 
+#' # View results
+#' writeLines(readLines(lf))
+#' 
 log_warning <- function(msg = NULL) {
   
   
   update_status()
-  
-  
+
+
   if (e$log_status == "open") {
-    
+
 
     # print("Warning Handler")
     if (!is.null(msg)) {
@@ -750,7 +1104,7 @@ log_warning <- function(msg = NULL) {
       message(msg1)
     } else {
       for (n in seq.int(to = 1, by = -1, length.out = sys.nframe() - 1)) {
-        e1 = sys.frame(n)
+        e1 <- sys.frame(n)
         # print(paste("frame: ", n))
         lse <- ls(e1)
         #print(lse)
@@ -766,15 +1120,15 @@ log_warning <- function(msg = NULL) {
       }
     }
   } else {
-    
+
     # Detach error handler
     options(error = NULL, warning.expression = NULL)
-    
+
     if (!is.null(e$autolog)) {
       if (e$autolog) {
-        
-        options("tidylog.display" = NULL) 
-        
+
+        options("tidylog.display" = NULL)
+
         # Detach tidylog if not attached by user
         if (!is.null(e$tidylog_loaded)) {
           if (e$tidylog_loaded == FALSE) {
@@ -783,6 +1137,6 @@ log_warning <- function(msg = NULL) {
         }
       }
     }
-    
+
   }
 }

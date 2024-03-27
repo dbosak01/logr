@@ -22,6 +22,9 @@ reference:
   - log_path
   - log_status
   - log_code
+  - log_suspend
+  - log_resume
+  - log_error
   - log_warning
   
 navbar:

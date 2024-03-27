@@ -1,27 +1,22 @@
 =========================================================================
-Log Path: C:/packages/logr/tests/testthat/programs/log/srctest.log
-Program Path: C:/packages/logr/tests/testthat/programs/srctest.R
+Log Path: C:/packages/logr/tests/testthat/programs/log/srctest1.log
+Program Path: C:/packages/logr/tests/testthat/programs/srctest1.R
 Working Directory: C:/packages/logr
 User Name: dbosa
 R Version: 4.3.2 (2023-10-31 ucrt)
 Machine: SOCRATES x86-64
 Operating System: Windows 10 x64 build 22621
 Base Packages: stats graphics grDevices utils datasets methods base
-Other Packages: logr_1.3.6
-Log Start Time: 2024-03-22 23:50:30.610008
+Other Packages: logr_1.3.7 testthat_3.1.10
+Log Start Time: 2024-03-24 21:42:23.035722
 =========================================================================
 
 Hello
 
-NOTE: Log Print Time:  2024-03-22 23:50:30.612775
-NOTE: Elapsed Time: 0.00104713439941406 secs
-
-Warning: a warning message
-
-NOTE: Log Print Time:  2024-03-22 23:50:30.614006
-NOTE: Elapsed Time: 0.00123095512390137 secs
+NOTE: Log Print Time:  2024-03-24 21:42:23.03781
+NOTE: Elapsed Time: 0.000957012176513672 secs
 
 =========================================================================
-Log End Time: 2024-03-22 23:50:30.616847
+Log End Time: 2024-03-24 21:42:23.038335
 Log Elapsed Time: 0 00:00:00
 =========================================================================

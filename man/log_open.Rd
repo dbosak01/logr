@@ -10,7 +10,8 @@ log_open(
   show_notes = TRUE,
   autolog = NULL,
   compact = FALSE,
-  traceback = TRUE
+  traceback = TRUE,
+  header = TRUE
 )
 }
 \arguments{
@@ -42,6 +43,9 @@ option does the same thing.}
 \item{traceback}{By default, if there is an error in the program
 being logged, \strong{logr} will print a traceback of the error. You may
 turn this feature off by setting the \code{traceback} parameter to FALSE.}
+
+\item{header}{Whether or not to print the log header.  Value values
+are TRUE and FALSE.  Default is TRUE.}
 }
 \value{
 The path of the log.
@@ -129,6 +133,8 @@ You may also use the global option \code{logr.traceback} to control printing
 of this information.
 }
 \examples{
+library(logr)
+
 # Create temp file location
 tmp <- file.path(tempdir(), "test.log")
 

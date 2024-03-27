@@ -1,5 +1,5 @@
 =========================================================================
-Log Path: c:\packages\logr\tests\testthat/log/test29.log
+Log Path: c:/packages/logr/tests/testthat/log/test35.log
 Program Path: C:/packages/logr/tests/testthat/test-logr.R
 Working Directory: C:/packages/logr
 User Name: dbosa
@@ -8,15 +8,26 @@ Machine: SOCRATES x86-64
 Operating System: Windows 10 x64 build 22621
 Base Packages: stats graphics grDevices utils datasets methods base
 Other Packages: logr_1.3.7 testthat_3.1.10
-Log Start Time: 2024-03-23 02:02:04.139455
+Log Start Time: 2024-03-26 21:33:43.086706
 =========================================================================
 
-Here is the first log message
+Before suspend
 
-NOTE: Log Print Time:  2024-03-23 02:02:04.460996
-NOTE: Elapsed Time: 0.32041597366333 secs
+NOTE: Log Print Time:  2024-03-26 21:33:43.19815
+NOTE: Elapsed Time: 0.00187182426452637 secs
 
 =========================================================================
-Log End Time: 2024-03-23 02:02:05.251824
+Log Suspended: 2024-03-26 21:33:43.511009
+Log Resumed: 2024-03-26 21:33:44.062996
+Elapsed Time: 0 00:00:00
+=========================================================================
+
+After suspend
+
+NOTE: Log Print Time:  2024-03-26 21:33:44.453667
+NOTE: Elapsed Time: 0.388875007629395 secs
+
+=========================================================================
+Log End Time: 2024-03-26 21:33:44.683031
 Log Elapsed Time: 0 00:00:01
 =========================================================================

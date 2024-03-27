@@ -74,6 +74,8 @@ integrate with \strong{logr}.  The function prints to the log only if
 \code{autolog} is enabled. It will not print to the console.
 }
 \examples{
+library(logr)
+
 # Create temp file location
 tmp <- file.path(tempdir(), "test.log")
 
