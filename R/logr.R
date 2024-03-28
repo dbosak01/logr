@@ -277,6 +277,16 @@ log_open <- function(file_name = "", logdir = TRUE, show_notes = TRUE,
     ppth <- NULL
     tryCatch({
       ppth <- common::Sys.path()
+      # print("ppth0: " %p% ppth)
+      # print("ppth1: " %p% is.null(ppth))
+      # print("ppth2: " %p% length(ppth))
+      # print("ppth3: " %p% nchar(ppth))
+      if (length(ppth) == 1) {
+        if (nchar(ppth) == 0) { 
+          ppth <- NULL 
+        }
+      }
+      
     }, error = function(e) { ppth <- NULL})
     
     if (is.null(ppth))
@@ -285,6 +295,8 @@ log_open <- function(file_name = "", logdir = TRUE, show_notes = TRUE,
       file_name <- sub(pattern = "(.*)\\..*$", replacement = "\\1", ppth)
     
   }
+  
+#print("File name #1: " %p% file_name)
   
   if (file_name != "") {
     
@@ -309,6 +321,8 @@ log_open <- function(file_name = "", logdir = TRUE, show_notes = TRUE,
       })
     }
   }
+
+  #print("File name #2: " %p% file_name)
   
   if (e$log_status == "off") {
     
@@ -368,6 +382,10 @@ log_open <- function(file_name = "", logdir = TRUE, show_notes = TRUE,
     
     # Attach warning event handler
     options(warning.expression = quote({log_warning()}))
+    
+    
+    #print("File name #3: " %p% lpath)
+    
     
     # Create the log header
     if (header) {

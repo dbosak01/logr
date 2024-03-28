@@ -6,10 +6,9 @@
 #' @noRd
 print_windows <- function(x, file_path, blank_after, hide_notes, ...) {
   
+
   # Print to log or msg file
   tryCatch( {
-    
-    
     
     f <- file(file_path, open = "a", encoding = "native.enc")
  
@@ -161,7 +160,7 @@ print_other <- function(x, file_path, blank_after, hide_notes, ...) {
     close(f)
   }
   ) 
-  
+    
 }
 
 
