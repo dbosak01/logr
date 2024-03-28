@@ -932,5 +932,49 @@ test_that("logr35: suspend and resume functions works as expected.", {
 })
 
 
+test_that("logr36: get_warnings() function works as expected.", {
+  
+  tmp <- base_path
+  
+  lp <- log_open(file.path(tmp, "test36.log"))
+  
+  log_print("Message 1")
+  log_warning("Warning 1")
+  log_print("Message 2")
+  
+  if (DEV) {
+    warning("Warning 2")
+  }
+  
+  log_close()
+  
+  mfl <- file.path(tmp, "./log/test36.msg")
+  
+  
+  expect_equal(file.exists(lp), TRUE)
+  expect_equal(file.exists(mfl), TRUE)
+  
+  res <- get_warnings()
+  
+  res
+  
+  expect_equal(length(res) > 0, TRUE)
+  expect_equal(res[1], "Warning: Warning 1")
+  
+  if (DEV) {
+    expect_equal(res[2], "Warning: Warning 2")
+  }
+  
+  res2 <- getOption("logr.warnings")
+  
+  
+  if (DEV) {
+    expect_equal(length(res2), 2)
+  } else {
+    expect_equal(length(res2), 1) 
+  }
+
+})
+
 
 

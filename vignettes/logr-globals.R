@@ -36,3 +36,10 @@ knitr::opts_chunk$set(
 #  # Turn off traceback messaging
 #  options("logr.traceback" = FALSE)
 
+## ----eval=FALSE, echo=TRUE----------------------------------------------------
+#  # Get warnings from function
+#  w1 <- get_warnings()
+#  
+#  # Get warnings from global variable
+#  w2 <- getOption("logr.warnings")
+

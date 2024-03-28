@@ -79,4 +79,18 @@ options("logr.traceback" = TRUE)
 options("logr.traceback" = FALSE)
 ```
 
+If warnings are generated during execution of a program, they will be written
+to both the log and the message file.  Warnings can also be returned
+programmatically using the `get_warnings()` function.  The **logr** package will
+additionally populate a global variable named "logr.warnings" with a vector of 
+the warnings. This global variable can be accessed as follows:
+
+```{r eval=FALSE, echo=TRUE}
+# Get warnings from function
+w1 <- get_warnings()
+
+# Get warnings from global variable
+w2 <- getOption("logr.warnings")
+```
+
 Next: [Aliases for log_print()](logr-put.html)

@@ -4,6 +4,7 @@
 * Added options to not print header and footer if desired.  
 * Added `log_suspend()` and `log_resume()` functions.
 * Added `log_error()` and `log_warning()` functions.
+* Added `get_warnings()` function.
 
 # logr 1.3.6
 

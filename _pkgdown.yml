@@ -13,19 +13,30 @@ articles:
   - logr-faq
 
 reference:
-- title: All Functions
+- title: Primary Logging Functions
   desc: Functions to open, print to, and close a log file.
   contents:
   - log_open
   - log_print
   - log_close
+- title: Interruption Functions
+  desc: Functions to suspend and resume a log.
+  contents:
+  - log_suspend
+  - log_resume
+- title: Exception Handling
+  desc: Functions to manage errors and warnings.
+  contents:
+  - log_error
+  - log_warning
+  - get_warnings
+- title: Utility Functions
+  desc: Other useful functions.
+  contents:
   - log_path
   - log_status
   - log_code
-  - log_suspend
-  - log_resume
-  - log_error
-  - log_warning
+
   
 navbar:
   type: inverse

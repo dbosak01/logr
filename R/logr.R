@@ -43,6 +43,7 @@ e <- new.env(parent = emptyenv())
 e$log_status <- "closed"
 e$os <- Sys.info()[["sysname"]]
 e$log_blank_after <- TRUE
+e$log_warnings <- c()
 # Log Separator
 separator <- 
   "========================================================================="
@@ -358,6 +359,12 @@ log_open <- function(file_name = "", logdir = TRUE, show_notes = TRUE,
         
       }
     }
+    
+    # Clear local warnings
+    e$log_warnings <- c()
+    
+    # Publish warnings 
+    options("logr.warnings" = c())
     
     # Attach warning event handler
     options(warning.expression = quote({log_warning()}))
@@ -1119,6 +1126,18 @@ log_warning <- function(msg = NULL) {
         }
       }
     }
+    
+    # Capture warnings locally
+    # This is necessary because now the warnings() function in Base R
+    # Doesn't work for logr.  So this allows a local version of the
+    # warnings() function called get_warnings().  
+    wrn <- e$log_warnings
+    wrn[length(wrn) + 1] <- msg1
+    e$log_warnings <- wrn
+    
+    # Publish warnings 
+    options("logr.warnings" = wrn)
+    
   } else {
 
     # Detach error handler
@@ -1140,3 +1159,43 @@ log_warning <- function(msg = NULL) {
 
   }
 }
+
+
+
+# Finally got this working
+#' @title Gets warnings from most recent log 
+#' @description Returns a vector of warning messages from the most recent
+#' logging session.  The function takes no parameters.  The warning
+#' list will be cleared the next time \code{\link{log_open}} is called.
+#' @export
+#' @examples
+#' library(logr)
+#' 
+#' # Create temp file location
+#' tmp <- file.path(tempdir(), "test.log")
+#' 
+#' # Open log
+#' lf <- log_open(tmp)
+#' 
+#' # Send warning message to log
+#' log_warning("Here is a warning")
+#'
+#' # Close log
+#' log_close()
+#' 
+#' # Retrieve warnings
+#' res <- get_warnings()
+#' 
+#' # View results
+#' res
+#' # [1] Here is a warning
+get_warnings <- function() {
+  
+  
+  ret <- e$log_warnings
+  
+  return(ret)
+
+}
+
+

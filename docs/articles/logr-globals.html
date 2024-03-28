@@ -173,6 +173,18 @@ TRUE or FALSE value, which will override anything set on
 <span></span>
 <span><span class="co"># Turn off traceback messaging</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span><span class="st">"logr.traceback"</span> <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
+<p>If warnings are generated during execution of a program, they will be
+written to both the log and the message file. Warnings can also be
+returned programmatically using the <code><a href="../reference/get_warnings.html">get_warnings()</a></code>
+function. The <strong>logr</strong> package will additionally populate a
+global variable named “logr.warnings” with a vector of the warnings.
+This global variable can be accessed as follows:</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Get warnings from function</span></span>
+<span><span class="va">w1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_warnings.html">get_warnings</a></span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Get warnings from global variable</span></span>
+<span><span class="va">w2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">getOption</a></span><span class="op">(</span><span class="st">"logr.warnings"</span><span class="op">)</span></span></code></pre></div>
 <p>Next: <a href="logr-put.html">Aliases for log_print()</a></p>
   </div>
 

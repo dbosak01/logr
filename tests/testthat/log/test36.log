@@ -1,0 +1,37 @@
+=========================================================================
+Log Path: c:/packages/logr/tests/testthat/log/test36.log
+Program Path: C:/packages/logr/tests/testthat/test-logr.R
+Working Directory: C:/packages/logr
+User Name: dbosa
+R Version: 4.3.2 (2023-10-31 ucrt)
+Machine: SOCRATES x86-64
+Operating System: Windows 10 x64 build 22621
+Base Packages: stats graphics grDevices utils datasets methods base
+Other Packages: logr_1.3.7 testthat_3.1.10
+Log Start Time: 2024-03-27 23:59:35.072346
+=========================================================================
+
+Message 1
+
+NOTE: Log Print Time:  2024-03-27 23:59:56.581944
+NOTE: Elapsed Time: 21.5084331035614 secs
+
+Warning: Warning 1
+
+NOTE: Log Print Time:  2024-03-27 23:59:56.889644
+NOTE: Elapsed Time: 0.307699918746948 secs
+
+Message 2
+
+NOTE: Log Print Time:  2024-03-27 23:59:57.144597
+NOTE: Elapsed Time: 0.254953145980835 secs
+
+Warning: Warning 2
+
+NOTE: Log Print Time:  2024-03-27 23:59:57.495165
+NOTE: Elapsed Time: 0.350568056106567 secs
+
+=========================================================================
+Log End Time: 2024-03-27 23:59:57.900581
+Log Elapsed Time: 0 00:00:22
+=========================================================================
