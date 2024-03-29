@@ -23,7 +23,7 @@ tmp <- file.path(tempdir(), "test.log")
 # Open log
 lf <- log_open(tmp)
 
-# Send warning message to log
+# Send error message to log
 log_error("Here is a error")
 
 # Close log

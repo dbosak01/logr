@@ -31,5 +31,5 @@ res <- get_warnings()
 
 # View results
 res
-# [1] Here is a warning
+# [1] "Warning: Here is a warning"
 }

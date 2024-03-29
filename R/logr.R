@@ -1014,7 +1014,7 @@ log_resume <- function(file_name = NULL) {
 #' # Open log
 #' lf <- log_open(tmp)
 #' 
-#' # Send warning message to log
+#' # Send error message to log
 #' log_error("Here is a error")
 #'
 #' # Close log
@@ -1043,6 +1043,9 @@ log_error <- function(msg = NULL) {
     
       if (e$log_traceback) {
         tb <- capture.output(traceback(5, max.lines = 1000))
+      } else {
+        
+        er <- paste0("Error: ", er) 
       }
     }
     
@@ -1206,7 +1209,7 @@ log_warning <- function(msg = NULL) {
 #' 
 #' # View results
 #' res
-#' # [1] Here is a warning
+#' # [1] "Warning: Here is a warning"
 get_warnings <- function() {
   
   
