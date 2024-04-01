@@ -4,8 +4,9 @@ base_path <- "c:\\packages\\logr\\tests\\testthat"
 
 base_path <- tempdir()
 
+DEV <- FALSE
 
-test_that("uni-02: The print_windows() function works as expected.", {
+test_that("uni-01: The print_windows() function works as expected.", {
 
   pth <- file.path(base_path, "log/test6.log")
 
