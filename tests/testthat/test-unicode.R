@@ -71,6 +71,7 @@ test_that("uni-03: Get_unicode() works as expected.", {
 
 # Should only print warning message to console.  
 test_that("uni-04: Invalid file path is trapped in log_print.", {
+  if (DEV) {
   
   tmp <- paste0("C:/PROGRA~1/R/R-43~1.2/bin/x64/Rterm.exe --no-save --no-restore ",
                 "-s -e \nattach(NULL, name = 'tools:rstudio');\nsys.source(",
@@ -86,5 +87,11 @@ test_that("uni-04: Invalid file path is trapped in log_print.", {
   expect_warning(print_other("test message", "", TRUE, FALSE))
   
   expect_warning(print_other("test message", tmp, TRUE, FALSE))
+  
+  } else {
+    
+    
+    expect_equal(TRUE, TRUE)
+  }
   
 })

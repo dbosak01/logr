@@ -6,13 +6,13 @@ User Name: dbosa
 R Version: 4.3.2 (2023-10-31 ucrt)
 Machine: SOCRATES x86-64
 Operating System: Windows 10 x64 build 22621
-Base Packages: stats graphics grDevices utils datasets methods base Other
-Packages: dplyr_1.1.3 logr_1.3.6 testthat_3.1.10
-Log Start Time: 2024-02-11 10:27:07.405052
+Base Packages: stats graphics grDevices utils datasets methods base
+Other Packages: dplyr_1.1.3 logr_1.3.7 testthat_3.1.10
+Log Start Time: 2024-03-31 23:03:47.480585
 =========================================================================
 Here is the first log message
-NOTE: Log Print Time:  2024-02-11 10:27:07.40759
-NOTE: Elapsed Time: 0.00109195709228516 secs
+NOTE: Log Print Time:  2024-03-31 23:03:47.482889
+NOTE: Elapsed Time: 0.00107192993164062 secs
                      mpg cyl  disp  hp drat    wt  qsec vs am gear carb
 Mazda RX4           21.0   6 160.0 110 3.90 2.620 16.46  0  1    4    4
 Mazda RX4 Wag       21.0   6 160.0 110 3.90 2.875 17.02  0  1    4    4
@@ -47,12 +47,12 @@ Ferrari Dino        19.7   6 145.0 175 3.62 2.770 15.50  0  1    5    6
 Maserati Bora       15.0   8 301.0 335 3.54 3.570 14.60  0  1    5    8
 Volvo 142E          21.4   4 121.0 109 4.11 2.780 18.60  1  1    4    2
 NOTE: Data frame has 32 rows and 11 columns.
-NOTE: Log Print Time:  2024-02-11 10:27:07.416869
-NOTE: Elapsed Time: 0.00927901268005371 secs
+NOTE: Log Print Time:  2024-03-31 23:03:47.491735
+NOTE: Elapsed Time: 0.00884604454040527 secs
 Here is a second log message
-NOTE: Log Print Time:  2024-02-11 10:27:07.418316
-NOTE: Elapsed Time: 0.00144696235656738 secs
+NOTE: Log Print Time:  2024-03-31 23:03:47.493135
+NOTE: Elapsed Time: 0.00139999389648438 secs
 =========================================================================
-Log End Time: 2024-02-11 10:27:07.419052
+Log End Time: 2024-03-31 23:03:47.493491
 Log Elapsed Time: 0 00:00:00
 =========================================================================

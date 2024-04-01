@@ -7,16 +7,16 @@ R Version: 4.3.2 (2023-10-31 ucrt)
 Machine: SOCRATES x86-64
 Operating System: Windows 10 x64 build 22621
 Base Packages: stats graphics grDevices utils datasets methods base
-Other Packages: logr_1.3.7 testthat_3.1.10
-Log Start Time: 2024-03-24 21:42:23.035722
+Other Packages: dplyr_1.1.3 logr_1.3.7 testthat_3.1.10
+Log Start Time: 2024-03-31 23:06:48.488287
 =========================================================================
-
 Hello
-
-NOTE: Log Print Time:  2024-03-24 21:42:23.03781
-NOTE: Elapsed Time: 0.000957012176513672 secs
-
+NOTE: Log Print Time:  2024-03-31 23:06:48.490588
+NOTE: Elapsed Time: 0.00109601020812988 secs
+Warning: a warning message
+NOTE: Log Print Time:  2024-03-31 23:06:48.493854
+NOTE: Elapsed Time: 0.0032660961151123 secs
 =========================================================================
-Log End Time: 2024-03-24 21:42:23.038335
+Log End Time: 2024-03-31 23:06:48.495615
 Log Elapsed Time: 0 00:00:00
 =========================================================================

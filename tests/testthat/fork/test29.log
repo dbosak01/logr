@@ -1,5 +1,5 @@
 =========================================================================
-Log Path: c:/packages/logr/tests/testthat/log/test36.log
+Log Path: c:\packages\logr\tests\testthat/fork/test29.log
 Program Path: C:/packages/logr/tests/testthat/test-logr.R
 Working Directory: C:/packages/logr
 User Name: dbosa
@@ -8,18 +8,12 @@ Machine: SOCRATES x86-64
 Operating System: Windows 10 x64 build 22621
 Base Packages: stats graphics grDevices utils datasets methods base
 Other Packages: dplyr_1.1.3 logr_1.3.7 testthat_3.1.10
-Log Start Time: 2024-03-31 23:08:34.522798
+Log Start Time: 2024-03-31 23:03:53.860528
 =========================================================================
-Message 1
-NOTE: Log Print Time:  2024-03-31 23:08:34.525094
-NOTE: Elapsed Time: 0.000993967056274414 secs
-Warning: Warning 1
-NOTE: Log Print Time:  2024-03-31 23:08:34.526038
-NOTE: Elapsed Time: 0.000943899154663086 secs
-Message 2
-NOTE: Log Print Time:  2024-03-31 23:08:34.530286
-NOTE: Elapsed Time: 0.00424814224243164 secs
+Here is the first log message
+NOTE: Log Print Time:  2024-03-31 23:03:53.862881
+NOTE: Elapsed Time: 0.00111198425292969 secs
 =========================================================================
-Log End Time: 2024-03-31 23:08:34.530857
+Log End Time: 2024-03-31 23:03:53.863264
 Log Elapsed Time: 0 00:00:00
 =========================================================================

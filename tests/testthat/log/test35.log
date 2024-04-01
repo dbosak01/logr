@@ -7,27 +7,14 @@ R Version: 4.3.2 (2023-10-31 ucrt)
 Machine: SOCRATES x86-64
 Operating System: Windows 10 x64 build 22621
 Base Packages: stats graphics grDevices utils datasets methods base
-Other Packages: logr_1.3.7 testthat_3.1.10
-Log Start Time: 2024-03-26 21:33:43.086706
+Other Packages: dplyr_1.1.3 logr_1.3.7 testthat_3.1.10
+Log Start Time: 2024-03-31 23:07:12.501827
 =========================================================================
-
 Before suspend
-
-NOTE: Log Print Time:  2024-03-26 21:33:43.19815
-NOTE: Elapsed Time: 0.00187182426452637 secs
-
+NOTE: Log Print Time:  2024-03-31 23:07:12.504818
+NOTE: Elapsed Time: 0.00140094757080078 secs
 =========================================================================
-Log Suspended: 2024-03-26 21:33:43.511009
-Log Resumed: 2024-03-26 21:33:44.062996
+Log Suspended: 2024-03-31 23:07:12.514873
+Log Resumed: 2024-03-31 23:07:12.531727
 Elapsed Time: 0 00:00:00
-=========================================================================
-
-After suspend
-
-NOTE: Log Print Time:  2024-03-26 21:33:44.453667
-NOTE: Elapsed Time: 0.388875007629395 secs
-
-=========================================================================
-Log End Time: 2024-03-26 21:33:44.683031
-Log Elapsed Time: 0 00:00:01
 =========================================================================
