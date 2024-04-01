@@ -978,3 +978,23 @@ test_that("logr36: get_warnings() function works as expected.", {
 
 
 
+# Should print error message to console.  
+test_that("logr37: Invalid file path is trapped in log_open.", {
+  
+  #res1 <- log_open(" ")
+  
+  tmp <- paste0("C:/PROGRA~1/R/R-43~1.2/bin/x64/Rterm.exe --no-save --no-restore ",
+                "-s -e \nattach(NULL, name = 'tools:rstudio');\nsys.source(",
+                "'C:/Program Files/RStudio/resources/app/R/modules/SourceWithProgress.R', ",
+                "envir = as.environment('tools:rstudio'));\n.rs.sourceWithProgress(\n   ",
+                "script = 'C:/Studies/Study1/test3.R',\n   encoding = 'UTF-8',\n   ",
+                "con = stdout(),\n   importRdata = NULL,\n   exportRdata = NULL\n)")
+  
+  
+  expect_error(log_open(tmp))
+  
+
+  #expect_equal(TRUE, TRUE)
+  
+})
+

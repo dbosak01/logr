@@ -44,6 +44,7 @@ e$log_status <- "closed"
 e$os <- Sys.info()[["sysname"]]
 e$log_blank_after <- TRUE
 e$log_warnings <- c()
+e$error_count <- 0
 # Log Separator
 separator <- 
   "========================================================================="
@@ -247,32 +248,12 @@ log_open <- function(file_name = "", logdir = TRUE, show_notes = TRUE,
     
   } else e$autolog <- FALSE
   
-  if (e$autolog) {
-    
-    if (length(find.package('tidylog', quiet=TRUE)) == 0) {
-      utils::install.packages("tidylog", verbose = FALSE, quiet = TRUE)
-      #print("tidylog installed")
-    }
 
-    if ("tidylog" %in% .packages()) {
-      do.call("library", list(package = "tidylog", warn.conflicts = FALSE))
-      e$tidylog_loaded <- TRUE
-      #print("tidylog was loaded")
-      
-    } else {
-      do.call("library", list(package = "tidylog", warn.conflicts = FALSE))
-      e$tidylog_loaded <- FALSE
-      #print("tidylog was not loaded")
-    }
-   
-    options("tidylog.display" = list(log_print)) 
-    #print("tidylog attached")
-  }
   
   lpath <- ""
   
   # If no filename is specified, use current program path.
-  if (file_name == "") {
+  if (trimws(file_name) == "") {
     
     ppth <- NULL
     tryCatch({
@@ -284,7 +265,7 @@ log_open <- function(file_name = "", logdir = TRUE, show_notes = TRUE,
       if (length(ppth) == 1) {
         if (nchar(ppth) == 0) { 
           ppth <- NULL 
-        }
+        } 
       }
       
     }, error = function(e) { ppth <- NULL})
@@ -298,7 +279,7 @@ log_open <- function(file_name = "", logdir = TRUE, show_notes = TRUE,
   
 #print("File name #1: " %p% file_name)
   
-  if (file_name != "") {
+  if (trimws(file_name) != "") {
     
     # If there is no log extension, give it one
     if (grepl(".log", file_name, fixed=TRUE) == TRUE)
@@ -315,14 +296,46 @@ log_open <- function(file_name = "", logdir = TRUE, show_notes = TRUE,
           dir.create(ldir, recursive = TRUE)
         lpath <- file.path(ldir, basename(lpath))
       },
+      warning = function(cond) {
+        lpath <- file.path(getwd(), basename(lpath))
+      },
       error = function(cond) {
         # do nothing
         # will create in current directory
+        lpath <- file.path(getwd(), basename(lpath))
       })
     }
   }
-
+  
+  # Give error if path is not valid,
+  # before any handlers are established
+  if (path_valid(lpath) == FALSE) {
+    stop(paste("Log path is invalid: ", lpath))
+  }
+    
   #print("File name #2: " %p% file_name)
+  
+  if (e$autolog) {
+    
+    if (length(find.package('tidylog', quiet=TRUE)) == 0) {
+      utils::install.packages("tidylog", verbose = FALSE, quiet = TRUE)
+      #print("tidylog installed")
+    }
+    
+    if ("tidylog" %in% .packages()) {
+      do.call("library", list(package = "tidylog", warn.conflicts = FALSE))
+      e$tidylog_loaded <- TRUE
+      #print("tidylog was loaded")
+      
+    } else {
+      do.call("library", list(package = "tidylog", warn.conflicts = FALSE))
+      e$tidylog_loaded <- FALSE
+      #print("tidylog was not loaded")
+    }
+    
+    options("tidylog.display" = list(log_print)) 
+    #print("tidylog attached")
+  }
   
   if (e$log_status == "off") {
     
@@ -353,7 +366,8 @@ log_open <- function(file_name = "", logdir = TRUE, show_notes = TRUE,
   
     # Set global variable
     e$log_path <- lpath
-    e$log_status = "open"
+    e$log_status <- "open"
+    e$error_count <- 0
     
     # Attach error event handler
     options(error = log_error)
@@ -666,22 +680,7 @@ log_close <- function(footer = TRUE) {
   # print(paste0("Exists: ", exists("last.warning")))
   # print(paste0("Get: ", unclass(get("last.warning"))))
   
-  # Detach error handler no matter what
-  options(error = NULL, warning.expression = NULL)
-  
-  if (!is.null(e$autolog)) {
-    if (e$autolog) {
-      
-      options("tidylog.display" = NULL) 
-      
-      # Detach tidylog if not attached by user
-      if (!is.null(e$tidylog_loaded)) {
-        if (e$tidylog_loaded == FALSE) {
-          do.call("detach", list(name = "package:tidylog", unload = TRUE))
-        }
-      }
-    }
-  }
+  disconnect_handlers()
   
   if (e$log_status == "open") {
     
@@ -1026,7 +1025,7 @@ log_resume <- function(file_name = NULL) {
 #' @export
 log_error <- function(msg = NULL) {
   
-  
+
   update_status()
   # print(e$log_status)
   
@@ -1045,7 +1044,9 @@ log_error <- function(msg = NULL) {
         tb <- capture.output(traceback(5, max.lines = 1000))
       } else {
         
-        er <- paste0("Error: ", er) 
+        if (all(grepl("Error", er, fixed = TRUE) == FALSE)) {
+          er <- paste0("Error: ", er) 
+        }
       }
     }
     
@@ -1069,24 +1070,8 @@ log_error <- function(msg = NULL) {
     log_close()
     
   } else {
-    
-    # Detach error handler
-    options(error = NULL, warning.expression = NULL)
 
-    if (!is.null(e$autolog)) {
-      if (e$autolog) {
-
-        options("tidylog.display" = NULL)
-
-        # Detach tidylog if not attached by user
-        if (!is.null(e$tidylog_loaded)) {
-          if (e$tidylog_loaded == FALSE) {
-            do.call("detach", list(name = "package:tidylog", unload = TRUE))
-          }
-        }
-      }
-    }
-    
+    disconnect_handlers()
   }
 }
 
@@ -1160,23 +1145,8 @@ log_warning <- function(msg = NULL) {
     options("logr.warnings" = wrn)
     
   } else {
-
-    # Detach error handler
-    options(error = NULL, warning.expression = NULL)
-
-    if (!is.null(e$autolog)) {
-      if (e$autolog) {
-
-        options("tidylog.display" = NULL)
-
-        # Detach tidylog if not attached by user
-        if (!is.null(e$tidylog_loaded)) {
-          if (e$tidylog_loaded == FALSE) {
-            do.call("detach", list(name = "package:tidylog", unload = TRUE))
-          }
-        }
-      }
-    }
+    
+    disconnect_handlers()
 
   }
 }

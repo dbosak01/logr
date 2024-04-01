@@ -6,6 +6,17 @@
 #' @noRd
 print_windows <- function(x, file_path, blank_after, hide_notes, ...) {
   
+  # Make sure the path can be written.
+  # Give warning if it can't.
+  # Don't feel good giving error, as I don't want to stop the whole program
+  # because of the log.
+  if (!path_valid(file_path)) {
+    disconnect_handlers()
+    warning("Invalid log path: ", file_path, "\nMessage not written to log.")
+    e$log_status <- "closed"
+    return(NULL) 
+  }
+  
 
   # Print to log or msg file
   tryCatch( {
@@ -89,10 +100,19 @@ print_windows <- function(x, file_path, blank_after, hide_notes, ...) {
 #' @noRd
 print_other <- function(x, file_path, blank_after, hide_notes, ...) {
   
+  # Make sure the path can be written.
+  # Give warning if it can't.
+  # Don't feel good giving error, as I don't want to stop the whole program
+  # because of the log.
+  if (!path_valid(file_path)) {
+    disconnect_handlers()
+    warning("Invalid log path: ", file_path, "\nMessage not written to log.")
+    e$log_status <- "closed"
+    return(NULL) 
+  }
+  
   # Print to log or msg file
   tryCatch( {
-    
-    
     
     f <- file(file_path, open = "a", encoding = "UTF-8")
     # Use sink() function so print() will work as desired

@@ -375,3 +375,57 @@ print_resume_header <- function(file_name, startpos, suspendtime) {
   
   return(file_name)
 }
+
+
+disconnect_handlers <- function() {
+  
+  
+  # Detach error handler
+  options(error = NULL, warning.expression = NULL)
+  
+  if (!is.null(e$autolog)) {
+    if (e$autolog) {
+      
+      options("tidylog.display" = NULL)
+      
+      # Detach tidylog if not attached by user
+      if (!is.null(e$tidylog_loaded)) {
+        if (e$tidylog_loaded == FALSE) {
+          do.call("detach", list(name = "package:tidylog", unload = TRUE))
+        }
+      }
+    }
+  }
+  
+}
+
+
+path_valid <- function(pth) {
+ 
+  ret <- TRUE
+  
+  nret <- tryCatch({
+    if (!file.exists(pth)) {
+      
+      f <- file(pth, open = "a", encoding = "UTF-8")
+      close(f)
+      file.remove(pth)
+      pth
+      
+    } else {
+      
+      
+      normalizePath(pth, mustWork = TRUE)
+      
+    }
+  }, warning = function(cond) {
+    NULL  
+  }, error = function(cond) {
+    NULL
+  })
+  
+  if (is.null(nret))
+    ret <- FALSE
+  
+  return(ret)
+}
