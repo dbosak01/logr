@@ -77,7 +77,7 @@ test_that("utils-03: print_resume_header() works as expected.", {
 
 test_that("utils-04: path_valid() works as expected.", {
   
- if (DEV) {
+ # if (DEV) {
     lp <- file.path(base_path, "log/testme.log")
     
     
@@ -124,7 +124,7 @@ test_that("utils-04: path_valid() works as expected.", {
     
     expect_equal(res5, FALSE)
     
-    # 
+
     # lp6 <- "./log/ .log"
     # 
     # res6 <- path_valid(lp6)
@@ -133,10 +133,10 @@ test_that("utils-04: path_valid() works as expected.", {
     # 
     # expect_equal(res6, FALSE)
   
-  } else {
-
-    expect_equal(TRUE, TRUE)
-  }
+  # } else {
+  # 
+  #   expect_equal(TRUE, TRUE)
+  # }
   
 })
 

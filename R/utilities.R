@@ -405,26 +405,19 @@ path_valid <- function(pth) {
   ret <- TRUE
   
   if (!file.exists(pth)) {
-    f <- NULL
+
     nret <- tryCatch({
         
        f <- file(pth, open = "a", encoding = "UTF-8")
-       if (!is.null(f)) 
-         close(f)
+        close(f)
        if (file.exists(pth))
          file.remove(pth)
        pth
     }, warning = function(cond) {
-      if (!is.null(f)) 
-        close(f)
-      if (file.exists(pth))
-        file.remove(pth)
+
       NULL  
     }, error = function(cond) {
-      if (!is.null(f)) 
-        close(f)
-      if (file.exists(pth))
-        file.remove(pth)
+
       NULL
     })
   
@@ -435,6 +428,9 @@ path_valid <- function(pth) {
 
         normalizePath(pth, mustWork = TRUE)
         
+    }, warning = function() {
+      
+      NULL  
     }, error = function(cond) {
       NULL
     })
