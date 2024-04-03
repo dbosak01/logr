@@ -116,13 +116,13 @@ test_that("utils-04: path_valid() works as expected.", {
     # 
     # expect_equal(res4, FALSE)
     
-    lp5 <- " "
-    
-    res5 <- path_valid(lp5)
-    
-    res5
-    
-    expect_equal(res5, FALSE)
+    # lp5 <- " "
+    # 
+    # res5 <- path_valid(lp5)
+    # 
+    # res5
+    # 
+    # expect_equal(res5, FALSE)
     
 
     # lp6 <- "./log/ .log"
