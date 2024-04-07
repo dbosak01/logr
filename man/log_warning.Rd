@@ -33,3 +33,6 @@ log_close()
 writeLines(readLines(lf))
 
 }
+\seealso{
+\code{\link{log_error}} to write an error message to the log.
+}

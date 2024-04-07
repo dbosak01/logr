@@ -12,7 +12,7 @@
 #' the base R \code{sink()} function.
 #' 
 #' @section How to use:
-#' There are only three \strong{logr} functions:
+#' There are three main \strong{logr} functions:
 #' \itemize{
 #'   \item \code{\link{log_open}}
 #'   \item \code{\link{log_print}}
@@ -722,6 +722,7 @@ log_close <- function(footer = TRUE) {
 #' does not close it. The function will 
 #' not print the log footer. To reopen the log, call \code{\link{log_resume}}. 
 #' @return None
+#' @seealso \code{\link{log_resume}} to continue logging.
 #' @export
 #' @examples 
 #' library(logr)
@@ -1001,9 +1002,10 @@ log_resume <- function(file_name = NULL) {
 # Is attached using options function in log_open.
 #' @title Logs an error
 #' @description Writes an error message to the log. Error will be written
-#' both to the log at the point the function is called, and also written to the 
-#' message file.  This function is used internally.
+#' both to the log and the message file.  For the log, the error will be written 
+#' at the point the function is called.  This function is used internally.
 #' @param msg The message to log.
+#' @seealso \code{\link{log_warning}} to write a warning message to the log. 
 #' @examples
 #' library(logr)
 #' 
@@ -1081,6 +1083,7 @@ log_error <- function(msg = NULL) {
 #' both to the log at the point the function is called, and also written to the 
 #' message file.  This function is used internally.
 #' @param msg The message to log.
+#' @seealso \code{\link{log_error}} to write an error message to the log.
 #' @export
 #' @examples
 #' library(logr)
@@ -1158,6 +1161,7 @@ log_warning <- function(msg = NULL) {
 #' @description Returns a vector of warning messages from the most recent
 #' logging session.  The function takes no parameters.  The warning
 #' list will be cleared the next time \code{\link{log_open}} is called.
+#' @seealso \code{\link{log_warning}} to write a warning message to the log.
 #' @export
 #' @examples
 #' library(logr)

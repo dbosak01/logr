@@ -44,3 +44,6 @@ log_close()
 # View results
 writeLines(readLines(lf))
 }
+\seealso{
+\code{\link{log_resume}} to continue logging.
+}

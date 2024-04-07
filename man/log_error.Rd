@@ -11,8 +11,8 @@ log_error(msg = NULL)
 }
 \description{
 Writes an error message to the log. Error will be written
-both to the log at the point the function is called, and also written to the
-message file.  This function is used internally.
+both to the log and the message file.  For the log, the error will be written
+at the point the function is called.  This function is used internally.
 }
 \examples{
 library(logr)
@@ -32,4 +32,7 @@ log_close()
 # View results
 writeLines(readLines(lf))
 
+}
+\seealso{
+\code{\link{log_warning}} to write a warning message to the log.
 }

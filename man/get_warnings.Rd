@@ -33,3 +33,6 @@ res <- get_warnings()
 res
 # [1] "Warning: Here is a warning"
 }
+\seealso{
+\code{\link{log_warning}} to write a warning message to the log.
+}

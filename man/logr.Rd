@@ -19,7 +19,7 @@ the base R \code{sink()} function.
 }
 \section{How to use}{
 
-There are only three \strong{logr} functions:
+There are three main \strong{logr} functions:
 \itemize{
 \item \code{\link{log_open}}
 \item \code{\link{log_print}}
