@@ -15,7 +15,8 @@ License: CC0
 Encoding: UTF-8
 URL: https://logr.r-sassy.org
 BugReports: https://github.com/dbosak01/logr/issues
-Depends: R (>= 3.4.0)
+Depends: R (>= 3.4.0),
+         common (>= 1.1.3)
 Suggests: 
     knitr,
     rmarkdown,
@@ -24,8 +25,7 @@ Suggests:
     dplyr,
     covr
 Imports: withr,
-         utils,
-         common
+         utils
 VignetteBuilder: knitr
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.1
