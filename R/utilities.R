@@ -87,13 +87,14 @@ print_log_header <- function(log_path) {
 print_log_footer <- function(has_warnings = FALSE) {
   
   tc <- Sys.time()
-  
-  if (e$log_show_notes == "TRUE" & has_warnings) {
-    
-    # Force notes after warning print, before the footer
-    log_quiet(paste("NOTE: Log Print Time:", Sys.time()), blank_after = FALSE)
-    log_quiet(paste("NOTE: Log Elapsed Time:", get_time_diff(tc)), 
-              blank_after = e$log_blank_after)
+  if (!is.null(e$log_show_notes)) {
+    if (e$log_show_notes == "TRUE" & has_warnings) {
+      
+      # Force notes after warning print, before the footer
+      log_quiet(paste("NOTE: Log Print Time:", Sys.time()), blank_after = FALSE)
+      log_quiet(paste("NOTE: Log Elapsed Time:", get_time_diff(tc)), 
+                blank_after = e$log_blank_after)
+    }
   }
   
   # Calculate total elapsed execution time

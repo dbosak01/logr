@@ -1,3 +1,7 @@
+# logr 1.3.8
+
+* Fixed issue with recursive warnings.
+
 # logr 1.3.7
 
 * Ensure that error and warning handlers are disconnected if log is closed.

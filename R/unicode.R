@@ -67,24 +67,25 @@ print_windows <- function(x, file_path, blank_after, hide_notes, ...) {
     # Print time stamps on normal log_print
     if (hide_notes == FALSE) {
       tc <- Sys.time()
-      
-      if (e$log_show_notes == TRUE) {
-        
-        # Print data frame row and column counts
-        if (any(class(x) == "data.frame")) {
-          writeLines(paste("NOTE: Data frame has", nrow(x), "rows and", ncol(x), 
-                    "columns."), con = f, useBytes = TRUE)
+      if (!is.null(e$log_show_notes)) {
+        if (e$log_show_notes == TRUE) {
+          
+          # Print data frame row and column counts
+          if (any(class(x) == "data.frame")) {
+            writeLines(paste("NOTE: Data frame has", nrow(x), "rows and", ncol(x), 
+                      "columns."), con = f, useBytes = TRUE)
+            if (e$log_blank_after)
+              writeLines("", con = f, useBytes = TRUE)
+          }
+          
+          # Print log timestamps
+          ts <- get_time_diff(tc)
+          writeLines(paste("NOTE: Log Print Time: ", tc), con = f, useBytes = TRUE)
+          writeLines(paste("NOTE: Elapsed Time:", ts, attributes(ts)$units), 
+                     con = f, useBytes = TRUE)
           if (e$log_blank_after)
             writeLines("", con = f, useBytes = TRUE)
         }
-        
-        # Print log timestamps
-        ts <- get_time_diff(tc)
-        writeLines(paste("NOTE: Log Print Time: ", tc), con = f, useBytes = TRUE)
-        writeLines(paste("NOTE: Elapsed Time:", ts, attributes(ts)$units), 
-                   con = f, useBytes = TRUE)
-        if (e$log_blank_after)
-          writeLines("", con = f, useBytes = TRUE)
       }
     }
     
@@ -155,21 +156,22 @@ print_other <- function(x, file_path, blank_after, hide_notes, ...) {
     # Print time stamps on normal log_print
     if (hide_notes == FALSE) {
       tc <- Sys.time()
-      
-      if (e$log_show_notes == TRUE) {
-        
-        # Print data frame row and column counts
-        if (any(class(x) == "data.frame")) {
-          cat(paste("NOTE: Data frame has", nrow(x), "rows and", ncol(x), 
-                    "columns."), "\n")
+      if (!is.null(e$log_show_notes)) {
+        if (e$log_show_notes == TRUE) {
+          
+          # Print data frame row and column counts
+          if (any(class(x) == "data.frame")) {
+            cat(paste("NOTE: Data frame has", nrow(x), "rows and", ncol(x), 
+                      "columns."), "\n")
+            cat("\n")
+          }
+          
+          # Print log timestamps
+          ts <- get_time_diff(tc)
+          cat(paste("NOTE: Log Print Time: ", tc), "\n")
+          cat(paste("NOTE: Elapsed Time:", ts, attributes(ts)$units), "\n")
           cat("\n")
         }
-        
-        # Print log timestamps
-        ts <- get_time_diff(tc)
-        cat(paste("NOTE: Log Print Time: ", tc), "\n")
-        cat(paste("NOTE: Elapsed Time:", ts, attributes(ts)$units), "\n")
-        cat("\n")
       }
     }
     

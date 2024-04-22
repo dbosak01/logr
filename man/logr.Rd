@@ -44,6 +44,7 @@ See function documentation for additional details.
 Useful links:
 \itemize{
   \item \url{https://logr.r-sassy.org}
+  \item \url{https://github.com/dbosak01/logr}
   \item Report bugs at \url{https://github.com/dbosak01/logr/issues}
 }
 

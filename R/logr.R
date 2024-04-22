@@ -1141,7 +1141,7 @@ log_warning <- function(msg = NULL) {
     # Doesn't work for logr.  So this allows a local version of the
     # warnings() function called get_warnings().  
     wrn <- e$log_warnings
-    wrn[length(wrn) + 1] <- msg1
+    wrn[length(wrn) + 1] <- paste0(msg1, collapse = "\n")
     e$log_warnings <- wrn
     
     # Publish warnings 
