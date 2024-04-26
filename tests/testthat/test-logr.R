@@ -1000,3 +1000,23 @@ test_that("logr37: Invalid file path is trapped in log_open.", {
   
 })
 
+
+
+test_that("logr38: log_warnings() accepts a null.", {
+  
+  tmp <- base_path
+  
+  lp <- log_open(file.path(tmp, "test38.log"))
+  
+  log_print("Message 1")
+  log_warning("test me")
+  log_warning(NULL)
+  
+  log_close()
+  
+  
+  res <- get_warnings()
+  
+  expect_equal(length(res) == 1, TRUE)
+  
+})

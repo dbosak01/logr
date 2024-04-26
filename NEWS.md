@@ -1,6 +1,7 @@
 # logr 1.3.8
 
 * Fixed issue with recursive warnings.
+* Fixed error caused by NULL warnings and 0 frame count.
 
 # logr 1.3.7
 

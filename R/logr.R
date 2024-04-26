@@ -1119,6 +1119,7 @@ log_warning <- function(msg = NULL) {
       log_quiet(msg1, msg = TRUE)
       message(msg1)
     } else {
+      msg1 <- NULL
       for (n in seq.int(to = 1, by = -1, length.out = sys.nframe() - 1)) {
         e1 <- sys.frame(n)
         # print(paste("frame: ", n))
@@ -1140,12 +1141,15 @@ log_warning <- function(msg = NULL) {
     # This is necessary because now the warnings() function in Base R
     # Doesn't work for logr.  So this allows a local version of the
     # warnings() function called get_warnings().  
-    wrn <- e$log_warnings
-    wrn[length(wrn) + 1] <- paste0(msg1, collapse = "\n")
-    e$log_warnings <- wrn
+    if (!is.null(msg1)) {
+      wrn <- e$log_warnings
+      wrn[length(wrn) + 1] <- paste0(msg1, collapse = "\n")
+      e$log_warnings <- wrn
+      
+      # Publish warnings 
+      options("logr.warnings" = wrn)
     
-    # Publish warnings 
-    options("logr.warnings" = wrn)
+    }
     
   } else {
     
