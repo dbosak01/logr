@@ -211,9 +211,9 @@ automatically.</p>
 the end of your <strong>dplyr</strong> pipelines. This is a very good
 habit to develop, and will greatly improve the quantity and quality of
 your logs. Here is an example:</p>
-<pre><code><span><span class="va">dat</span> <span class="op">&lt;-</span> <span class="va">mtcars</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
-<span>       <span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span><span class="va">mpg</span> <span class="op">&lt;</span> <span class="fl">20</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
-<span>       <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html" class="external-link">arrange</a></span><span class="op">(</span><span class="va">mpg</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<pre><code><span><span class="va">dat</span> <span class="op">&lt;-</span> <span class="va">mtcars</span> <span class="op">%&gt;%</span> </span>
+<span>       <span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span><span class="va">mpg</span> <span class="op">&lt;</span> <span class="fl">20</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
+<span>       <span class="fu">arrange</span><span class="op">(</span><span class="va">mpg</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
 <span>       <span class="fu"><a href="../reference/log_print.html">put</a></span><span class="op">(</span><span class="op">)</span></span></code></pre>
 <p>Note that the above <code><a href="../reference/log_print.html">put()</a></code> statement has no effect on the
 resulting data frame. It simply logs the pipeline result before

@@ -175,11 +175,11 @@ or downloaded directly from the <strong>logr</strong> GitHub site <a href="https
 <span></span>
 <span></span>
 <span><span class="co"># Manipulate data</span></span>
-<span><span class="va">final</span> <span class="op">&lt;-</span> <span class="va">sdtm.DM</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">USUBJID</span>, <span class="va">BRTHDTC</span>, <span class="va">AGE</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>AGEG <span class="op">=</span> <span class="fu">fapply</span><span class="op">(</span><span class="va">AGE</span>, <span class="va">ageg</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html" class="external-link">arrange</a></span><span class="op">(</span><span class="va">AGEG</span>, <span class="va">AGE</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">AGEG</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<span><span class="va">final</span> <span class="op">&lt;-</span> <span class="va">sdtm.DM</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu">select</span><span class="op">(</span><span class="va">USUBJID</span>, <span class="va">BRTHDTC</span>, <span class="va">AGE</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu">mutate</span><span class="op">(</span>AGEG <span class="op">=</span> <span class="fu">fapply</span><span class="op">(</span><span class="va">AGE</span>, <span class="va">ageg</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu">arrange</span><span class="op">(</span><span class="va">AGEG</span>, <span class="va">AGE</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu">group_by</span><span class="op">(</span><span class="va">AGEG</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
 <span>  <span class="fu">datastep</span><span class="op">(</span>retain <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>SEQ <span class="op">=</span> <span class="fl">0</span><span class="op">)</span>, </span>
 <span>           calculate <span class="op">=</span> <span class="op">{</span><span class="va">AGEM</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">AGE</span><span class="op">)</span><span class="op">}</span>,</span>
 <span>           attrib <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>USUBJID <span class="op">=</span> <span class="fu">dsattr</span><span class="op">(</span>label <span class="op">=</span> <span class="st">"Universal Subject ID"</span><span class="op">)</span>,</span>
@@ -221,12 +221,12 @@ or downloaded directly from the <strong>logr</strong> GitHub site <a href="https
 <span>             <span class="kw">else</span> </span>
 <span>               <span class="va">AGEMC</span> <span class="op">&lt;-</span> <span class="st">"B"</span></span>
 <span>             </span>
-<span>           <span class="op">}</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">ungroup</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<span>           <span class="op">}</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu">ungroup</span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
 <span>  <span class="fu"><a href="../reference/log_print.html">put</a></span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Put dictionary to log</span></span>
-<span><span class="fu">dictionary</span><span class="op">(</span><span class="va">final</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/log_print.html">put</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="fu">dictionary</span><span class="op">(</span><span class="va">final</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="../reference/log_print.html">put</a></span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Create Report ------------------------------------------------------------</span></span>
 <span><span class="fu"><a href="../reference/log_print.html">sep</a></span><span class="op">(</span><span class="st">"Create report"</span><span class="op">)</span></span>
@@ -237,8 +237,8 @@ or downloaded directly from the <strong>logr</strong> GitHub site <a href="https
 <span></span>
 <span><span class="co"># Create report</span></span>
 <span><span class="va">rpt</span> <span class="op">&lt;-</span> <span class="fu">create_report</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">tmp</span>, <span class="st">"./output/example1.rtf"</span><span class="op">)</span>, </span>
-<span>                     output_type <span class="op">=</span> <span class="st">"RTF"</span>, font <span class="op">=</span> <span class="st">"Arial"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
-<span>  <span class="fu">titles</span><span class="op">(</span><span class="st">"Our first SASSY report"</span>, bold <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<span>                     output_type <span class="op">=</span> <span class="st">"RTF"</span>, font <span class="op">=</span> <span class="st">"Arial"</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu">titles</span><span class="op">(</span><span class="st">"Our first SASSY report"</span>, bold <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
 <span>  <span class="fu">add_content</span><span class="op">(</span><span class="va">tbl</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># write out the report</span></span>

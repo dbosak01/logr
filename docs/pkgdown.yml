@@ -1,4 +1,4 @@
-pandoc: 3.1.1
+pandoc: 3.1.11
 pkgdown: 2.0.7
 pkgdown_sha: ~
 articles:
@@ -10,7 +10,7 @@ articles:
   logr-put: logr-put.html
   logr-tidylog: logr-tidylog.html
   logr: logr.html
-last_built: 2024-04-26T01:45Z
+last_built: 2024-05-09T14:43Z
 urls:
   reference: https://logr.r-sassy.org/reference
   article: https://logr.r-sassy.org/articles
