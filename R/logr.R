@@ -45,6 +45,7 @@ e$os <- Sys.info()[["sysname"]]
 e$log_blank_after <- TRUE
 e$log_warnings <- c()
 e$error_count <- 0
+e$log_stdout <- FALSE
 # Log Separator
 separator <- 
   "========================================================================="
@@ -162,6 +163,10 @@ separator <-
 #' turn this feature off by setting the \code{traceback} parameter to FALSE.
 #' @param header Whether or not to print the log header.  Value values
 #' are TRUE and FALSE.  Default is TRUE.
+#' @param stdout If TRUE, the log will print to stdout instead of a file.
+#' Default is FALSE, which means the log will normally print to a file.
+#' This behavior can also be set with the global option 
+#' \code{globals("logr.stdout" = TRUE)}.
 #' @return The path of the log.
 #' @seealso \code{\link{log_print}} for printing to the log (and console), 
 #' and \code{\link{log_close}} to close the log.
@@ -191,7 +196,20 @@ separator <-
 #' writeLines(readLines(lf))
 log_open <- function(file_name = "", logdir = TRUE, show_notes = TRUE,
                      autolog = NULL, compact = FALSE, traceback = TRUE, 
-                     header = TRUE) {
+                     header = TRUE, stdout = FALSE) {
+  
+  # Deal with stdout option 
+  if (is.null(options()[["logr.stdout"]]) == FALSE) {
+    
+    optc <- options("logr.stdout")
+    
+    e$log_stdout = optc[[1]] 
+    
+  } else {
+    
+    # Capture compact parameter
+    e$log_stdout = stdout
+  }
   
   # Deal with compact log
   if (is.null(options()[["logr.compact"]]) == FALSE) {
@@ -282,7 +300,7 @@ log_open <- function(file_name = "", logdir = TRUE, show_notes = TRUE,
   if (trimws(file_name) != "") {
     
     # If there is no log extension, give it one
-    if (grepl(".log", file_name, fixed=TRUE) == TRUE)
+    if (grepl(".log", basename(file_name), fixed=TRUE) == TRUE)
       lpath <- file_name
     else
       lpath <- paste0(file_name, ".log")
@@ -344,7 +362,8 @@ log_open <- function(file_name = "", logdir = TRUE, show_notes = TRUE,
   } else {
   
     # Create path for message file
-    mpath <- sub(".log", ".msg", lpath, fixed = TRUE)
+    fmpath <- sub(".log", ".msg", basename(lpath), fixed = TRUE)
+    mpath <- file.path(dirname(lpath), fmpath)
     e$msg_path <- mpath
   
       
@@ -530,22 +549,28 @@ log_print <- function(x, ...,
   if (e$log_status == "open") {
   
     # Print to console, if requested
-    if (console == TRUE)
-      print(x, ...)
+    if (console == TRUE || e$log_stdout) {
+      if (all("character" == class(x)) && length(x) == 1) {
+        cat(strwrap(x, width = 80), "\n")
+      } else {
+        print(x, ...)
+      }
+    }
     
     # Print to msg_path, if requested
     file_path <- e$log_path
     if (msg == TRUE)
       file_path <- e$msg_path
     
-    if (e$os == "Windows") {
-      
-      print_windows(x, file_path, blank_after, hide_notes, ...)
-      
-      
-    } else {
-      
-      print_other(x, file_path, blank_after, hide_notes, ...)
+    if (e$log_stdout == FALSE) {
+      if (e$os == "Windows") {
+        
+        print_windows(x, file_path, blank_after, hide_notes, ...)
+        
+      } else {
+        
+        print_other(x, file_path, blank_after, hide_notes, ...)
+      }
     }
     
     

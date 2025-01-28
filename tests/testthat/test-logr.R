@@ -1020,3 +1020,53 @@ test_that("logr38: log_warnings() accepts a null.", {
   expect_equal(length(res) == 1, TRUE)
   
 })
+
+test_that("logr39: logr.stdout option works as expected.", {
+  
+  tmp <- base_path
+  
+  options("logr.stdout" = TRUE)
+  
+  lf <- log_open(file.path(tmp, "test.log"))
+  log_print("Here is the first log message")
+  log_print(mtcars)
+  log_print("Here is a second log message")
+  
+  mp <- sub(".log", ".msg", lf, fixed = TRUE) 
+  log_close()
+  
+  ret <- file.exists(lf)
+  ret2 <- file.exists(mp)
+  
+  expect_equal(ret, FALSE)
+  expect_equal(ret2, FALSE)
+  
+  options("logr.stdout" = NULL)
+  
+})
+
+
+test_that("logr40: logr.stdout parameter works as expected.", {
+  
+  tmp <- base_path
+  
+
+  lf <- log_open(file.path(tmp, "test.log"), stdout = TRUE)
+  log_print("Here is the first log message")
+  log_print(mtcars)
+  log_print("Here is a second log message")
+  
+  mp <- sub(".log", ".msg", lf, fixed = TRUE) 
+  log_close()
+  
+  ret <- file.exists(lf)
+  ret2 <- file.exists(mp)
+  
+  expect_equal(ret, FALSE)
+  expect_equal(ret2, FALSE)
+  
+
+})
+
+
+

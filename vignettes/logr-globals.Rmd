@@ -93,4 +93,22 @@ w1 <- get_warnings()
 w2 <- getOption("logr.warnings")
 ```
 
+In some situations, you may want to print the log to the console instead
+of a file.  The "logr.stdout" option allows you to do that.  The syntax to
+set the global option is this:
+```{r eval=FALSE, echo=TRUE}
+# Print log to stdout (console)
+options("logr.stdout" = TRUE)
+```
+
+To restore printing to a file, you can set the "stdout" option to FALSE, or remove
+the option entirely.  Like this:
+```{r eval=FALSE, echo=TRUE}
+# Restore printing
+options("logr.stdout" = FALSE)
+
+# Remove stdout option
+options("logr.stdout" = NULL)
+```
+
 Next: [Aliases for log_print()](logr-put.html)

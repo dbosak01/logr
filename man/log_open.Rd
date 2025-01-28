@@ -11,7 +11,8 @@ log_open(
   autolog = NULL,
   compact = FALSE,
   traceback = TRUE,
-  header = TRUE
+  header = TRUE,
+  stdout = FALSE
 )
 }
 \arguments{
@@ -46,6 +47,11 @@ turn this feature off by setting the \code{traceback} parameter to FALSE.}
 
 \item{header}{Whether or not to print the log header.  Value values
 are TRUE and FALSE.  Default is TRUE.}
+
+\item{stdout}{If TRUE, the log will print to stdout instead of a file.
+Default is FALSE, which means the log will normally print to a file.
+This behavior can also be set with the global option
+\code{globals("logr.stdout" = TRUE)}.}
 }
 \value{
 The path of the log.
