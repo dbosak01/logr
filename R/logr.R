@@ -1223,3 +1223,62 @@ get_warnings <- function() {
 }
 
 
+#' @title Logs an informational message
+#' @description Writes an informational message to the log. Message will be written
+#' to the log at the point the function is called.  
+#' @param msg The message to log.  The message must be a character string.
+#' @param console Whether or not to print to the console.  Valid values are
+#' TRUE and FALSE.  Default is TRUE.
+#' @param blank_after Whether or not to print a blank line following the 
+#' printed message.  The blank line helps readability of the log.  Valid values
+#' are TRUE and FALSE. Default is TRUE.
+#' @param hide_notes If notes are on, this parameter gives you the option 
+#' of not printing notes for a particular log entry.  Default is FALSE, 
+#' meaning notes will be displayed.  Used internally.
+#' @return The object, invisibly
+#' @seealso \code{\link{log_warning}} to write a warning message to the log.
+#' @export
+#' @examples
+#' library(logr)
+#' 
+#' # Create temp file location
+#' tmp <- file.path(tempdir(), "test.log")
+#' 
+#' # Open log
+#' lf <- log_open(tmp)
+#' 
+#' # Send info to log
+#' log_info("Here is an info message")
+#'
+#' # Close log
+#' log_close()
+#' 
+#' # View results
+#' writeLines(readLines(lf))
+#' 
+log_info <- function(msg,
+                     console = TRUE, 
+                     blank_after = NULL, 
+                     hide_notes = FALSE) {
+  
+  if (is.null(blank_after)) {
+    
+    blank_after <- e$log_blank_after
+  }
+  
+  if (all("character" %in% class(msg))) {
+  
+    nmsg <- paste0("Info: ", msg)
+    
+    # Pass everything to log_print()
+    ret <- log_print(nmsg, console = console, blank_after = blank_after,
+                     msg = FALSE, hide_notes = hide_notes)
+  
+  } else {
+    
+    message("Info message must be a character string.")
+  }
+  
+  invisible(ret)
+}
+

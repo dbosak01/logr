@@ -3,6 +3,8 @@
 * Fixed bug on creating path for message file.
 * Added "stdout" option to send log output to the console
 instead of a file.
+* Added `log_info()` function to send an informational message
+to the log.
 
 # logr 1.3.8
 

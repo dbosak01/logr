@@ -36,6 +36,7 @@ reference:
   - log_path
   - log_status
   - log_code
+  - log_info
 
   
 navbar:

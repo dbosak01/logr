@@ -1070,3 +1070,26 @@ test_that("logr40: logr.stdout parameter works as expected.", {
 
 
 
+test_that("logr41: the log_info() function works as expected.", {
+  
+  tmp <- base_path
+  
+  lf <- log_open(file.path(tmp, "test.log"))
+  log_print("Here is the first log message")
+
+  log_info("Here is a second log message")
+  
+  log_info(mtcars)
+  
+  mp <- sub(".log", ".msg", lf, fixed = TRUE) 
+  log_close()
+  
+  ret <- file.exists(lf)
+  ret2 <- file.exists(mp)
+  
+  expect_equal(ret, TRUE)
+  expect_equal(ret2, FALSE)
+  
+  
+})
+
