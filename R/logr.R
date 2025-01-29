@@ -1275,7 +1275,7 @@ log_info <- function(msg,
                      msg = FALSE, hide_notes = hide_notes)
   
   } else {
-    
+    ret <- msg
     message("Info message must be a character string.")
   }
   
