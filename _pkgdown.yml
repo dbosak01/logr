@@ -9,6 +9,7 @@ articles:
   - logr-globals
   - logr-put
   - logr-tidylog
+  - logr-integration
   - logr-example1
   - logr-faq
 

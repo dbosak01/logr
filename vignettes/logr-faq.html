@@ -260,6 +260,8 @@ values?</a></li>
 Packages” lines in the header?</a></li>
 <li><a href="#compact">How can I get rid of the blank lines?</a></li>
 <li><a href="#traceback">How can I get rid of the traceback?</a></li>
+<li><a href="#integration">Can I use <strong>logr</strong> in my own
+package?</a></li>
 </ul>
 </div>
 <div id="content" class="section level2">
@@ -527,6 +529,18 @@ this feature annoying and useless. How can I turn it off?</p>
 <code>log_open()</code> function called “traceback” that you can use to
 turn off the traceback messaging. Simply set traceback = FALSE. The
 global option logr.traceback = FALSE will do the same thing.</p>
+<p><a href="#top">top</a></p>
+<hr />
+</div>
+<div id="integration" class="section level3">
+<h3>Can I use <strong>logr</strong> in my own package?</h3>
+<p><strong>Q:</strong> I’m creating a package of functions for my
+company. I’d like to use the <strong>logr</strong> package to generate a
+log from my package. Is it possible to integrate <strong>logr</strong>
+into my package?</p>
+<p><strong>A:</strong> Yes. <strong>logr</strong> can be used for both
+direct and indirect logging from your own custom package. For more
+information, see the package integration vignette <a href="logr-integration.html">here</a>.</p>
 <p><a href="#top">top</a></p>
 <hr />
 </div>

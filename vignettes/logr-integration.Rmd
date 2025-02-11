@@ -1,0 +1,128 @@
+---
+title: "Package Integration"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Package Integration}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+The **logr** package can be used as a logging system for R packages.  The
+system is best suited for cases where you need a complete, SAS®-like log.
+It has functions to generate errors, warnings, and informative messages. The 
+log header and footer are produced automatically. Notes
+and timestamps are already built in. In short, the **logr** package takes 
+care of all the tedious details of logging, and lets you concentrate on documenting
+key activities and providing valuable feedback to your user. 
+
+There are two types of logging you may want to offer with your custom R package: 
+direct logging, and indirect logging.  
+
+Direct logging means you want your
+package to create its own log.  Indirect logging means the user of your package
+will be creating a log, and you want your package to contribute to the user's
+log.  Below are some considerations for each of these two types of logging.
+
+### Direct Logging
+
+To integrate the **logr** package into your custom R package, take the following
+steps for direct logging:
+
+1) Add **logr** to the "imports" section of your DESCRIPTION file.
+2) Add the directive "@import logr" to at least one roxygen function header.
+3) Add **logr** calls to your functions as desired.
+
+For this type of logging, there is normally a "main" or driver function, 
+which branches to several subroutines.  In this case, place the `log_open()`
+and `log_close()` function calls in the "main" function.  Then place 
+`log_print()` or `put()` calls in the subroutines.  The printing functions 
+will output to the log as expected.  
+
+For direct logging, you may also use the `log_error()`, `log_warning()`, 
+and `log_info()` functions as needed.  Note that `log_error()` will not stop execution
+of your function calls.  It will simply log the appropriate message and keep going.
+To stop execution of your function, use the Base R `stop()` function.
+
+Also note that `log_error()`, `log_warning()` and `log_info()` will send messages
+to the console.  This feature is useful for notifying the user of what is going
+on with your package.
+
+### Indirect Logging
+
+For indirect logging, the user will be creating their own log, and you want
+your package to write messages to their log.  
+
+For example, you may be creating
+a package of utility functions, and the user is using your utility functions to 
+write a program.  The program will have the calls to `log_open()` and `log_close()`,
+but you want your utility functions to send messages to the program log.  This outcome
+can be achieved with the logging hook.
+
+#### Logging Hook
+
+The **logr** package provides a special function, `log_hook()`, specifically
+designed for logging common informational messages from a custom package.  The
+function is intended to be used in cases where you want to send items to the log, 
+but not send anything to the console. In other words, the `log_hook()` function
+is for when you want to log things quietly and invisibly.  
+
+To use indirect logging, take the following steps:
+
+1) Add **logr** to the "imports" or "suggests" section of your DESCRIPTION file.
+2) Add the directive "@import logr" to at least one roxygen function header.
+3) Add `log_hook()` calls to your functions as desired.
+
+When called, the `log_hook()` function will first check to see whether the user's 
+log is open.  If open, the function will then write the message to the user's log.
+If a log is not open, the message will be ignored.  This feature is useful to 
+avoid "log not open" warnings from the **logr** package.
+
+Additionally, the `log_hook()` function is integrated with the "autolog" feature.
+In other words, `log_hook()` will only work when "autolog" is turned on.  That
+means the user will be able to turn off your custom logging messages by turning
+off "autolog". This feature gives the user some control over whether routine messages
+from your package are logged or not.
+
+The example below shows a custom function, where the function output is 
+logged automatically using `log_hook()`:
+
+```{r eval=FALSE, echo=TRUE}
+#' @title Read an RDS file
+#' @param file_path The path to the file. 
+#' @return The RDS file contents as an R object.
+#' @import logr
+#' @export
+read_file <- function(file_path) {
+  
+  ret <-  readRDS(file_path)
+  
+  log_hook(paste0("Read RDS file from '", file_path, "'"))
+  
+  return(ret)
+}
+```
+The above function simply reads in an RDS file and returns the contents to the 
+user. What is different about this function is that it will record the operation
+in the user's log automatically via `log_hook()`.  This integration allows you
+to provide automatic, invisible logging to your users in the most seamless
+way possible.
+
+#### Indirect Logging of Errors and Warnings 
+
+For indirect logging of errors and warnings, it is recommended to use 
+the `stop()` and `warning()` Base R functions, instead of `log_error()` and
+`log_warning()`.  The logger package will trap these Base R functions, and send
+the message to the log. The `stop()` command will also stop execution of your
+function. Stopping execution of the function is normally what is intended
+when an error occurs.
+
+
+Next: [Complete Example](logr-example1.html)
+
+

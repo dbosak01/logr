@@ -34,6 +34,7 @@ on the links below to navigate to the full question and answer content.
 * [What are the "Base Packages" and "Other Packages" lines in the header?](#packages)
 * [How can I get rid of the blank lines?](#compact)
 * [How can I get rid of the traceback?](#traceback)
+* [Can I use **logr** in my own package?](#integration)
 
 ## Content
 
@@ -344,3 +345,18 @@ the same thing.
 [top](#top)
 
 ******
+
+### Can I use **logr** in my own package? {#integration}
+
+**Q:** I'm creating a package of functions for my company. I'd 
+like to use the **logr** package to generate a log from my package. Is it
+possible to integrate **logr** into my package?
+
+**A:** Yes.  **logr** can be used for both direct and indirect logging
+from your own custom package.  For more information, see the package integration
+vignette [here](logr-integration.html).
+
+[top](#top)
+
+******
+

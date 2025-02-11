@@ -6,11 +6,12 @@ articles:
   logr-faq: logr-faq.html
   logr-features: logr-features.html
   logr-globals: logr-globals.html
+  logr-integration: logr-integration.html
   logr-parts: logr-parts.html
   logr-put: logr-put.html
   logr-tidylog: logr-tidylog.html
   logr: logr.html
-last_built: 2025-01-29T02:22Z
+last_built: 2025-02-11T04:28Z
 urls:
   reference: https://logr.r-sassy.org/reference
   article: https://logr.r-sassy.org/articles
