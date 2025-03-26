@@ -12,7 +12,8 @@ log_open(
   compact = FALSE,
   traceback = TRUE,
   header = TRUE,
-  stdout = FALSE
+  stdout = FALSE,
+  line_size = 80
 )
 }
 \arguments{
@@ -52,6 +53,10 @@ are TRUE and FALSE.  Default is TRUE.}
 Default is FALSE, which means the log will normally print to a file.
 This behavior can also be set with the global option
 \code{globals("logr.stdout" = TRUE)}.}
+
+\item{line_size}{The maximum character width for a line in the log. If the
+line exceeds the maximum width, the line will be broken and wrapped to the
+next line.  Default is 80 characters.}
 }
 \value{
 The path of the log.

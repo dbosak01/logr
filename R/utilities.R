@@ -47,7 +47,7 @@ update_status <- function() {
 #' @noRd
 print_log_header <- function(log_path) {
   
-  log_quiet(paste(separator), blank_after = FALSE)
+  log_quiet(paste(e$separator), blank_after = FALSE)
   log_quiet(paste("Log Path:", log_path), blank_after = FALSE)
   
   ppth <- NULL
@@ -79,7 +79,7 @@ print_log_header <- function(log_path) {
   log_quiet(get_other_package_versions(), blank_after = FALSE)
   
   log_quiet(paste("Log Start Time:", Sys.time()), blank_after = FALSE)
-  log_quiet(paste(separator), blank_after = e$log_blank_after)
+  log_quiet(paste(e$separator), blank_after = e$log_blank_after)
 }
 
 #' Function to print the log footer
@@ -103,10 +103,10 @@ print_log_footer <- function(has_warnings = FALSE) {
   lt <-  difftime(tc, ts, units = "secs") 
   
   # Print the log footer
-  log_quiet(paste(separator), blank_after = FALSE)
+  log_quiet(paste(e$separator), blank_after = FALSE)
   log_quiet(paste("Log End Time:", tc),  blank_after = FALSE)
   log_quiet(paste("Log Elapsed Time:", dhms(as.numeric(lt))), blank_after = FALSE)
-  log_quiet(paste(separator), blank_after = FALSE)
+  log_quiet(paste(e$separator), blank_after = FALSE)
 }
 
 #' Get time difference between last log_print call and current call
@@ -346,13 +346,13 @@ print_resume_header <- function(file_name, startpos, suspendtime) {
   
   stm <-  difftime(st, as.POSIXct(suspendtime), units = "secs")
   
-  mlns[length(mlns) + 1] <- separator
+  mlns[length(mlns) + 1] <- e$separator
   mlns[length(mlns) + 1] <- "Log Suspended: " %p% suspendtime
 
   mlns[length(mlns) + 1] <- "Log Resumed: " %p% st
   mlns[length(mlns) + 1] <- "Elapsed Time: " %p% dhms(as.numeric(stm))
   
-  mlns[length(mlns) + 1] <- separator
+  mlns[length(mlns) + 1] <- e$separator
   
   blnk <- TRUE
   if (!is.null(e$log_blank_after)) {

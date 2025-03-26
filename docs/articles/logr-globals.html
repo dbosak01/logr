@@ -200,6 +200,13 @@ FALSE, or remove the option entirely. Like this:</p>
 <span></span>
 <span><span class="co"># Remove stdout option</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span><span class="st">"logr.stdout"</span> <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div>
+<p>The default <strong>logr</strong> line size is 80 characters. That
+means if the line exceeds 80 characters, the line will be broken and
+continued on the next line. To change the line size, you can set the
+“logr.linesize” option:</p>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Restore printing</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span><span class="st">"logr.linesize"</span> <span class="op">=</span> <span class="fl">100</span><span class="op">)</span></span></code></pre></div>
 <p>Next: <a href="logr-put.html">Aliases for log_print()</a></p>
   </div>
 

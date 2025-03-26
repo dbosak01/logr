@@ -1093,3 +1093,33 @@ test_that("logr41: the log_info() function works as expected.", {
   
 })
 
+test_that("logr42: logr.linesize works as expected.", {
+  
+  tmp <- base_path
+  
+  options("logr.linesize" = 100)
+  
+  
+  lf <- log_open(file.path(tmp, "test.log"))
+  
+  str <- paste("Here is a a really long log line.", 
+               "I want to exceed 40 characters")
+  log_print(str)
+  
+  
+  
+  log_close()
+  
+  ret <- file.exists(lf)
+  
+  expect_equal(ret, TRUE)
+  
+  
+  readLines(lf)
+  
+  options("logr.linesize" = NULL)
+  
+})
+
+
+

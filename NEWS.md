@@ -6,6 +6,7 @@ instead of a file.
 * Added `log_info()` function to send an informational message
 to the log.
 * Added vignette to explain **logr** integration with custom packages.
+* Added option to control the line size on the log output.
 
 # logr 1.3.8
 

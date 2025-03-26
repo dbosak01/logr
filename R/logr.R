@@ -47,7 +47,7 @@ e$log_warnings <- c()
 e$error_count <- 0
 e$log_stdout <- FALSE
 # Log Separator
-separator <- 
+e$separator <- 
   "========================================================================="
 
 
@@ -167,6 +167,9 @@ separator <-
 #' Default is FALSE, which means the log will normally print to a file.
 #' This behavior can also be set with the global option 
 #' \code{globals("logr.stdout" = TRUE)}.
+#' @param line_size The maximum character width for a line in the log. If the 
+#' line exceeds the maximum width, the line will be broken and wrapped to the 
+#' next line.  Default is 80 characters.
 #' @return The path of the log.
 #' @seealso \code{\link{log_print}} for printing to the log (and console), 
 #' and \code{\link{log_close}} to close the log.
@@ -196,7 +199,7 @@ separator <-
 #' writeLines(readLines(lf))
 log_open <- function(file_name = "", logdir = TRUE, show_notes = TRUE,
                      autolog = NULL, compact = FALSE, traceback = TRUE, 
-                     header = TRUE, stdout = FALSE) {
+                     header = TRUE, stdout = FALSE, line_size = 80) {
   
   # Deal with stdout option 
   if (is.null(options()[["logr.stdout"]]) == FALSE) {
@@ -222,6 +225,30 @@ log_open <- function(file_name = "", logdir = TRUE, show_notes = TRUE,
     
     # Capture compact parameter
     e$log_blank_after = !compact
+  }
+  
+  # Deal with line size
+  if (is.null(options()[["logr.linesize"]]) == FALSE) {
+    
+    optc <- options("logr.linesize")
+    
+    e$line_size = optc[[1]] 
+    
+  } else {
+    
+    # Capture line size
+    e$line_size = line_size
+  }
+  
+  # Update separator according to line size.
+  # Default from original is 73.  Use this as max.
+  # No reason to exceed that for the separator.
+  # Actual log lines can go longer.
+  if (!is.null(e$line_size)) {
+    if (e$line_size > 0 && e$line_size < 80)
+      e$separator <- paste0(rep("=", e$line_size), collapse = "")
+    else 
+      e$separator <- paste0(rep("=", 73), collapse = "")
   }
 
   # Deal with traceback option
@@ -649,11 +676,11 @@ log_quiet <- function(x, blank_after = NULL, msg = FALSE) {
 sep <- function(x, console = TRUE) {
   
   # Pass everything to log_print()
-  log_print(separator, blank_after = FALSE, hide_notes = TRUE, console = console)
+  log_print(e$separator, blank_after = FALSE, hide_notes = TRUE, console = console)
   
-  str <- paste(strwrap(x, nchar(separator)), collapse = "\n")
+  str <- paste(strwrap(x, nchar(e$separator)), collapse = "\n")
   ret <- log_print(str, blank_after = FALSE, hide_notes = TRUE, console = console)
-  log_print(separator, hide_notes = TRUE, blank_after = e$log_blank_after, console = console)
+  log_print(e$separator, hide_notes = TRUE, blank_after = e$log_blank_after, console = console)
   
   invisible(ret)
 }
@@ -784,9 +811,9 @@ log_suspend <- function() {
 
   if (e$log_status %in% c("open")) {
     
-    log_quiet(paste(separator), blank_after = FALSE)
+    log_quiet(paste(e$separator), blank_after = FALSE)
     log_quiet("Log suspended", blank_after = FALSE)
-    log_quiet(paste(separator), blank_after = TRUE)
+    log_quiet(paste(e$separator), blank_after = TRUE)
     
     log_quiet(paste0("Autolog: ", e$autolog), blank_after = FALSE)
     log_quiet(paste0("Log Path: ", e$log_path), blank_after = FALSE)

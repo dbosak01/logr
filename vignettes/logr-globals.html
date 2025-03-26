@@ -414,6 +414,12 @@ FALSE, or remove the option entirely. Like this:</p>
 <span id="cb7-3"><a href="#cb7-3" tabindex="-1"></a></span>
 <span id="cb7-4"><a href="#cb7-4" tabindex="-1"></a><span class="co"># Remove stdout option</span></span>
 <span id="cb7-5"><a href="#cb7-5" tabindex="-1"></a><span class="fu">options</span>(<span class="st">&quot;logr.stdout&quot;</span> <span class="ot">=</span> <span class="cn">NULL</span>)</span></code></pre></div>
+<p>The default <strong>logr</strong> line size is 80 characters. That
+means if the line exceeds 80 characters, the line will be broken and
+continued on the next line. To change the line size, you can set the
+“logr.linesize” option:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="co"># Restore printing</span></span>
+<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a><span class="fu">options</span>(<span class="st">&quot;logr.linesize&quot;</span> <span class="ot">=</span> <span class="dv">100</span>)</span></code></pre></div>
 <p>Next: <a href="logr-put.html">Aliases for log_print()</a></p>
 
 

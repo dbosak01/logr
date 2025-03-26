@@ -110,5 +110,14 @@ options("logr.stdout" = FALSE)
 # Remove stdout option
 options("logr.stdout" = NULL)
 ```
+The default **logr** line size is 80 characters.  That means if the line exceeds
+80 characters, the line will be broken and continued on the next line.  To change
+the line size, you can set the "logr.linesize" option:
+```{r eval=FALSE, echo=TRUE}
+# Restore printing
+options("logr.linesize" = 100)
+
+```
+
 
 Next: [Aliases for log_print()](logr-put.html)

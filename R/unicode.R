@@ -28,7 +28,7 @@ print_windows <- function(x, file_path, blank_after, hide_notes, ...) {
         
         
         # Print the string
-        writeLines(enc2utf8(strwrap(x, width = 80)), con = f, useBytes = TRUE)
+        writeLines(enc2utf8(strwrap(x, width = e$line_size)), con = f, useBytes = TRUE)
 
       } else {
         
@@ -122,7 +122,7 @@ print_other <- function(x, file_path, blank_after, hide_notes, ...) {
       if (length(x) == 1) {
         
         # Print the string
-        cat(strwrap(x, width = 80), "\n")
+        cat(strwrap(x, width = e$line_size), "\n")
         
       } else {
         

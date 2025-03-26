@@ -98,7 +98,8 @@
 <span>  compact <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  traceback <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  header <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>  stdout <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span>  stdout <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  line_size <span class="op">=</span> <span class="fl">80</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -157,6 +158,12 @@ are TRUE and FALSE.  Default is TRUE.</p></dd>
 Default is FALSE, which means the log will normally print to a file.
 This behavior can also be set with the global option
 <code>globals("logr.stdout" = TRUE)</code>.</p></dd>
+
+
+<dt id="arg-line-size">line_size<a class="anchor" aria-label="anchor" href="#arg-line-size"></a></dt>
+<dd><p>The maximum character width for a line in the log. If the
+line exceeds the maximum width, the line will be broken and wrapped to the
+next line.  Default is 80 characters.</p></dd>
 
 </dl></div>
     <div id="value">

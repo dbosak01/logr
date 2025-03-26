@@ -54,3 +54,8 @@ knitr::opts_chunk$set(
 #  # Remove stdout option
 #  options("logr.stdout" = NULL)
 
+## ----eval=FALSE, echo=TRUE----------------------------------------------------
+#  # Restore printing
+#  options("logr.linesize" = 100)
+#  
+
