@@ -403,11 +403,14 @@ send anything to the console. In other words, the
 quietly and invisibly.</p>
 <p>To use indirect logging, take the following steps:</p>
 <ol style="list-style-type: decimal">
-<li>Add <strong>logr</strong> to the “imports” or “suggests” section of
-your DESCRIPTION file.</li>
-<li>Add the directive “<span class="citation">@import</span> logr” to at
-least one roxygen function header.</li>
-<li>Add <code>log_hook()</code> calls to your functions as desired.</li>
+<li>Add <strong>logr</strong> to the “suggests” section of your
+DESCRIPTION file.</li>
+<li>Do not add the directive “<span class="citation">@import</span>
+logr” to any roxygen function header.</li>
+<li>Do check to ensure <strong>logr</strong> is installed on the local
+machine.</li>
+<li>Add <code>logr::log_hook()</code> calls to your functions as
+desired, using the double colon full package reference.</li>
 </ol>
 <p>When called, the <code>log_hook()</code> function will first check to
 see whether the user’s log is open. If open, the function will then
@@ -425,16 +428,17 @@ is logged automatically using <code>log_hook()</code>:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="co">#&#39; @title Read an RDS file</span></span>
 <span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="co">#&#39; @param file_path The path to the file. </span></span>
 <span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a><span class="co">#&#39; @return The RDS file contents as an R object.</span></span>
-<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a><span class="co">#&#39; @import logr</span></span>
-<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a><span class="co">#&#39; @export</span></span>
-<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a>read_file <span class="ot">&lt;-</span> <span class="cf">function</span>(file_path) {</span>
-<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a>  </span>
-<span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a>  ret <span class="ot">&lt;-</span>  <span class="fu">readRDS</span>(file_path)</span>
-<span id="cb1-9"><a href="#cb1-9" tabindex="-1"></a>  </span>
-<span id="cb1-10"><a href="#cb1-10" tabindex="-1"></a>  <span class="fu">log_hook</span>(<span class="fu">paste0</span>(<span class="st">&quot;Read RDS file from &#39;&quot;</span>, file_path, <span class="st">&quot;&#39;&quot;</span>))</span>
-<span id="cb1-11"><a href="#cb1-11" tabindex="-1"></a>  </span>
-<span id="cb1-12"><a href="#cb1-12" tabindex="-1"></a>  <span class="fu">return</span>(ret)</span>
-<span id="cb1-13"><a href="#cb1-13" tabindex="-1"></a>}</span></code></pre></div>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a><span class="co">#&#39; @export</span></span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a>read_file <span class="ot">&lt;-</span> <span class="cf">function</span>(file_path) {</span>
+<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a>  </span>
+<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a>  ret <span class="ot">&lt;-</span>  <span class="fu">readRDS</span>(file_path)</span>
+<span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a>  </span>
+<span id="cb1-9"><a href="#cb1-9" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">length</span>(<span class="fu">find.package</span>(<span class="st">&#39;logr&#39;</span>, <span class="at">quiet=</span><span class="cn">TRUE</span>)) <span class="sc">&gt;</span> <span class="dv">0</span>) {</span>
+<span id="cb1-10"><a href="#cb1-10" tabindex="-1"></a>    logr<span class="sc">::</span><span class="fu">log_hook</span>(<span class="fu">paste0</span>(<span class="st">&quot;Read RDS file from &#39;&quot;</span>, file_path, <span class="st">&quot;&#39;&quot;</span>))</span>
+<span id="cb1-11"><a href="#cb1-11" tabindex="-1"></a>  }</span>
+<span id="cb1-12"><a href="#cb1-12" tabindex="-1"></a>  </span>
+<span id="cb1-13"><a href="#cb1-13" tabindex="-1"></a>  <span class="fu">return</span>(ret)</span>
+<span id="cb1-14"><a href="#cb1-14" tabindex="-1"></a>}</span></code></pre></div>
 <p>The above function simply reads in an RDS file and returns the
 contents to the user. What is different about this function is that it
 will record the operation in the user’s log automatically via

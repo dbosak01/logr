@@ -74,9 +74,11 @@ is for when you want to log things quietly and invisibly.
 
 To use indirect logging, take the following steps:
 
-1) Add **logr** to the "imports" or "suggests" section of your DESCRIPTION file.
-2) Add the directive "@import logr" to at least one roxygen function header.
-3) Add `log_hook()` calls to your functions as desired.
+1) Add **logr** to the "suggests" section of your DESCRIPTION file.
+2) Do not add the directive "@import logr" to any roxygen function header.
+3) Do check to ensure **logr** is installed on the local machine.
+4) Add `logr::log_hook()` calls to your functions as desired, using the double
+colon full package reference.
 
 When called, the `log_hook()` function will first check to see whether the user's 
 log is open.  If open, the function will then write the message to the user's log.
@@ -96,13 +98,14 @@ logged automatically using `log_hook()`:
 #' @title Read an RDS file
 #' @param file_path The path to the file. 
 #' @return The RDS file contents as an R object.
-#' @import logr
 #' @export
 read_file <- function(file_path) {
   
   ret <-  readRDS(file_path)
   
-  log_hook(paste0("Read RDS file from '", file_path, "'"))
+  if (length(find.package('logr', quiet=TRUE)) > 0) {
+    logr::log_hook(paste0("Read RDS file from '", file_path, "'"))
+  }
   
   return(ret)
 }

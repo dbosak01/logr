@@ -185,11 +185,14 @@ send anything to the console. In other words, the
 quietly and invisibly.</p>
 <p>To use indirect logging, take the following steps:</p>
 <ol style="list-style-type: decimal">
-<li>Add <strong>logr</strong> to the “imports” or “suggests” section of
-your DESCRIPTION file.</li>
-<li>Add the directive “<span class="citation">@import</span> logr” to at
-least one roxygen function header.</li>
-<li>Add <code><a href="../reference/log_print.html">log_hook()</a></code> calls to your functions as desired.</li>
+<li>Add <strong>logr</strong> to the “suggests” section of your
+DESCRIPTION file.</li>
+<li>Do not add the directive “<span class="citation">@import</span>
+logr” to any roxygen function header.</li>
+<li>Do check to ensure <strong>logr</strong> is installed on the local
+machine.</li>
+<li>Add <code><a href="../reference/log_print.html">logr::log_hook()</a></code> calls to your functions as
+desired, using the double colon full package reference.</li>
 </ol>
 <p>When called, the <code><a href="../reference/log_print.html">log_hook()</a></code> function will first check to
 see whether the user’s log is open. If open, the function will then
@@ -208,13 +211,14 @@ is logged automatically using <code><a href="../reference/log_print.html">log_ho
 <code class="sourceCode R"><span><span class="co">#' @title Read an RDS file</span></span>
 <span><span class="co">#' @param file_path The path to the file. </span></span>
 <span><span class="co">#' @return The RDS file contents as an R object.</span></span>
-<span><span class="co">#' @import logr</span></span>
 <span><span class="co">#' @export</span></span>
 <span><span class="va">read_file</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">file_path</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  </span>
 <span>  <span class="va">ret</span> <span class="op">&lt;-</span>  <span class="fu"><a href="https://rdrr.io/r/base/readRDS.html" class="external-link">readRDS</a></span><span class="op">(</span><span class="va">file_path</span><span class="op">)</span></span>
 <span>  </span>
-<span>  <span class="fu"><a href="../reference/log_print.html">log_hook</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"Read RDS file from '"</span>, <span class="va">file_path</span>, <span class="st">"'"</span><span class="op">)</span><span class="op">)</span></span>
+<span>  <span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/find.package.html" class="external-link">find.package</a></span><span class="op">(</span><span class="st">'logr'</span>, quiet<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">&gt;</span> <span class="fl">0</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="fu">logr</span><span class="fu">::</span><span class="fu"><a href="../reference/log_print.html">log_hook</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"Read RDS file from '"</span>, <span class="va">file_path</span>, <span class="st">"'"</span><span class="op">)</span><span class="op">)</span></span>
+<span>  <span class="op">}</span></span>
 <span>  </span>
 <span>  <span class="kw"><a href="https://rdrr.io/r/base/function.html" class="external-link">return</a></span><span class="op">(</span><span class="va">ret</span><span class="op">)</span></span>
 <span><span class="op">}</span></span></code></pre></div>
