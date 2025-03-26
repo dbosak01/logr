@@ -115,9 +115,10 @@ is not supplied.</p></dd>
 
 
 <dt id="arg-logdir">logdir<a class="anchor" aria-label="anchor" href="#arg-logdir"></a></dt>
-<dd><p>Send the log to a log directory named "log".  If the log
+<dd><p>Send the log to a log directory.  If the log
 directory does not exist, the function will create it.  Valid values are
-TRUE and FALSE. The default is TRUE.</p></dd>
+TRUE, FALSE, or a quoted directory name. The default is TRUE.  The default
+log directory is named "log".</p></dd>
 
 
 <dt id="arg-show-notes">show_notes<a class="anchor" aria-label="anchor" href="#arg-show-notes"></a></dt>
@@ -184,9 +185,12 @@ not have a '.log' extension, the <code>log_open</code> function will add it.</p>
 the function will use the program/script name as the default
 log file name, and the program/script path as the default path.</p>
 <p>If requested in the <code>logdir</code> parameter, the <code>log_open</code>
-function will write to a 'log' subdirectory of the path specified in the
-<code>file_name</code>.  If the 'log' subdirectory does not exist,
-the function will create it.</p>
+function will write to a subdirectory of the path specified in the
+<code>file_name</code>.  If the subdirectory does not exist,
+the function will create it.  By default, the subdirectory is named "log".
+If you want to name it something else, pass the desired name
+as a quoted string on the <code>logdir</code> parameter.  If you don't want
+to send the log to a subdirectory, set <code>logdir</code> to FALSE.</p>
 <p>The log file will be initialized with a header that shows the log file name,
 the current working directory, the current user, and a timestamp of
 when the <code>log_open</code> function was called.</p>

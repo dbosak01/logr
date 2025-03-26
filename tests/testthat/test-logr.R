@@ -1122,4 +1122,34 @@ test_that("logr42: logr.linesize works as expected.", {
 })
 
 
+test_that("logr43: logdir with directory name works as expected.", {
+  
+  if (DEV) {
+    
+    tmp <- base_path
+  
+    
+    lf <- log_open(file.path(tmp, "test.log"), logdir = "myspdir")
+    
+    str <- paste("Here is a a really long log line.", 
+                 "I want to exceed 40 characters")
+    log_print(str)
+    
+    
+    
+    log_close()
+    
+    ret <- file.exists(lf)
+    
+    expect_equal(ret, TRUE)
+    
+    
+    readLines(lf)
+  
 
+  } else {
+    
+    expect_equal(TRUE, TRUE) 
+  }
+  
+})

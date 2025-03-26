@@ -7,6 +7,7 @@ instead of a file.
 to the log.
 * Added vignette to explain **logr** integration with custom packages.
 * Added option to control the line size on the log output.
+* Added option to pass a directory name on the "logdir" parameter.
 
 # logr 1.3.8
 

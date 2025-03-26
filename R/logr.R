@@ -75,9 +75,12 @@ e$separator <-
 #' log file name, and the program/script path as the default path.
 #' 
 #' If requested in the \code{logdir} parameter, the \code{log_open}
-#' function will write to a 'log' subdirectory of the path specified in the 
-#' \code{file_name}.  If the 'log' subdirectory does not exist, 
-#' the function will create it.
+#' function will write to a subdirectory of the path specified in the 
+#' \code{file_name}.  If the subdirectory does not exist, 
+#' the function will create it.  By default, the subdirectory is named "log".
+#' If you want to name it something else, pass the desired name 
+#' as a quoted string on the \code{logdir} parameter.  If you don't want
+#' to send the log to a subdirectory, set \code{logdir} to FALSE.
 #' 
 #' The log file will be initialized with a header that shows the log file name,
 #' the current working directory, the current user, and a timestamp of
@@ -142,9 +145,10 @@ e$separator <-
 #' working directory will be used.  As of v1.2.7, the name and path of the 
 #' program or script will be used as a default if the \code{file_name} parameter
 #' is not supplied.
-#' @param logdir Send the log to a log directory named "log".  If the log 
+#' @param logdir Send the log to a log directory.  If the log 
 #' directory does not exist, the function will create it.  Valid values are 
-#' TRUE and FALSE. The default is TRUE.
+#' TRUE, FALSE, or a quoted directory name. The default is TRUE.  The default
+#' log directory is named "log".
 #' @param show_notes If true, will write notes to the log.  Valid values are 
 #' TRUE and FALSE. Default is TRUE.
 #' @param autolog Whether to turn on autolog functionality.  Autolog
@@ -322,6 +326,15 @@ log_open <- function(file_name = "", logdir = TRUE, show_notes = TRUE,
     
   }
   
+  # Handle custom log directory
+  if (is.character(logdir)) {
+    logbase <- logdir
+    logdir <- TRUE
+  } else {
+    logbase <- "log" 
+  }
+  
+  
 #print("File name #1: " %p% file_name)
   
   if (trimws(file_name) != "") {
@@ -334,9 +347,9 @@ log_open <- function(file_name = "", logdir = TRUE, show_notes = TRUE,
     
     # Create log directory if needed
     d <- dirname(lpath)
-    if (logdir == TRUE & basename(d) != "log") {
+    if (logdir == TRUE & basename(d) != logbase) {
       tryCatch({
-        ldir <- file.path(d, "log")
+        ldir <- file.path(d, logbase)
         if (!dir.exists(ldir))
           dir.create(ldir, recursive = TRUE)
         lpath <- file.path(ldir, basename(lpath))

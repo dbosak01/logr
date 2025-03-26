@@ -30,10 +30,6 @@ options(rmarkdown.html_vignette.check_title = FALSE)
 #  # Define data library
 #  libname(sdtm, pkg, "csv")
 #  
-#  # Load the library into memory
-#  lib_load(sdtm)
-#  
-#  
 #  # Prepare Data -------------------------------------------------------------
 #  sep("Prepare the data")
 #  
@@ -45,7 +41,7 @@ options(rmarkdown.html_vignette.check_title = FALSE)
 #  
 #  
 #  # Manipulate data
-#  final <- sdtm.DM %>%
+#  final <- sdtm$DM %>%
 #    select(USUBJID, BRTHDTC, AGE) %>%
 #    mutate(AGEG = fapply(AGE, ageg)) %>%
 #    arrange(AGEG, AGE) %>%
@@ -118,17 +114,14 @@ options(rmarkdown.html_vignette.check_title = FALSE)
 #  # Clean Up -----------------------------------------------------------------
 #  sep("Clean Up")
 #  
-#  # Unload libname
-#  lib_unload(sdtm)
-#  
 #  # Close the log
 #  log_close()
 #  
-#  # View log
-#  writeLines(readLines(lf, encoding = "UTF-8"))
-#  
 #  # View Report
 #  # file.show(res$modified_path)
+#  
+#  # View Log
+#  # file.show(lf)
 #  
 #  
 
