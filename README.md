@@ -10,7 +10,8 @@
 <!-- badges: end -->
 
 # Introduction to **logr**
-<img src='man/images/logr_new.png' align="left" height="138" style="margin-right:10px;height:138px"/>
+<img src='man/images/logr_new.png' align="left" height="138" 
+style="margin-right:10px;height:138px" alt="logr package logo"/>
 
 There are already several logging packages for R.  Why create another one? 
 
@@ -49,6 +50,18 @@ Then put the following line at the top of your script:
 For examples and usage 
 information, please visit the **logr** documentation site 
 [here](https://logr.r-sassy.org/articles/logr.html)
+
+### Introductory Video
+
+For a quick, high-level introduction to the **logr** package, please see the 
+following video:
+
+[![Logr Package Introduction](https://img.youtube.com/vi/o20fT6IOBVs/0.jpg)](https://www.youtube.com/watch?v=o20fT6IOBVs)
+
+More information about the package is available on the 
+[Getting Started](https://logr.r-sassy.org/articles/logr.html) page, and 
+complete documentation can be found at the 
+[Function Reference](https://logr.r-sassy.org/reference/index.html).
 
 ### Getting Help
 
