@@ -1,3 +1,7 @@
+# logr 1.4.0
+
+* Added source function name to warning messages.
+
 # logr 1.3.9
 
 * Fixed bug on creating path for message file.

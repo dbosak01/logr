@@ -1192,9 +1192,18 @@ log_warning <- function(msg = NULL) {
         #print(lse)
         
         if ("call" %in% lse && "msg" %in% lse) {
-          # call1 <- capture.output(print(get("call", envir = e1)))
+          call1 <- get("call", envir = e1)
           # print(msg) 
-          msg1 <- paste("Warning:", get("msg", envir = e1))
+          if (length(call1) > 0) {
+            if (nchar(call1) > 0) {
+              msg1 <- paste0("Warning message:\n", "In ",  call1, "(): ", get("msg", envir = e1))
+            } else {
+              
+              msg1 <- paste0("Warning: ", get("msg", envir = e1))
+            } 
+          } else {
+            msg1 <- paste0("Warning: ", get("msg", envir = e1))
+          }
           log_print(msg1, console = FALSE)
           log_quiet(msg1, msg = TRUE)
           message(msg1)

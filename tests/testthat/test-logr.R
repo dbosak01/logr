@@ -1153,3 +1153,43 @@ test_that("logr43: logdir with directory name works as expected.", {
   }
   
 })
+
+test_that("logr44: warnings show location.", {
+
+  if (DEV) {
+  
+    log_file <- file.path(base_path, "demo_warning_traceback.log")
+    
+    level_3 <- function() {
+      warning("ADSL.AGE contains missing values")
+    }
+    
+    level_2 <- function() {
+      level_3()
+    }
+    
+    level_1 <- function() {
+      level_2()
+    }
+    
+    lf <- log_open(
+      log_file,
+      logdir = TRUE,
+      show_notes = FALSE,
+      traceback = TRUE
+    )
+    
+    level_1()
+    
+    log_close()
+  
+    
+    ret <- file.exists(lf)
+    
+    expect_equal(ret, TRUE)
+
+  } else {
+    expect_equal(TRUE, TRUE) 
+  }
+  
+})
