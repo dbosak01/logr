@@ -3,20 +3,48 @@ Log Path: C:/packages/logr/tests/testthat/log/test-logr.log
 Program Path: C:/packages/logr/tests/testthat/test-logr.R
 Working Directory: C:/packages/logr
 User Name: dbosa
-R Version: 4.3.2 (2023-10-31 ucrt)
+R Version: 4.6.1 (2026-06-24 ucrt)
 Machine: SOCRATES x86-64
-Operating System: Windows 10 x64 build 22621
+Operating System: Windows 10 x64 build 26200
 Base Packages: stats graphics grDevices utils datasets methods base
-Other Packages: dplyr_1.1.3 logr_1.3.7 testthat_3.1.10
-Log Start Time: 2024-03-31 23:03:46.281566
+Other Packages: logr_1.4.0 dplyr_1.2.1 ggplot2_4.0.3 testthat_3.3.2
+common_1.1.5
+Log Start Time: 2026-10-15 21:19:52.745122
 =========================================================================
 
-Here is a log message
+Warning message:
+In smooth.construct.cr.smooth.spec(): x has insufficient unique values to support 10 knots: reduce k.
 
-NOTE: Log Print Time:  2024-03-31 23:03:46.283947
-NOTE: Elapsed Time: 0.00100207328796387 secs
+Warning message:
+In object(): x has insufficient unique values to support 10 knots: reduce k.
+
+Warning message:
+In data(): x has insufficient unique values to support 10 knots: reduce k.
+
+Warning message:
+In knots(): x has insufficient unique values to support 10 knots: reduce k.
+
+
+NOTE: Log Print Time:  2026-10-15 21:19:53.738875
+NOTE: Elapsed Time: 0.989686965942383 secs
+
+Warning message:
+In smooth.construct.cr.smooth.spec(): x has insufficient unique values to support 10 knots: reduce k.
+
+Warning message:
+In object(): x has insufficient unique values to support 10 knots: reduce k.
+
+Warning message:
+In data(): x has insufficient unique values to support 10 knots: reduce k.
+
+Warning message:
+In knots(): x has insufficient unique values to support 10 knots: reduce k.
+
+
+NOTE: Log Print Time:  2026-10-15 21:19:56.265347
+NOTE: Elapsed Time: 2.5264720916748 secs
 
 =========================================================================
-Log End Time: 2024-03-31 23:03:46.284271
-Log Elapsed Time: 0 00:00:00
+Log End Time: 2026-10-15 21:19:59.483313
+Log Elapsed Time: 0 00:00:06
 =========================================================================

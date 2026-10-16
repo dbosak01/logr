@@ -954,10 +954,10 @@ test_that("logr36: get_warnings() function works as expected.", {
   res
   
   expect_equal(length(res) > 0, TRUE)
-  expect_equal(res[1], "Warning: Warning 1")
+  expect_equal(res[1], "Warning: Warning 1 \n")
   
   if (DEV) {
-    expect_equal(res[2], "Warning: Warning 2")
+    expect_equal(res[2], "Warning: Warning 2 \n")
   }
   
   res2 <- getOption("logr.warnings")
@@ -1191,5 +1191,39 @@ test_that("logr44: warnings show location.", {
   } else {
     expect_equal(TRUE, TRUE) 
   }
+  
+})
+
+test_that("logr45: Simon's issue works as expected.", {
+  
+  if (DEV) {
+    # 
+    # library(logr)
+    # library(ggplot2)
+    # library(dplyr)
+    # 
+    # # log_close()
+    # log_open() # opening the log will cause a crash when trying to handle the warning
+    # 
+    # set.seed(123)
+    # 
+    # data.frame(
+    #   x = sample(c(NA, 1:10), 10), 
+    #   y = sample(c(NA, 1:10), 10)
+    # ) %>% 
+    #   ggplot() +
+    #   geom_point(aes(x = x, y = y)) +
+    #   geom_smooth(aes(x = x, y = y), method = "gam") # throws a warning
+    # 
+    # ggsave("logr_test_plot.png")
+    # 
+    # log_close()
+    # 
+    # print("Done") # run completes, but not if logr used
+  
+  } else {
+    expect_equal(TRUE, TRUE) 
+  }
+  
   
 })

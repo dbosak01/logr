@@ -1,3 +1,7 @@
+# logr 1.4.1
+
+* Bug fix for multi-part warning messages.
+
 # logr 1.4.0
 
 * Added source function name to warning messages.

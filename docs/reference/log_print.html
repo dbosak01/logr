@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">logr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.4.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.4.1</span>
       </span>
     </div>
 
@@ -174,28 +174,87 @@ and <code><a href="log_close.html">log_close</a></code> to close the log.</p></d
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://logr.r-sassy.org">logr</a></span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># Create temp file location</span></span>
-<span><span class="va">tmp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">"test.log"</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># Open log</span></span>
-<span><span class="va">lf</span> <span class="op">&lt;-</span> <span class="fu"><a href="log_open.html">log_open</a></span><span class="op">(</span><span class="va">tmp</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># Send message to log</span></span>
-<span><span class="fu">log_print</span><span class="op">(</span><span class="st">"High Mileage Cars Subset"</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># Perform operations</span></span>
-<span><span class="va">hmc</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span><span class="va">mtcars</span>, <span class="va">mtcars</span><span class="op">$</span><span class="va">mpg</span> <span class="op">&gt;</span> <span class="fl">20</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># Print data to log</span></span>
-<span><span class="fu">log_print</span><span class="op">(</span><span class="va">hmc</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># Close log</span></span>
-<span><span class="fu"><a href="log_close.html">log_close</a></span><span class="op">(</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># View results</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/writeLines.html" class="external-link">writeLines</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/readLines.html" class="external-link">readLines</a></span><span class="op">(</span><span class="va">lf</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://logr.r-sassy.org">logr</a></span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Create temp file location</span></span></span>
+<span class="r-in"><span><span class="va">tmp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">"test.log"</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Open log</span></span></span>
+<span class="r-in"><span><span class="va">lf</span> <span class="op">&lt;-</span> <span class="fu"><a href="log_open.html">log_open</a></span><span class="op">(</span><span class="va">tmp</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Send message to log</span></span></span>
+<span class="r-in"><span><span class="fu">log_print</span><span class="op">(</span><span class="st">"High Mileage Cars Subset"</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> High Mileage Cars Subset </span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Perform operations</span></span></span>
+<span class="r-in"><span><span class="va">hmc</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span><span class="va">mtcars</span>, <span class="va">mtcars</span><span class="op">$</span><span class="va">mpg</span> <span class="op">&gt;</span> <span class="fl">20</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Print data to log</span></span></span>
+<span class="r-in"><span><span class="fu">log_print</span><span class="op">(</span><span class="va">hmc</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                 mpg cyl  disp  hp drat    wt  qsec vs am gear carb</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Mazda RX4      21.0   6 160.0 110 3.90 2.620 16.46  0  1    4    4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Mazda RX4 Wag  21.0   6 160.0 110 3.90 2.875 17.02  0  1    4    4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Datsun 710     22.8   4 108.0  93 3.85 2.320 18.61  1  1    4    1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Hornet 4 Drive 21.4   6 258.0 110 3.08 3.215 19.44  1  0    3    1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Merc 240D      24.4   4 146.7  62 3.69 3.190 20.00  1  0    4    2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Merc 230       22.8   4 140.8  95 3.92 3.150 22.90  1  0    4    2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Fiat 128       32.4   4  78.7  66 4.08 2.200 19.47  1  1    4    1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Honda Civic    30.4   4  75.7  52 4.93 1.615 18.52  1  1    4    2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Toyota Corolla 33.9   4  71.1  65 4.22 1.835 19.90  1  1    4    1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Toyota Corona  21.5   4 120.1  97 3.70 2.465 20.01  1  0    3    1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Fiat X1-9      27.3   4  79.0  66 4.08 1.935 18.90  1  1    4    1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Porsche 914-2  26.0   4 120.3  91 4.43 2.140 16.70  0  1    5    2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Lotus Europa   30.4   4  95.1 113 3.77 1.513 16.90  1  1    5    2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Volvo 142E     21.4   4 121.0 109 4.11 2.780 18.60  1  1    4    2</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Close log</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="log_close.html">log_close</a></span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># View results</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/writeLines.html" class="external-link">writeLines</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/readLines.html" class="external-link">readLines</a></span><span class="op">(</span><span class="va">lf</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> =========================================================================</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Log Path: C:/Users/dbosa/AppData/Local/Temp/RtmpsjFzDn/log/test.log</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Working Directory: C:/packages/logr/docs/reference</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> User Name: dbosa</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> R Version: 4.6.1 (2026-06-24 ucrt)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Machine: SOCRATES x86-64</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Operating System: Windows 10 x64 build 26200</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Base Packages: stats graphics grDevices utils datasets methods base</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Other Packages: logr_1.4.0 common_1.1.5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Log Start Time: 2026-10-15 21:26:38.904741</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> =========================================================================</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> High Mileage Cars Subset</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> NOTE: Log Print Time:  2026-10-15 21:26:38.908492</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> NOTE: Elapsed Time: 0.00176811218261719 secs</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                 mpg cyl  disp  hp drat    wt  qsec vs am gear carb</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Mazda RX4      21.0   6 160.0 110 3.90 2.620 16.46  0  1    4    4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Mazda RX4 Wag  21.0   6 160.0 110 3.90 2.875 17.02  0  1    4    4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Datsun 710     22.8   4 108.0  93 3.85 2.320 18.61  1  1    4    1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Hornet 4 Drive 21.4   6 258.0 110 3.08 3.215 19.44  1  0    3    1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Merc 240D      24.4   4 146.7  62 3.69 3.190 20.00  1  0    4    2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Merc 230       22.8   4 140.8  95 3.92 3.150 22.90  1  0    4    2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Fiat 128       32.4   4  78.7  66 4.08 2.200 19.47  1  1    4    1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Honda Civic    30.4   4  75.7  52 4.93 1.615 18.52  1  1    4    2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Toyota Corolla 33.9   4  71.1  65 4.22 1.835 19.90  1  1    4    1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Toyota Corona  21.5   4 120.1  97 3.70 2.465 20.01  1  0    3    1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Fiat X1-9      27.3   4  79.0  66 4.08 1.935 18.90  1  1    4    1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Porsche 914-2  26.0   4 120.3  91 4.43 2.140 16.70  0  1    5    2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Lotus Europa   30.4   4  95.1 113 3.77 1.513 16.90  1  1    5    2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Volvo 142E     21.4   4 121.0 109 4.11 2.780 18.60  1  1    4    2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> NOTE: Data frame has 14 rows and 11 columns.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> NOTE: Log Print Time:  2026-10-15 21:26:38.91916</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> NOTE: Elapsed Time: 0.0106678009033203 secs</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> =========================================================================</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Log End Time: 2026-10-15 21:26:38.921956</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Log Elapsed Time: 0 00:00:00</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> =========================================================================</span>
+</code></pre></div>
     </div>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

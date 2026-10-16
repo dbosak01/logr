@@ -1179,7 +1179,7 @@ log_warning <- function(msg = NULL) {
 
     # print("Warning Handler")
     if (!is.null(msg)) {
-      msg1 <- paste("Warning:", msg)
+      msg1 <- paste("Warning:", msg, "\n")
       log_print(msg1, console = FALSE)
       log_quiet(msg1, msg = TRUE)
       message(msg1)
@@ -1195,14 +1195,14 @@ log_warning <- function(msg = NULL) {
           call1 <- get("call", envir = e1)
           # print(msg) 
           if (length(call1) > 0) {
-            if (nchar(call1) > 0) {
-              msg1 <- paste0("Warning message:\n", "In ",  call1, "(): ", get("msg", envir = e1))
+            if (any(nchar(call1) > 0)) {
+              msg1 <- paste0("Warning message:\n", "In ",  call1, "(): ", get("msg", envir = e1), "\n")
             } else {
               
-              msg1 <- paste0("Warning: ", get("msg", envir = e1))
+              msg1 <- paste0("Warning: ", get("msg", envir = e1), "\n")
             } 
           } else {
-            msg1 <- paste0("Warning: ", get("msg", envir = e1))
+            msg1 <- paste0("Warning: ", get("msg", envir = e1), "\n")
           }
           log_print(msg1, console = FALSE)
           log_quiet(msg1, msg = TRUE)

@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">logr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.4.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.4.1</span>
       </span>
     </div>
 
@@ -116,34 +116,105 @@ and <code><a href="log_close.html">log_close</a></code> to close the log.</p></d
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://logr.r-sassy.org">logr</a></span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># Create temp file location</span></span>
-<span><span class="va">tmp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">"test.log"</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># Open log</span></span>
-<span><span class="va">lf</span> <span class="op">&lt;-</span> <span class="fu"><a href="log_open.html">log_open</a></span><span class="op">(</span><span class="va">tmp</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># Send message to log</span></span>
-<span><span class="fu"><a href="log_print.html">log_print</a></span><span class="op">(</span><span class="st">"Before suspend"</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># Suspend log</span></span>
-<span><span class="fu"><a href="log_suspend.html">log_suspend</a></span><span class="op">(</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># View suspended log</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/writeLines.html" class="external-link">writeLines</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/readLines.html" class="external-link">readLines</a></span><span class="op">(</span><span class="va">lf</span><span class="op">)</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># Resume log</span></span>
-<span><span class="fu">log_resume</span><span class="op">(</span><span class="va">lf</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># Print data to log</span></span>
-<span><span class="fu"><a href="log_print.html">log_print</a></span><span class="op">(</span><span class="st">"After suspend"</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># Close log</span></span>
-<span><span class="fu"><a href="log_close.html">log_close</a></span><span class="op">(</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># View results</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/writeLines.html" class="external-link">writeLines</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/readLines.html" class="external-link">readLines</a></span><span class="op">(</span><span class="va">lf</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://logr.r-sassy.org">logr</a></span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Create temp file location</span></span></span>
+<span class="r-in"><span><span class="va">tmp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">"test.log"</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Open log</span></span></span>
+<span class="r-in"><span><span class="va">lf</span> <span class="op">&lt;-</span> <span class="fu"><a href="log_open.html">log_open</a></span><span class="op">(</span><span class="va">tmp</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Send message to log</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="log_print.html">log_print</a></span><span class="op">(</span><span class="st">"Before suspend"</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Before suspend </span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Suspend log</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="log_suspend.html">log_suspend</a></span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Log suspended</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># View suspended log</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/writeLines.html" class="external-link">writeLines</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/readLines.html" class="external-link">readLines</a></span><span class="op">(</span><span class="va">lf</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> =========================================================================</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Log Path: C:/Users/dbosa/AppData/Local/Temp/RtmpsjFzDn/log/test.log</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Working Directory: C:/packages/logr/docs/reference</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> User Name: dbosa</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> R Version: 4.6.1 (2026-06-24 ucrt)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Machine: SOCRATES x86-64</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Operating System: Windows 10 x64 build 26200</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Base Packages: stats graphics grDevices utils datasets methods base</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Other Packages: logr_1.4.0 common_1.1.5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Log Start Time: 2026-10-15 21:26:39.683593</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> =========================================================================</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Before suspend</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> NOTE: Log Print Time:  2026-10-15 21:26:39.687289</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> NOTE: Elapsed Time: 0.00177001953125 secs</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> =========================================================================</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Log suspended</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> =========================================================================</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Autolog: FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Log Path: C:/Users/dbosa/AppData/Local/Temp/RtmpsjFzDn/log/test.log</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Msg Path: C:/Users/dbosa/AppData/Local/Temp/RtmpsjFzDn/log/test.msg</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Show Notes: TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Blank After: TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Traceback: TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Status: open</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Tidylog:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Log Time: 2026-10-15 21:26:39.687289</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Start Time: 2026-10-15 21:26:39.685519</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Suspend Time: 2026-10-15 21:26:39.6999</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Elapsed Time: 0.012610912322998</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Resume log</span></span></span>
+<span class="r-in"><span><span class="fu">log_resume</span><span class="op">(</span><span class="va">lf</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "C:/Users/dbosa/AppData/Local/Temp/RtmpsjFzDn/log/test.log"</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Print data to log</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="log_print.html">log_print</a></span><span class="op">(</span><span class="st">"After suspend"</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> After suspend </span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Close log</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="log_close.html">log_close</a></span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># View results</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/writeLines.html" class="external-link">writeLines</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/readLines.html" class="external-link">readLines</a></span><span class="op">(</span><span class="va">lf</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> =========================================================================</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Log Path: C:/Users/dbosa/AppData/Local/Temp/RtmpsjFzDn/log/test.log</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Working Directory: C:/packages/logr/docs/reference</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> User Name: dbosa</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> R Version: 4.6.1 (2026-06-24 ucrt)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Machine: SOCRATES x86-64</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Operating System: Windows 10 x64 build 26200</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Base Packages: stats graphics grDevices utils datasets methods base</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Other Packages: logr_1.4.0 common_1.1.5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Log Start Time: 2026-10-15 21:26:39.683593</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> =========================================================================</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Before suspend</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> NOTE: Log Print Time:  2026-10-15 21:26:39.687289</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> NOTE: Elapsed Time: 0.00177001953125 secs</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> =========================================================================</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Log Suspended: 2026-10-15 21:26:39.6999</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Log Resumed: 2026-10-15 21:26:39.717577</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Elapsed Time: 0 00:00:00</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> =========================================================================</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> After suspend</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> NOTE: Log Print Time:  2026-10-15 21:26:39.724566</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> NOTE: Elapsed Time: 0.00173807144165039 secs</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> =========================================================================</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Log End Time: 2026-10-15 21:26:39.726687</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Log Elapsed Time: 0 00:00:00</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> =========================================================================</span>
+</code></pre></div>
     </div>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
